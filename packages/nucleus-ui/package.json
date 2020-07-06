@@ -1,0 +1,29 @@
+{
+  "name": "@sdh-project-services/nucleus-ui",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "run-s build:rimraf build:cpx build:tsc",
+    "build:cpx": "cpx 'src/**/*.css' dist",
+    "build:rimraf": "rimraf dist",
+    "build:tsc": "tsc",
+    "dev": "run-p dev:cpx dev:tsc",
+    "dev:cpx": "cpx --watch 'src/**/*.css' dist",
+    "dev:tsc": "tsc --watch"
+  },
+  "engines": {
+    "node": ">= 12.0.0",
+    "npm": "please-use-yarn"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-hook-form": "^5.7.2",
+    "react-icons": "^3.10.0"
+  },
+  "devDependencies": {
+    "cpx": "^1.5.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "typescript": "^3.8.3"
+  }
+}

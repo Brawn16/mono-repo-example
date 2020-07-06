@@ -1,14 +1,14 @@
 import { useMutation } from "@apollo/client";
+import { Alert } from "@sdh-project-services/nucleus-ui/dist/alert";
+import { Button } from "@sdh-project-services/nucleus-ui/dist/button";
+import { Checkbox } from "@sdh-project-services/nucleus-ui/dist/checkbox";
+import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
 import filterObject from "filter-obj";
 import React, { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useForm } from "react-hook-form";
 import { FaLock } from "react-icons/fa";
-import { Alert } from "../alert";
 import { Anchor } from "../anchor";
-import { Button } from "../button";
-import { Checkbox } from "../checkbox";
-import { Input } from "../input";
 import { login as loginMutation } from "./mutations.gql";
 import { LoginFormData, LoginProps } from "./types";
 
