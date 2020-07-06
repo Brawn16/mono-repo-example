@@ -1,0 +1,23 @@
+.checkbox {
+  @apply hidden;
+}
+
+.toggle {
+  @apply mt-2 mb-4 h-6 bg-gray-200 border-2 border-transparent rounded-full cursor-pointer w-11 transition ease-in-out duration-150;
+}
+
+.toggle:focus {
+  @apply outline-none shadow-outline;
+}
+
+.toggleHandle {
+  @apply block w-5 h-5 bg-white rounded-full shadow translate-x-0 transform transition ease-in-out duration-150;
+}
+
+.checkbox:checked + .toggle {
+  @apply bg-pink-600;
+}
+
+.checkbox:checked + .toggle .toggleHandle {
+  @apply translate-x-5;
+}

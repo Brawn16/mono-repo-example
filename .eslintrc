@@ -1,0 +1,62 @@
+{
+  "extends": [
+    "airbnb-typescript",
+    "plugin:tailwind/recommended",
+    "plugin:unicorn/recommended",
+    "prettier",
+    "prettier/react",
+    "prettier/@typescript-eslint"
+  ],
+  "overrides": [
+    {
+      "files": ["packages/*/pages/**/*.ts"],
+      "rules": {
+        "import/no-default-export": "off"
+      }
+    }
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "@typescript-eslint/explicit-member-accessibility": "error",
+    "class-methods-use-this": "off",
+    "dot-notation": [
+      "error",
+      {
+        "allowPattern": "^_"
+      }
+    ],
+    "import/no-default-export": "error",
+    "import/order": [
+      "error",
+      {
+        "alphabetize": {
+          "order": "asc"
+        }
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "assert": "either"
+      }
+    ],
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-sort-props": "error",
+    "unicorn/no-null": "off",
+    "unicorn/no-unreadable-array-destructuring": "off",
+    "unicorn/prevent-abbreviations": [
+      "error",
+      {
+        "checkFilenames": false,
+        "checkShorthandImports": false,
+        "whitelist": {
+          "getServerSideProps": true,
+          "props": true
+        }
+      }
+    ]
+  }
+}

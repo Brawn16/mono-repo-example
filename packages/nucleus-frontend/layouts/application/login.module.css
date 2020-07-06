@@ -1,0 +1,11 @@
+.login {
+  @apply absolute flex flex-col left-0 justify-center min-h-full py-8 top-0 min-w-full z-0;
+}
+
+.login:before {
+  backdrop-filter: blur(.15rem);
+  content: "";
+  z-index: -1;
+
+  @apply absolute bg-black bg-opacity-25 inset-0;
+}
