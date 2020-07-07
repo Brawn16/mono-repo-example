@@ -9,4 +9,6 @@ export interface ButtonProps
   className?: string;
   iconType?: IconType;
   onClick?: (event: React.MouseEvent) => void;
+  postionIconRight?: boolean;
+  isDisabled?: boolean;
 }
