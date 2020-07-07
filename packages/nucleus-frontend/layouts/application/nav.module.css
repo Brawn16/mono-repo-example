@@ -1,6 +1,6 @@
 .notificationCount {
   left: 1.25rem;
-  top: -0.5rem;
+  top: -.5rem;
 
   @apply absolute text-xs font-medium text-white bg-pink-600 rounded-full px-1.5;
 }
