@@ -15,7 +15,7 @@ export function Alert({
             <Icon className="w-5 h-5" />
           </div>
         )}
-        <div className="flex flex-1">{children}</div>
+        <div className="flex-1">{children}</div>
       </div>
     </div>
   );

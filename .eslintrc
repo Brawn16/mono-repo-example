@@ -9,7 +9,7 @@
   ],
   "overrides": [
     {
-      "files": ["packages/*/pages/**/*.ts"],
+      "files": ["packages/*/pages/**/*.ts", "**/*.stories.tsx"],
       "rules": {
         "import/no-default-export": "off"
       }
@@ -28,6 +28,7 @@
       }
     ],
     "import/no-default-export": "error",
+    "import/no-extraneous-dependencies": "off",
     "import/order": [
       "error",
       {
