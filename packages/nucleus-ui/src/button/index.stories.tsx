@@ -1,7 +1,13 @@
 import { action } from "@storybook/addon-actions";
 import React from "react";
 import { FaLock, FaCheck } from "react-icons/fa";
-import { Button, DangerButton, SecondaryButton, SuccessButton } from ".";
+import {
+  Button,
+  PrimaryButton,
+  DangerButton,
+  SecondaryButton,
+  SuccessButton,
+} from ".";
 
 export default {
   component: Button,
@@ -22,16 +28,16 @@ export const basicButton = () => {
 export const buttonWithIcon = () => {
   return (
     <div className="space-y-6">
-      <Button
+      <PrimaryButton
         iconType={FaLock}
         onClick={action("button-click")}
         postionIconRight
       >
         BUTTON
-      </Button>
-      <Button iconType={FaLock} onClick={action("button-click")}>
+      </PrimaryButton>
+      <PrimaryButton iconType={FaLock} onClick={action("button-click")}>
         BUTTON
-      </Button>
+      </PrimaryButton>
     </div>
   );
 };
@@ -53,5 +59,16 @@ export const successButton = () => {
     <SuccessButton iconType={FaCheck} onClick={action("button-click")}>
       SUCCESS
     </SuccessButton>
+  );
+};
+
+export const primaryButton = () => {
+  return (
+    <div className="space-y-6">
+      <PrimaryButton onClick={action("button-click")}>PRIMARY</PrimaryButton>
+      <PrimaryButton disabled onClick={action("button-click")}>
+        DISABLED
+      </PrimaryButton>
+    </div>
   );
 };
