@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "outDir": "dist",
+    "target": "esnext"
+  },
+  "exclude": ["node_modules", "tests", "**/*.test.ts"],
+  "extends": "../../tsconfig.json",
+  "include": ["**/*.ts"]
+}
