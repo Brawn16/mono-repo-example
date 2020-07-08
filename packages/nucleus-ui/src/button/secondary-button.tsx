@@ -9,7 +9,7 @@ export function SecondaryButton(
   const { children } = props;
   return (
     <Button
-      className="text-blue-600 bg-transparent border border-blue-400 hover:text-white hover:bg-blue-500 text-white-600 active:bg-blue-800 ${}"
+      className="text-blue-600 bg-transparent border border-blue-400 hover:text-white hover:bg-blue-500 text-white-600 active:bg-blue-800"
       {...props}
     >
       {children}

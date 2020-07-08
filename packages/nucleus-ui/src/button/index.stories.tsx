@@ -12,7 +12,7 @@ export const basicButton = () => {
   return (
     <div className="space-y-6">
       <Button onClick={action("button-click")}>Button</Button>
-      <Button isDisabled onClick={action("button-click")}>
+      <Button disabled onClick={action("button-click")}>
         Disabled
       </Button>
     </div>
