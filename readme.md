@@ -36,7 +36,7 @@ Other versions may cause/mask issues, so it's important to be on a supported ver
 
 ## Workspaces
 
-This repo contains multiple packages used together to build up the complete app, managed through Yarn Workspaces. For more information of workspaces read https://classic.yarnpkg.com/en/docs/workspaces.
+This repo contains multiple packages used together to build up the complete app, managed through Yarn Workspaces. For more information on workspaces read https://classic.yarnpkg.com/en/docs/workspaces.
 
 ## Packages
 
