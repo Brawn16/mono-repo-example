@@ -1,0 +1,1 @@
+export const GET_ADDRESS_API_KEY = "epBnv40qJUW55Pdmm4T1eQ27130";
