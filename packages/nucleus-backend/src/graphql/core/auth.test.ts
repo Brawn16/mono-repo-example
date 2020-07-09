@@ -5,11 +5,14 @@ import { ResolverData, UnauthorizedError } from "type-graphql";
 import { UserEntity } from "../../shared/entity/user.entity";
 import { stubEntity } from "../../shared/tests/helpers/entity";
 import { getMockUserEntity } from "../../shared/tests/helpers/user";
-import { getMockRequest } from "../tests/helpers/request";
+import {
+  getMockContext,
+  getMockAuthenticatedAppContext
+} from "../tests/helpers/context";
 import {
   checkAuth,
   createAuthToken,
-  getAuthUserFromRequest,
+  getAuthUserFromContext,
   verifyAuthToken
 } from "./auth";
 import { AuthenticatedAppContext } from "./context";
@@ -21,14 +24,8 @@ it("checks auth", async () => {
   const user = await getMockUserEntity();
   stubEntity(stub, UserEntity, [user]);
 
-  const token = createAuthToken(user);
   const resolverData = {
-    context: {
-      request: getMockRequest({
-        headers: { authorization: `Bearer ${token}` }
-      }),
-      user: new UserEntity()
-    }
+    context: await getMockAuthenticatedAppContext()
   } as ResolverData<AuthenticatedAppContext>;
 
   await checkAuth(resolverData);
@@ -36,7 +33,7 @@ it("checks auth", async () => {
 });
 
 it("creates auth token", async () => {
-  const timestamp = new Date().getTime() / 1000 + 86400;
+  const timestamp = new Date().getTime() / 1000 + 43200;
   const user = await getMockUserEntity();
   stubEntity(stub, UserEntity, [user]);
 
@@ -73,32 +70,30 @@ it("gets auth user from request", async () => {
   stubEntity(stub, UserEntity, [user]);
 
   const token = createAuthToken(user);
-  const request = getMockRequest({
-    headers: { authorization: `Bearer ${token}` }
-  });
+  const context = getMockContext({ authorization: `Bearer ${token}` });
 
-  const result = await getAuthUserFromRequest(request);
+  const result = await getAuthUserFromContext(context);
   expect(result).toBe(user);
 });
 
 it("throws exception when no token is in request", async () => {
-  const request = getMockRequest();
+  const context = getMockContext();
 
-  const result = getAuthUserFromRequest(request);
+  const result = getAuthUserFromContext(context);
   expect(result).rejects.toThrow(UnauthorizedError);
 });
 
 it("throws exception when invalid token is in request", async () => {
-  const request = getMockRequest({
-    headers: { authorization: `Bearer invalid` }
+  const context = getMockContext({
+    authorization: `Bearer invalid`
   });
 
-  const result = getAuthUserFromRequest(request);
+  const result = getAuthUserFromContext(context);
   expect(result).rejects.toThrow(UnauthorizedError);
 });
 
 it("verifies a valid token", async () => {
-  const timestamp = new Date().getTime() / 1000 + 86400;
+  const timestamp = new Date().getTime() / 1000 + 43200;
   const user = await getMockUserEntity();
 
   const token = createAuthToken(user);

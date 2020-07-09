@@ -2,9 +2,10 @@
   "compilerOptions": {
     "module": "commonjs",
     "outDir": "dist",
+    "sourceMap": false,
     "target": "esnext"
   },
-  "exclude": ["node_modules", "tests", "**/*.test.ts"],
+  "exclude": ["node_modules", "**/*.test.ts"],
   "extends": "../../tsconfig.json",
-  "include": ["**/*.ts"]
+  "include": ["src/**/*.ts"]
 }

@@ -1,0 +1,19 @@
+functions:
+  graphql:
+    events:
+      - http:
+          cors: true
+          method: get
+          path: graphql
+      - http:
+          cors: true
+          method: post
+          path: graphql
+    handler: dist/graphql.graphqlHandler
+plugins:
+  - serverless-offline
+provider:
+  name: aws
+  region: eu-west-2
+  runtime: nodejs12.x
+service: nucleus-backend
