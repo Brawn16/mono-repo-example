@@ -42,12 +42,24 @@ This repo contains multiple packages used together to build up the complete app,
 
 ### Nucleus Frontend
 
+The frontend package provides the API backend for the Nucleus app, using Apollo Server as the framework (https://www.apollographql.com/docs/apollo-server).
+
+The following commands are available:
+
+- `build` - Build production distruction of backend
+- `dev` - Runs local development environment
+- `seed` -
+
+### Nucleus Frontend
+
 The frontend package provides the frontend for the Nucleus app, using Next.js as the framework (https://nextjs.org).
 
 The following commands are available:
 
 - `build` - Creates a production-ready static bundle
 - `dev` - Runs local development environment
+- `seed` - Seed database
+- `test` - Run test suite
 
 ### Nucleus UI
 
