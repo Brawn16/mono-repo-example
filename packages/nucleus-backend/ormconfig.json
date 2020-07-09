@@ -1,9 +1,0 @@
-{
-  "cli": {
-    "migrationsDir": "src/shared/database/migrations"
-  },
-  "factories": ["dist/shared/database/factories/*.factory.js"],
-  "migrations": ["dist/shared/database/migrations/*.js"],
-  "migrationsTableName": "migration",
-  "seeds": ["dist/shared/database/seeds/*.seed.js"]
-}

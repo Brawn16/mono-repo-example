@@ -8,11 +8,17 @@
     "build:tsc": "tsc",
     "dev": "tsc-watch --onSuccess 'sls offline --httpPort 5000'",
     "postinstall": "yarn build",
+    "seed": "node node_modules/typeorm-seeding/dist/cli.js seed",
     "test": "jest"
   },
   "engines": {
     "node": ">= 12.0.0",
     "npm": "please-use-yarn"
+  },
+  "workspaces": {
+    "nohoist": [
+      "typeorm-seeding"
+    ]
   },
   "devDependencies": {
     "@types/faker": "^4.1.11",
