@@ -7,6 +7,7 @@ Monorepo for SDH Nucleus project.
 ## Requirements
 
 - NodeJS, v12.9 < v13 (LTS, 12.9 onwards supports ES2020 natively)
+- PostgreSQL v12
 - Yarn, v1 < v2 (For working with monorepo)
 
 If you need multiple versions of NodeJS for different projects, consider using NVM/NVM-Windows:
@@ -40,15 +41,17 @@ This repo contains multiple packages used together to build up the complete app,
 
 ## Packages
 
-### Nucleus Frontend
+### Nucleus Backend
 
 The frontend package provides the API backend for the Nucleus app, using Apollo Server as the framework (https://www.apollographql.com/docs/apollo-server).
 
 The following commands are available:
 
-- `build` - Build production distruction of backend
+- `build` - Creates a production-ready static bundle
+- `build-schema` - Build database schema
 - `dev` - Runs local development environment
-- `seed` -
+- `seed` - Seed database with dummy data
+- `test` - Run test suite
 
 ### Nucleus Frontend
 
