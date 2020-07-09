@@ -6,12 +6,12 @@ import {
   PrimaryButton,
   DangerButton,
   SecondaryButton,
-  SuccessButton,
+  SuccessButton
 } from ".";
 
 export default {
   component: Button,
-  title: "Button",
+  title: "Button"
 };
 
 export const basicButton = () => {
@@ -36,6 +36,9 @@ export const buttonWithIcon = () => {
         BUTTON
       </PrimaryButton>
       <PrimaryButton iconType={FaLock} onClick={action("button-click")}>
+        BUTTON
+      </PrimaryButton>
+      <PrimaryButton iconType={FaLock} loading onClick={action("button-click")}>
         BUTTON
       </PrimaryButton>
     </div>

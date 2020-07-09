@@ -9,4 +9,5 @@ export interface ButtonProps
   className?: string;
   iconType?: IconType;
   postionIconRight?: boolean;
+  loading?: boolean;
 }
