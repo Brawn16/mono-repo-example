@@ -49,9 +49,25 @@ The following commands are available:
 
 - `build` - Creates a production-ready static bundle
 - `build-schema` - Build database schema
-- `dev` - Runs local development environment
+- `dev` - Runs local development environment _(see setup instructions below)_
 - `seed` - Seed database with dummy data
 - `test` - Run test suite
+
+#### Setup Development Environment
+
+1. Make sure you have PostgreSQL installed.
+
+2. Add the following database and credentials:
+
+   - Username: `nucleus`
+   - Password: `nucleus`
+   - Database: `nucleus`
+
+3. Run `build-schema` command. This will populate the database with all the required tables.
+
+4. Run `seed` command. This will populate the database with dummy data.
+
+You can then run the `dev` command to start the API environment.
 
 ### Nucleus Frontend
 
@@ -63,6 +79,8 @@ The following commands are available:
 - `dev` - Runs local development environment
 - `seed` - Seed database
 - `test` - Run test suite
+
+**NB:** _The frontend requires a working backend, so make sure the backend is running to use the frontend with errors._
 
 ### Nucleus UI
 
