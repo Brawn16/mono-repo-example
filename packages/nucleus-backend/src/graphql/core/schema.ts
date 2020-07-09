@@ -9,6 +9,6 @@ export const resolvers = [AuthResolver, UserResolver];
 export function getSchema(): GraphQLSchema {
   return buildSchemaSync({
     authChecker: checkAuth,
-    resolvers
+    resolvers,
   });
 }

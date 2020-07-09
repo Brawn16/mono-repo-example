@@ -15,7 +15,7 @@ const path = env.GRAPHQL_JWT_KEY_PATH || "jwt.key";
 const passphrase = env.GRAPHQL_JWT_KEY_PASSPHRASE || "secret";
 const tokenKey = JWK.asKey({
   key: readFileSync(path),
-  passphrase
+  passphrase,
 });
 
 /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
@@ -24,7 +24,7 @@ export function verifyAuthToken(token: string): { [key: string]: any } {
 }
 
 export async function getAuthUserFromContext({
-  headers: { authorization = "" }
+  headers: { authorization = "" },
 }: AppContext): Promise<UserEntity> {
   try {
     const token = authorization.slice(7);
@@ -36,7 +36,7 @@ export async function getAuthUserFromContext({
 }
 
 export async function checkAuth({
-  context
+  context,
 }: ResolverData<AuthenticatedAppContext>): Promise<boolean> {
   context.user = await getAuthUserFromContext(context);
   return true;

@@ -15,10 +15,10 @@ export const server = new ApolloServer({
     // Disable polling by default so we don't flood the
     // console with requests with running locally
     settings: {
-      "schema.polling.enable": false
-    } as Partial<ISettings>
+      "schema.polling.enable": false,
+    } as Partial<ISettings>,
   },
-  tracing: true
+  tracing: true,
 });
 
 export const graphqlHandler = server.createHandler();
