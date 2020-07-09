@@ -4,6 +4,6 @@
 * [ ] Docs have been added / updated (markdown or storybook)
 * [ ] All code has been linted
 
-- **WWhat is the JIRA ticket number?**
+- **What is the JIRA ticket number?**
 
 - **Other information** (Helpful notes for reviewer, keep other information in JIRA)

@@ -11,6 +11,7 @@
     "dev": "run-p dev:cpx dev:tsc",
     "dev:cpx": "cpx --watch 'src/**/*.css' dist",
     "dev:tsc": "tsc --watch",
+    "postinstall": "yarn build",
     "storybook": "start-storybook -p 6006",
     "test": "jest"
   },
