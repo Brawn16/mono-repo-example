@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "lint": "run-s lint:eslint lint:prettier lint:stylelint",
-    "lint:eslint": "eslint --fix --max-warnings 0 **/*.{js,ts,tsx}",
+    "lint:eslint": "eslint --fix --max-warnings 0 packages/**/*.{js,ts,tsx}",
     "lint:prettier": "prettier --loglevel warn --write .",
     "lint:stylelint": "stylelint --fix --max-warnings 0 '**/*.css'"
   },
