@@ -1,4 +1,5 @@
 import React from "react";
+import { Input } from "../input";
 import { FieldSet } from ".";
 
 export default {
@@ -7,8 +8,8 @@ export default {
 };
 
 export const fieldSet = () => (
-  <FieldSet  heading='heading'>
-     <p>item 1</p>
-     <p>item 2</p>
+  <FieldSet heading="Field Title">
+    <Input label="Input 1" name="input1" />
+    <Input label="Input 2" name="input2" />
   </FieldSet>
 );
