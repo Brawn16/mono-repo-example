@@ -5535,7 +5535,7 @@ css-loader@3.5.3:
     schema-utils "^2.6.6"
     semver "^6.3.0"
 
-css-loader@^3.0.0:
+css-loader@^3.0.0, css-loader@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/css-loader/-/css-loader-3.6.0.tgz#2e4b2c7e6e2d27f8c8f28f61bffcd2e6c91ef645"
   integrity sha512-M5lSukoWi1If8dhQAUCvj4H8vUt3vOnwbQBH9DdTm/s4Ym2B/3dPMtYZeJmq7Q3S3Pa+I94DcZ7pc9bP14cWIQ==
@@ -5553,6 +5553,14 @@ css-loader@^3.0.0:
     postcss-value-parser "^4.1.0"
     schema-utils "^2.7.0"
     semver "^6.3.0"
+
+css-modules-typescript-loader@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/css-modules-typescript-loader/-/css-modules-typescript-loader-4.0.0.tgz#17c0924107f45c7d9998fb59be5c59d6398aac5c"
+  integrity sha512-K6ii0+kt2i3sHN+VKTWdF728x+N4PFitsjE8aldUO+N98XlZhanJYIEZrnh4FMTZzDvOjyBialU0LnkCSeeUig==
+  dependencies:
+    line-diff "^2.0.1"
+    loader-utils "^1.2.3"
 
 css-select-base-adapter@^0.1.1:
   version "0.1.1"
@@ -7613,6 +7621,13 @@ gauge@~2.7.3:
     strip-ansi "^3.0.1"
     wide-align "^1.1.0"
 
+generic-names@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/generic-names/-/generic-names-2.0.1.tgz#f8a378ead2ccaa7a34f0317b05554832ae41b872"
+  integrity sha512-kPCHWa1m9wGG/OwQpeweTwM/PYiQLrUIxXbt/P4Nic3LbGjCP0YwrALHW1uNLKZ0LIMg+RF+XRlj2ekT9ZlZAQ==
+  dependencies:
+    loader-utils "^1.1.0"
+
 gensync@^1.0.0-beta.1:
   version "1.0.0-beta.1"
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.1.tgz#58f4361ff987e5ff6e1e7a210827aa371eaac269"
@@ -8259,6 +8274,11 @@ iconv-lite@0.4.24, iconv-lite@^0.4.24:
   integrity sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
+
+icss-replace-symbols@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/icss-replace-symbols/-/icss-replace-symbols-1.1.0.tgz#06ea6f83679a7749e386cfe1fe812ae5db223ded"
+  integrity sha1-Bupvg2ead0njhs/h/oEq5dsiPe0=
 
 icss-utils@^4.0.0, icss-utils@^4.1.1:
   version "4.1.1"
@@ -9892,6 +9912,11 @@ lazy-universal-dotenv@^3.0.1:
     dotenv "^8.0.0"
     dotenv-expand "^5.1.0"
 
+levdist@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/levdist/-/levdist-1.0.0.tgz#91d7a3044964f2ccc421a0477cac827fe75c5718"
+  integrity sha1-kdejBElk8szEIaBHfKyCf+dcVxg=
+
 leven@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/leven/-/leven-3.1.0.tgz#77891de834064cccba82ae7842bb6b14a13ed7f2"
@@ -9911,6 +9936,13 @@ levn@^0.3.0, levn@~0.3.0:
   dependencies:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
+
+line-diff@^2.0.1:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/line-diff/-/line-diff-2.1.0.tgz#4c407100471b4ebe1617bf37e877554a67abaa08"
+  integrity sha512-EciuZHwQfFG5ITBdIjN+zyJtcJXRVgbDSxtv6sz8BBf16rw4iGRO28AwIDVlNSoKlpDzp1UzRti54j3wBlU9Fw==
+  dependencies:
+    levdist "^1.0.0"
 
 lines-and-columns@^1.1.6:
   version "1.1.6"
@@ -10002,6 +10034,11 @@ locate-path@^5.0.0:
   integrity sha512-t7hw9pI+WvuwNJXwk5zVHpyhIqzg2qTlklJOf0mVxGSbe3Fp2VieZcduNYjaLDoy6p9uGpQEGWG87WpMKlNq8g==
   dependencies:
     p-locate "^4.1.0"
+
+lodash.camelcase@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/lodash.camelcase/-/lodash.camelcase-4.3.0.tgz#b28aa6288a2b9fc651035c7711f65ab6190331a6"
+  integrity sha1-soqmKIorn8ZRA1x3EfZathkDMaY=
 
 lodash.clonedeep@^4.5.0:
   version "4.5.0"
@@ -11937,6 +11974,21 @@ postcss-modules-values@^3.0.0:
   dependencies:
     icss-utils "^4.0.0"
     postcss "^7.0.6"
+
+postcss-modules@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/postcss-modules/-/postcss-modules-3.2.0.tgz#1ca870d197cd09a7964253e12de2aac906c94256"
+  integrity sha512-ceodlVbBypGD3R7EI1xM7gz28J0syaXq0VKd7rJVXVlOSkxUIRBRJQjBgpoKnKVFNAcCjtLVgZqBA3mUNntWPA==
+  dependencies:
+    generic-names "^2.0.1"
+    icss-replace-symbols "^1.1.0"
+    lodash.camelcase "^4.3.0"
+    postcss "^7.0.32"
+    postcss-modules-extract-imports "^2.0.0"
+    postcss-modules-local-by-default "^3.0.2"
+    postcss-modules-scope "^2.2.0"
+    postcss-modules-values "^3.0.0"
+    string-hash "^1.1.1"
 
 postcss-nested@^4.1.1:
   version "4.2.2"
@@ -14153,7 +14205,7 @@ strict-uri-encode@^1.0.0:
   resolved "https://registry.yarnpkg.com/strict-uri-encode/-/strict-uri-encode-1.1.0.tgz#279b225df1d582b1f54e65addd4352e18faa0713"
   integrity sha1-J5siXfHVgrH1TmWt3UNS4Y+qBxM=
 
-string-hash@1.1.3:
+string-hash@1.1.3, string-hash@^1.1.1:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/string-hash/-/string-hash-1.1.3.tgz#e8aafc0ac1855b4666929ed7dd1275df5d6c811b"
   integrity sha1-6Kr8CsGFW0Zmkp7X3RJ1311sgRs=
@@ -14361,7 +14413,7 @@ strip-json-comments@^3.0.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-3.1.0.tgz#7638d31422129ecf4457440009fba03f9f9ac180"
   integrity sha512-e6/d0eBu7gHtdCqFt0xJr642LdToM5/cN4Qb9DbHjVx1CP5RyeM+zH7pbecEmDv/lBqb0QH+6Uqq75rxFPkM0w==
 
-style-loader@1.2.1, style-loader@^1.0.0:
+style-loader@1.2.1, style-loader@^1.0.0, style-loader@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-1.2.1.tgz#c5cbbfbf1170d076cfdd86e0109c5bba114baa1a"
   integrity sha512-ByHSTQvHLkWE9Ir5+lGbVOXhxX10fbprhLvdg96wedFZb4NDekDPxVKv5Fwmio+QcMlkkNfuK+5W1peQ5CUhZg==
