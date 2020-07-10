@@ -1,0 +1,51 @@
+{
+  "name": "@sdh-project-services/nucleus-backend",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "run-s build:rimraf build:tsc",
+    "build:rimraf": "rimraf dist",
+    "build:tsc": "tsc",
+    "dev": "tsc-watch --onSuccess 'sls offline --httpPort 5000'",
+    "postinstall": "yarn build",
+    "seed": "node node_modules/typeorm-seeding/dist/cli.js seed",
+    "test": "jest"
+  },
+  "engines": {
+    "node": ">= 12.0.0",
+    "npm": "please-use-yarn"
+  },
+  "workspaces": {
+    "nohoist": [
+      "typeorm-seeding"
+    ]
+  },
+  "devDependencies": {
+    "@types/faker": "^4.1.11",
+    "@types/jest": "^25.2.1",
+    "@types/sinon": "^9.0.0",
+    "jest": "^25.5.4",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "serverless": "^1.74.1",
+    "serverless-offline": "^6.4.0",
+    "sinon": "^9.0.2",
+    "ts-jest": "^25.5.0",
+    "tsc-watch": "^4.2.5",
+    "typeorm-seeding": "^1.6.1",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "apollo-server-lambda": "^2.15.1",
+    "argon2": "^0.26.2",
+    "change-case": "^4.1.1",
+    "class-transformer": "^0.2.3",
+    "class-validator": "^0.12.2",
+    "graphql": "^14.5.8",
+    "graphql-tools": "^5.0.0",
+    "jose": "^1.27.0",
+    "pg": "^8.0.3",
+    "type-graphql": "^0.17.6",
+    "typeorm": "^0.2.24"
+  }
+}

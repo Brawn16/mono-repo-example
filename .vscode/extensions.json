@@ -4,6 +4,8 @@
     "christian-kohler.npm-intellisense",
     "daosro.stylelint",
     "dbaeumer.vscode-eslint",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "kumar-harsh.graphql-for-vscode",
+    "ms-azuretools.vscode-docker"
   ]
 }

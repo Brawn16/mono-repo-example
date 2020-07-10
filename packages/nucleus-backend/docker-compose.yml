@@ -1,0 +1,9 @@
+version: "3"
+services:
+  postgres:
+    environment:
+      - POSTGRES_PASSWORD=nucleus
+      - POSTGRES_USER=nucleus
+    image: postgres
+    ports:
+      - 5432:5432
