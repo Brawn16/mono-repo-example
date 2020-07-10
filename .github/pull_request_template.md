@@ -1,6 +1,5 @@
 - **Please check if the PR fulfills these requirements**
 
-* [ ] The commit message includes a JIRA ticket number
 * [ ] Tests for the changes have been added
 * [ ] Docs have been added / updated (markdown or storybook)
 * [ ] All code has been linted
