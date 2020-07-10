@@ -19,6 +19,7 @@
     "npm": "please-use-yarn"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "react": "^16.13.1",
     "react-hook-form": "^5.7.2",
     "react-icons": "^3.10.0"
