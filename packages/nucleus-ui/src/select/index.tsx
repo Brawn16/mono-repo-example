@@ -1,6 +1,6 @@
 import React from "react";
-import ReactSelect from "react-select";
+import ReactSelect, { Props } from "react-select";
 
-export const Select = (props: any) => {
+export const Select = (props: Props) => {
   return <ReactSelect {...props} />;
 };

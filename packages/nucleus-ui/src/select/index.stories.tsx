@@ -46,7 +46,6 @@ export const disabledSelect = () => {
   return (
     <Select
       hideSelectedOptions
-      isDisabled
       onChange={handleSelection}
       options={selectOptions}
       placeholder="please select country"
