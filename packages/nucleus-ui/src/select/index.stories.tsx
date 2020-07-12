@@ -15,27 +15,23 @@ const selectOptions = [
   { label: "Germany", value: "Germany" }
 ];
 
-const handleSelection = (value: any) => {
-  action("on selection", value)(value);
-};
-
 export const basicSelect = () => {
   return (
     <Select
       hideSelectedOptions
-      onChange={handleSelection}
+      onChange={action("onChange")}
       options={selectOptions}
       placeholder="please select country"
     />
   );
 };
 
-export const MulitSelect = () => {
+export const mulitSelect = () => {
   return (
     <Select
       hideSelectedOptions
       isMulti
-      onChange={handleSelection}
+      onChange={action("onChange")}
       options={selectOptions}
       placeholder="please select country"
     />
@@ -46,7 +42,8 @@ export const disabledSelect = () => {
   return (
     <Select
       hideSelectedOptions
-      onChange={handleSelection}
+      isDisabled
+      onChange={action("onChange")}
       options={selectOptions}
       placeholder="please select country"
     />
