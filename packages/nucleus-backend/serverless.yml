@@ -16,4 +16,4 @@ provider:
   name: aws
   region: eu-west-2
   runtime: nodejs12.x
-service: nucleus-backend
+service: nucleus-backend-depotnet-poc
