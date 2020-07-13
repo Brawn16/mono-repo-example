@@ -9,11 +9,20 @@ functions:
           cors: true
           method: post
           path: graphql
-    handler: dist/graphql.graphqlHandler
+    handler: dist/graphql/index.graphqlHandler
 plugins:
   - serverless-offline
 provider:
+  environment:
+    TYPEORM_HOST: nucleus-backend-depotnet-poc.cxpjhjwyl9xj.eu-west-2.rds.amazonaws.com
+    TYPEORM_PASSWORD: ${env:TYPEORM_PASSWORD}
   name: aws
   region: eu-west-2
   runtime: nodejs12.x
+  timeout: 30
+  vpc:
+    securityGroupIds:
+      - sg-05b94ccf2a7ec5e20
+    subnetIds:
+      - subnet-03cdb57ee0a1bf915
 service: nucleus-backend-depotnet-poc
