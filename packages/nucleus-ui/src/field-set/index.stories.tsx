@@ -1,15 +1,17 @@
 import React from "react";
 import { Input } from "../input";
-import { FieldSet } from ".";
+import { Fieldset } from ".";
 
 export default {
-  component: FieldSet,
-  title: "Field Set",
+  component: Fieldset,
+  title: "Fieldset"
 };
 
-export const fieldSet = () => (
-  <FieldSet heading="Field Title">
-    <Input label="Input 1" name="input1" />
-    <Input label="Input 2" name="input2" />
-  </FieldSet>
-);
+export function fieldSet() {
+  return (
+    <Fieldset>
+      <Input label="Input 1" name="input1" />
+      <Input label="Input 2" name="input2" />
+    </Fieldset>
+  );
+}
