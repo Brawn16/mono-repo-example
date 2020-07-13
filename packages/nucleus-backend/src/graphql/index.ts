@@ -9,7 +9,7 @@ import { createConnection } from "typeorm";
 import { context } from "./core/context";
 import { getSchema } from "./core/schema";
 
-createConnection();
+const connection = createConnection();
 
 const server = new ApolloServer({
   context,
@@ -26,7 +26,13 @@ const server = new ApolloServer({
   tracing: true
 });
 
-const handler = server.createHandler();
+const handler = server.createHandler({
+  cors: {
+    credentials: true,
+    origin:
+      "http://nucleus-frontend-depotnet-poc.s3-website.eu-west-2.amazonaws.com"
+  }
+});
 
 async function executeHandler(
   event: APIGatewayProxyEvent,

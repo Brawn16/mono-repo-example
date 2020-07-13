@@ -14,6 +14,8 @@ plugins:
   - serverless-offline
 provider:
   environment:
+    DN_PASSWORD: ${env:DN_PASSWORD}
+    DN_USERNAME: JLeckenbySDH
     TYPEORM_HOST: nucleus-backend-depotnet-poc.cxpjhjwyl9xj.eu-west-2.rds.amazonaws.com
     TYPEORM_PASSWORD: ${env:TYPEORM_PASSWORD}
   name: aws

@@ -3,7 +3,7 @@ const theme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   plugins: [ui({ sidebar: true })],
-  purge: ["**/*.tsx"],
+  purge: false,
   theme: {
     extend: {
       fontFamily: {
