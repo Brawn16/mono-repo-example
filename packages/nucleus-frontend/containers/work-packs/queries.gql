@@ -1,0 +1,15 @@
+query workPacks {
+  workPacks {
+    jobReference
+    projectReference
+    workTypeName
+    popAreaName
+    cityName
+    jobStatusName
+    projectStatusName
+    contractorName
+    projectManagerName
+    baselineStartDate
+    requiredByDate
+  }
+}
