@@ -11,12 +11,18 @@
     "dev": "run-p dev:cpx dev:tsc",
     "dev:cpx": "cpx --watch 'src/**/*.css' dist",
     "dev:tsc": "tsc --watch",
+    "postinstall": "yarn build",
     "storybook": "start-storybook -p 6006",
     "test": "jest"
   },
   "engines": {
     "node": ">= 12.0.0",
     "npm": "please-use-yarn"
+  },
+  "workspaces": {
+    "nohoist": [
+      "@storybook/addon-storyshots"
+    ]
   },
   "dependencies": {
     "dotenv": "^8.2.0",
@@ -45,6 +51,7 @@
     "npm-run-all": "^4.1.5",
     "postcss-import": "^12.0.1",
     "postcss-loader": "^3.0.0",
+    "react-test-renderer": "^16.13.1",
     "rimraf": "^3.0.2",
     "style-loader": "^1.2.1",
     "tailwindcss": "^1.4.6",

@@ -1,4 +1,7 @@
 {
-  "extends": "stylelint-config-airbnb",
-  "ignoreFiles": ["node_modules"]
+  "extends": [
+    "stylelint-config-airbnb",
+    "stylelint-config-prettier"
+  ],
+  "ignoreFiles": ["node_modules"],
 }

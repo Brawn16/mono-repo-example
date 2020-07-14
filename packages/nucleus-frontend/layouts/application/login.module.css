@@ -3,7 +3,7 @@
 }
 
 .login:before {
-  backdrop-filter: blur(.15rem);
+  backdrop-filter: blur(0.15rem);
   content: "";
   z-index: -1;
 

@@ -10,7 +10,7 @@ export function Login(): React.ReactElement | null {
     setRender(true);
   }, []);
 
-  if (render) {
+  if (!render) {
     return null;
   }
 
