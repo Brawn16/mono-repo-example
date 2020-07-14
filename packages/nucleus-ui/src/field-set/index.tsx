@@ -1,7 +1,7 @@
 import React from "react";
 
 export function Fieldset({
-  children
+  children,
 }: React.PropsWithChildren<
   React.DetailedHTMLProps<
     React.FieldsetHTMLAttributes<HTMLFieldSetElement>,

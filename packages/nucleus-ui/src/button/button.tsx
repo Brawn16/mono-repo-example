@@ -9,10 +9,10 @@ export function Button(
     iconType: Icon,
     postionIconRight,
     disabled,
-    loading
+    loading,
   } = props;
   let {
-    className = "bg-blue-700 hover:bg-blue-600 active:bg-blue-800"
+    className = "bg-blue-700 hover:bg-blue-600 active:bg-blue-800",
   } = props;
 
   className +=
