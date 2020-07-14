@@ -4,10 +4,10 @@ import { Fieldset } from ".";
 
 export default {
   component: Fieldset,
-  title: "Fieldset"
+  title: "fieldset",
 };
 
-export function fieldSet() {
+export function fieldset() {
   return (
     <Fieldset>
       <Input label="Input 1" name="input1" />
