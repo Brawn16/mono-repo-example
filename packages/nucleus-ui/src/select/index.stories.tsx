@@ -5,14 +5,14 @@ import { Select } from ".";
 
 export default {
   component: Select,
-  title: "Select"
+  title: "Select",
 };
 
 const selectOptions = [
   { label: "Great Britain", value: "Great Britain" },
   { label: "France", value: "France" },
   { label: "Spain", value: "Spain" },
-  { label: "Germany", value: "Germany" }
+  { label: "Germany", value: "Germany" },
 ];
 
 export const basicSelect = () => {

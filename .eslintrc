@@ -9,7 +9,7 @@
   ],
   "overrides": [
     {
-      "files": ["packages/*/pages/**/*.ts", "**/*.stories.tsx"],
+      "files": ["packages/*/pages/**/*.ts", "packages/**/*.stories.tsx"],
       "rules": {
         "import/no-default-export": "off"
       }
