@@ -1,4 +1,5 @@
 import React from "react";
+import { Spinner } from "../spinner";
 import { ButtonProps } from "./types";
 
 export function Button(
@@ -9,10 +10,10 @@ export function Button(
     iconType: Icon,
     postionIconRight,
     disabled,
-    loading,
+    loading
   } = props;
   let {
-    className = "bg-blue-700 hover:bg-blue-600 active:bg-blue-800",
+    className = "bg-blue-700 hover:bg-blue-600 active:bg-blue-800"
   } = props;
 
   className +=
@@ -24,7 +25,7 @@ export function Button(
   if (loading) {
     return (
       <button disabled type="submit" {...props} className={className}>
-        loading
+        <Spinner size={25} />
       </button>
     );
   }
