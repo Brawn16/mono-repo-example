@@ -28,7 +28,8 @@ const server = new ApolloServer({
 
 const handler = server.createHandler({
   cors: {
-    credentials: true,
+    allowedHeaders: ["authorization", "content-type"],
+    methods: ["POST"],
     origin:
       "http://nucleus-frontend-depotnet-poc.s3-website.eu-west-2.amazonaws.com"
   }

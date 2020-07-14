@@ -30,7 +30,7 @@ export const authLink = new ApolloLink((operation, forward) => {
 });
 
 export const httpLink = new HttpLink({
-  uri: "https://wpvhd2xw93.execute-api.eu-west-2.amazonaws.com/dev/graphql"
+  uri: "http://localhost:5000/dev/graphql"
 });
 
 const apolloClient = new ApolloClient({

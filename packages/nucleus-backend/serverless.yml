@@ -22,9 +22,4 @@ provider:
   region: eu-west-2
   runtime: nodejs12.x
   timeout: 30
-  vpc:
-    securityGroupIds:
-      - sg-05b94ccf2a7ec5e20
-    subnetIds:
-      - subnet-03cdb57ee0a1bf915
 service: nucleus-backend-depotnet-poc
