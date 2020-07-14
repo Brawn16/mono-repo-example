@@ -1,3 +1,20 @@
+service: nucleus-backend-depotnet-poc
+plugins:
+  - serverless-offline
+
+provider:
+  environment:
+    APOLLO_CORS_ORIGIN: http://nucleus-frontend-depotnet-poc.s3-website.eu-west-2.amazonaws.com
+    APOLLO_PLAYGROUND_ENABLED: false
+    DN_PASSWORD: ${env:DN_PASSWORD}
+    DN_USERNAME: JLeckenbySDH
+    TYPEORM_HOST: nucleus-backend-depotnet-poc.cxpjhjwyl9xj.eu-west-2.rds.amazonaws.com
+    TYPEORM_PASSWORD: ${env:TYPEORM_PASSWORD}
+  name: aws
+  region: eu-west-2
+  runtime: nodejs12.x
+  timeout: 30
+
 functions:
   graphql:
     events:
@@ -10,16 +27,3 @@ functions:
           method: post
           path: graphql
     handler: dist/graphql/index.graphqlHandler
-plugins:
-  - serverless-offline
-provider:
-  environment:
-    DN_PASSWORD: ${env:DN_PASSWORD}
-    DN_USERNAME: JLeckenbySDH
-    TYPEORM_HOST: nucleus-backend-depotnet-poc.cxpjhjwyl9xj.eu-west-2.rds.amazonaws.com
-    TYPEORM_PASSWORD: ${env:TYPEORM_PASSWORD}
-  name: aws
-  region: eu-west-2
-  runtime: nodejs12.x
-  timeout: 30
-service: nucleus-backend-depotnet-poc

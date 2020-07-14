@@ -30,7 +30,7 @@ export const authLink = new ApolloLink((operation, forward) => {
 });
 
 export const httpLink = new HttpLink({
-  uri: "http://localhost:5000/dev/graphql",
+  uri: process.env.NEXT_PUBLIC_APOLLO_URI,
 });
 
 const apolloClient = new ApolloClient({

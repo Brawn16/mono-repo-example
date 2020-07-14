@@ -21,16 +21,27 @@ export function Button(
     className += " opacity-50 cursor-not-allowed";
   }
 
+  // Build props to pass to button
+  const buttonProperties = { ...props };
+  delete buttonProperties.iconType;
+  delete buttonProperties.postionIconRight;
+  delete buttonProperties.loading;
+
   if (loading) {
     return (
-      <button disabled type="submit" {...props} className={className}>
+      <button
+        disabled
+        type="submit"
+        {...buttonProperties}
+        className={className}
+      >
         loading
       </button>
     );
   }
 
   return (
-    <button type="submit" {...props} className={className}>
+    <button type="submit" {...buttonProperties} className={className}>
       {Icon && !postionIconRight && (
         <Icon className="w-4 h-4 mr-2 text-white opacity-50 duration-150 ease-in-out transition" />
       )}
