@@ -7,7 +7,7 @@
     "outDir": "dist",
     "target": "es5"
   },
-  "exclude": ["**/*.stories.tsx", "**/*.test.ts"],
+  "exclude": ["**/*.test.ts"],
   "extends": "../../tsconfig.json",
   "include": ["src/**/*.ts", "src/**/*.tsx"]
 }
