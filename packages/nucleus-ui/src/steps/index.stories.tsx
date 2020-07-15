@@ -1,3 +1,4 @@
+/* eslint-disable no-script-url */
 import React from "react";
 import { Steps } from ".";
 
@@ -7,9 +8,9 @@ export default {
 };
 
 const stepsItems = [
-  { label: "Fred", path: "./fred" },
-  { label: "Wilma", path: "./wilma" },
-  { label: "Barney", path: "./barney" },
+  { label: "Fred", path: "javascript:void(0)" },
+  { label: "Wilma", path: "javascript:void(0);" },
+  { label: "Barney", path: "javascript:void(0);" },
 ];
 
 export const singleStep = () => {
