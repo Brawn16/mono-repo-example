@@ -1,4 +1,5 @@
 import React from "react";
+import { Spinner } from "../spinner";
 import { ButtonProps } from "./types";
 
 export function Button(
@@ -35,7 +36,7 @@ export function Button(
         {...buttonProperties}
         className={className}
       >
-        loading
+        <Spinner size={25} />
       </button>
     );
   }
