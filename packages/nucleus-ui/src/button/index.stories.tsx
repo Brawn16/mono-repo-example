@@ -16,10 +16,10 @@ export default {
 
 export const basicButton = () => {
   return (
-    <div className="space-y-6">
+    <div className="space-x-2">
       <Button onClick={action("button-click")}>BUTTON</Button>
       <Button disabled onClick={action("button-click")}>
-        DISABLED
+        Disabled
       </Button>
     </div>
   );
@@ -27,32 +27,32 @@ export const basicButton = () => {
 
 export const buttonWithIcon = () => {
   return (
-    <div className="space-y-6">
+    <div className="flex space-x-2">
       <PrimaryButton
         iconType={FaLock}
         onClick={action("button-click")}
         postionIconRight
       >
-        BUTTON
+        Button
       </PrimaryButton>
       <PrimaryButton iconType={FaLock} onClick={action("button-click")}>
-        BUTTON
+        Button
       </PrimaryButton>
       <PrimaryButton iconType={FaLock} loading onClick={action("button-click")}>
-        BUTTON
+        Button
       </PrimaryButton>
     </div>
   );
 };
 
 export const dangerButton = () => {
-  return <DangerButton onClick={action("button-click")}>DANGER </DangerButton>;
+  return <DangerButton onClick={action("button-click")}>Danger</DangerButton>;
 };
 
 export const secondaryButton = () => {
   return (
     <SecondaryButton onClick={action("button-click")}>
-      SECONDARY
+      Secondary
     </SecondaryButton>
   );
 };
@@ -60,17 +60,17 @@ export const secondaryButton = () => {
 export const successButton = () => {
   return (
     <SuccessButton iconType={FaCheck} onClick={action("button-click")}>
-      SUCCESS
+      Success
     </SuccessButton>
   );
 };
 
 export const primaryButton = () => {
   return (
-    <div className="space-y-6">
+    <div className="space-x-2">
       <PrimaryButton onClick={action("button-click")}>PRIMARY</PrimaryButton>
       <PrimaryButton disabled onClick={action("button-click")}>
-        DISABLED
+        Disabled
       </PrimaryButton>
     </div>
   );

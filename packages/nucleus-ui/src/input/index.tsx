@@ -17,8 +17,7 @@ export function Input(props: InputProps): React.ReactElement {
   // Build error classes
   let errorClassName = "";
   if (error) {
-    errorClassName =
-      "pr-10 text-red-900 border-red-300 focus:border-red-300 focus:shadow-outline-red";
+    errorClassName = "pr-10 text-red-900 border-red-300 focus:border-red-300";
   }
 
   // Build props to pass to input
@@ -34,11 +33,11 @@ export function Input(props: InputProps): React.ReactElement {
         {label}
         {required && <span className="text-red-600"> *</span>}
       </label>
-      <div className="relative mt-1 rounded-md">
+      <div className="relative mt-1">
         <input
           {...inputProperties}
           ref={componentRef}
-          className={`block w-full form-input shadow-sm ${errorClassName} ${
+          className={`block w-full form-input ${errorClassName} ${
             positionIconLeft ? " pl-8" : "pr-8"
           }`}
           id={name}
