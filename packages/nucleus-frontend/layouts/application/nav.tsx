@@ -27,7 +27,7 @@ export function Nav(): React.ReactElement {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-blue-700 shadow-sm">
+    <nav className="sticky top-0 z-50 bg-blue-700">
       <div className="pr-2 mx-auto md:pr-6 md:pl-8 max-w-7xl">
         <div className="flex items-center justify-between h-16">
           <button

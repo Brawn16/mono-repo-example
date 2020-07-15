@@ -6,10 +6,10 @@ export function Panel({
   className = "",
   subtitle,
   title,
-  titleClassName = "",
+  titleClassName = ""
 }: React.PropsWithChildren<PanelProps>): React.ReactElement {
   return (
-    <div className={`bg-white shadow md:rounded-md ${className}`}>
+    <div className={`bg-white shadow ${className}`}>
       {title && (
         <div className={`p-8 ${titleClassName}`}>
           <h3 className="text-lg font-medium">{title}</h3>

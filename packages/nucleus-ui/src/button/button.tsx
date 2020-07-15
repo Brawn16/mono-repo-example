@@ -10,14 +10,14 @@ export function Button(
     iconType: Icon,
     postionIconRight,
     disabled,
-    loading,
+    loading
   } = props;
   let {
-    className = "bg-blue-700 hover:bg-blue-600 active:bg-blue-800",
+    className = "bg-blue-700 hover:bg-blue-600 active:bg-blue-800"
   } = props;
 
   className +=
-    " flex items-center justify-center px-4 py-2 font-medium text-white rounded-md  shadow-sm focus:outline-none duration-150 ease-in-out transition";
+    " flex items-center justify-center px-4 py-2 font-medium text-white focus:outline-none duration-150 ease-in-out transition";
   if (disabled || loading) {
     className += " opacity-50 cursor-not-allowed";
   }
