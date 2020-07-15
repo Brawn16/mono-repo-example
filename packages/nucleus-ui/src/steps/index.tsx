@@ -8,13 +8,23 @@ export function Steps(props: stepProps) {
     <div>
       <div className="flex border-l-2 rounded-sm border-grey-700">
         {items.map((item) => {
-          const { label, path } = item;
-          const activeClass = active === label ? "bg-gray-300" : "";
+          const { label, path, disabled } = item;
+          const activeClass = active === label ? "bg-gray-400 " : "";
+
+          if (disabled) {
+            return (
+              <div key={label}>
+                <div className="p-2 text-gray-400 bg-gray-200 border-t-2 border-b-2 border-r-2 rounded-sm border-grey-700">
+                  {label}
+                </div>
+              </div>
+            );
+          }
+
           return (
-            <a href={path} onClick={onClick}>
+            <a key={label} href={path} onClick={onClick}>
               <div
-                key={label}
-                className={`p-2 text-gray-700 border-t-2 border-b-2 border-r-2 rounded-sm border-grey-700 ${activeClass}`}
+                className={`p-2 text-gray-700  border-t-2 border-b-2 border-r-2 rounded-sm border-grey-700 ${activeClass}`}
               >
                 {label}
               </div>
