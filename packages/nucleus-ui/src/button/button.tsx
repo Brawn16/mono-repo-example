@@ -1,4 +1,5 @@
 import React from "react";
+import { Spinner } from "../spinner";
 import { ButtonProps } from "./types";
 
 export function Button(
@@ -24,7 +25,7 @@ export function Button(
   if (loading) {
     return (
       <button disabled type="submit" {...props} className={className}>
-        loading
+        <Spinner size={25} />
       </button>
     );
   }

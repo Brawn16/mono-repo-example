@@ -2,6 +2,5 @@
   "extends": [
     "stylelint-config-airbnb",
     "stylelint-config-prettier"
-  ],
-  "ignoreFiles": ["node_modules"],
+  ]
 }

@@ -3,7 +3,16 @@ import { FaExclamationCircle } from "react-icons/fa";
 import { InputProps } from "./types";
 
 export function Input(props: InputProps): React.ReactElement {
-  const { className, componentRef, error, label, name, required } = props;
+  const {
+    className,
+    componentRef,
+    error,
+    label,
+    name,
+    required,
+    iconType: Icon,
+    positionIconLeft,
+  } = props;
 
   // Build error classes
   let errorClassName = "";
@@ -17,6 +26,8 @@ export function Input(props: InputProps): React.ReactElement {
   delete inputProperties.componentRef;
   delete inputProperties.required;
 
+  const iconPostionClass: string = positionIconLeft ? "left-0" : "right-0";
+
   return (
     <div className={className}>
       <label className="block font-medium text-gray-700" htmlFor={name}>
@@ -27,16 +38,25 @@ export function Input(props: InputProps): React.ReactElement {
         <input
           {...inputProperties}
           ref={componentRef}
-          className={`block w-full form-input shadow-sm ${errorClassName}`}
+          className={`block w-full form-input shadow-sm ${errorClassName} ${
+            positionIconLeft ? " pl-8" : "pr-8"
+          }`}
           id={name}
         />
-        {error && (
-          <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-            <FaExclamationCircle className="w-5 h-5 text-red-500" />
+        {Icon && (
+          <div
+            className={`absolute inset-y-0 flex items-center pl-3 pr-3 pointer-events-none ${iconPostionClass}`}
+          >
+            <Icon className="w-5 h-5" />
           </div>
         )}
       </div>
-      {error && <p className="mt-1 text-xs text-red-600">{error.message}</p>}
+      {error && (
+        <div className="flex items-center p-1 ">
+          <FaExclamationCircle className="w-4 h-4 text-red-500" />
+          <p className="mt-1 mb-1 ml-1 text-xs text-red-600">{error.message}</p>
+        </div>
+      )}
     </div>
   );
 }
