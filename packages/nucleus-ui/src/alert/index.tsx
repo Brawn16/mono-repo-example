@@ -5,7 +5,7 @@ import { AlertProps } from "./types";
 export function Alert({
   children,
   className = "",
-  iconType: Icon = FaExclamationCircle
+  iconType: Icon = FaExclamationCircle,
 }: React.PropsWithChildren<AlertProps>): React.ReactElement {
   return (
     <div className={`p-4 text-white bg-red-600 ${className}`}>

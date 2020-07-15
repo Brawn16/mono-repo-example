@@ -6,7 +6,7 @@ export function Panel({
   className = "",
   subtitle,
   title,
-  titleClassName = ""
+  titleClassName = "",
 }: React.PropsWithChildren<PanelProps>): React.ReactElement {
   return (
     <div className={`bg-white shadow ${className}`}>

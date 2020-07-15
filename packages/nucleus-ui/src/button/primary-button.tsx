@@ -6,5 +6,13 @@ export function PrimaryButton(
   props: React.PropsWithChildren<ButtonProps>
 ): React.ReactElement {
   const { children } = props;
-  return <Button {...props}>{children}</Button>;
+  return (
+    <Button
+      className="text-white bg-blue-600 hover:bg-blue-700 active:bg-red-700"
+      loadingColor="#fff"
+      {...props}
+    >
+      {children}
+    </Button>
+  );
 }

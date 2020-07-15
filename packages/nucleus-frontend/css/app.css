@@ -7,5 +7,5 @@
 body {
   min-width: 320px;
 
-  @apply min-h-screen font-sans text-sm antialiased text-gray-900 bg-gray-100;
+  @apply min-h-screen font-sans text-sm antialiased text-gray-900;
 }
