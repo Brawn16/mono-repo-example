@@ -10,4 +10,5 @@ export interface ButtonProps
   iconType?: IconType;
   postionIconRight?: boolean;
   loading?: boolean;
+  loadingColor?: string;
 }
