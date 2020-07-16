@@ -1,4 +1,5 @@
 /* eslint-disable no-script-url */
+import { action } from "@storybook/addon-actions";
 import React from "react";
 import { Steps } from ".";
 
@@ -20,9 +21,17 @@ const disabledItems = [
 ];
 
 export const steps = () => {
-  return <Steps active="Mr Smith" items={stepsItems} />;
+  return (
+    <Steps active="Mr Smith" items={stepsItems} onClick={action("clicked")} />
+  );
 };
 
 export const stepItemsDisabled = () => {
-  return <Steps active="Mr Smith" items={disabledItems} />;
+  return (
+    <Steps
+      active="Mr Smith"
+      items={disabledItems}
+      onClick={action("clicked")}
+    />
+  );
 };
