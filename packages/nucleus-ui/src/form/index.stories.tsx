@@ -13,10 +13,6 @@ type Inputs = {
   lastName: string;
 };
 
-const onSubmit = (data: any) => {
-  action("submit", data)(data);
-};
-
 export const basicForm = () => {
   const { register, handleSubmit, errors } = useForm<Inputs>();
 
@@ -24,7 +20,7 @@ export const basicForm = () => {
     <div className="flex  justify-center">
       <form
         className="flex flex-col justify-center w-1/2"
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(action("submit"))}
       >
         <Input
           componentRef={register({ required: "Firstname is required" })}
