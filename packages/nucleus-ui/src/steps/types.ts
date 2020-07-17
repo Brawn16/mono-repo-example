@@ -1,10 +1,10 @@
-export interface stepProps {
-  items: stepItem[];
+export interface StepProps {
+  items: StepItem[];
   active?: string;
-  onClick?: (event: any) => void;
+  onClick?: (stepItem: StepItem) => void;
 }
 
-export interface stepItem {
+export interface StepItem {
   label: string;
   path?: string;
   disabled?: boolean;

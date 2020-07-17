@@ -1,17 +1,17 @@
 import React from "react";
-import { stepProps, stepItem } from "./types";
+import { StepProps, StepItem } from "./types";
 
-export function Steps(props: stepProps) {
+export function Steps(props: StepProps) {
   const { items, active, onClick } = props;
 
-  const handleClick = (item: stepItem) => {
+  const handleClick = (item: StepItem) => {
     if (onClick) {
       onClick(item);
     }
   };
 
-  const renderSteps = (stepItems: stepItem[]) => {
-    return stepItems.map((item: stepItem) => {
+  const renderSteps = (stepItems: StepItem[]) => {
+    return stepItems.map((item: StepItem) => {
       const { label, path, disabled } = item;
       const activeClass = active === label ? "bg-gray-400 " : "";
 
