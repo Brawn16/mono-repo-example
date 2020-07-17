@@ -11,7 +11,7 @@ export function Input(props: InputProps): React.ReactElement {
     name,
     required,
     iconType: Icon,
-    positionIconLeft,
+    positionIconLeft
   } = props;
   const iconPostionClass = positionIconLeft ? "left-0" : "right-0";
 
@@ -25,6 +25,8 @@ export function Input(props: InputProps): React.ReactElement {
   const inputProperties = { ...props };
   delete inputProperties.componentRef;
   delete inputProperties.error;
+  delete inputProperties.iconType;
+  delete inputProperties.positionIconLeft;
   delete inputProperties.required;
 
   return (

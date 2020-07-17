@@ -54,8 +54,10 @@
         "checkFilenames": false,
         "checkShorthandImports": false,
         "whitelist": {
+          "componentRef": true,
           "getServerSideProps": true,
-          "props": true
+          "props": true,
+          "ref": true
         }
       }
     ]
