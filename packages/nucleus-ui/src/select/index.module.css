@@ -1,5 +1,5 @@
 .select {
-  @apply block rounded-none border  border-gray-300;
+  @apply block rounded-none border border-gray-300;
 }
 
 .select:focus {
@@ -11,17 +11,7 @@
 }
 
 .select > div {
-  border: none;
-  appearance: none;
-  background-color: #ffffff;
-  border-color: #a4cafe;
-  border-width: 1px;
-
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #8a909b;
-  opacity: 1;
-  @apply rounded-none;
+  @apply rounded-none text-gray-500 bg-white leading-normal text-base border-none;
 }
 
 .select span {
