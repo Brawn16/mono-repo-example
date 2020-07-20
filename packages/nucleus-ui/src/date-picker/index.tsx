@@ -1,26 +1,61 @@
-import { format } from "date-fns";
+import DateFnsUtils from "@date-io/date-fns";
+import {
+  createMuiTheme,
+  MuiThemeProvider,
+  TextFieldProps
+} from "@material-ui/core";
+import {
+  DatePicker as MaterialDatePicker,
+  MuiPickersUtilsProvider
+} from "@material-ui/pickers";
+import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
+import { format, parse } from "date-fns";
 import React, { useRef } from "react";
-import ReactDatePicker from "react-datepicker";
 import { BrowserView, MobileView } from "react-device-detect";
 import { FaCalendar } from "react-icons/fa";
 import { Input } from "../input";
 import { DatePickerProps } from "./types";
-import "./index.css";
+
+const theme = createMuiTheme({
+  overrides: {
+    MuiDialogActions: {
+      root: {
+        display: "none"
+      }
+    }
+  }
+});
 
 export function DatePicker(props: DatePickerProps) {
   const ref = useRef<HTMLInputElement>(null);
-  const { componentRef, max, min } = props;
+  const { max, min } = props;
+  let { value } = props;
 
-  // Build input properties, parsing min and max dates
-  // into valid attributes
+  // If we have a value, parse into correct
+  // date format for browser view
+  if (value) {
+    const valueDate = parse(value, "yyyy-MM-dd", new Date());
+    value = format(valueDate, "dd/MM/yyyy");
+  }
+
+  // Build input properties, parsing min
+  // and max dates into valid attributes
   const inputProperties = {
     ...props,
     max: max ? format(max, "yyyy-MM-dd") : undefined,
     min: min ? format(min, "yyyy-MM-dd") : undefined
   };
 
-  const handleChange = (date: Date | null) => {
-    console.log(date, ref);
+  // Handle datepicker change
+  const handleChange = (date: MaterialUiPickersDate) => {
+    const { current } = ref;
+    if (current === null || date === null) {
+      return;
+    }
+
+    const event = new Event("input", { bubbles: true });
+    current.value = format(date, "dd/MM/yyyy");
+    current.dispatchEvent(event);
   };
 
   return (
@@ -29,13 +64,25 @@ export function DatePicker(props: DatePickerProps) {
         <Input iconType={FaCalendar} type="date" {...inputProperties} />
       </MobileView>
       <BrowserView>
-        <Input componentRef={ref} iconType={FaCalendar} {...inputProperties} />
-        <ReactDatePicker
-          customInput={<></>}
-          dateFormat="dd/MM/yyyy"
-          onChange={handleChange}
-          open
-        />
+        <MuiThemeProvider theme={theme}>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <MaterialDatePicker
+              autoOk
+              disableToolbar
+              onChange={handleChange}
+              openTo="year"
+              TextFieldComponent={({ onClick }: TextFieldProps) => (
+                <Input
+                  componentRef={ref}
+                  iconType={FaCalendar}
+                  {...inputProperties}
+                  onMouseDown={onClick}
+                />
+              )}
+              value={null}
+            />
+          </MuiPickersUtilsProvider>
+        </MuiThemeProvider>
       </BrowserView>
     </>
   );
