@@ -3,7 +3,9 @@ import { Spinner } from ".";
 
 export default {
   component: Spinner,
-  title: "Spinner",
+  title: "Spinner"
 };
 
-export const loadingSpinner = () => <Spinner color="#000" />;
+export const defaultSpinner = () => <Spinner />;
+
+export const coloredSpinner = () => <Spinner color="blue" />;

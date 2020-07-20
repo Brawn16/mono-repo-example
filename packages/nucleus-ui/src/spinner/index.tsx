@@ -3,5 +3,6 @@ import { ClipLoader } from "react-spinners";
 import { LoaderSizeProps } from "react-spinners/interfaces";
 
 export function Spinner(props: LoaderSizeProps) {
-  return <ClipLoader {...props} />;
+  const { color = "gray" } = props;
+  return <ClipLoader {...props} color={color} />;
 }
