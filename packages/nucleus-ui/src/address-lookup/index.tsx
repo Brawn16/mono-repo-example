@@ -14,7 +14,7 @@ const formatResponse = (data: any) => {
       label: addressString,
       latitude,
       longitude,
-      postcode
+      postcode,
     };
     return newAddress;
   });
@@ -27,7 +27,7 @@ export const AddressLookup = ({ onAddressSelect }: AddressLookupProps) => {
   const [postcode, setPostcode] = useState("");
   const [apiError, setError] = useState({
     message: "",
-    type: "error"
+    type: "error",
   });
 
   const handleSelection = (address: any) => {
@@ -41,7 +41,7 @@ export const AddressLookup = ({ onAddressSelect }: AddressLookupProps) => {
       setLoading(false);
       return setError({
         message,
-        type: "error"
+        type: "error",
       });
     }, 500);
   };

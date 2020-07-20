@@ -11,7 +11,7 @@ export function Input(props: InputProps): React.ReactElement {
     name,
     required,
     iconType: Icon,
-    positionIconLeft
+    positionIconLeft,
   } = props;
   const iconPostionClass = positionIconLeft ? "left-0" : "right-0";
 
@@ -23,8 +23,11 @@ export function Input(props: InputProps): React.ReactElement {
 
   // Build props to pass to input
   const inputProperties = { ...props };
+  delete inputProperties.className;
   delete inputProperties.componentRef;
   delete inputProperties.error;
+  delete inputProperties.iconType;
+  delete inputProperties.positionIconLeft;
   delete inputProperties.required;
 
   const labelPadding = label ? "mt-1" : "";
