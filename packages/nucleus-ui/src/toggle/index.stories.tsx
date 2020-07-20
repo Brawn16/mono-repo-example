@@ -4,7 +4,7 @@ import { Toggle } from ".";
 
 export default {
   component: Toggle,
-  title: "toggle"
+  title: "toggle",
 };
 
 export const basicToggle = () => {

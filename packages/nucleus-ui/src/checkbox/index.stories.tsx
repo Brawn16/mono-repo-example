@@ -3,7 +3,7 @@ import { Checkbox } from ".";
 
 export default {
   component: Checkbox,
-  title: "Checkbox"
+  title: "Checkbox",
 };
 
 export const basicCheckbox = () => {
