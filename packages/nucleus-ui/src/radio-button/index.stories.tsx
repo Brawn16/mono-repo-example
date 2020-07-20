@@ -4,22 +4,21 @@ import { RadioButton } from ".";
 
 export default {
   component: RadioButton,
-  title: "RadioButton"
+  title: "RadioButton",
 };
 
 export const radioButton = () => {
   return (
     <>
       <RadioButton
-        checked
         label="Option 1"
-        onClick={action("clicked")}
+        onChange={action("clicked")}
         value="OptionOne"
       />
       <RadioButton
-        checked={false}
+        checked
         label="Option 2"
-        onClick={action("clicked")}
+        onChange={action("clicked")}
         value="OptionTwo"
       />
     </>

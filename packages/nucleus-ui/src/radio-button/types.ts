@@ -1,6 +1,7 @@
-export interface RadioInputTypes {
-  checked?: boolean;
-  onClick: (event: any) => void;
-  value: string;
+export interface RadioInputTypes
+  extends React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {
   label: string;
 }
