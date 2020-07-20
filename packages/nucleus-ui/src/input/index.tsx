@@ -27,10 +27,7 @@ export function Input(props: InputProps): React.ReactElement {
   delete inputProperties.error;
   delete inputProperties.required;
 
-
-  const iconPostionClass: string = positionIconLeft ? "left-0" : "right-0";
   const labelPadding = label ? "mt-1" : "";
-
 
   return (
     <div className={className}>
@@ -40,7 +37,6 @@ export function Input(props: InputProps): React.ReactElement {
       </label>
 
       <div className={`relative ${labelPadding} rounded-md`}>
-
         <input
           {...inputProperties}
           ref={componentRef}
