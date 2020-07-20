@@ -15,7 +15,7 @@
 }
 
 .checkbox:checked + .toggle {
-  @apply bg-pink-600;
+  @apply bg-blue-600;
 }
 
 .checkbox:checked + .toggle .toggleHandle {
