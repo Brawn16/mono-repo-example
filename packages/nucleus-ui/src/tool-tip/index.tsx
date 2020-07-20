@@ -5,9 +5,9 @@ import { tooltipProps } from "./types";
 
 export const Tooltip = ({ message }: tooltipProps) => {
   return (
-    <>
+    <div className="p-10">
       <BsQuestionCircle data-effect="solid" data-tip={message} />
-      <ReactTooltip />
-    </>
+      <ReactTooltip backgroundColor="gray" place="top" textColor="white" />
+    </div>
   );
 };
