@@ -4,7 +4,7 @@ import { LoaderSizeProps } from "react-spinners/interfaces";
 
 export function Spinner(props: LoaderSizeProps) {
   const [spin, setSpin] = useState(false);
-  const { color } = props;
+  const { color = "gray" } = props;
 
   useEffect(() => {
     setTimeout(() => setSpin(true), 200);
@@ -14,5 +14,5 @@ export function Spinner(props: LoaderSizeProps) {
     return null;
   }
 
-  return <ClipLoader {...props} color={color || "gray"} />;
+  return <ClipLoader {...props} color={color} />;
 }
