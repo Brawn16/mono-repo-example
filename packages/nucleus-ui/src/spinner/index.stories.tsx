@@ -6,6 +6,6 @@ export default {
   title: "Spinner"
 };
 
-export const defualtSpinner = () => <Spinner />;
+export const defaultSpinner = () => <Spinner />;
 
 export const coloredSpinner = () => <Spinner color="blue" />;
