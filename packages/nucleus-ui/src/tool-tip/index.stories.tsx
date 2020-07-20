@@ -9,7 +9,7 @@ export default {
 export const tooltip = () => {
   return (
     <>
-      <Tooltip message="tooltip message" />
+      <Tooltip message="Tooltip Message" />
     </>
   );
 };
