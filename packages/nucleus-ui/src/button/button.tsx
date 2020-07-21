@@ -38,8 +38,15 @@ export function Button(
     innerClassName += " opacity-0";
   }
 
+  // Build props to pass to button
+  const buttonProperties = { ...props };
+  delete buttonProperties.iconType;
+  delete buttonProperties.postionIconRight;
+  delete buttonProperties.loading;
+  delete buttonProperties.loadingColor;
+
   return (
-    <button type="submit" {...props} className={className}>
+    <button type="submit" {...buttonProperties} className={className}>
       <span className={innerClassName}>
         {Icon && !postionIconRight && (
           <Icon className="w-3 h-3 mr-1 text-white opacity-50 duration-150 ease-in-out transition" />
