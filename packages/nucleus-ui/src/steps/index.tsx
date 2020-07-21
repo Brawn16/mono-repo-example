@@ -1,47 +1,57 @@
 import React from "react";
-import { StepProps, StepItem } from "./types";
+import {
+  leftArrow,
+  leftArrowActive,
+  rightArrow,
+  rightArrowActive
+} from "./index.module.css";
+import { StepProps, Step } from "./types";
 
 export function Steps(props: StepProps) {
-  const { items, active, onClick } = props;
+  const { steps, active, onClick } = props;
+  const lastIndex = steps.length - 1;
 
-  const handleClick = (item: StepItem) => {
-    if (onClick) {
-      onClick(item);
+  // Render individual steps
+  const rendered = steps.map((item: Step, index: number) => {
+    const { disabled, href, label } = item;
+    let rightArrowClassName = rightArrow;
+    let leftArrowClassName = leftArrow;
+    let className = "bg-gray-300";
+
+    if (disabled) {
+      return null;
     }
-  };
 
-  const renderSteps = (stepItems: StepItem[]) => {
-    return stepItems.map((item: StepItem) => {
-      const { label, path, disabled } = item;
-      const activeClass = active === label ? "bg-gray-400 " : "";
-
-      if (disabled) {
-        return (
-          <div key={label}>
-            <div className="p-2 text-gray-400 bg-gray-200 border-t-2 border-b-2 border-r-2 rounded-sm border-grey-700">
-              {label}
-            </div>
-          </div>
-        );
+    const handleClick = () => {
+      if (onClick) {
+        onClick(item);
       }
+    };
 
-      return (
-        <a key={label} href={path} onClick={() => handleClick(item)}>
+    if (active === label) {
+      rightArrowClassName += ` ${rightArrowActive}`;
+      leftArrowClassName += ` ${leftArrowActive}`;
+      className = "bg-orange-500 text-white";
+    }
+
+    return (
+      <a key={href} className="mt-2" href={href} onClick={handleClick}>
+        <div className="flex">
+          {index !== 0 && <div className={leftArrowClassName} />}
           <div
-            className={`p-2 text-gray-700  border-t-2 border-b-2 border-r-2 rounded-sm border-grey-700 ${activeClass}`}
+            className={`relative flex flex-col justify-center h-10 px-3 ${className}`}
           >
             {label}
           </div>
-        </a>
-      );
-    });
-  };
+          {index !== lastIndex && <div className={rightArrowClassName} />}
+        </div>
+      </a>
+    );
+  });
 
   return (
-    <div>
-      <div className="flex border-l-2 rounded-sm border-grey-700">
-        {renderSteps(items)}
-      </div>
+    <div className="flex flex-wrap -mt-2 text-lg text-gray-600 uppercase">
+      {rendered}
     </div>
   );
 }

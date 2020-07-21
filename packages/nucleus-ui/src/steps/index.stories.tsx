@@ -5,24 +5,28 @@ import { Steps } from ".";
 
 export default {
   component: Steps,
-  title: "Steps",
+  title: "Steps"
 };
 
-const stepsItems = [
+const standardSteps = [
   { label: "Dashboard", path: "javascript:void(0)" },
-  { label: "Customers", path: "javascript:void(0);" },
-  { label: "Mr Smith", path: "javascript:void(0);" },
+  { label: "Customers", path: "javascript:void(0)" },
+  { label: "Mr Smith", path: "javascript:void(0)" }
 ];
 
-const disabledItems = [
+const disabledSteps = [
   { label: "Dashboard", path: "javascript:void(0)" },
-  { label: "Customers", path: "javascript:void(0);", disabled: true },
-  { label: "Mr Smith", path: "javascript:void(0);", disabled: true },
+  { label: "Customers", path: "javascript:void(0)", disabled: true },
+  { label: "Mr Smith", path: "javascript:void(0)", disabled: true }
 ];
 
 export const steps = () => {
   return (
-    <Steps active="Mr Smith" items={stepsItems} onClick={action("clicked")} />
+    <Steps
+      active="Mr Smith"
+      onClick={action("clicked")}
+      steps={standardSteps}
+    />
   );
 };
 
@@ -30,8 +34,8 @@ export const stepItemsDisabled = () => {
   return (
     <Steps
       active="Mr Smith"
-      items={disabledItems}
       onClick={action("clicked")}
+      steps={disabledSteps}
     />
   );
 };
