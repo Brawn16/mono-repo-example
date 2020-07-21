@@ -1,7 +1,7 @@
 import React from "react";
-import { RadioButtonTypes } from "./types";
+import { RadioButtonProps } from "./types";
 
-export const RadioButton = (props: RadioButtonTypes) => {
+export const RadioButton = (props: RadioButtonProps) => {
   const { checked, label } = props;
 
   const renderRadioButton = checked ? (

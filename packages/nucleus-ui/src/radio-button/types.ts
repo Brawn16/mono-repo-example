@@ -1,4 +1,4 @@
-export interface RadioButtonTypes
+export interface RadioButtonProps
   extends React.DetailedHTMLProps<
     React.InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
