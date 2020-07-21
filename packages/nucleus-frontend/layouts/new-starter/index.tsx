@@ -20,7 +20,7 @@ export function NewStarter({
         <div className="text-white uppercase bg-orange-500">
           <div className="py-2 mx-auto text-center max-w-7xl">Preparation</div>
         </div>
-        <main className="flex-1 pt-8 mx-auto max-w-7xl">{children}</main>
+        <main className="flex-1 w-full pt-8 mx-auto max-w-7xl">{children}</main>
         <footer className="p-8 pt-0 text-xs text-center text-gray-400">
           &copy; {year}. All Rights Reserved.
         </footer>

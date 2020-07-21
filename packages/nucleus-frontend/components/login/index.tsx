@@ -59,7 +59,7 @@ export function Login({
             message: "Invalid email address.",
             value: /^[\w%+.-]+@[\d.a-z-]+\.[a-z]{2,5}$/i,
           },
-          required: true,
+          required: "Email is required",
         })}
         defaultValue={remember}
         error={errors.email}
