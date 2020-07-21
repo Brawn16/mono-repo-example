@@ -7,7 +7,7 @@ export function Anchor(
 ): React.ReactElement {
   const {
     children,
-    className = "text-blue-600 hover:text-blue-500",
+    className = "text-blue-600 hover:text-blue-500 focus:text-blue-500",
     href,
   } = props;
 
