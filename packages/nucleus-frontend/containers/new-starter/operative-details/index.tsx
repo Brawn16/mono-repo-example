@@ -10,18 +10,10 @@ import { AiOutlineMail } from "react-icons/ai";
 import { FiPhone } from "react-icons/fi";
 import { Head } from "../../../components/head";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
+import { InputTypes } from "./types";
 
 export function OperativeDetails(): React.ReactElement {
-  type Inputs = {
-    firstName: string;
-    lastName: string;
-    phoneNumber: string;
-    email: string;
-    emergencyContactName: string;
-    emergencyContactNumber: string;
-  };
-
-  const { register, handleSubmit, errors } = useForm<Inputs>();
+  const { register, handleSubmit, errors } = useForm<InputTypes>();
   return (
     <>
       <Head title="Operative Details" />
