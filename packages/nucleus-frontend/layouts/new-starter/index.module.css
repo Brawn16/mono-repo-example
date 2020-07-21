@@ -1,14 +1,12 @@
 .stageArrow {
-  @apply border-gray-300;
-
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent;
   border-left-width: 10px;
   border-left-style: solid;
+  @apply border-gray-300;
 }
 .stageArrowActive {
-  @apply border-orange-500;
-
   border-top-color: transparent;
   border-bottom-color: transparent;
+  @apply border-orange-500;
 }
