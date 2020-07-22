@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Select from "react-select";
 import { Button } from "../button";
 import { Input } from "../input";
+import { Label } from "../label";
 import { FormattedAddress, Address, AddressLookupProps } from "./types";
 
 const formatResponse = (data: any) => {
@@ -83,18 +84,17 @@ export const AddressLookup = ({ onAddressSelect }: AddressLookupProps) => {
   return (
     <>
       <div className="flex-col">
-        <p>postcode</p>
-        <div className="flex h-12 pb-2">
+        <Label label="Postcode" name="addressLookup" />
+        <div className="flex mt-1">
           <Input
             className="w-full mr-2"
             error={apiError.message.length > 0 ? apiError : undefined}
-            name="address"
+            name="addressLookup"
             onChange={handleChange}
             value={postcode}
           />
-
           <Button loading={loading} onClick={handleOnClick}>
-            Submit
+            Search
           </Button>
         </div>
       </div>

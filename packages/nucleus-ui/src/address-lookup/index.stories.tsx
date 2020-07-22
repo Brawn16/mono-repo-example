@@ -7,10 +7,6 @@ export default {
   title: "Address Lookup",
 };
 
-const callBackFunction = (address: any) => {
-  action("address")(address);
-};
-
-export const onAddressSelect = () => (
-  <AddressLookup onAddressSelect={callBackFunction} />
+export const addressLookup = () => (
+  <AddressLookup onAddressSelect={action("onAddressSelect")} />
 );

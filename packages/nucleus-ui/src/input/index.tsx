@@ -1,5 +1,6 @@
 import React from "react";
-import { FaExclamationCircle } from "react-icons/fa";
+import { InputError } from "../input-error";
+import { Label } from "../label";
 import { InputProps } from "./types";
 
 export function Input(props: InputProps): React.ReactElement {
@@ -30,16 +31,10 @@ export function Input(props: InputProps): React.ReactElement {
   delete inputProperties.positionIconLeft;
   delete inputProperties.required;
 
-  const labelPadding = label ? "mt-1" : "";
-
   return (
     <div className={className}>
-      <label className="block text-gray-600" htmlFor={name}>
-        {label}
-        {required && <span className="text-red-600"> *</span>}
-      </label>
-
-      <div className={`relative ${labelPadding} rounded-md`}>
+      {label && <Label label={label} name={name} required={required} />}
+      <div className="relative">
         <input
           {...inputProperties}
           ref={componentRef}
@@ -56,12 +51,7 @@ export function Input(props: InputProps): React.ReactElement {
           </div>
         )}
       </div>
-      {error && (
-        <div className="flex items-center p-1 text-red-600">
-          <FaExclamationCircle className="w-3 h-3" />
-          <p className="mt-1 mb-1 ml-1 text-xs">{error.message}</p>
-        </div>
-      )}
+      {error && <InputError error={error} />}
     </div>
   );
 }

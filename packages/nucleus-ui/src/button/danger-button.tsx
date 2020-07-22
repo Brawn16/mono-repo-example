@@ -6,10 +6,10 @@ export function DangerButton(
   props: React.PropsWithChildren<ButtonProps>
 ): React.ReactElement {
   const { children } = props;
-
   return (
     <Button
       className="text-white bg-red-600 hover:bg-red-700 active:bg-red-700"
+      loadingColor="#fff"
       {...props}
     >
       {children}

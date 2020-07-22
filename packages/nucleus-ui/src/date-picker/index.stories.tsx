@@ -12,16 +12,30 @@ export const datePicker = () => (
   <DatePicker
     label="Date Picker"
     name="date-picker"
-    onChange={action("change")}
+    onChange={action("onChange")}
   />
 );
 
-export const datePickerMaxDate = () => {
+export const maxDate = () => {
   const max = addDays(new Date(), 2);
-  return <DatePicker label="Date Picker" max={max} name="date-picker" />;
+  return (
+    <DatePicker
+      label="Date Picker"
+      max={max}
+      name="date-picker"
+      onChange={action("onChange")}
+    />
+  );
 };
 
-export const datePickerMinDate = () => {
+export const minDate = () => {
   const min = subDays(new Date(), 2);
-  return <DatePicker label="Date Picker" min={min} name="date-picker" />;
+  return (
+    <DatePicker
+      label="Date Picker"
+      min={min}
+      name="date-picker"
+      onChange={action("onChange")}
+    />
+  );
 };

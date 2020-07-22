@@ -1,11 +1,11 @@
 import { action } from "@storybook/addon-actions";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Button } from "../button";
+import { PrimaryButton } from "../button";
 import { Input } from "../input";
 
 export default {
-  title: "form",
+  title: "Form",
 };
 
 type Inputs = {
@@ -13,14 +13,14 @@ type Inputs = {
   lastName: string;
 };
 
-export const basicForm = () => {
+export const form = () => {
   const { register, handleSubmit, errors } = useForm<Inputs>();
 
   return (
-    <div className="flex  justify-center">
+    <div className="flex justify-center">
       <form
         className="flex flex-col justify-center w-1/2"
-        onSubmit={handleSubmit(action("submit"))}
+        onSubmit={handleSubmit(action("onSubmit"))}
       >
         <Input
           componentRef={register({ required: "Firstname is required" })}
@@ -28,7 +28,6 @@ export const basicForm = () => {
           label="FirstName"
           name="firstName"
         />
-
         <Input
           className="mt-4"
           componentRef={register({ required: "Lastname is required" })}
@@ -36,9 +35,8 @@ export const basicForm = () => {
           label="Lastname"
           name="lastName"
         />
-
         <div className="mt-8">
-          <Button type="submit">Submit</Button>
+          <PrimaryButton>Submit</PrimaryButton>
         </div>
       </form>
     </div>
