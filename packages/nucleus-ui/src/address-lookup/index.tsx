@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import Select from "react-select";
-import { Button } from "../button";
+import { PrimaryButton } from "../button";
 import { Input } from "../input";
 import { Label } from "../label";
 import { FormattedAddress, Address, AddressLookupProps } from "./types";
@@ -51,7 +51,7 @@ export const AddressLookup = ({ onAddressSelect }: AddressLookupProps) => {
     try {
       errorMessaging("");
       const { status, data } = await axios.get(
-        `https://api.getAddress.io/find/${postcode}?api-key=${process.env.GET_ADDRESS_API_KEY}&expand=true`
+        `https://api.getAddress.io/find/${postcode}?api-key=API_KEY_HERE&expand=true`
       );
 
       if (status === 200) {
@@ -93,9 +93,10 @@ export const AddressLookup = ({ onAddressSelect }: AddressLookupProps) => {
             onChange={handleChange}
             value={postcode}
           />
-          <Button loading={loading} onClick={handleOnClick}>
+
+          <PrimaryButton loading={loading} onClick={handleOnClick}>
             Search
-          </Button>
+          </PrimaryButton>
         </div>
       </div>
       {addressOptions.length > 0 && (

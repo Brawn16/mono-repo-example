@@ -2,7 +2,7 @@ import {
   PrimaryButton,
   Button,
 } from "@sdh-project-services/nucleus-ui/dist/button";
-import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/field-set";
+import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -104,7 +104,7 @@ export function OperativeDetails(): React.ReactElement {
                 />
               </div>
             </Fieldset>
-            <div className="flex justify-between px-6 py-4">
+            <div className="flex justify-between py-4">
               <Button>Back</Button>
               <PrimaryButton>Continue</PrimaryButton>
             </div>
