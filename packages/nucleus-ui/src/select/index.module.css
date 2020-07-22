@@ -1,5 +1,5 @@
 .select {
-  @apply block rounded-none border border-gray-300;
+  @apply block rounded-none border border-gray-300 mt-1;
 }
 
 .select:focus {

@@ -1,0 +1,12 @@
+import React from "react";
+import { FaExclamationCircle } from "react-icons/fa";
+import { InputErrorProps } from "./types";
+
+export function InputError({ error }: InputErrorProps): React.ReactElement {
+  return (
+    <div className="flex items-center p-1 text-red-600">
+      <FaExclamationCircle className="w-3 h-3" />
+      <p className="mt-1 mb-1 ml-1 text-xs">{error.message}</p>
+    </div>
+  );
+}

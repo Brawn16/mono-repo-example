@@ -1,3 +1,4 @@
+import { action } from "@storybook/addon-actions";
 import React from "react";
 import { Checkbox } from ".";
 
@@ -6,6 +7,8 @@ export default {
   title: "Checkbox",
 };
 
-export const basicCheckbox = () => {
-  return <Checkbox label="item" name="check" />;
+export const checkbox = () => {
+  return (
+    <Checkbox label="Label" name="checkbox" onChange={action("onChange")} />
+  );
 };

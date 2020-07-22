@@ -18,10 +18,10 @@ const selectOptions = [
 export const basicSelect = () => {
   return (
     <Select
-      hideSelectedOptions
+      label="Select Country"
+      name="select"
       onChange={action("onChange")}
       options={selectOptions}
-      placeholder="please select country"
     />
   );
 };
@@ -31,9 +31,10 @@ export const mulitSelect = () => {
     <Select
       hideSelectedOptions
       isMulti
+      label="Select Countries"
+      name="select"
       onChange={action("onChange")}
       options={selectOptions}
-      placeholder="please select country"
     />
   );
 };
@@ -41,11 +42,11 @@ export const mulitSelect = () => {
 export const disabledSelect = () => {
   return (
     <Select
-      hideSelectedOptions
       isDisabled
+      label="Select Country"
+      name="select"
       onChange={action("onChange")}
       options={selectOptions}
-      placeholder="please select country"
     />
   );
 };

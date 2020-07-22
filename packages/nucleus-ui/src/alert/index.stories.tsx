@@ -7,7 +7,7 @@ export default {
   title: "Alert",
 };
 
-export const basicAlert = () => (
+export const alert = () => (
   <Alert>
     <strong>Basic alert</strong>
     <p>And a little bit of text...</p>
