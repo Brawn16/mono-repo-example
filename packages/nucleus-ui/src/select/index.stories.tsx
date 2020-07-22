@@ -17,8 +17,8 @@ const options = [
 export const select = () => {
   return (
     <Select
-      label="Select"
-      name="select"
+      label="Country"
+      name="country"
       onChange={action("onChange")}
       options={options}
     />

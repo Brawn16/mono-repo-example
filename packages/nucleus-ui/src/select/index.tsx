@@ -1,10 +1,13 @@
 import React from "react";
-import { FaExclamationCircle } from "react-icons/fa";
+import { InputError } from "../input-error";
+import { Label } from "../label";
 import { SelectProps, SelectOption } from "./types";
 
 function renderOptions(options: SelectOption[]) {
   return options.map(({ label, value }: SelectOption) => (
-    <option value={value}>{label}</option>
+    <option key={value} value={value}>
+      {label}
+    </option>
   ));
 }
 
@@ -30,14 +33,12 @@ export function Select(props: SelectProps) {
   delete selectProperties.className;
   delete selectProperties.componentRef;
   delete selectProperties.error;
+  delete selectProperties.options;
   delete selectProperties.required;
 
   return (
     <div className={className}>
-      <label className="block text-gray-600" htmlFor={name}>
-        {label}
-        {required && <span className="text-red-600"> *</span>}
-      </label>
+      {label && <Label label={label} name={name} required={required} />}
       <select
         {...selectProperties}
         ref={componentRef}
@@ -46,12 +47,7 @@ export function Select(props: SelectProps) {
       >
         {renderOptions(options)}
       </select>
-      {error && (
-        <div className="flex items-center p-1 text-red-600">
-          <FaExclamationCircle className="w-3 h-3" />
-          <p className="mt-1 mb-1 ml-1 text-xs">{error.message}</p>
-        </div>
-      )}
+      {error && <InputError error={error} />}
     </div>
   );
 }
