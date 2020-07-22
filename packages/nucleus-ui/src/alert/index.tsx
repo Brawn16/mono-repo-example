@@ -4,11 +4,11 @@ import { AlertProps } from "./types";
 
 export function Alert({
   children,
-  className = "",
+  className = "text-white bg-red-600",
   iconType: Icon = FaExclamationCircle,
 }: React.PropsWithChildren<AlertProps>): React.ReactElement {
   return (
-    <div className={`p-4 text-white bg-red-600 ${className}`}>
+    <div className={`p-4  ${className}`}>
       <div className="flex">
         {Icon && (
           <div className="flex-shrink-0 pr-2">

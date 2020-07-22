@@ -70,7 +70,7 @@ export function Login({
       <Input
         autoComplete="current-password"
         className="mt-4"
-        componentRef={register({ required: true })}
+        componentRef={register({ required: "Password is required" })}
         error={errors.password}
         label="Password"
         name="password"
