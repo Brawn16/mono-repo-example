@@ -17,7 +17,7 @@ export default {
 export const button = () => {
   return (
     <div className="space-x-2">
-      <Button onClick={action("onClick")}>BUTTON</Button>
+      <Button onClick={action("onClick")}>Button</Button>
       <Button disabled onClick={action("onClick")}>
         Disabled
       </Button>

@@ -10,11 +10,7 @@ export default {
 export const basicToggle = () => {
   return (
     <>
-      <Toggle
-        label="Toggle"
-        name="toggle1"
-        onChange={action("handle toggle change")}
-      />
+      <Toggle label="Toggle" name="toggle1" onChange={action("onChange")} />
     </>
   );
 };
