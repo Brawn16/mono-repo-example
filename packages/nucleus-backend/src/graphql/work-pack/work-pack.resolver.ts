@@ -1,6 +1,7 @@
 import { env } from "process";
 import { plainToClass } from "class-transformer";
-import { post, CoreOptions, Response } from "request";
+import { CoreOptions, Response } from "request";
+import { post } from "request-promise";
 import { Authorized, Query, Resolver } from "type-graphql";
 import { WorkPackDto } from "./work-pack.dto";
 
@@ -47,19 +48,13 @@ export class WorkPackResolver {
     );
   }
 
-  private sendRequest(path: string, options: CoreOptions): Promise<Response> {
-    return new Promise(resolve =>
-      post(
-        `https://cityfibre.depotnet.co.uk/${path}`,
-        options,
-        (error: Error | null, message: Response) => {
-          if (error) {
-            throw error;
-          }
-
-          resolve(message);
-        }
-      )
-    );
+  private async sendRequest(
+    path: string,
+    options: CoreOptions
+  ): Promise<Response> {
+    return post(`https://cityfibre.depotnet.co.uk/${path}`, {
+      resolveWithFullResponse: true,
+      ...options
+    });
   }
 }
