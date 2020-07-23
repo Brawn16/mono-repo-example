@@ -33,7 +33,7 @@ export class AddressLookupResolver {
       record.line1 = line1;
       record.line2 = line2;
       record.line3 = line3;
-      record.city = address.town_or_city || null;
+      record.townCity = address.town_or_city || null;
       record.county = address.county || null;
       record.postcode = postcode;
       record.longitude = longitude || null;

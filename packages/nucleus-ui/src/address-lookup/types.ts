@@ -7,7 +7,7 @@ export interface AddressLookupAddress {
   line1?: string;
   line2?: string;
   line3?: string;
-  city?: string;
+  townCity?: string;
   postcode?: string;
   latitude?: number;
   longitude?: number;
