@@ -1,107 +1,74 @@
-import axios from "axios";
-import React, { useState } from "react";
-import Select from "react-select";
+import { useLazyQuery } from "@apollo/client";
+import React from "react";
+import { useForm } from "react-hook-form";
 import { PrimaryButton } from "../button";
 import { Input } from "../input";
+import { InputError } from "../input-error";
 import { Label } from "../label";
-import { FormattedAddress, Address, AddressLookupProps } from "./types";
+import { Select } from "../select";
+import { addressLookup as addressLookupQuery } from "./queries";
+import {
+  AddressLookupFormData,
+  AddressLookupProps,
+  AddressLookupAddress
+} from "./types";
 
-const formatResponse = (data: any) => {
-  const { latitude, longitude, postcode, addresses } = data;
-  const formattedData = addresses.map((address: any) => {
-    const addressString = address.formatted_address.join(" ");
-    const newAddress: FormattedAddress = {
-      value: address,
-      label: addressString,
-      latitude,
-      longitude,
-      postcode,
-    };
-    return newAddress;
-  });
-  return formattedData;
-};
-
-export const AddressLookup = ({ onAddressSelect }: AddressLookupProps) => {
-  const [addressOptions, setAddressOptions] = useState<Address[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [postcode, setPostcode] = useState("");
-  const [apiError, setError] = useState({
-    message: "",
-    type: "error",
+export const AddressLookup = ({ label = "Postcode" }: AddressLookupProps) => {
+  const { register, handleSubmit, errors } = useForm<AddressLookupFormData>();
+  const [addressLookup, { data, error }] = useLazyQuery(addressLookupQuery, {
+    errorPolicy: "all"
   });
 
-  const handleSelection = (address: any) => {
-    onAddressSelect(address);
-    setAddressOptions([]);
+  const onSubmit = ({ addressLookupPostcode }: AddressLookupFormData) => {
+    addressLookup({
+      variables: { postcode: addressLookupPostcode }
+    });
   };
 
-  const errorMessaging = (message: string) => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      return setError({
-        message,
-        type: "error",
-      });
-    }, 500);
-  };
+  const renderAddresses = (addresses: AddressLookupAddress[]) => {
+    const options = addresses.map(
+      (
+        { line1, line2, line3, city, postcode }: AddressLookupAddress,
+        index
+      ) => {
+        const optionLabel = [line1, line2, line3, city, postcode]
+          .filter(value => value !== "")
+          .join(", ");
 
-  const handleOnClick = async () => {
-    try {
-      errorMessaging("");
-      const { status, data } = await axios.get(
-        `https://api.getAddress.io/find/${postcode}?api-key=API_KEY_HERE&expand=true`
-      );
-
-      if (status === 200) {
-        errorMessaging("");
-        const formatted = formatResponse(data);
-        return setAddressOptions(formatted);
+        return {
+          label: optionLabel,
+          value: index.toString()
+        };
       }
+    );
 
-      return errorMessaging("Postcode not valid, please check and try again.");
-    } catch (error) {
-      const { status } = error.response;
-
-      if (status === 404) {
-        setAddressOptions([]);
-        return errorMessaging(
-          "Postcode not found, please check and try again."
-        );
-      }
-
-      errorMessaging("Postcode not valid, please check and try again.");
-      return setAddressOptions([]);
-    }
-  };
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setPostcode(value.toLocaleUpperCase());
+    return <Select name="addressLookupAddresses" options={options} />;
   };
 
   return (
     <>
-      <div className="flex-col">
-        <Label label="Postcode" name="addressLookup" />
-        <div className="flex mt-1">
-          <Input
-            className="w-full mr-2"
-            error={apiError.message.length > 0 ? apiError : undefined}
-            name="addressLookup"
-            onChange={handleChange}
-            value={postcode}
-          />
-
-          <PrimaryButton loading={loading} onClick={handleOnClick}>
-            Search
-          </PrimaryButton>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex-col">
+          <Label label={label} name="addressLookup" />
+          <div className="flex">
+            <Input
+              className="w-full"
+              componentRef={register({
+                required: "Postcode is required"
+              })}
+              name="addressLookupPostcode"
+            />
+            <PrimaryButton>Search</PrimaryButton>
+          </div>
+          {error && (
+            <InputError error={{ message: error.message, type: "apollo" }} />
+          )}
+          {errors.addressLookupPostcode && (
+            <InputError error={errors.addressLookupPostcode} />
+          )}
         </div>
-      </div>
-      {addressOptions.length > 0 && (
-        <Select onChange={handleSelection} options={addressOptions} />
-      )}
+      </form>
+      {data && renderAddresses(data.addressLookup)}
     </>
   );
 };

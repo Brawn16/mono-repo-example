@@ -1,15 +1,3 @@
-export interface AddressProps {
-  addressLineOne: string;
-  addressLineTwo: string;
-  addressLineThree: string;
-  city: string;
-  postcode: string;
-}
+import { AddressLookupAddress } from "@sdh-project-services/nucleus-ui/dist/address-lookup/types";
 
-export interface InputValueProps {
-  city: string;
-  postcode: string;
-  addressLineOne: string;
-  addressLineTwo: string;
-  addressLineThree: string;
-}
+export interface NewStarterAddressFormData extends AddressLookupAddress {}

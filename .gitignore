@@ -3,6 +3,6 @@ dist/
 node_modules/
 
 .DS_Store
+.env.local
 package-lock.json
 *.log*
-constant*

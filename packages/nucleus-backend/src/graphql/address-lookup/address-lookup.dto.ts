@@ -1,7 +1,7 @@
 import { Field, ObjectType } from "type-graphql";
 
 @ObjectType()
-export class AddressRecord {
+export class AddressLookupDto {
   @Field({ nullable: true })
   public line1?: string;
 

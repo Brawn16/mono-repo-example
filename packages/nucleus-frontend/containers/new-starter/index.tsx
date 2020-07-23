@@ -1,4 +1,5 @@
 import { PrimaryButton } from "@sdh-project-services/nucleus-ui/dist/button";
+import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import React from "react";
 import { Anchor } from "../../components/anchor";
 import { Head } from "../../components/head";
@@ -13,7 +14,7 @@ export function NewStarter(): React.ReactElement {
           <h2 className="font-bold uppercase">Before You Start</h2>
           Please make sure you have the following to hand:
         </div>
-        <div className="p-8 pl-12 mt-8 border border-gray-200 shadow-md">
+        <Fieldset className="pl-12 mt-8">
           <ul className="list-disc">
             <li>
               At least one of the following (preferably two):
@@ -33,9 +34,9 @@ export function NewStarter(): React.ReactElement {
             </li>
             <li className="mt-4">Qualification certifcates</li>
           </ul>
-        </div>
-        <div className="mt-8 mr-8 text-right md:mr-0">
-          <Anchor href="/new-starter/operative-details">
+        </Fieldset>
+        <div className="mx-8 mt-8 text-right md:mx-0">
+          <Anchor href="/new-starter/personal-details">
             <PrimaryButton>Continue</PrimaryButton>
           </Anchor>
         </div>
