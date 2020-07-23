@@ -1,4 +1,4 @@
-export interface InputTypes {
+export interface NewStarterPersonalDetailsFormData {
   firstName: string;
   lastName: string;
   phoneNumber: string;

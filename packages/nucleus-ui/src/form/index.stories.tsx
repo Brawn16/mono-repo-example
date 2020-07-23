@@ -8,13 +8,13 @@ export default {
   title: "Form",
 };
 
-type Inputs = {
+type InputTypes = {
   firstName: string;
   lastName: string;
 };
 
 export const form = () => {
-  const { register, handleSubmit, errors } = useForm<Inputs>();
+  const { register, handleSubmit, errors } = useForm<InputTypes>();
 
   return (
     <div className="flex justify-center">

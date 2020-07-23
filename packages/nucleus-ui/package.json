@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "build": "run-s build:rimraf build:cpx build:tsc",
-    "build:cpx": "cpx 'src/**/*.css' dist",
+    "build:cpx": "cpx 'src/**/*.!(ts|tsx)' dist",
     "build:rimraf": "rimraf dist",
     "build:tsc": "tsc",
     "build-storybook": "build-storybook",
     "dev": "run-p dev:cpx dev:tsc",
-    "dev:cpx": "cpx --watch 'src/**/*.css' dist",
+    "dev:cpx": "cpx --watch 'src/**/*.!(ts|tsx)' dist",
     "dev:tsc": "tsc --watch",
     "postinstall": "yarn build",
     "storybook": "start-storybook -p 6006",
@@ -25,12 +25,12 @@
     ]
   },
   "dependencies": {
+    "@apollo/client": "^3.0.2",
     "@date-io/date-fns": "1.x",
     "@material-ui/core": "^4.11.0",
     "@material-ui/pickers": "^3.2.10",
     "@types/react-select": "^3.0.14",
     "add": "^2.0.6",
-    "axios": "^0.19.2",
     "date-fns": "^2.14.0",
     "dotenv": "^8.2.0",
     "react": "^16.13.1",
