@@ -18,12 +18,12 @@ function renderLoading() {
 }
 
 function renderPacks(packs: WorkPack[]) {
-  return packs.map(pack => <Pack key={pack.jobReference} pack={pack} />);
+  return packs.map((pack) => <Pack key={pack.jobReference} pack={pack} />);
 }
 
 export function WorkPacks(): React.ReactElement {
   const { data, loading } = useQuery<WorkPacksData>(workPacksQuery, {
-    errorPolicy: "all"
+    errorPolicy: "all",
   });
 
   return (

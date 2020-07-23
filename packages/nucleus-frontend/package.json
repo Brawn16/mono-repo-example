@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "build": "next build && next export",
-    "dev": "next dev"
+    "dev": "next dev",
+    "test": "next --version"
   },
   "engines": {
     "node": ">= 12.0.0",
