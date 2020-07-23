@@ -1,19 +1,12 @@
-import { resolve } from "path";
-import { env, cwd } from "process";
+import "./environment";
+import { env } from "process";
 import {
   APIGatewayProxyCallback,
   APIGatewayProxyEvent,
   Context as LambdaContext,
 } from "aws-lambda";
-import { config } from "dotenv";
 import { createConnection } from "typeorm";
 import { server } from "./server";
-
-// Load environment variables
-config({
-  path: resolve(cwd(), ".env.local"),
-});
-config();
 
 const connection = createConnection();
 

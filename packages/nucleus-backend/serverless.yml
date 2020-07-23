@@ -1,18 +1,8 @@
-service: nucleus-backend-depotnet-poc
+service: nucleus-backend
 plugins:
   - serverless-offline
 
 provider:
-  environment:
-    APOLLO_CORS_ORIGIN: http://nucleus-frontend-depotnet-poc.s3-website.eu-west-2.amazonaws.com
-    APOLLO_PLAYGROUND_ENABLED: false
-
-    SERVICE_GETADDRESS_API_KEY: ${env:SERVICE_GETADDRESS_API_KEY}
-    SERVICE_DEPOTNET_USERNAME: ${env:SERVICE_DEPOTNET_USERNAME}
-    SERVICE_DEPOTNET_PASSWORD: ${env:SERVICE_DEPOTNET_PASSWORD}
-
-    TYPEORM_HOST: ${env:TYPEORM_HOST}
-    TYPEORM_PASSWORD: ${env:TYPEORM_PASSWORD}
   name: aws
   region: eu-west-2
   runtime: nodejs12.x
