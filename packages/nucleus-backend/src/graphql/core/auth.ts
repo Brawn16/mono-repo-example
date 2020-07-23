@@ -24,10 +24,11 @@ export function verifyAuthToken(token: string): { [key: string]: any } {
 }
 
 export async function getAuthUserFromContext({
-  headers: { authorization = "" },
+  headers,
 }: AppContext): Promise<UserEntity> {
   try {
-    const token = authorization.slice(7);
+    const auth = headers.Authorization || headers.authorization;
+    const token = auth.slice(7);
     const decoded = verifyAuthToken(token);
     return UserEntity.findOneOrFail(decoded.sub);
   } catch (error) {

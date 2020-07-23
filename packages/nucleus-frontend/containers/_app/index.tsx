@@ -3,16 +3,36 @@ import {
   ApolloClient,
   ApolloLink,
   InMemoryCache,
+  HttpLink,
 } from "@apollo/client";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import React from "react";
 import { CookiesProvider } from "react-cookie";
-import { authLink } from "./auth-link";
 import { Cookies } from "./cookies";
-import { httpLink } from "./http-link";
 
 const cookies = new Cookies();
+
+export const authLink = new ApolloLink((operation, forward) => {
+  const token = cookies.get("token");
+
+  if (token) {
+    operation.setContext((context: Record<string, any>) => ({
+      ...context,
+      headers: {
+        ...context.headers,
+        authorization: `Bearer ${token}`,
+      },
+    }));
+  }
+
+  return forward(operation);
+});
+
+export const httpLink = new HttpLink({
+  uri: process.env.NEXT_PUBLIC_APOLLO_URI,
+});
+
 const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
   link: ApolloLink.from([authLink, httpLink]),

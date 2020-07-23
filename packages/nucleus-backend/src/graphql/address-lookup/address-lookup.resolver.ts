@@ -27,8 +27,8 @@ export class AddressLookupResolver {
         address.line_2,
         address.line_3,
         address.line_4,
-        address.locality
-      ].filter(line => line !== "");
+        address.locality,
+      ].filter((line) => line !== "");
 
       record.line1 = line1;
       record.line2 = line2;
@@ -44,16 +44,16 @@ export class AddressLookupResolver {
   }
 
   private sendRequest(postcode: string): Promise<Response> {
-    const key = env.SERVICE_GET_ADDRESS_API_KEY;
+    const key = env.SERVICE_GETADDRESS_API_KEY;
     if (key === undefined) {
       throw new Error("Address lookup is unavailable.");
     }
 
-    return new Promise(resolve =>
+    return new Promise((resolve) =>
       get(
         `https://api.getAddress.io/find/${postcode}?api-key=${key}&expand=true`,
         {
-          json: true
+          json: true,
         },
         (error: Error | null, message: Response) => {
           if (error) {

@@ -1,3 +1,13 @@
+service: nucleus-backend
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  region: eu-west-2
+  runtime: nodejs12.x
+  timeout: 30
+
 functions:
   graphql:
     events:
@@ -9,11 +19,4 @@ functions:
           cors: true
           method: post
           path: graphql
-    handler: dist/graphql.graphqlHandler
-plugins:
-  - serverless-offline
-provider:
-  name: aws
-  region: eu-west-2
-  runtime: nodejs12.x
-service: nucleus-backend
+    handler: dist/graphql/index.graphqlHandler

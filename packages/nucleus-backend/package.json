@@ -7,7 +7,6 @@
     "build:rimraf": "rimraf dist",
     "build:tsc": "tsc",
     "dev": "tsc-watch --onSuccess 'sls offline --httpPort 5000'",
-    "postinstall": "yarn build",
     "seed": "node node_modules/typeorm-seeding/dist/cli.js seed",
     "test": "jest"
   },
@@ -46,6 +45,7 @@
     "graphql-tools": "^5.0.0",
     "jose": "^1.27.0",
     "pg": "^8.0.3",
+    "request": "^2.88.2",
     "type-graphql": "^0.17.6",
     "typeorm": "^0.2.24"
   }

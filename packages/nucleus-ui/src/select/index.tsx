@@ -21,7 +21,7 @@ export function Select(props: SelectProps) {
     name,
     options,
     placeholder = "Select an option...",
-    required
+    required,
   } = props;
 
   // Build error classes
