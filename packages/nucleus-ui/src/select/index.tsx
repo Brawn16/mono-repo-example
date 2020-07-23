@@ -1,46 +1,53 @@
-import React, { useRef } from "react";
-import { FaExclamationCircle } from "react-icons/fa";
-import ReactSelect from "react-select";
-import { select } from "./index.module.css";
-import { SelectProps } from "./types";
+import React from "react";
+import { InputError } from "../input-error";
+import { Label } from "../label";
+import { SelectProps, SelectOption } from "./types";
+
+function renderOptions(options: SelectOption[]) {
+  return options.map(({ label, value }: SelectOption) => (
+    <option key={value} value={value}>
+      {label}
+    </option>
+  ));
+}
 
 export function Select(props: SelectProps) {
-  const { componentRef, error, label, name, required } = props;
-  const ref = useRef<HTMLInputElement>(null);
+  const {
+    className,
+    componentRef,
+    error,
+    label,
+    name,
+    options,
+    required,
+  } = props;
 
-  // Handle select change
-  const handleChange = (value: any) => {
-    const { current } = ref;
-    if (current === null) {
-      return;
-    }
+  // Build error classes
+  let errorClassName = "";
+  if (error) {
+    errorClassName = "pr-10 text-red-600 border-red-600 focus:border-red-600";
+  }
 
-    const event = new Event("input", { bubbles: true });
-    current.value = value.value;
-    current.dispatchEvent(event);
-  };
+  // Build props to pass to input
+  const selectProperties = { ...props };
+  delete selectProperties.className;
+  delete selectProperties.componentRef;
+  delete selectProperties.error;
+  delete selectProperties.options;
+  delete selectProperties.required;
 
   return (
-    <>
-      {label && (
-        <label className="block text-gray-600" htmlFor={name}>
-          {label}
-          {required && <span className="text-red-600"> *</span>}
-        </label>
-      )}
-      <ReactSelect
-        className={select}
-        onChange={handleChange}
-        {...props}
-        name={undefined}
-      />
-      <input ref={componentRef || ref} name={name} type="hidden" />
-      {error && (
-        <div className="flex items-center p-1 text-red-600">
-          <FaExclamationCircle className="w-3 h-3" />
-          <p className="mt-1 mb-1 ml-1 text-xs">{error.message}</p>
-        </div>
-      )}
-    </>
+    <div className={className}>
+      {label && <Label label={label} name={name} required={required} />}
+      <select
+        {...selectProperties}
+        ref={componentRef}
+        className={`block w-full form-input rounded-none text-gray-900 focus:shadow-none focus:border-blue-500 ${errorClassName}`}
+        id={name}
+      >
+        {renderOptions(options)}
+      </select>
+      {error && <InputError error={error} />}
+    </div>
   );
 }

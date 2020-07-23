@@ -12,7 +12,7 @@ export function Toggle(props: ToggleProps): React.ReactElement {
 
   return (
     <div className={className}>
-      <label className="block font-medium text-gray-700" htmlFor={name}>
+      <label className="block text-gray-600" htmlFor={name}>
         {label}
         <input
           {...inputProperties}
