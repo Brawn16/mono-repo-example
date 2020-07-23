@@ -7,9 +7,6 @@ jobs:
       - name: "Retrieve code"
         uses: actions/checkout@v2
 
-      - name: Install modules using yarn
-        run: yarn
-
       - name: Get yarn cache path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -21,6 +18,9 @@ jobs:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+
+      - name: Install modules using yarn
+        run: yarn
 
       - name: Run tests
         run: yarn workspaces run test
