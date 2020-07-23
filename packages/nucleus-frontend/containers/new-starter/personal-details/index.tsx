@@ -37,6 +37,7 @@ export function PersonalDetails(): React.ReactElement {
                 error={errors.firstName}
                 label="First Name"
                 name="firstName"
+                required
               />
               <Input
                 className="md:pl-2 md:w-1/2"
@@ -46,6 +47,7 @@ export function PersonalDetails(): React.ReactElement {
                 error={errors.lastName}
                 label="Last Name"
                 name="lastName"
+                required
               />
             </div>
             <hr className="my-8 border-orange-500" />
@@ -61,6 +63,7 @@ export function PersonalDetails(): React.ReactElement {
                 label="Phone Number"
                 name="phoneNumber"
                 positionIconLeft
+                required
                 type="tel"
               />
               <Input
@@ -78,6 +81,7 @@ export function PersonalDetails(): React.ReactElement {
                 label="Email"
                 name="email"
                 positionIconLeft
+                required
               />
             </div>
             <hr className="my-8 border-orange-500" />
@@ -90,6 +94,7 @@ export function PersonalDetails(): React.ReactElement {
                 error={errors.emergencyContactName}
                 label="Emergency Contact Name"
                 name="emergencyContactName"
+                required
               />
               <Input
                 className="md:pl-2 md:w-1/2"
@@ -102,6 +107,7 @@ export function PersonalDetails(): React.ReactElement {
                 label="Emergency Contact Number"
                 name="emergencyContactNumber"
                 positionIconLeft
+                required
                 type="tel"
               />
             </div>
@@ -110,9 +116,7 @@ export function PersonalDetails(): React.ReactElement {
             <Anchor href="/new-starter">
               <Button>Back</Button>
             </Anchor>
-            <Anchor href="/new-starter/address">
-              <PrimaryButton>Continue</PrimaryButton>
-            </Anchor>
+            <PrimaryButton>Continue</PrimaryButton>
           </div>
         </form>
       </NewStarterLayout>

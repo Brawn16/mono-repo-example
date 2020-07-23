@@ -102,7 +102,7 @@ export function AddressDetails() {
           </Fieldset>
           <div className="flex justify-between mx-8 mt-8 md:mx-0">
             <Button>Back</Button>
-            <PrimaryButton type="submit">Continue</PrimaryButton>
+            <PrimaryButton>Continue</PrimaryButton>
           </div>
         </form>
       </NewStarterLayout>
