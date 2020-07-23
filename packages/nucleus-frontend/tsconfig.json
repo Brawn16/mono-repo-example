@@ -7,5 +7,6 @@
   },
   "exclude": ["node_modules"],
   "extends": "../../tsconfig.json",
+  "files": ["next-env.d.ts"],
   "include": ["**/*.ts", "**/*.tsx"]
 }

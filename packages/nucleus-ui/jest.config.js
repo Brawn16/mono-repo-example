@@ -5,9 +5,8 @@ module.exports = {
     }
   },
   moduleNameMapper: {
-    "\\.css$": "<rootDir>/__mocks__/css.ts"
+    "\\.css$": "identity-obj-proxy"
   },
   preset: "ts-jest",
-  testEnvironment: "node",
   testPathIgnorePatterns: ["node_modules"]
 };

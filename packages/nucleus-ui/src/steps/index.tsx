@@ -35,7 +35,7 @@ export function Steps(props: StepProps) {
     }
 
     return (
-      <a key={href} className="mt-2" href={href} onClick={handleClick}>
+      <a key={href || index} className="mt-2" href={href} onClick={handleClick}>
         <div className="flex">
           {index !== 0 && <div className={leftArrowClassName} />}
           <div
