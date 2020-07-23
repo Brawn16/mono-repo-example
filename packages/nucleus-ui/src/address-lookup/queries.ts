@@ -6,7 +6,7 @@ export const addressLookup: any = gql`
       line1
       line2
       line3
-      city
+      townCity
       county
       postcode
       latitude

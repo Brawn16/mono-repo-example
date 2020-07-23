@@ -13,7 +13,7 @@ type InputTypes = {
   lastName: string;
 };
 
-export const form = () => {
+function Form() {
   const { register, handleSubmit, errors } = useForm<InputTypes>();
 
   return (
@@ -41,4 +41,6 @@ export const form = () => {
       </form>
     </div>
   );
-};
+}
+
+export const form = () => <Form />;

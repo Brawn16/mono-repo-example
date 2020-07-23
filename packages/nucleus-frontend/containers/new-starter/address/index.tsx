@@ -78,7 +78,7 @@ export function AddressDetails() {
                 className="mt-4 md:pl-2 md:w-1/2"
                 componentRef={register}
                 label="Town/City"
-                name="city"
+                name="townCity"
               />
             </div>
             <div className="md:flex">

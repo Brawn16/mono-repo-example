@@ -38,11 +38,11 @@ export const AddressLookup = ({
   const renderAddresses = (addresses: AddressLookupAddress[]) => {
     const options = addresses.map(
       (
-        { line1, line2, line3, city, postcode }: AddressLookupAddress,
+        { line1, line2, line3, townCity, postcode }: AddressLookupAddress,
         index
       ) => {
-        const optionLabel = [line1, line2, line3, city, postcode]
-          .filter((value) => value !== "")
+        const optionLabel = [line1, line2, line3, townCity, postcode]
+          .filter((value) => value)
           .join(", ");
 
         return {

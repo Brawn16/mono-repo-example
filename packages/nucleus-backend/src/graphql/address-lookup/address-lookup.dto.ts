@@ -12,7 +12,7 @@ export class AddressLookupDto {
   public line3?: string;
 
   @Field({ nullable: true })
-  public city?: string;
+  public townCity?: string;
 
   @Field({ nullable: true })
   public county?: string;

@@ -5,6 +5,7 @@ module.exports = {
     },
   },
   preset: "ts-jest",
+  setupFiles: ["./jest.setup"],
   testEnvironment: "node",
   testPathIgnorePatterns: ["node_modules"],
 };

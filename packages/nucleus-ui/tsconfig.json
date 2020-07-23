@@ -9,5 +9,6 @@
   },
   "exclude": ["**/*.test.ts"],
   "extends": "../../tsconfig.json",
+  "files": ["src/modules.d.ts"],
   "include": ["src/**/*.ts", "src/**/*.tsx"]
 }

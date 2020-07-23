@@ -1,5 +1,5 @@
 import { env } from "process";
-import { get, Response } from "request";
+import { get } from "request-promise";
 import { Query, Resolver, Arg } from "type-graphql";
 import { AddressLookupDto } from "./address-lookup.dto";
 
@@ -33,7 +33,7 @@ export class AddressLookupResolver {
       record.line1 = line1;
       record.line2 = line2;
       record.line3 = line3;
-      record.city = address.town_or_city || null;
+      record.townCity = address.town_or_city || null;
       record.county = address.county || null;
       record.postcode = postcode;
       record.longitude = longitude || null;
@@ -43,26 +43,18 @@ export class AddressLookupResolver {
     });
   }
 
-  private sendRequest(postcode: string): Promise<Response> {
+  private async sendRequest(postcode: string): Promise<any> {
     const key = env.SERVICE_GETADDRESS_API_KEY;
     if (key === undefined) {
       throw new Error("Address lookup is unavailable.");
     }
 
-    return new Promise((resolve) =>
-      get(
-        `https://api.getAddress.io/find/${postcode}?api-key=${key}&expand=true`,
-        {
-          json: true,
-        },
-        (error: Error | null, message: Response) => {
-          if (error) {
-            throw error;
-          }
-
-          resolve(message);
-        }
-      )
+    return get(
+      `https://api.getAddress.io/find/${postcode}?api-key=${key}&expand=true`,
+      {
+        json: true,
+        resolveWithFullResponse: true,
+      }
     );
   }
 }
