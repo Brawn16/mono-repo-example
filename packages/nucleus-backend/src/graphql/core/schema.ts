@@ -10,12 +10,12 @@ export const resolvers = [
   AddressLookupResolver,
   AuthResolver,
   UserResolver,
-  WorkPackResolver
+  WorkPackResolver,
 ];
 
 export function getSchema(): GraphQLSchema {
   return buildSchemaSync({
     authChecker: checkAuth,
-    resolvers
+    resolvers,
   });
 }
