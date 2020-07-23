@@ -1,7 +1,8 @@
-name: build
+name: Production Builds
 on: push
 jobs:
   build:
+    name: Production Builds
     runs-on: ubuntu-latest
     steps:
       - name: "Retrieve code"
