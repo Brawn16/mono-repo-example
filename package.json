@@ -4,7 +4,8 @@
     "lint": "run-s lint:eslint lint:prettier",
     "lint:eslint": "eslint --fix --max-warnings 0 **/*.{js,ts,tsx}",
     "lint:prettier": "prettier --loglevel warn --write **/*.{css,gql,js,json,md,ts,tsx,yml}",
-    "lint:stylelint": "stylelint --fix --max-warnings 0 '**/*.css'"
+    "lint:stylelint": "stylelint --fix --max-warnings 0 '**/*.css'",
+    "test": "wsrun -c test"
   },
   "engines": {
     "node": ">= 12.0.0",
@@ -36,6 +37,7 @@
     "stylelint-config-airbnb": "^0.0.0",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-order": "^4.0.0",
-    "stylelint-scss": "^3.17.2"
+    "stylelint-scss": "^3.17.2",
+    "wsrun": "^5.2.1"
   }
 }

@@ -1,7 +1,7 @@
 name: jest
 on: push
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: "Retrieve code"
@@ -23,4 +23,4 @@ jobs:
         run: yarn
 
       - name: Run tests
-        run: yarn workspaces run test
+        run: yarn test
