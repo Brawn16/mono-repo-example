@@ -1,16 +1,20 @@
-import { Ref } from "react";
+import { DetailedHTMLProps, Ref, SelectHTMLAttributes } from "react";
 import { FieldError } from "react-hook-form";
-import { Props } from "react-select";
 
-export interface OptionType {
-  label: string;
-  value: string;
-}
-
-export interface SelectProps extends Props {
-  componentRef?: Ref<HTMLInputElement>;
+export interface SelectProps
+  extends DetailedHTMLProps<
+    SelectHTMLAttributes<HTMLSelectElement>,
+    HTMLSelectElement
+  > {
+  className?: string;
+  componentRef?: Ref<HTMLSelectElement>;
   error?: FieldError;
   label?: string;
   name: string;
-  required?: boolean;
+  options: SelectOption[];
+}
+
+export interface SelectOption {
+  label: string;
+  value: string;
 }
