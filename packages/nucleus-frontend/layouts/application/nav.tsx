@@ -36,7 +36,7 @@ export function Nav(): React.ReactElement {
           >
             <FaBars className="w-5 h-5" />
           </button>
-          <div className="flex items-center hidden -ml-2 md:block">
+          <div className="items-center hidden -ml-2 md:flex">
             <NavLink href="/dashboard" label="Dashboard" />
             <NavLink href="/work-packs" label="Work Packs" />
           </div>

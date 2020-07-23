@@ -16,7 +16,7 @@ export function Login(): React.ReactElement | null {
 
   return (
     <div className={loginClassName}>
-      <div className="w-full max-w-sm p-8 mx-auto bg-white shadow-sm md:rounded-md">
+      <div className="w-full max-w-sm p-8 mx-auto bg-white">
         <LoginForm>
           <div className="text-center">
             <h2 className="text-2xl font-extrabold">

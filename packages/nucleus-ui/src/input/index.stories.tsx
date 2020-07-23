@@ -1,3 +1,4 @@
+import { action } from "@storybook/addon-actions";
 import React from "react";
 import { AiOutlineMail } from "react-icons/ai";
 import { Input } from ".";
@@ -7,35 +8,42 @@ export default {
   title: "Input",
 };
 
-export const basicInput = () => {
-  return <Input label="Name" name="basic-input" />;
+export const input = () => {
+  return <Input label="Name" name="input" onChange={action("onChange")} />;
 };
 
-export const inputWithIcon = () => {
+export const withIcon = () => {
   return (
-    <div className="space-y-6">
-      <Input iconType={AiOutlineMail} label="Email" name="input error" />
+    <div className="space-y-8">
       <Input
         iconType={AiOutlineMail}
-        label="Email"
+        label="Right Icon"
         name="input error"
+        onChange={action("onChange")}
+      />
+      <Input
+        iconType={AiOutlineMail}
+        label="Left Icon"
+        name="withIcon"
+        onChange={action("onChange")}
         positionIconLeft
       />
     </div>
   );
 };
 
-export const inputError = () => {
-  const fieldError = {
+export const withError = () => {
+  const error = {
     message: "Please provide a valid email",
     type: "error",
   };
+
   return (
     <Input
-      error={fieldError}
-      iconType={AiOutlineMail}
-      label="Email"
-      name="input error"
+      error={error}
+      label="Input"
+      name="inputError"
+      onChange={action("onChange")}
     />
   );
 };

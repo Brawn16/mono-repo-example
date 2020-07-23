@@ -1,9 +1,10 @@
 import React from "react";
+import { InputError } from "../input-error";
 import { checkbox, toggle, toggleHandle } from "./index.module.css";
 import { ToggleProps } from "./types";
 
 export function Toggle(props: ToggleProps): React.ReactElement {
-  const { className, componentRef, label, name } = props;
+  const { className, componentRef, error, label, name } = props;
 
   // Build props to pass to input
   const inputProperties = { ...props };
@@ -11,7 +12,7 @@ export function Toggle(props: ToggleProps): React.ReactElement {
 
   return (
     <div className={className}>
-      <label className="block font-medium text-gray-700" htmlFor={name}>
+      <label className="block text-gray-600" htmlFor={name}>
         {label}
         <input
           {...inputProperties}
@@ -24,6 +25,7 @@ export function Toggle(props: ToggleProps): React.ReactElement {
           <span className={toggleHandle} />
         </div>
       </label>
+      {error && <InputError error={error} />}
     </div>
   );
 }

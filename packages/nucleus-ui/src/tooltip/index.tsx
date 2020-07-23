@@ -1,13 +1,13 @@
 import React from "react";
 import { BsQuestionCircle } from "react-icons/bs";
 import ReactTooltip from "react-tooltip";
-import { tooltipProps } from "./types";
+import { TooltipProps } from "./types";
 
-export const Tooltip = ({ message }: tooltipProps) => {
+export function Tooltip({ message }: TooltipProps) {
   return (
-    <>
+    <div>
       <BsQuestionCircle data-effect="solid" data-tip={message} />
-      <ReactTooltip />
-    </>
+      <ReactTooltip backgroundColor="gray" place="top" textColor="white" />
+    </div>
   );
-};
+}

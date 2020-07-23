@@ -4,14 +4,21 @@ import { Fieldset } from ".";
 
 export default {
   component: Fieldset,
-  title: "fieldset",
+  title: "Fieldset",
 };
 
 export function fieldset() {
   return (
     <Fieldset>
-      <Input label="Input 1" name="input1" />
-      <Input label="Input 2" name="input2" />
+      <Input label="Input" name="input" />
+    </Fieldset>
+  );
+}
+
+export function customClass() {
+  return (
+    <Fieldset className="bg-blue-50">
+      <Input label="Input" name="input" />
     </Fieldset>
   );
 }

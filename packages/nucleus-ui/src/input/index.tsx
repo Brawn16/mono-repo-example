@@ -1,5 +1,6 @@
 import React from "react";
-import { FaExclamationCircle } from "react-icons/fa";
+import { InputError } from "../input-error";
+import { Label } from "../label";
 import { InputProps } from "./types";
 
 export function Input(props: InputProps): React.ReactElement {
@@ -11,52 +12,50 @@ export function Input(props: InputProps): React.ReactElement {
     name,
     required,
     iconType: Icon,
-    positionIconLeft,
+    positionIconLeft
   } = props;
+  const iconPostionClassName = positionIconLeft ? "left-0" : "right-0";
 
   // Build error classes
   let errorClassName = "";
   if (error) {
-    errorClassName =
-      "pr-10 text-red-900 border-red-300 focus:border-red-300 focus:shadow-outline-red";
+    errorClassName = "pr-10 text-red-600 border-red-600 focus:border-red-600";
+  }
+
+  // Build icon classes
+  let iconClassName = "";
+  if (Icon) {
+    iconClassName = positionIconLeft ? " pl-10" : " pr-10";
   }
 
   // Build props to pass to input
   const inputProperties = { ...props };
+  delete inputProperties.className;
   delete inputProperties.componentRef;
+  delete inputProperties.error;
+  delete inputProperties.iconType;
+  delete inputProperties.positionIconLeft;
   delete inputProperties.required;
-
-  const iconPostionClass: string = positionIconLeft ? "left-0" : "right-0";
 
   return (
     <div className={className}>
-      <label className="block font-medium text-gray-700" htmlFor={name}>
-        {label}
-        {required && <span className="text-red-600"> *</span>}
-      </label>
-      <div className="relative mt-1 rounded-md">
+      {label && <Label label={label} name={name} required={required} />}
+      <div className="relative">
         <input
           {...inputProperties}
           ref={componentRef}
-          className={`block w-full form-input shadow-sm ${errorClassName} ${
-            positionIconLeft ? " pl-8" : "pr-8"
-          }`}
+          className={`block w-full form-input rounded-none text-gray-900 focus:shadow-none focus:border-blue-500 ${errorClassName} ${iconClassName}`}
           id={name}
         />
         {Icon && (
           <div
-            className={`absolute inset-y-0 flex items-center pl-3 pr-3 pointer-events-none ${iconPostionClass}`}
+            className={`absolute inset-y-0 flex items-center px-3 pointer-events-none ${iconPostionClassName}`}
           >
-            <Icon className="w-5 h-5" />
+            <Icon className="w-4 h-4" />
           </div>
         )}
       </div>
-      {error && (
-        <div className="flex items-center p-1 ">
-          <FaExclamationCircle className="w-4 h-4 text-red-500" />
-          <p className="mt-1 mb-1 ml-1 text-xs text-red-600">{error.message}</p>
-        </div>
-      )}
+      {error && <InputError error={error} />}
     </div>
   );
 }

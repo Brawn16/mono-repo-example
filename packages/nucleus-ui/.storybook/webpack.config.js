@@ -1,4 +1,6 @@
 const { resolve } = require("path");
+const tailwindcss = require("tailwindcss");
+const autoprefixer = require("autoprefixer");
 
 module.exports = async ({ config }) => {
   config.module.rules.find(
@@ -10,7 +12,6 @@ module.exports = async ({ config }) => {
       test: /\.module\.css$/,
       use: [
         "style-loader",
-        "css-modules-typescript-loader",
         {
           loader: "css-loader",
           options: {
@@ -26,11 +27,11 @@ module.exports = async ({ config }) => {
           loader: "postcss-loader",
           options: {
             ident: "postcss",
-            plugins: [require("tailwindcss"), require("autoprefixer")],
+            plugins: [tailwindcss, autoprefixer],
           },
         },
       ],
-      include: resolve(__dirname, "../"),
+      include: resolve(__dirname, ".."),
     }
   );
   return config;
