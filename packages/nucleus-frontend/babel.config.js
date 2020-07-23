@@ -1,4 +1,4 @@
 module.exports = {
   plugins: ["import-graphql"],
-  presets: ["next/babel"],
+  presets: ["next/babel"]
 };

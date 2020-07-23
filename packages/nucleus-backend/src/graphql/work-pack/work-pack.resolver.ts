@@ -13,9 +13,9 @@ export class WorkPackResolver {
     const { headers } = await this.sendRequest("Signin", {
       formData: {
         password: env.SERVICE_DEPOTNET_PASSWORD,
-        username: env.SERVICE_DEPOTNET_USERNAME,
+        username: env.SERVICE_DEPOTNET_USERNAME
       },
-      timeout: 15000,
+      timeout: 15000
     });
 
     // Attempt to retrieve cookies from headers
@@ -32,13 +32,13 @@ export class WorkPackResolver {
       {
         headers: {
           "content-type": "application/json",
-          cookie,
+          cookie
         },
         json: {
           skip: 0,
-          take: 50,
+          take: 50
         },
-        timeout: 15000,
+        timeout: 15000
       }
     );
 
@@ -48,7 +48,7 @@ export class WorkPackResolver {
   }
 
   private sendRequest(path: string, options: CoreOptions): Promise<Response> {
-    return new Promise((resolve) =>
+    return new Promise(resolve =>
       post(
         `https://cityfibre.depotnet.co.uk/${path}`,
         options,

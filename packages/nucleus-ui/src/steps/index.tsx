@@ -3,7 +3,7 @@ import {
   leftArrow,
   leftArrowActive,
   rightArrow,
-  rightArrowActive,
+  rightArrowActive
 } from "./index.module.css";
 import { StepProps, Step } from "./types";
 

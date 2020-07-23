@@ -2,11 +2,11 @@ import DateFnsUtils from "@date-io/date-fns";
 import {
   createMuiTheme,
   MuiThemeProvider,
-  TextFieldProps,
+  TextFieldProps
 } from "@material-ui/core";
 import {
   DatePicker as MaterialDatePicker,
-  MuiPickersUtilsProvider,
+  MuiPickersUtilsProvider
 } from "@material-ui/pickers";
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import { format, parse } from "date-fns";
@@ -20,10 +20,10 @@ const theme = createMuiTheme({
   overrides: {
     MuiDialogActions: {
       root: {
-        display: "none",
-      },
-    },
-  },
+        display: "none"
+      }
+    }
+  }
 });
 
 export function DatePicker(props: DatePickerProps) {
@@ -43,7 +43,7 @@ export function DatePicker(props: DatePickerProps) {
   const inputProperties = {
     ...props,
     max: max ? format(max, "yyyy-MM-dd") : undefined,
-    min: min ? format(min, "yyyy-MM-dd") : undefined,
+    min: min ? format(min, "yyyy-MM-dd") : undefined
   };
 
   // Handle datepicker change

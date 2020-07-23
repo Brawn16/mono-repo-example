@@ -1,13 +1,13 @@
 module.exports = {
   globals: {
     "ts-jest": {
-      tsConfig: "tsconfig.test.json",
-    },
+      tsConfig: "tsconfig.test.json"
+    }
   },
   moduleNameMapper: {
-    "\\.css$": "<rootDir>/__mocks__/css.ts",
+    "\\.css$": "<rootDir>/__mocks__/css.ts"
   },
   preset: "ts-jest",
   testEnvironment: "node",
-  testPathIgnorePatterns: ["node_modules"],
+  testPathIgnorePatterns: ["node_modules"]
 };

@@ -3,7 +3,7 @@
   "scripts": {
     "lint": "run-s lint:eslint lint:prettier",
     "lint:eslint": "eslint --fix --max-warnings 0 **/*.{js,ts,tsx}",
-    "lint:prettier": "prettier --loglevel warn --write .",
+    "lint:prettier": "prettier --loglevel warn --write **/*.{css,gql,js,json,md,ts,tsx}",
     "lint:stylelint": "stylelint --fix --max-warnings 0 '**/*.css'"
   },
   "engines": {
