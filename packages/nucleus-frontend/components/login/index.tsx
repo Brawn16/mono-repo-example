@@ -87,7 +87,7 @@ export function Login({
         <Anchor href="/reset-password">Forgot Password?</Anchor>
       </div>
       <PrimaryButton
-        className="w-full bg-blue-700 hover:bg-blue-600 active:bg-blue-800"
+        className="w-full text-white bg-blue-700 hover:bg-blue-600 active:bg-blue-800"
         iconType={FaLock}
       >
         Login

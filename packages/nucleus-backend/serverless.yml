@@ -6,9 +6,12 @@ provider:
   environment:
     APOLLO_CORS_ORIGIN: http://nucleus-frontend-depotnet-poc.s3-website.eu-west-2.amazonaws.com
     APOLLO_PLAYGROUND_ENABLED: false
-    DN_PASSWORD: ${env:DN_PASSWORD}
-    DN_USERNAME: JLeckenbySDH
-    TYPEORM_HOST: nucleus-backend-depotnet-poc.cxpjhjwyl9xj.eu-west-2.rds.amazonaws.com
+
+    SERVICE_GETADDRESS_API_KEY: ${env:SERVICE_GETADDRESS_API_KEY}
+    SERVICE_DEPOTNET_USERNAME: ${env:SERVICE_DEPOTNET_USERNAME}
+    SERVICE_DEPOTNET_PASSWORD: ${env:SERVICE_DEPOTNET_PASSWORD}
+
+    TYPEORM_HOST: ${env:TYPEORM_HOST}
     TYPEORM_PASSWORD: ${env:TYPEORM_PASSWORD}
   name: aws
   region: eu-west-2

@@ -1,7 +1,7 @@
 import { Field, ObjectType } from "type-graphql";
 
 @ObjectType()
-export class WorkPackEntity {
+export class WorkPackDto {
   @Field({ nullable: true })
   public jobReference?: string;
 

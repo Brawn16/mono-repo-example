@@ -2,20 +2,20 @@ import { env } from "process";
 import { plainToClass } from "class-transformer";
 import { post, CoreOptions, Response } from "request";
 import { Authorized, Query, Resolver } from "type-graphql";
-import { WorkPackEntity } from "../../shared/entity/work-pack.entity";
+import { WorkPackDto } from "./work-pack.dto";
 
 @Resolver()
 export class WorkPackResolver {
   @Authorized()
-  @Query(() => [WorkPackEntity])
-  public async workPacks(): Promise<WorkPackEntity[]> {
+  @Query(() => [WorkPackDto])
+  public async workPacks(): Promise<WorkPackDto[]> {
     // Send login request
     const { headers } = await this.sendRequest("Signin", {
       formData: {
-        password: env.DN_PASSWORD,
-        username: env.DN_USERNAME,
+        password: env.SERVICE_DEPOTNET_PASSWORD,
+        username: env.SERVICE_DEPOTNET_USERNAME
       },
-      timeout: 15000,
+      timeout: 15000
     });
 
     // Attempt to retrieve cookies from headers
@@ -32,23 +32,23 @@ export class WorkPackResolver {
       {
         headers: {
           "content-type": "application/json",
-          cookie,
+          cookie
         },
         json: {
           skip: 0,
-          take: 50,
+          take: 50
         },
-        timeout: 15000,
+        timeout: 15000
       }
     );
 
     return response.body.data.map((pack: any) =>
-      plainToClass(WorkPackEntity, pack)
+      plainToClass(WorkPackDto, pack)
     );
   }
 
   private sendRequest(path: string, options: CoreOptions): Promise<Response> {
-    return new Promise((resolve) =>
+    return new Promise(resolve =>
       post(
         `https://cityfibre.depotnet.co.uk/${path}`,
         options,

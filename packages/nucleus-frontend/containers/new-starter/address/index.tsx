@@ -44,6 +44,7 @@ export function AddressDetails() {
         </div>
         <form
           onSubmit={handleSubmit(data => {
+            /* eslint-disable-next-line no-console */
             console.log(data);
           })}
         >

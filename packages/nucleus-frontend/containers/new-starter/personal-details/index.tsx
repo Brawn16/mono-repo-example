@@ -23,6 +23,7 @@ export function PersonalDetails(): React.ReactElement {
       <NewStarterLayout>
         <form
           onSubmit={handleSubmit(data => {
+            /* eslint-disable-next-line no-console */
             console.log("data", data);
           })}
         >

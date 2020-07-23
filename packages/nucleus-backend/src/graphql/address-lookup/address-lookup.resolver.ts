@@ -44,7 +44,7 @@ export class AddressLookupResolver {
   }
 
   private sendRequest(postcode: string): Promise<Response> {
-    const key = env.SERVICE_GET_ADDRESS_API_KEY;
+    const key = env.SERVICE_GETADDRESS_API_KEY;
     if (key === undefined) {
       throw new Error("Address lookup is unavailable.");
     }
