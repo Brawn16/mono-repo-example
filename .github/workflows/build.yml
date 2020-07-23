@@ -1,7 +1,7 @@
-name: jest
+name: build
 on: push
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: "Retrieve code"
@@ -22,5 +22,11 @@ jobs:
       - name: Install modules using yarn
         run: yarn
 
-      - name: Run tests
-        run: yarn test
+      - name: Build backend
+        run: yarn workspace @sdh-project-services/nucleus-backend build
+
+      - name: Build UI
+        run: yarn workspace @sdh-project-services/nucleus-ui build
+
+      - name: Build frontend
+        run: yarn workspace @sdh-project-services/nucleus-frontend build
