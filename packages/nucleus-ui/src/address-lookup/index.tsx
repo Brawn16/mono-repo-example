@@ -1,5 +1,5 @@
 import { useLazyQuery } from "@apollo/client";
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { PrimaryButton } from "../button";
 import { Input } from "../input";
@@ -13,13 +13,23 @@ import {
   AddressLookupAddress
 } from "./types";
 
-export const AddressLookup = ({ label = "Postcode" }: AddressLookupProps) => {
+export const AddressLookup = ({
+  label = "Postcode",
+  onAddressSelect
+}: AddressLookupProps) => {
   const { register, handleSubmit, errors } = useForm<AddressLookupFormData>();
+  const [showDropdown, setShowDropdown] = useState(false);
   const [addressLookup, { data, error }] = useLazyQuery(addressLookupQuery, {
     errorPolicy: "all"
   });
 
+  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    onAddressSelect(data.addressLookup[event.target.value]);
+    setShowDropdown(false);
+  };
+
   const onSubmit = ({ addressLookupPostcode }: AddressLookupFormData) => {
+    setShowDropdown(true);
     addressLookup({
       variables: { postcode: addressLookupPostcode }
     });
@@ -42,7 +52,14 @@ export const AddressLookup = ({ label = "Postcode" }: AddressLookupProps) => {
       }
     );
 
-    return <Select name="addressLookupAddresses" options={options} />;
+    return (
+      <Select
+        className="mt-1"
+        name="addressLookupAddresses"
+        onChange={handleChange}
+        options={options}
+      />
+    );
   };
 
   return (
@@ -68,7 +85,7 @@ export const AddressLookup = ({ label = "Postcode" }: AddressLookupProps) => {
           )}
         </div>
       </form>
-      {data && renderAddresses(data.addressLookup)}
+      {showDropdown && data && renderAddresses(data.addressLookup)}
     </>
   );
 };

@@ -19,7 +19,10 @@ export function AddressDetails() {
   >();
 
   const handleAddressSelection = (address: AddressLookupAddress) => {
-    console.log(address);
+    const keys = Object.keys(address) as (keyof AddressLookupAddress)[];
+    keys.forEach((key: keyof AddressLookupAddress) => {
+      setValue(key, address[key] || "");
+    });
   };
 
   return (
@@ -34,8 +37,8 @@ export function AddressDetails() {
               <p className="px-2 text-gray-500">OR</p>
               <hr className="w-1/2 border-orange-600" />
             </div>
-            <div className="flex justify-center pb-5 text-gray-500">
-              <p>ENTER YOUR ADDRESS MANUALLY</p>
+            <div className="flex justify-center pb-5 text-gray-500 uppercase">
+              Enter your address manually
             </div>
           </div>
         </div>
@@ -50,41 +53,52 @@ export function AddressDetails() {
               <Input
                 className="md:pr-2 md:w-1/2"
                 componentRef={register({
-                  required: "this field is required"
+                  required: "Address line 1 is required"
                 })}
-                error={errors.addressLineOne}
+                error={errors.line1}
                 label="Address Line 1"
-                name="addressLineOne"
+                name="line1"
                 required
               />
               <Input
                 className="mt-4 md:mt-0 md:pl-2 md:w-1/2"
+                componentRef={register}
                 label="Address Line 2"
-                name="addressLineTwo"
+                name="line2"
               />
             </div>
             <div className="md:flex">
               <Input
                 className="mt-4 md:pr-2 md:w-1/2"
+                componentRef={register}
                 label="Address Line 3"
-                name="addressLineThree"
+                name="line3"
               />
               <Input
                 className="mt-4 md:pl-2 md:w-1/2"
-                label="City"
+                componentRef={register}
+                label="Town/City"
                 name="city"
               />
             </div>
-            <Input
-              className="mt-4 md:w-1/4"
-              componentRef={register({
-                required: "Postcode is required"
-              })}
-              error={errors.postcode}
-              label="Postcode"
-              name="postcode"
-              required
-            />
+            <div className="md:flex">
+              <Input
+                className="mt-4 md:pr-2 md:w-1/2"
+                componentRef={register}
+                label="County"
+                name="county"
+              />
+              <Input
+                className="mt-4 md:pl-2 md:w-1/2"
+                componentRef={register({
+                  required: "Postcode is required"
+                })}
+                error={errors.postcode}
+                label="Postcode"
+                name="postcode"
+                required
+              />
+            </div>
           </Fieldset>
           <div className="flex justify-between mx-8 mt-8 md:mx-0">
             <Button>Back</Button>

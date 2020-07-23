@@ -12,14 +12,20 @@ export function Input(props: InputProps): React.ReactElement {
     name,
     required,
     iconType: Icon,
-    positionIconLeft,
+    positionIconLeft
   } = props;
-  const iconPostionClass = positionIconLeft ? "left-0" : "right-0";
+  const iconPostionClassName = positionIconLeft ? "left-0" : "right-0";
 
   // Build error classes
   let errorClassName = "";
   if (error) {
     errorClassName = "pr-10 text-red-600 border-red-600 focus:border-red-600";
+  }
+
+  // Build icon classes
+  let iconClassName = "";
+  if (Icon) {
+    iconClassName = positionIconLeft ? " pl-10" : " pr-10";
   }
 
   // Build props to pass to input
@@ -38,14 +44,12 @@ export function Input(props: InputProps): React.ReactElement {
         <input
           {...inputProperties}
           ref={componentRef}
-          className={`block w-full form-input rounded-none text-gray-900 focus:shadow-none focus:border-blue-500 ${errorClassName} ${
-            positionIconLeft ? " pl-10" : "pr-10"
-          }`}
+          className={`block w-full form-input rounded-none text-gray-900 focus:shadow-none focus:border-blue-500 ${errorClassName} ${iconClassName}`}
           id={name}
         />
         {Icon && (
           <div
-            className={`absolute inset-y-0 flex items-center pl-3 pr-3 pointer-events-none ${iconPostionClass}`}
+            className={`absolute inset-y-0 flex items-center px-3 pointer-events-none ${iconPostionClassName}`}
           >
             <Icon className="w-4 h-4" />
           </div>

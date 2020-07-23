@@ -15,6 +15,9 @@ export class AddressLookupDto {
   public city?: string;
 
   @Field({ nullable: true })
+  public county?: string;
+
+  @Field({ nullable: true })
   public postcode?: string;
 
   @Field({ nullable: true })

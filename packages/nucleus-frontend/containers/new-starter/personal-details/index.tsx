@@ -74,7 +74,7 @@ export function PersonalDetails(): React.ReactElement {
                 error={errors.email}
                 iconType={AiOutlineMail}
                 inputMode="email"
-                label="Email Address"
+                label="Email"
                 name="email"
                 positionIconLeft
               />
@@ -93,7 +93,7 @@ export function PersonalDetails(): React.ReactElement {
               <Input
                 className="md:pl-2 md:w-1/2"
                 componentRef={register({
-                  required: "emergency phone number is required"
+                  required: "Emergency contact number is required"
                 })}
                 error={errors.emergencyContactNumber}
                 iconType={FiPhone}
