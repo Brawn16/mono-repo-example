@@ -4,8 +4,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Install modules using yarn
       - uses: actions/checkout@v2
-      - name: Install modules
         run: yarn
+
+      - name: Get yarn cache path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Restore yarn cache
+      - uses: actions/cache@v2
+        with:
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
       - name: Run tests
         run: yarn workspaces run test
