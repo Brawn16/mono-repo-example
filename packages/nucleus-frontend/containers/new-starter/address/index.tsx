@@ -42,7 +42,6 @@ export function AddressDetails() {
             </div>
           </div>
         </div>
-
         <form
           onSubmit={handleSubmit(data => {
             console.log(data);
