@@ -1,0 +1,33 @@
+name: Production Builds
+on: push
+jobs:
+  build:
+    name: Production Builds
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Retrieve code"
+        uses: actions/checkout@v2
+
+      - name: Get yarn cache path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: "Restore yarn cache"
+        uses: actions/cache@v2
+        with:
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install modules using yarn
+        run: yarn
+
+      - name: Build backend
+        run: yarn workspace @sdh-project-services/nucleus-backend build
+
+      - name: Build UI
+        run: yarn workspace @sdh-project-services/nucleus-ui build
+
+      - name: Build frontend
+        run: yarn workspace @sdh-project-services/nucleus-frontend build
