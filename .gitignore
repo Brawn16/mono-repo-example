@@ -1,3 +1,4 @@
+cdk.out/
 coverage/
 dist/
 node_modules/
@@ -6,3 +7,4 @@ node_modules/
 .env.local
 package-lock.json
 *.log*
+*.zip

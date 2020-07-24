@@ -47,6 +47,7 @@
     "jose": "^1.27.0",
     "pg": "^8.0.3",
     "reflect-metadata": "^0.1.13",
+    "request": "^2.88.2",
     "request-promise": "^4.2.6",
     "type-graphql": "^0.17.6",
     "typeorm": "^0.2.24"
