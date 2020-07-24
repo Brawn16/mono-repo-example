@@ -29,8 +29,8 @@ const steps = [
     label: "Identification",
   },
   {
-    href: "/new-starter/medical-questionnaire",
-    label: "Medical Questionnaire",
+    href: "/new-starter/medical",
+    label: "Medical",
   },
   {
     href: "/new-starter/summary",
@@ -51,12 +51,12 @@ export function NewStarter({
     <DataProvider value={{}}>
       <div className="flex flex-col min-h-screen">
         <header className="py-4 bg-black">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-3xl mx-auto">
             <img alt="Nucleus" className="h-4" src="/logo.svg" />
           </div>
         </header>
-        <main className="flex-1 w-full max-w-4xl mx-auto">
-          <h1 className="py-4 text-2xl font-light text-center uppercase">
+        <main className="flex-1 w-full max-w-3xl mx-auto">
+          <h1 className="py-4 text-3xl font-light text-center uppercase">
             New Starter Form
           </h1>
           <Steps active={active} steps={steps} />

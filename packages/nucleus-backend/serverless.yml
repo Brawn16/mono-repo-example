@@ -4,9 +4,6 @@ plugins:
 
 provider:
   name: aws
-  region: eu-west-2
-  runtime: nodejs12.x
-  timeout: 30
 
 functions:
   graphql:
