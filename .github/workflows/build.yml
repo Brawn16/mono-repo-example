@@ -1,8 +1,8 @@
-name: Production Builds
+name: Build Repo
 on: push
 jobs:
-  build:
-    name: Production Builds
+  test:
+    name: Run Unit Tests & Build
     runs-on: ubuntu-latest
     steps:
       - name: "Retrieve code"
@@ -20,8 +20,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Install modules using yarn
+      - name: Install modules
         run: yarn
+
+      - name: Run tests
+        run: yarn test
 
       - name: Build backend
         run: yarn workspace @sdh-project-services/nucleus-backend build
