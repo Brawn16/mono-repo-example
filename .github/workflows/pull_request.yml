@@ -1,0 +1,84 @@
+name: Pull Request
+on: pull_request
+jobs:
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Retrieve code"
+        uses: actions/checkout@v2
+
+      - name: Get yarn cache path
+        id: yarn-cache-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Restore yarn cache
+        uses: actions/cache@v2
+        with:
+          key: yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ${{ steps.yarn-cache-path.outputs.dir }}
+          restore-keys: yarn-
+
+      - name: Install modules
+        run: yarn
+
+      - name: Run tests
+        run: yarn test
+
+  build:
+    name: Build Bundles
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Retrieve code"
+        uses: actions/checkout@v2
+
+      - name: Get yarn cache path
+        id: yarn-cache-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Restore yarn cache
+        uses: actions/cache@v2
+        with:
+          key: yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ${{ steps.yarn-cache-path.outputs.dir }}
+          restore-keys: yarn-
+
+      - name: Install modules
+        run: yarn
+
+      - name: Build backend
+        run: yarn workspace @sdh-project-services/nucleus-backend build
+
+      - name: Build UI
+        run: yarn workspace @sdh-project-services/nucleus-ui build
+
+      - name: Build frontend
+        run: yarn workspace @sdh-project-services/nucleus-frontend build
+
+  storybook:
+    name: Publish Storybook
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Retrieve code"
+        uses: actions/checkout@v2
+
+      - name: Get yarn cache path
+        id: yarn-cache-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Restore yarn cache
+        uses: actions/cache@v2
+        with:
+          key: yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ${{ steps.yarn-cache-path.outputs.dir }}
+          restore-keys: yarn-
+
+      - name: Install modules
+        run: yarn
+
+      - name: Publish storybook
+        run: cd packages/nucleus-ui && yarn chromatic
+          --exit-once-uploaded
+          --project-token=${{ secrets.CHROMATIC }}
