@@ -22,21 +22,21 @@ jobs:
       - name: Install modules
         run: yarn
 
-      - name: Upload workspace
+      - name: Upload modules
         uses: actions/upload-artifact@v2
         with:
-          name: workspace
-          path: .
+          name: modules
+          path: "**/node_modules"
 
   test:
     name: Run Unit Tests
     needs: [bootstrap]
     runs-on: ubuntu-latest
     steps:
-      - name: Restore workspace
+      - name: Restore modules
         uses: actions/download-artifact@v2
         with:
-          name: workspace
+          name: modules
 
       - name: Run tests
         run: yarn test
@@ -46,10 +46,10 @@ jobs:
     needs: [bootstrap]
     runs-on: ubuntu-latest
     steps:
-      - name: Restore workspace
+      - name: Restore modules
         uses: actions/download-artifact@v2
         with:
-          name: workspace
+          name: modules
 
       - name: Build backend
         run: yarn workspace @sdh-project-services/nucleus-backend build
