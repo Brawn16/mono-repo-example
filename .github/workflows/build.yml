@@ -27,6 +27,7 @@ jobs:
 
   build:
     name: Build Bundles
+    needs: [test]
     runs-on: ubuntu-latest
     steps:
       - name: "Retrieve code"
