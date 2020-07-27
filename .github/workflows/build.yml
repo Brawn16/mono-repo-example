@@ -1,8 +1,8 @@
 name: Build Repo
 on: push
 jobs:
-  install:
-    name: Install modules
+  test:
+    name: Run Unit Tests
     runs-on: ubuntu-latest
     steps:
       - name: "Retrieve code"
@@ -22,34 +22,29 @@ jobs:
       - name: Install modules
         run: yarn
 
-      - name: Upload modules
-        uses: actions/upload-artifact@v2
-        with:
-          name: modules
-          path: "**/node_modules"
-
-  test:
-    name: Run Unit Tests
-    needs: [install]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Restore modules
-        uses: actions/download-artifact@v2
-        with:
-          name: modules
-
       - name: Run tests
         run: yarn test
 
   build:
     name: Build Bundles
-    needs: [install]
     runs-on: ubuntu-latest
     steps:
-      - name: Restore modules
-        uses: actions/download-artifact@v2
+      - name: "Retrieve code"
+        uses: actions/checkout@v2
+
+      - name: Get yarn cache path
+        id: yarn-cache-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Restore yarn cache
+        uses: actions/cache@v2
         with:
-          name: modules
+          key: yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ${{ steps.yarn-cache-path.outputs.dir }}
+          restore-keys: yarn-
+
+      - name: Install modules
+        run: yarn
 
       - name: Build backend
         run: yarn workspace @sdh-project-services/nucleus-backend build
