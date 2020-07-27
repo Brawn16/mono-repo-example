@@ -1,8 +1,8 @@
 name: Build Repo
 on: push
 jobs:
-  bootstrap:
-    name: Bootstrap Workspace
+  install:
+    name: Install modules
     runs-on: ubuntu-latest
     steps:
       - name: "Retrieve code"
@@ -30,7 +30,7 @@ jobs:
 
   test:
     name: Run Unit Tests
-    needs: [bootstrap]
+    needs: [install]
     runs-on: ubuntu-latest
     steps:
       - name: Restore modules
@@ -43,7 +43,7 @@ jobs:
 
   build:
     name: Build Bundles
-    needs: [bootstrap]
+    needs: [install]
     runs-on: ubuntu-latest
     steps:
       - name: Restore modules
