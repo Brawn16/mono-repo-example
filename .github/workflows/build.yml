@@ -78,7 +78,17 @@ jobs:
       - name: Install modules
         run: yarn
 
+      - name: "Navigate to UI package"
+        run: cd packages/nucleus-ui
+
       - name: Publish storybook
-        run: cd packages/nucleus-ui && yarn chromatic
+        run: yarn chromatic
           --exit-once-uploaded
+          --project-token=${{ secrets.CHROMATIC }}
+
+      - name: Create patch build
+        if: github.event_name == pull_request
+        run: yarn chromatic
+          --exit-once-uploaded
+          --patch-build=${{ github.head_ref }}...${{ github.base_ref }}
           --project-token=${{ secrets.CHROMATIC }}
