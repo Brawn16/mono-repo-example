@@ -17,6 +17,7 @@ export function PersonalDetails(): React.ReactElement {
   const { register, handleSubmit, errors } = useForm<
     NewStarterPersonalDetailsFormData
   >();
+
   return (
     <>
       <Head title="Personal Details - New Starter Form" />
