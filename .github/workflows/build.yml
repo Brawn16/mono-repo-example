@@ -1,8 +1,8 @@
 name: Build Repo
 on: push
 jobs:
-  test:
-    name: Run Unit Tests & Build
+  install:
+    name: Bootstrap Workspace
     runs-on: ubuntu-latest
     steps:
       - name: "Retrieve code"
@@ -12,7 +12,7 @@ jobs:
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - name: "Restore yarn cache"
+      - name: Restore yarn cache
         uses: actions/cache@v2
         with:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -20,17 +20,37 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Install modules
-        run: yarn
+      - name: Upload workspace
+        uses: actions/upload-artifact@v2
+        with:
+          name: workspace
 
-      - name: Run tests
-        run: yarn test
+    test:
+      name: Run Unit Tests
+      runs-on: ubuntu-latest
+      steps:
+        - name: Restore workspace
+          uses: actions/download-artifact@v2
+          with:
+            name: workspace
 
-      - name: Build backend
-        run: yarn workspace @sdh-project-services/nucleus-backend build
+        - name: Run tests
+          run: yarn test
 
-      - name: Build UI
-        run: yarn workspace @sdh-project-services/nucleus-ui build
+    build:
+      name: Build Bundles
+      runs-on: ubuntu-latest
+      steps:
+        - name: Restore workspace
+          uses: actions/download-artifact@v2
+          with:
+            name: workspace
 
-      - name: Build frontend
-        run: yarn workspace @sdh-project-services/nucleus-frontend build
+        - name: Build backend
+          run: yarn workspace @sdh-project-services/nucleus-backend build
+
+        - name: Build UI
+          run: yarn workspace @sdh-project-services/nucleus-ui build
+
+        - name: Build frontend
+          run: yarn workspace @sdh-project-services/nucleus-frontend build
