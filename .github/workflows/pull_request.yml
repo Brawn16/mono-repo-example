@@ -1,4 +1,4 @@
-name: Build Repo
+name: Pull Requests
 on: pull_request
 jobs:
   test:
@@ -78,10 +78,7 @@ jobs:
       - name: Install modules
         run: yarn
 
-      - name: "Navigate to UI package"
-        run: cd packages/nucleus-ui
-
       - name: Publish storybook
-        run: yarn chromatic
+        run: cd packages/nucleus-ui && yarn chromatic
           --exit-once-uploaded
           --project-token=${{ secrets.CHROMATIC }}
