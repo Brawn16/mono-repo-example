@@ -87,7 +87,6 @@ jobs:
           --project-token=${{ secrets.CHROMATIC }}
 
       - name: Create patch build
-        if: github.event_name == pull_request
         run: yarn chromatic
           --exit-once-uploaded
           --patch-build=${{ github.head_ref }}...${{ github.base_ref }}

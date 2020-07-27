@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button
+  Button,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import { Select } from "@sdh-project-services/nucleus-ui/dist/select";
@@ -20,7 +20,7 @@ export function WorkDetails(): React.ReactElement {
       <Head title="Work Details - New Starter Form" />
       <NewStarterLayout>
         <form
-          onSubmit={handleSubmit(data => {
+          onSubmit={handleSubmit((data) => {
             /* eslint-disable-next-line no-console */
             console.log("data", data);
           })}
@@ -28,7 +28,7 @@ export function WorkDetails(): React.ReactElement {
           <Fieldset>
             <Select
               componentRef={register({
-                required: "Workstream is required"
+                required: "Workstream is required",
               })}
               error={errors.workstream}
               label="Workstream"
@@ -39,7 +39,7 @@ export function WorkDetails(): React.ReactElement {
             <hr className="my-8 border-orange-500" />
             <Select
               componentRef={register({
-                required: "Subcontractor is required"
+                required: "Subcontractor is required",
               })}
               error={errors.workstream}
               label="Subcontractor"

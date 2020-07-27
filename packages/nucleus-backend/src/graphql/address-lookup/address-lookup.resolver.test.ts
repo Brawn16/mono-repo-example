@@ -22,10 +22,10 @@ it("returns addresses", async () => {
           line_4: "line4",
           locality: "locality",
           town_or_city: "city",
-          county: "county"
-        }
-      ]
-    }
+          county: "county",
+        },
+      ],
+    },
   });
 
   const result = await new AddressLookupResolver().addressLookup("postcode");
@@ -38,14 +38,14 @@ it("returns addresses", async () => {
       county: "county",
       postcode: "postcode",
       latitude: "latitude",
-      longitude: "longitude"
-    }
+      longitude: "longitude",
+    },
   ]);
 });
 
 it("throws an error when postcode is unknown", async () => {
   stub(request, "get").resolves({
-    statusCode: 404
+    statusCode: 404,
   });
 
   const result = new AddressLookupResolver().addressLookup("postcode");
@@ -54,7 +54,7 @@ it("throws an error when postcode is unknown", async () => {
 
 it("throws an error when postcode service errors", async () => {
   stub(request, "get").resolves({
-    statusCode: 500
+    statusCode: 500,
   });
 
   const result = new AddressLookupResolver().addressLookup("postcode");

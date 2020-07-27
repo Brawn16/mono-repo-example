@@ -4,7 +4,7 @@ import { RadioButton } from ".";
 
 export default {
   component: RadioButton,
-  title: "Radio Button"
+  title: "Radio Button",
 };
 
 export const radioButton = () => {

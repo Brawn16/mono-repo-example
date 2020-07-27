@@ -7,7 +7,7 @@ module.exports = {
     "@storybook/addon-actions",
 
     "@storybook/addon-viewport",
-    "@storybook/preset-typescript"
+    "@storybook/preset-typescript",
   ],
-  stories: ["../src/**/*.stories.tsx"]
+  stories: ["../src/**/*.stories.tsx"],
 };
