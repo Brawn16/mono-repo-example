@@ -1,7 +1,8 @@
 name: Deploy
 on:
   push:
-    - develop
+    branches:
+      - develop
 jobs:
   test:
     name: Run Unit Tests
