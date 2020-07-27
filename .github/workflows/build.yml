@@ -25,32 +25,32 @@ jobs:
         with:
           name: workspace
 
-    test:
-      name: Run Unit Tests
-      runs-on: ubuntu-latest
-      steps:
-        - name: Restore workspace
-          uses: actions/download-artifact@v2
-          with:
-            name: workspace
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore workspace
+        uses: actions/download-artifact@v2
+        with:
+          name: workspace
 
-        - name: Run tests
-          run: yarn test
+      - name: Run tests
+        run: yarn test
 
-    build:
-      name: Build Bundles
-      runs-on: ubuntu-latest
-      steps:
-        - name: Restore workspace
-          uses: actions/download-artifact@v2
-          with:
-            name: workspace
+  build:
+    name: Build Bundles
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore workspace
+        uses: actions/download-artifact@v2
+        with:
+          name: workspace
 
-        - name: Build backend
-          run: yarn workspace @sdh-project-services/nucleus-backend build
+      - name: Build backend
+        run: yarn workspace @sdh-project-services/nucleus-backend build
 
-        - name: Build UI
-          run: yarn workspace @sdh-project-services/nucleus-ui build
+      - name: Build UI
+        run: yarn workspace @sdh-project-services/nucleus-ui build
 
-        - name: Build frontend
-          run: yarn workspace @sdh-project-services/nucleus-frontend build
+      - name: Build frontend
+        run: yarn workspace @sdh-project-services/nucleus-frontend build
