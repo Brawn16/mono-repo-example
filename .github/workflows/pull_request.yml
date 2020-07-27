@@ -8,19 +8,8 @@ jobs:
       - name: "Retrieve code"
         uses: actions/checkout@v2
 
-      - name: Get yarn cache path
-        id: yarn-cache-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Restore yarn cache
-        uses: actions/cache@v2
-        with:
-          key: yarn-${{ hashFiles('**/yarn.lock') }}
-          path: ${{ steps.yarn-cache-path.outputs.dir }}
-          restore-keys: yarn-
-
       - name: Install modules
-        run: yarn
+        uses: bahmutov/npm-install@v1
 
       - name: Run tests
         run: yarn test
@@ -33,19 +22,8 @@ jobs:
       - name: "Retrieve code"
         uses: actions/checkout@v2
 
-      - name: Get yarn cache path
-        id: yarn-cache-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Restore yarn cache
-        uses: actions/cache@v2
-        with:
-          key: yarn-${{ hashFiles('**/yarn.lock') }}
-          path: ${{ steps.yarn-cache-path.outputs.dir }}
-          restore-keys: yarn-
-
       - name: Install modules
-        run: yarn
+        uses: bahmutov/npm-install@v1
 
       - name: Build backend
         run: yarn workspace @sdh-project-services/nucleus-backend build
@@ -64,19 +42,8 @@ jobs:
       - name: "Retrieve code"
         uses: actions/checkout@v2
 
-      - name: Get yarn cache path
-        id: yarn-cache-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Restore yarn cache
-        uses: actions/cache@v2
-        with:
-          key: yarn-${{ hashFiles('**/yarn.lock') }}
-          path: ${{ steps.yarn-cache-path.outputs.dir }}
-          restore-keys: yarn-
-
       - name: Install modules
-        run: yarn
+        uses: bahmutov/npm-install@v1
 
       - name: Publish storybook
         run: cd packages/nucleus-ui && yarn chromatic
