@@ -1,6 +1,6 @@
 # nucleus-monorepo
 
-![Production Builds](https://github.com/sdh-project-services/nucleus-monorepo/workflows/Production%20Builds/badge.svg) [![Storybook](https://github.com/storybookjs/brand/blob/master/badge/badge-storybook.svg)](https://5f1d51b3b8aef40022482d07-wpwbblrwrk.chromatic.com)
+![Deploy](https://github.com/sdh-project-services/nucleus-monorepo/workflows/Deploy/badge.svg?branch=develop) [![Storybook](https://github.com/storybookjs/brand/blob/master/badge/badge-storybook.svg)](https://5f1d51b3b8aef40022482d07-wpwbblrwrk.chromatic.com)
 
 ## Description
 
