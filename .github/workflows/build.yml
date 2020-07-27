@@ -20,6 +20,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
+      - name: Install modules
+        run: yarn
+
       - name: Upload workspace
         uses: actions/upload-artifact@v2
         with:
