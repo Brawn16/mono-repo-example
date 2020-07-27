@@ -5,7 +5,7 @@ import { PrimaryButton } from "../button";
 import { Input } from "../input";
 
 export default {
-  title: "Form",
+  title: "Form"
 };
 
 type InputTypes = {

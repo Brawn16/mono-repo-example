@@ -5,7 +5,7 @@ import { DatePicker } from ".";
 
 export default {
   component: DatePicker,
-  title: "Date Picker",
+  title: "Date Picker"
 };
 
 export const datePicker = () => (

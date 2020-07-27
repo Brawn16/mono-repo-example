@@ -79,6 +79,6 @@ jobs:
         run: yarn
 
       - name: Publish storybook
-        run: yarn workspace @sdh-project-services/nucleus-frontend chromatic
+        run: cd packages/nucleus-ui && yarn chromatic
           --exit-once-uploaded
           --project-token=${{ secrets.CHROMATIC }}

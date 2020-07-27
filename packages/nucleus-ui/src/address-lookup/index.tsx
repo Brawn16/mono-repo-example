@@ -10,17 +10,17 @@ import { addressLookup as addressLookupQuery } from "./queries";
 import {
   AddressLookupFormData,
   AddressLookupProps,
-  AddressLookupAddress,
+  AddressLookupAddress
 } from "./types";
 
 export const AddressLookup = ({
   label = "Postcode",
-  onAddressSelect,
+  onAddressSelect
 }: AddressLookupProps) => {
   const { register, handleSubmit, errors } = useForm<AddressLookupFormData>();
   const [showDropdown, setShowDropdown] = useState(false);
   const [addressLookup, { data, error }] = useLazyQuery(addressLookupQuery, {
-    errorPolicy: "all",
+    errorPolicy: "all"
   });
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -31,7 +31,7 @@ export const AddressLookup = ({
   const onSubmit = ({ addressLookupPostcode }: AddressLookupFormData) => {
     setShowDropdown(true);
     addressLookup({
-      variables: { postcode: addressLookupPostcode },
+      variables: { postcode: addressLookupPostcode }
     });
   };
 
@@ -42,12 +42,12 @@ export const AddressLookup = ({
         index
       ) => {
         const optionLabel = [line1, line2, line3, townCity, postcode]
-          .filter((value) => value)
+          .filter(value => value)
           .join(", ");
 
         return {
           label: optionLabel,
-          value: index.toString(),
+          value: index.toString()
         };
       }
     );
@@ -71,7 +71,7 @@ export const AddressLookup = ({
             <Input
               className="w-full"
               componentRef={register({
-                required: "Postcode is required",
+                required: "Postcode is required"
               })}
               name="addressLookupPostcode"
             />
