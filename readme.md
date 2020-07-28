@@ -1,5 +1,7 @@
 # nucleus-monorepo
 
+![Deploy](https://github.com/sdh-project-services/nucleus-monorepo/workflows/Deploy/badge.svg?branch=develop) [![Storybook](https://github.com/storybookjs/brand/blob/master/badge/badge-storybook.svg)](https://5f1d51b3b8aef40022482d07-wpwbblrwrk.chromatic.com)
+
 ## Description
 
 Monorepo for SDH Nucleus project.

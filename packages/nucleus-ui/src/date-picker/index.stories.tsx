@@ -1,5 +1,5 @@
 import { action } from "@storybook/addon-actions";
-import { addDays, subDays } from "date-fns";
+import { parse } from "date-fns";
 import React from "react";
 import { DatePicker } from ".";
 
@@ -17,7 +17,7 @@ export const datePicker = () => (
 );
 
 export const maxDate = () => {
-  const max = addDays(new Date(), 2);
+  const max = parse("2099-01-01", "yyyy-MM-dd", new Date());
   return (
     <DatePicker
       label="Date Picker"
@@ -29,7 +29,7 @@ export const maxDate = () => {
 };
 
 export const minDate = () => {
-  const min = subDays(new Date(), 2);
+  const min = parse("2000-01-01", "yyyy-MM-dd", new Date());
   return (
     <DatePicker
       label="Date Picker"

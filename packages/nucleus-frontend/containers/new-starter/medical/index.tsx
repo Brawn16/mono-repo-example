@@ -6,7 +6,7 @@ import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import { Label } from "@sdh-project-services/nucleus-ui/dist/label";
 import { RadioButton } from "@sdh-project-services/nucleus-ui/dist/radio-button";
 import { Textarea } from "@sdh-project-services/nucleus-ui/dist/textarea";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Anchor } from "../../../components/anchor";
 import { Head } from "../../../components/head";
@@ -14,7 +14,19 @@ import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { NewStarterMedicalFormData } from "./types";
 
 export function Medical(): React.ReactElement {
-  const { handleSubmit } = useForm<NewStarterMedicalFormData>();
+  const { register, handleSubmit, errors } = useForm<
+    NewStarterMedicalFormData
+  >();
+  const [medicalIssues, useMedicalIssues] = useState(false);
+  const [medicationRequired, useMedicationRequired] = useState(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.name === "medicalIssues") {
+      useMedicalIssues(!medicalIssues);
+    } else {
+      useMedicationRequired(!medicationRequired);
+    }
+  };
 
   return (
     <>
@@ -33,25 +45,76 @@ export function Medical(): React.ReactElement {
               required
             />
             <div className="flex">
-              <RadioButton label="Yes" name="issuesRadio" />
+              <RadioButton
+                checked={medicalIssues}
+                label="Yes"
+                name="medicalIssues"
+                onChange={handleChange}
+              />
               <div className="ml-4">
-                <RadioButton label="No" name="issuesRadio" />
+                <RadioButton
+                  checked={!medicalIssues}
+                  label="No"
+                  name="medicalIssues"
+                  onChange={handleChange}
+                />
               </div>
             </div>
-            <Textarea className="mt-4" name="issues" />
+            {medicalIssues && (
+              <Textarea
+                className="mt-4"
+                componentRef={register(
+                  medicalIssues
+                    ? {
+                        required:
+                          "Please provide information of medical issues",
+                      }
+                    : {}
+                )}
+                error={errors.issues}
+                name="issues"
+                required
+              />
+            )}
+
             <hr className="my-8 border-orange-500" />
             <Label
               label="Do you take any medication that could impair your ability to work?"
-              name="medicationRadio"
+              name="medicationRequired"
               required
             />
             <div className="flex">
-              <RadioButton label="Yes" name="medicationRadio" />
+              <RadioButton
+                checked={medicationRequired}
+                label="Yes"
+                name="medicationRequired"
+                onChange={handleChange}
+              />
               <div className="ml-4">
-                <RadioButton label="No" name="medicationRadio" />
+                <RadioButton
+                  checked={!medicationRequired}
+                  label="No"
+                  name="medicationRadio"
+                  onChange={handleChange}
+                />
               </div>
             </div>
-            <Textarea className="mt-4" name="medication" />
+            {medicationRequired && (
+              <Textarea
+                className="mt-4"
+                componentRef={register(
+                  medicationRequired
+                    ? {
+                        required:
+                          "Please provide information of medication requirements",
+                      }
+                    : {}
+                )}
+                error={errors.medication}
+                name="medication"
+                required
+              />
+            )}
           </Fieldset>
           <div className="flex justify-between mx-8 mt-8 md:mx-0">
             <Anchor href="/new-starter/identification">
