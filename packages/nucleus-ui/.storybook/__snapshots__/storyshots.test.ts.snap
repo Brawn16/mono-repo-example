@@ -445,11 +445,7 @@ exports[`Storyshots Date Picker Max Date 1`] = `
         data-testid="date-picker-input"
         id="date-picker"
         label="Date Picker"
-<<<<<<< Updated upstream
         max="2099-01-01"
-=======
-        max="2020-07-31"
->>>>>>> Stashed changes
         name="date-picker"
         onChange={[Function]}
         onMouseDown={[Function]}
@@ -499,11 +495,7 @@ exports[`Storyshots Date Picker Min Date 1`] = `
         data-testid="date-picker-input"
         id="date-picker"
         label="Date Picker"
-<<<<<<< Updated upstream
         min="2000-01-01"
-=======
-        min="2020-07-27"
->>>>>>> Stashed changes
         name="date-picker"
         onChange={[Function]}
         onMouseDown={[Function]}
