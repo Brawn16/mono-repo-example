@@ -17,9 +17,7 @@ describe("Form", () => {
       fireEvent.change(getByLabelText("Lastname"), {
         target: { value: "smith" }
       });
-    });
 
-    await act(async () => {
       fireEvent.click(getByRole("button"));
     });
 
@@ -43,9 +41,7 @@ describe("Form", () => {
       fireEvent.change(getByLabelText("Lastname"), {
         target: { value: "smith" }
       });
-    });
 
-    await act(async () => {
       fireEvent.click(getByRole("button"));
     });
 
@@ -62,12 +58,11 @@ describe("Form", () => {
       fireEvent.change(getByLabelText("Firstname"), {
         target: { value: "john" }
       });
+
       fireEvent.change(getByLabelText("Lastname"), {
         target: { value: "" }
       });
-    });
 
-    await act(async () => {
       fireEvent.click(getByRole("button"));
     });
 

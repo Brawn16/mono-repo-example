@@ -6,14 +6,16 @@ import { Select } from ".";
 describe("Select", () => {
   const selectError: FieldError = {
     type: "select",
-    message: "select error"
+    message: "select error",
   };
+
   const options = [
     { label: "Great Britain", value: "Great Britain" },
     { label: "France", value: "France" },
     { label: "Spain", value: "Spain" },
-    { label: "Germany", value: "Germany" }
+    { label: "Germany", value: "Germany" },
   ];
+
   it("shows error state", () => {
     const { container } = render(
       <Select error={selectError} name="select" options={options} />
