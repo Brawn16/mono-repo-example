@@ -1,15 +1,13 @@
-import "./environment";
 import { env } from "process";
 import {
   APIGatewayProxyCallback,
   APIGatewayProxyEvent,
   Context as LambdaContext,
 } from "aws-lambda";
-import { createConnection } from "typeorm";
+import { bootstrap } from "./bootstrap";
 import { server } from "./server";
 
-const connection = createConnection();
-
+const bootstrapped = bootstrap();
 const handler = server.createHandler({
   cors: {
     allowedHeaders: ["authorization", "content-type"],
@@ -23,7 +21,7 @@ async function executeHandler(
   context_: LambdaContext,
   callback: APIGatewayProxyCallback
 ) {
-  await connection;
+  await bootstrapped;
   handler(event, context_, callback);
 }
 

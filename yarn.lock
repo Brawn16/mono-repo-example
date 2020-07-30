@@ -355,7 +355,7 @@
     "@aws-cdk/core" "1.54.0"
     constructs "^3.0.2"
 
-"@aws-cdk/aws-s3-assets@1.54.0", "@aws-cdk/aws-s3-assets@^1.54.0":
+"@aws-cdk/aws-s3-assets@1.54.0":
   version "1.54.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-s3-assets/-/aws-s3-assets-1.54.0.tgz#01844b4550cc3434e9ffb4ab0b4f64da0d2cacb2"
   integrity sha512-IMGX3mqQyF4OurYh+Pu+HeImlvcOSaeq9WfiH31NzWvHNiR7Zuh2MvRG7r1lo9VNtS4Ttk1nXJFBe2W0yTFDrA==
@@ -387,7 +387,7 @@
     "@aws-cdk/core" "1.54.0"
     constructs "^3.0.2"
 
-"@aws-cdk/aws-secretsmanager@1.54.0":
+"@aws-cdk/aws-secretsmanager@1.54.0", "@aws-cdk/aws-secretsmanager@^1.54.0":
   version "1.54.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-secretsmanager/-/aws-secretsmanager-1.54.0.tgz#70791f7a0b21b2614cc978444732947764405f92"
   integrity sha512-OwKmid2Tp8RqerofxnI1O7WR6aJ3a3EqZ6CaTVs4IG2FFi1ub2caavouUc1z3YHXaOfh2beuUnXJZtD98ocFBw==
@@ -411,7 +411,7 @@
     "@aws-cdk/core" "1.54.0"
     constructs "^3.0.2"
 
-"@aws-cdk/aws-ssm@1.54.0", "@aws-cdk/aws-ssm@^1.54.0":
+"@aws-cdk/aws-ssm@1.54.0":
   version "1.54.0"
   resolved "https://registry.yarnpkg.com/@aws-cdk/aws-ssm/-/aws-ssm-1.54.0.tgz#00fcefee34e4a2a32b91021247f4135cd67b0105"
   integrity sha512-i66zvnOpEpTONI/kKeH4rBg9Lr3w5Z9N+dPJRkqZRqv/f3n2vegPzYX1o3C2eBuVeOCcbgj8775khJO8PbBlww==
@@ -5162,6 +5162,21 @@ aws-sdk@^2.706.0:
   version "2.713.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.713.0.tgz#e87404ddcba093d36afafb48f119ec66f654a83f"
   integrity sha512-axR1eOVn134KXJc1IT+Au2TXcK6oswY+4nvGe5GfU3pXeehhe0xNeP9Bw9yF36TRBxuvu4IJ2hRHDKma05smgA==
+  dependencies:
+    buffer "4.9.2"
+    events "1.1.1"
+    ieee754 "1.1.13"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.3.2"
+    xml2js "0.4.19"
+
+aws-sdk@^2.721.0:
+  version "2.721.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.721.0.tgz#da9a66803e2a34da0f97d59c60933fa9e02eafe7"
+  integrity sha512-loljx8gp4u/Y4nKO2mbcj3df8HpMkoxTFCYx5800IkLj4Y6yZqodxPTt0SZ5fHlQNx8TUtjwkmp3isBGtdEdyA==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"

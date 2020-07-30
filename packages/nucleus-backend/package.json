@@ -38,6 +38,7 @@
   "dependencies": {
     "apollo-server-lambda": "^2.15.1",
     "argon2": "^0.26.2",
+    "aws-sdk": "^2.721.0",
     "change-case": "^4.1.1",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
