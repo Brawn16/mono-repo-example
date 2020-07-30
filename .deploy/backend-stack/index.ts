@@ -1,10 +1,13 @@
 import { Construct, Duration, SecretValue, Stack } from "@aws-cdk/core";
 import {
+  BastionHostLinux,
   InstanceClass,
   InstanceSize,
   InstanceType,
+  Peer,
   Port,
   SecurityGroup,
+  SubnetType,
   Vpc,
 } from "@aws-cdk/aws-ec2";
 import { Code, Function, Runtime } from "@aws-cdk/aws-lambda";
@@ -125,14 +128,14 @@ export class BackendStack extends Stack {
       vpc,
     });
 
-    // Give graphql lambda access to core database
+    // Grant graphql lambda access to core database
     coreDatabaseSecurityGroup.addIngressRule(
       graphqlSecurityGroup,
       Port.tcp(5432),
       `Core database access for Nucleus backend graphql lambda (${branch})`
     );
 
-    // Give graphql lambda access to graphql lambda secrets
+    // Grant graphql lambda access to graphql lambda secrets
     if (graphqlLambda.role) {
       graphqlLambdaSecret.grantRead(graphqlLambda.role);
     }
@@ -150,5 +153,40 @@ export class BackendStack extends Stack {
     const graphqlGatewayResource = graphqlGateway.root.addResource("graphql");
     graphqlGatewayResource.addMethod("GET");
     graphqlGatewayResource.addMethod("POST");
+
+    // Create core VPC bastion security group
+    const coreVpcBastionSecurityGroup = new SecurityGroup(
+      this,
+      "CoreVpcBastionSecurityGroup",
+      {
+        description: `Core VPC bastion security group for Nucleus backend (${branch})`,
+        securityGroupName: `${stackName}-CoreVpcBastionSecurityGroup`,
+        vpc,
+      }
+    );
+
+    // Create core VPC bastion
+    new BastionHostLinux(this, "CoreVpcBastion", {
+      instanceName: `${stackName}-CoreVpcBastion`,
+      securityGroup: coreVpcBastionSecurityGroup,
+      subnetSelection: {
+        subnetType: SubnetType.PUBLIC,
+      },
+      vpc,
+    });
+
+    // Grant core VPC bastion access to core database
+    coreDatabaseSecurityGroup.addIngressRule(
+      coreVpcBastionSecurityGroup,
+      Port.tcp(5432),
+      `Core database access for Nucleus backend core VPC bastion (${branch})`
+    );
+
+    // Grant manchester office access to core VPC bastion
+    coreVpcBastionSecurityGroup.addIngressRule(
+      Peer.ipv4("212.36.35.198/32"),
+      Port.tcp(22),
+      `Manchester office access for Nucleus backend core VPC bastion (${branch})`
+    );
   }
 }
