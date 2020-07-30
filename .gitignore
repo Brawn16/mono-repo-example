@@ -1,11 +1,9 @@
-cdk.out/
 coverage/
 dist/
 node_modules/
 
 .DS_Store
 .env.local
-cdk.context.json
 package-lock.json
 *.log*
 *.zip

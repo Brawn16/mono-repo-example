@@ -1,9 +1,6 @@
-import { Construct, Duration, SecretValue, Stack } from "@aws-cdk/core";
+import { Construct, Duration, Fn, Stack } from "@aws-cdk/core";
 import {
   BastionHostLinux,
-  InstanceClass,
-  InstanceSize,
-  InstanceType,
   Peer,
   Port,
   SecurityGroup,
@@ -13,11 +10,7 @@ import {
 import { Code, Function, Runtime } from "@aws-cdk/aws-lambda";
 import { LambdaRestApi } from "@aws-cdk/aws-apigateway";
 import { resolve } from "path";
-import {
-  DatabaseInstance,
-  DatabaseInstanceEngine,
-  PostgresEngineVersion,
-} from "@aws-cdk/aws-rds";
+import { CfnDBCluster, CfnDBSubnetGroup } from "@aws-cdk/aws-rds";
 import { Secret } from "@aws-cdk/aws-secretsmanager";
 import { sanitizeBranch } from "../utils";
 
@@ -31,7 +24,7 @@ export class BackendStack extends Stack {
       description: `Stack for Nucleus backend (${branch})`,
       env: {
         account: "303003277076",
-        region: "eu-west-2",
+        region: "eu-west-1",
       },
       tags: {
         branch,
@@ -67,34 +60,43 @@ export class BackendStack extends Stack {
       }
     );
 
+    // Create core database subnet group
+    const coreDatabaseSubnetGroup = new CfnDBSubnetGroup(
+      this,
+      "CoreDatabaseSubnetGroup",
+      {
+        dbSubnetGroupDescription: `Core database subnet group for Nucleus backend (${branch})`,
+        dbSubnetGroupName: `${stackName}-CoreDatabaseSubnetGroup`.toLowerCase(),
+        subnetIds: vpc.privateSubnets.map((sub) => sub.subnetId),
+      }
+    );
+
     // Create core database
-    const coreDatabase = new DatabaseInstance(this, "CoreDatabase", {
-      allocatedStorage: 20,
-      backupRetention: Duration.days(7),
+    const coreDatabase = new CfnDBCluster(this, "CoreDatabase", {
+      backupRetentionPeriod: 7,
       databaseName: "nucleus",
+      dbClusterIdentifier: `${stackName}-CoreDatabase`.toLowerCase(),
+      dbSubnetGroupName: coreDatabaseSubnetGroup.ref,
       deletionProtection: terminationProtection,
-      enablePerformanceInsights: true,
-      engine: DatabaseInstanceEngine.postgres({
-        version: PostgresEngineVersion.VER_12,
-      }),
-      instanceIdentifier: `nucleus-backend-core-${sanitizeBranch(
-        branch,
-        true
-      )}`,
-      instanceType: InstanceType.of(
-        InstanceClass.BURSTABLE3,
-        InstanceSize.MICRO
-      ),
-      masterUserPassword: new SecretValue(
-        graphqlLambdaSecret.secretValueFromJson("TYPEORM_PASSWORD")
-      ),
+      engine: "aurora-postgresql",
+      engineMode: "serverless",
+      engineVersion: "10.7",
       masterUsername: "nucleus",
-      monitoringInterval: Duration.minutes(1),
-      maxAllocatedStorage: 1000,
+      masterUserPassword: Fn.join("", [
+        "{{resolve:secretsmanager:",
+        graphqlLambdaSecret.secretArn,
+        ":SecretString:TYPEORM_PASSWORD}}",
+      ]),
       preferredBackupWindow: "02:00-03:00",
       preferredMaintenanceWindow: "Mon:04:00-Mon:05:00",
-      securityGroups: [coreDatabaseSecurityGroup],
-      vpc,
+      scalingConfiguration: {
+        autoPause: true,
+        maxCapacity: 2,
+        minCapacity: 2,
+        secondsUntilAutoPause: 300,
+      },
+      storageEncrypted: true,
+      vpcSecurityGroupIds: [coreDatabaseSecurityGroup.securityGroupId],
     });
 
     // Create graphql lambda security group
@@ -117,8 +119,7 @@ export class BackendStack extends Stack {
       environment: {
         APOLLO_PLAYGROUND_ENDPOINT: "/prod/graphql",
         AWS_SECRET: `${graphqlLambdaName}Secret`,
-        TYPEORM_HOST: coreDatabase.dbInstanceEndpointAddress,
-        TYPEORM_SEED: "true",
+        TYPEORM_HOST: coreDatabase.attrEndpointAddress,
       },
       functionName: graphqlLambdaName,
       handler: "dist/graphql/index.graphqlHandler",
