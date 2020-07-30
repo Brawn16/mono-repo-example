@@ -9,7 +9,7 @@ exports[`Storyshots Address Lookup Address Lookup 1`] = `
   >
     <label
       className="block mb-1 text-gray-600"
-      htmlFor="addressLookup"
+      htmlFor="addressLookupPostcode"
     >
       Postcode
     </label>
@@ -393,6 +393,7 @@ exports[`Storyshots Date Picker Date Picker 1`] = `
     >
       <input
         className="block w-full form-input rounded-none text-gray-900 focus:shadow-none focus:border-blue-500   pr-10"
+        data-testid="date-picker-input"
         id="date-picker"
         label="Date Picker"
         name="date-picker"
@@ -441,6 +442,7 @@ exports[`Storyshots Date Picker Max Date 1`] = `
     >
       <input
         className="block w-full form-input rounded-none text-gray-900 focus:shadow-none focus:border-blue-500   pr-10"
+        data-testid="date-picker-input"
         id="date-picker"
         label="Date Picker"
         max="2099-01-01"
@@ -490,6 +492,7 @@ exports[`Storyshots Date Picker Min Date 1`] = `
     >
       <input
         className="block w-full form-input rounded-none text-gray-900 focus:shadow-none focus:border-blue-500   pr-10"
+        data-testid="date-picker-input"
         id="date-picker"
         label="Date Picker"
         min="2000-01-01"
@@ -588,7 +591,7 @@ exports[`Storyshots Form Form 1`] = `
         className="block mb-1 text-gray-600"
         htmlFor="firstName"
       >
-        FirstName
+        Firstname
       </label>
       <div
         className="relative"
@@ -596,7 +599,7 @@ exports[`Storyshots Form Form 1`] = `
         <input
           className="block w-full form-input rounded-none text-gray-900 focus:shadow-none focus:border-blue-500  "
           id="firstName"
-          label="FirstName"
+          label="Firstname"
           name="firstName"
         />
       </div>
@@ -1017,6 +1020,7 @@ exports[`Storyshots Steps Disabled Steps 1`] = `
 >
   <a
     className="mt-2"
+    data-testid="step-link"
     onClick={[Function]}
   >
     <div
@@ -1041,6 +1045,7 @@ exports[`Storyshots Steps Steps 1`] = `
 >
   <a
     className="mt-2"
+    data-testid="step-link"
     onClick={[Function]}
   >
     <div
@@ -1058,6 +1063,7 @@ exports[`Storyshots Steps Steps 1`] = `
   </a>
   <a
     className="mt-2"
+    data-testid="step-link"
     onClick={[Function]}
   >
     <div
@@ -1078,6 +1084,7 @@ exports[`Storyshots Steps Steps 1`] = `
   </a>
   <a
     className="mt-2"
+    data-testid="step-link"
     onClick={[Function]}
   >
     <div

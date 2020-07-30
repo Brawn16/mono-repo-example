@@ -3,29 +3,30 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { PrimaryButton } from "../button";
 import { Input } from "../input";
+import { InputTypes } from "./types";
 
 export default {
-  title: "Form",
+  title: "Form"
 };
 
-type InputTypes = {
-  firstName: string;
-  lastName: string;
+type Props = {
+  onSubmit?: (data: object) => any;
 };
 
-function Form() {
+export const Form = (props: Props) => {
   const { register, handleSubmit, errors } = useForm<InputTypes>();
+  const { onSubmit = action("onSubmit") } = props;
 
   return (
     <div className="flex justify-center">
       <form
         className="flex flex-col justify-center w-1/2"
-        onSubmit={handleSubmit(action("onSubmit"))}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <Input
           componentRef={register({ required: "Firstname is required" })}
           error={errors.firstName}
-          label="FirstName"
+          label="Firstname"
           name="firstName"
         />
         <Input
@@ -41,6 +42,6 @@ function Form() {
       </form>
     </div>
   );
-}
+};
 
 export const form = () => <Form />;
