@@ -41,6 +41,9 @@ export async function bootstrap() {
     });
   }
 
-  // Create database connection
-  await createConnection();
+  // Create database connection and run migrations
+  const connection = await createConnection();
+  await connection.runMigrations({
+    transaction: "each",
+  });
 }

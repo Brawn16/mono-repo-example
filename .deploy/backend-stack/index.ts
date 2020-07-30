@@ -115,6 +115,7 @@ export class BackendStack extends Stack {
         APOLLO_PLAYGROUND_ENDPOINT: "/prod/graphql",
         AWS_SECRET: `${graphqlLambdaName}Secret`,
         TYPEORM_HOST: coreDatabase.dbInstanceEndpointAddress,
+        TYPEORM_SEED: "true",
       },
       functionName: graphqlLambdaName,
       handler: "dist/graphql/index.graphqlHandler",

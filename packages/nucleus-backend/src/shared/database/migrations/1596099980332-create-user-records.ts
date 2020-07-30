@@ -1,11 +1,10 @@
 import { hash } from "argon2";
-import { Connection } from "typeorm";
-import { Factory, Seeder } from "typeorm-seeding";
+import { MigrationInterface, QueryRunner } from "typeorm";
 import { UserEntity } from "../../entity/user.entity";
 
-export class UserSeed implements Seeder {
-  public async run(_factory: Factory, connection: Connection): Promise<void> {
-    await connection
+export class CreateUserRecords1596099980332 implements MigrationInterface {
+  public async up(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.connection
       .createQueryBuilder()
       .insert()
       .into(UserEntity)
@@ -18,5 +17,9 @@ export class UserSeed implements Seeder {
         },
       ])
       .execute();
+  }
+
+  public async down(): Promise<void> {
+    //
   }
 }
