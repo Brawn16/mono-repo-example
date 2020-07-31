@@ -50,7 +50,9 @@ export function Login({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {children}
-      {error && <Alert className="mt-8">{error.message}</Alert>}
+      {error && (
+        <Alert className="mt-8 text-white bg-red-600">{error.message}</Alert>
+      )}
       <Input
         autoComplete="email"
         className="mt-8"

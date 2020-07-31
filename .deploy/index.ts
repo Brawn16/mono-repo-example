@@ -1,5 +1,5 @@
 import { App } from "@aws-cdk/core";
-import { BackendStack } from "./backend-stack";
+import { NucleusStack } from "./nucleus-stack";
 
 const app = new App();
-new BackendStack(app, "develop", true);
+new NucleusStack(app, "develop", false);
