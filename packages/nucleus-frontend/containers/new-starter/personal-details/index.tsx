@@ -4,19 +4,29 @@ import {
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineMail } from "react-icons/ai";
 import { FiPhone } from "react-icons/fi";
 import { Anchor } from "../../../components/anchor";
 import { Head } from "../../../components/head";
+import { Context, FormContext } from "../../../contexts/context";
+import { setFormWithLocalStorage } from "../../../helpers/helper";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { NewStarterPersonalDetailsFormData } from "./types";
 
 export function PersonalDetails(): React.ReactElement {
-  const { register, handleSubmit, errors } = useForm<
+  const { register, handleSubmit, errors, setValue } = useForm<
     NewStarterPersonalDetailsFormData
   >();
+  const { setFormData, updateStoreWithFormData } = useContext<
+    FormContext | any
+  >(Context);
+
+  useEffect(() => {
+    setFormWithLocalStorage("personalDetails", setValue);
+    updateStoreWithFormData();
+  }, []);
 
   return (
     <>
@@ -25,7 +35,7 @@ export function PersonalDetails(): React.ReactElement {
         <form
           onSubmit={handleSubmit((data) => {
             /* eslint-disable-next-line no-console */
-            console.log("data", data);
+            setFormData("personalDetails", data);
           })}
         >
           <Fieldset>

@@ -9,6 +9,7 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 import React from "react";
 import { CookiesProvider } from "react-cookie";
+import { ContextProvider } from "../../contexts/context";
 import { Cookies } from "./cookies";
 
 const cookies = new Cookies();
@@ -43,11 +44,13 @@ export function App({ Component, pageProps }: AppProps): React.ReactElement {
   return (
     <CookiesProvider cookies={cookies}>
       <ApolloProvider client={apolloClient}>
-        <Head>
-          <link href="/favicon.ico" rel="icon" />
-          <link href="//rsms.me/inter/inter.css" rel="stylesheet" />
-        </Head>
-        <Component {...pageProps} />
+        <ContextProvider>
+          <Head>
+            <link href="/favicon.ico" rel="icon" />
+            <link href="//rsms.me/inter/inter.css" rel="stylesheet" />
+          </Head>
+          <Component {...pageProps} />
+        </ContextProvider>
       </ApolloProvider>
     </CookiesProvider>
   );
