@@ -4,6 +4,7 @@ import {
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
+import Router from "next/router";
 import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { AiOutlineMail } from "react-icons/ai";
@@ -19,13 +20,10 @@ export function PersonalDetails(): React.ReactElement {
   const { register, handleSubmit, errors, setValue } = useForm<
     NewStarterPersonalDetailsFormData
   >();
-  const { setFormData, updateStoreWithFormData } = useContext<
-    FormContext | any
-  >(Context);
+  const { setFormData } = useContext<FormContext | any>(Context);
 
   useEffect(() => {
     setFormWithLocalStorage("personalDetails", setValue);
-    updateStoreWithFormData();
   }, []);
 
   return (
@@ -34,8 +32,8 @@ export function PersonalDetails(): React.ReactElement {
       <NewStarterLayout>
         <form
           onSubmit={handleSubmit((data) => {
-            /* eslint-disable-next-line no-console */
             setFormData("personalDetails", data);
+            Router.push("/new-starter/address");
           })}
         >
           <Fieldset>
