@@ -12,7 +12,10 @@ import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Head } from "../../../components/head";
 import { FormContext, Context } from "../../../contexts/context";
-import { setFormWithLocalStorage } from "../../../helpers/helper";
+import {
+  setFormWithLocalStorage,
+  initiatePageToLocal,
+} from "../../../helpers/helper";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { NewStarterAddressFormData } from "./types";
 
@@ -31,6 +34,7 @@ export function AddressDetails() {
 
   useEffect(() => {
     setFormWithLocalStorage("addressDetails", setValue);
+    initiatePageToLocal("addressDetails", setFormData);
   }, []);
 
   return (

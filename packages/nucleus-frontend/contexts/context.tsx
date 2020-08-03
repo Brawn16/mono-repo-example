@@ -51,7 +51,7 @@ export const ContextProvider = (props: any) => {
 
     // finds cuurent active page
     const currentStep = filter(steps, (step) => {
-      return step.href === route;
+      return step.href === route && step.href !== "/new-starter";
     });
 
     // finds completed steps
@@ -62,15 +62,16 @@ export const ContextProvider = (props: any) => {
     });
 
     const stepsArray = [
+      {
+        href: "/new-starter",
+        label: "Preparation",
+      },
       ...currentSteps,
-      currentStep[0]
-        ? currentStep[0]
-        : {
-            href: "/new-starter",
-            label: "Preparation",
-          },
     ];
-    // remove duplicates creqated by using the always using current step
+    if (currentStep[0]) {
+      stepsArray.push(currentStep[0]);
+    }
+    // remove duplicates created by using the always using current step
     return stepsArray.filter((v: any, i: any) => stepsArray.indexOf(v) === i);
   };
 

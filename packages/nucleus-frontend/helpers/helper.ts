@@ -12,3 +12,11 @@ export const setFormWithLocalStorage = (name: string, setValue: any) => {
     });
   }
 };
+export const initiatePageToLocal = (
+  name: string,
+  setFormData: (name: string, value: object) => void
+) => {
+  if (!localStorage.getItem(name)) {
+    setFormData(name, {});
+  }
+};

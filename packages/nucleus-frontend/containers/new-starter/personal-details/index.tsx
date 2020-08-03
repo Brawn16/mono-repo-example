@@ -12,7 +12,10 @@ import { FiPhone } from "react-icons/fi";
 import { Anchor } from "../../../components/anchor";
 import { Head } from "../../../components/head";
 import { Context, FormContext } from "../../../contexts/context";
-import { setFormWithLocalStorage } from "../../../helpers/helper";
+import {
+  setFormWithLocalStorage,
+  initiatePageToLocal,
+} from "../../../helpers/helper";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { NewStarterPersonalDetailsFormData } from "./types";
 
@@ -24,6 +27,7 @@ export function PersonalDetails(): React.ReactElement {
 
   useEffect(() => {
     setFormWithLocalStorage("personalDetails", setValue);
+    initiatePageToLocal("personalDetails", setFormData);
   }, []);
 
   return (
