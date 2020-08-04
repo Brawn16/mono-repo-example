@@ -3,13 +3,9 @@ import { Tooltip } from ".";
 
 export default {
   component: Tooltip,
-  title: "Tooltip",
+  title: "Tooltip"
 };
 
 export const tooltip = () => {
-  return (
-    <>
-      <Tooltip message="Tooltip Message" />
-    </>
-  );
+  return <Tooltip message="Tooltip Message" />;
 };
