@@ -6,7 +6,7 @@ export function Fieldset({
   className,
 }: React.PropsWithChildren<FieldsetProps>) {
   return (
-    <fieldset className={`p-8 border border-gray-200 shadow-md ${className}`}>
+    <fieldset className={`p-4 border border-gray-200 shadow-md ${className}`}>
       {children}
     </fieldset>
   );
