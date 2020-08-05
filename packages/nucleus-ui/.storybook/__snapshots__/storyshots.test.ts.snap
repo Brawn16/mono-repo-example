@@ -1,5 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Storyshots Accordion Accordion 1`] = `
+<div>
+  <div
+    className="flex justify-between"
+  >
+    <p
+      className="text-lg text-gray-600"
+    >
+      Items
+    </p>
+    <button
+      className="pt-1 outline-none focus:outline-none"
+      onClick={[Function]}
+      type="button"
+    >
+      <svg
+        className="transform rotate-180"
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+        viewBox="0 0 16 16"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clipRule="evenodd"
+          d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z"
+          fillRule="evenodd"
+        />
+      </svg>
+    </button>
+  </div>
+  <div>
+    <div>
+      item 1
+    </div>
+    <div>
+      item 2
+    </div>
+    <div>
+      item 3
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Address Lookup Address Lookup 1`] = `
 <form
   onSubmit={[Function]}
@@ -530,7 +582,7 @@ exports[`Storyshots Date Picker Min Date 1`] = `
 
 exports[`Storyshots Fieldset Custom Class 1`] = `
 <fieldset
-  className="p-8 border border-gray-200 shadow-md bg-blue-50"
+  className="p-4 border border-gray-200 shadow-md bg-blue-50"
 >
   <div>
     <label
@@ -555,7 +607,7 @@ exports[`Storyshots Fieldset Custom Class 1`] = `
 
 exports[`Storyshots Fieldset Fieldset 1`] = `
 <fieldset
-  className="p-8 border border-gray-200 shadow-md "
+  className="p-4 border border-gray-200 shadow-md "
 >
   <div>
     <label
