@@ -1,52 +1,23 @@
 import { Steps } from "@sdh-project-services/nucleus-ui/dist/steps";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { FormContext, Context } from "../../contexts/context";
 import { DataProvider } from "./context";
-
-const steps = [
-  {
-    href: "/new-starter",
-    label: "Preparation"
-  },
-  {
-    href: "/new-starter/personal-details",
-    label: "Personal Details"
-  },
-  {
-    href: "/new-starter/address",
-    label: "Address"
-  },
-  {
-    href: "/new-starter/work-details",
-    label: "Work Details"
-  },
-  {
-    href: "/new-starter/qualifications",
-    label: "Qualifications"
-  },
-  {
-    href: "/new-starter/identification",
-    label: "Identification"
-  },
-  {
-    href: "/new-starter/medical",
-    label: "Medical"
-  },
-  {
-    href: "/new-starter/summary",
-    label: "Summary"
-  }
-];
 
 export function NewStarter({
   children
 }: React.PropsWithChildren<{}>): React.ReactElement {
   const { route } = useRouter();
   const year = new Date().getFullYear();
-
+  const { stepsCompleted, updateStoreWithFormData } = useContext<
+    FormContext | any
+  >(Context);
+  const steps = stepsCompleted(route);
   // Find step with matching route
-  const { label: active } = steps.find(({ href }) => href === route) || {};
-
+  const { label: active } = steps.find(({ href }: any) => href === route) || {};
+  useEffect(() => {
+    updateStoreWithFormData();
+  }, []);
   return (
     <DataProvider value={{}}>
       <div className="flex flex-col min-h-screen">

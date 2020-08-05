@@ -7,9 +7,15 @@ import {
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
-import React from "react";
+import Router from "next/router";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Head } from "../../../components/head";
+import { FormContext, Context } from "../../../contexts/context";
+import {
+  setFormWithLocalStorage,
+  initiatePageToLocal,
+} from "../../../helpers/helper";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { NewStarterAddressFormData } from "./types";
 
@@ -17,6 +23,7 @@ export function AddressDetails() {
   const { register, handleSubmit, errors, setValue } = useForm<
     NewStarterAddressFormData
   >();
+  const { setFormData } = useContext<FormContext | any>(Context);
 
   const handleAddressSelection = (address: AddressLookupAddress) => {
     const keys = Object.keys(address) as (keyof AddressLookupAddress)[];
@@ -24,6 +31,11 @@ export function AddressDetails() {
       setValue(key, address[key] || "");
     });
   };
+
+  useEffect(() => {
+    setFormWithLocalStorage("addressDetails", setValue);
+    initiatePageToLocal("addressDetails", setFormData);
+  }, []);
 
   return (
     <div>
@@ -45,7 +57,8 @@ export function AddressDetails() {
         <form
           onSubmit={handleSubmit(data => {
             /* eslint-disable-next-line no-console */
-            console.log(data);
+            setFormData("addressDetails", data);
+            Router.push("/new-starter/work-details");
           })}
         >
           <Fieldset>
