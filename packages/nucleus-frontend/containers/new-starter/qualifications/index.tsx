@@ -14,27 +14,24 @@ import {
   initiatePageToLocal,
 } from "../../../helpers/helper";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
-import { NewStarterWorkDetailsFormData } from "./types";
 
-export function WorkDetails(): React.ReactElement {
-  const { register, handleSubmit, setValue, errors } = useForm<
-    NewStarterWorkDetailsFormData
-  >();
+export function Qualifications(): React.ReactElement {
+  const { register, handleSubmit, setValue, errors } = useForm();
 
   const { setFormData } = useContext<FormContext | any>(Context);
 
   useEffect(() => {
-    setFormWithLocalStorage("workDetails", setValue);
-    initiatePageToLocal("workDetails", setFormData);
+    setFormWithLocalStorage("qualifications", setValue);
+    initiatePageToLocal("qualifications", setFormData);
   }, []);
   return (
     <>
-      <Head title="Work Details - New Starter Form" />
+      <Head title="Qualifications - New Starter Form" />
       <NewStarterLayout>
         <form
           onSubmit={handleSubmit((data) => {
-            setFormData("workDetails", data);
-            Router.push("/new-starter/qualifications");
+            setFormData("qualifications", data);
+            Router.push("/new-starter/identification");
           })}
         >
           <Select
@@ -42,8 +39,8 @@ export function WorkDetails(): React.ReactElement {
               required: "Workstream is required",
             })}
             error={errors.workstream}
-            label="Workstream"
-            name="workstream"
+            label="qualification 1"
+            name="qualification1"
             options={[{ label: "city fibre", value: "city fibre" }]}
             required
           />
@@ -53,8 +50,8 @@ export function WorkDetails(): React.ReactElement {
               required: "Subcontractor is required",
             })}
             error={errors.workstream}
-            label="Subcontractor"
-            name="subcontractor"
+            label="qualification 2"
+            name="qualification2"
             options={[{ label: "Terry's Telecom", value: "Terry's Telecom" }]}
             required
           />
