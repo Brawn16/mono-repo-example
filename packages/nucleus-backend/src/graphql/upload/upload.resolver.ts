@@ -1,8 +1,10 @@
 import { env } from "process";
+import { ForbiddenError } from "apollo-server-core";
 import { S3 } from "aws-sdk";
 import { plainToClass } from "class-transformer";
-import { Mutation, Resolver, Arg } from "type-graphql";
+import { Mutation, Query, Resolver, Arg } from "type-graphql";
 import { UploadEntity } from "../../shared/entity/upload.entity";
+import { CreatePresignedUploadUrlDto } from "./create-presigned-upload-url.dto";
 import { CreatePresignedUploadDto } from "./create-presigned-upload.dto";
 import { CreatePresignedUploadInput } from "./create-presigned-upload.input";
 
@@ -12,9 +14,7 @@ export class UploadResolver {
   public async createPresignedUpload(
     @Arg("data") data: CreatePresignedUploadInput
   ): Promise<CreatePresignedUploadDto> {
-    // Create upload record
     const upload = await plainToClass(UploadEntity, data).save();
-
     const s3 = new S3({
       accessKeyId: env.AWS_UPLOAD_ACCESS_KEY,
       endpoint: env.AWS_UPLOAD_ENDPOINT,
@@ -54,5 +54,32 @@ export class UploadResolver {
         });
       })
     );
+  }
+
+  @Query(() => CreatePresignedUploadUrlDto)
+  public async presignedUploadUrl(
+    @Arg("id") id: string
+  ): Promise<CreatePresignedUploadUrlDto> {
+    const { tags = [] } = await UploadEntity.findOneOrFail(id);
+    const s3 = new S3({
+      accessKeyId: env.AWS_UPLOAD_ACCESS_KEY,
+      endpoint: env.AWS_UPLOAD_ENDPOINT,
+      secretAccessKey: env.AWS_UPLOAD_ACCESS_SECRET
+    });
+
+    // If upload does not have a public tag, throw exception. If you
+    // need to view non-public files, create your endpoint with
+    // specific permissions.
+    if (!tags.includes("public")) {
+      throw new ForbiddenError("Upload is not flagged as public.");
+    }
+
+    const presignedUrl = await s3.getSignedUrlPromise("getObject", {
+      Bucket: env.AWS_UPLOAD_BUCKET,
+      Expires: 60,
+      Key: id
+    });
+
+    return { presignedUrl };
   }
 }

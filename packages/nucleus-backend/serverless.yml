@@ -28,4 +28,4 @@ resources:
     uploads:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: uploads
+        BucketName: uploads.localhost

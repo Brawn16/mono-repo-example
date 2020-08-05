@@ -1,3 +1,3 @@
 export interface NewStarterIdentificationFormData {
-  pictureId: string;
+  photoId: string;
 }

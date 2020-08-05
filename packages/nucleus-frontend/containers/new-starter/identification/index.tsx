@@ -31,7 +31,7 @@ export function Identification(): React.ReactElement {
         >
           <Fieldset>
             <Upload
-              error={errors.pictureId}
+              error={errors.photoId}
               label="Upload Passport"
               onChange={handleChange}
               tags={["identification"]}

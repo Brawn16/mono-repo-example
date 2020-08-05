@@ -9,6 +9,7 @@ export interface UploadInProgressProps {
 }
 
 export interface UploadProps extends DropzoneOptions {
+  buttonEntity?: string;
   error?: FieldError;
   label?: string;
   onChange: (fileIds: string[]) => void;
