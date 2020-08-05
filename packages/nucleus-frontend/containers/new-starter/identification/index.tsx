@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button,
+  Button
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Upload } from "@sdh-project-services/nucleus-ui/dist/upload";
 import Router from "next/router";
@@ -11,7 +11,7 @@ import { Head } from "../../../components/head";
 import { FormContext, Context } from "../../../contexts/context";
 import {
   setFormWithLocalStorage,
-  initiatePageToLocal,
+  initiatePageToLocal
 } from "../../../helpers/helper";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { NewStarterIdentificationFormData } from "./types";
@@ -37,14 +37,14 @@ export function Identification(): React.ReactElement {
       <Head title="Identification - New Starter Form" />
       <NewStarterLayout>
         <form
-          onSubmit={handleSubmit((data) => {
+          onSubmit={handleSubmit(data => {
             /* eslint-disable-next-line no-console */
             console.log("data", data);
             Router.push("/new-starter/my-photo");
           })}
         >
           <Upload
-            error={errors.pictureId}
+            error={errors.photoId}
             label="Upload Passport"
             onChange={handleChange}
             tags={["identification"]}

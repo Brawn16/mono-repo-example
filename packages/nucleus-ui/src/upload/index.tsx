@@ -9,10 +9,18 @@ import { UploadProps } from "./types";
 import { Uploaded } from "./uploaded";
 
 export function Upload(props: UploadProps) {
-  const { error, label, multiple, onChange, required, tags } = props;
   const [fileNames, setFileNames] = useState<{ [id: string]: string }>({});
   const [inProgress, setInProgress] = useState<File[]>([]);
   const [uploaded, setUploaded] = useState<string[]>([]);
+  const {
+    buttonEntity = "file",
+    error,
+    label,
+    multiple,
+    onChange,
+    required,
+    tags
+  } = props;
 
   useEffect(() => {
     onChange(uploaded);
@@ -31,11 +39,11 @@ export function Upload(props: UploadProps) {
   // Render button
   let button;
   if (multiple || (inProgress.length === 0 && uploaded.length === 0)) {
-    let buttonLabel = "Choose file";
+    let buttonLabel = `Choose ${buttonEntity}`;
     if (isDragActive) {
       buttonLabel = "Drop here...";
     } else if (multiple) {
-      buttonLabel = "Choose files";
+      buttonLabel = `Choose ${buttonEntity}s`;
     }
 
     button = (
