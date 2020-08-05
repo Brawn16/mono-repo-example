@@ -17,6 +17,7 @@ const formNames = [
   "workDetails",
   "qualifications",
   "identification",
+  "myPhoto",
   "medical",
   "summary",
 ];

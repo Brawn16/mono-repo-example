@@ -1,5 +1,4 @@
 import { PrimaryButton } from "@sdh-project-services/nucleus-ui/dist/button";
-import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import React from "react";
 import { Anchor } from "../../components/anchor";
 import { Head } from "../../components/head";
@@ -10,11 +9,9 @@ export function NewStarter(): React.ReactElement {
     <>
       <Head title="New Starter Form" />
       <NewStarterLayout>
-        <div className="text-center">
-          <h2 className="font-bold uppercase">Before You Start</h2>
-          Please make sure you have the following to hand:
-        </div>
-        <Fieldset className="pl-12 mt-8">
+        <h2 className="font-bold uppercase">Before You Start</h2>
+        Please make sure you have the following to hand:
+        <div className="pl-4 mt-8">
           <ul className="list-disc">
             <li>
               At least one of the following (preferably two):
@@ -34,7 +31,7 @@ export function NewStarter(): React.ReactElement {
             </li>
             <li className="mt-4">Qualification certifcates</li>
           </ul>
-        </Fieldset>
+        </div>
         <div className="mx-8 mt-8 text-right md:mx-0">
           <Anchor href="/new-starter/personal-details">
             <PrimaryButton>Continue</PrimaryButton>

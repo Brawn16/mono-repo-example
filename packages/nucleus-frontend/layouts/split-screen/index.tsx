@@ -2,7 +2,7 @@ import React from "react";
 import { background, logo } from "./index.module.css";
 
 export function SplitScreen({
-  children
+  children,
 }: React.PropsWithChildren<{}>): React.ReactElement {
   const year = new Date().getFullYear();
 

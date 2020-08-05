@@ -23,6 +23,10 @@ export const steps: any = {
     href: "/new-starter/identification",
     label: "Identification",
   },
+  myPhoto: {
+    href: "/new-starter/my-photo",
+    label: "My Photo",
+  },
   medical: {
     href: "/new-starter/medical",
     label: "Medical",

@@ -1,13 +1,30 @@
 import {
   PrimaryButton,
-  Button
+  Button,
 } from "@sdh-project-services/nucleus-ui/dist/button";
-import React from "react";
+import Router from "next/router";
+import React, { useContext, useEffect } from "react";
 import { Anchor } from "../../../components/anchor";
 import { Head } from "../../../components/head";
+import { FormContext, Context } from "../../../contexts/context";
+import {
+  setFormWithLocalStorage,
+  initiatePageToLocal,
+} from "../../../helpers/helper";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 
+const handleClick = () => {
+  Router.push("/new-starter/qualifications");
+};
+
 export function MyPhoto(): React.ReactElement {
+  const { setFormData } = useContext<FormContext | any>(Context);
+
+  useEffect(() => {
+    setFormWithLocalStorage("MyPhoto", () => {});
+    initiatePageToLocal("myPhoto", setFormData);
+  }, []);
+
   return (
     <>
       <Head title="New Starter Form" />
@@ -36,8 +53,8 @@ export function MyPhoto(): React.ReactElement {
 
           <div className="flex justify-between py-2">
             <Button>BACK</Button>
-            <Anchor href="/new-starter/personal-details">
-              <PrimaryButton>Continue</PrimaryButton>
+            <Anchor href="/new-starter/medical">
+              <PrimaryButton onClick={handleClick}>Continue</PrimaryButton>
             </Anchor>
           </div>
         </div>
