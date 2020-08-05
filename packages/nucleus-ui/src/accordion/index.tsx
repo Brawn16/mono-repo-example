@@ -7,7 +7,7 @@ export function Accordion(props: AccordionProps) {
   const [open, setOpen] = useState(isOpen && isOpen);
 
   const handleClick = () => {
-    setOpen(!open);
+    setOpen(open === false);
   };
 
   return (
