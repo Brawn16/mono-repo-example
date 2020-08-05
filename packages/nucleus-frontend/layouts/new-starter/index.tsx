@@ -6,40 +6,40 @@ import { DataProvider } from "./context";
 const steps = [
   {
     href: "/new-starter",
-    label: "Preparation",
+    label: "Preparation"
   },
   {
     href: "/new-starter/personal-details",
-    label: "Personal Details",
+    label: "Personal Details"
   },
   {
     href: "/new-starter/address",
-    label: "Address",
+    label: "Address"
   },
   {
     href: "/new-starter/work-details",
-    label: "Work Details",
+    label: "Work Details"
   },
   {
     href: "/new-starter/qualifications",
-    label: "Qualifications",
+    label: "Qualifications"
   },
   {
     href: "/new-starter/identification",
-    label: "Identification",
+    label: "Identification"
   },
   {
     href: "/new-starter/medical",
-    label: "Medical",
+    label: "Medical"
   },
   {
     href: "/new-starter/summary",
-    label: "Summary",
-  },
+    label: "Summary"
+  }
 ];
 
 export function NewStarter({
-  children,
+  children
 }: React.PropsWithChildren<{}>): React.ReactElement {
   const { route } = useRouter();
   const year = new Date().getFullYear();
@@ -60,6 +60,11 @@ export function NewStarter({
             New Starter Form
           </h1>
           <Steps active={active} steps={steps} />
+          <span>
+            <div className="flex items-center justify-center  w-full h-10 text-white bg-orange-500 text-bold md:hidden">
+              {active?.toUpperCase()}
+            </div>
+          </span>
           <div className="pt-8">{children}</div>
         </main>
         <footer className="p-8 text-xs text-center text-gray-400">
