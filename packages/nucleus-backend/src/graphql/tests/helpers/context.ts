@@ -8,7 +8,7 @@ export function getMockContext(
   } = {}
 ) {
   return {
-    headers,
+    headers
   };
 }
 
@@ -23,8 +23,8 @@ export async function getMockAuthenticatedAppContext(
   return {
     headers: {
       authorization: `Bearer ${token}`,
-      ...headers,
+      ...headers
     },
-    user,
+    user
   };
 }

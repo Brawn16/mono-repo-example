@@ -14,8 +14,8 @@ export class UserSeed implements Seeder {
           email: "admin@localhost.local",
           password: await hash("password"),
           isActive: true,
-          isVerified: true,
-        },
+          isVerified: true
+        }
       ])
       .execute();
   }

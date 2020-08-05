@@ -4,7 +4,7 @@ const autoprefixer = require("autoprefixer");
 
 module.exports = async ({ config }) => {
   config.module.rules.find(
-    (rule) => rule.test.toString() === "/\\.css$/"
+    rule => rule.test.toString() === "/\\.css$/"
   ).exclude = /\.module\.css$/;
 
   config.module.rules.push(
@@ -15,10 +15,10 @@ module.exports = async ({ config }) => {
         {
           loader: "css-loader",
           options: {
-            modules: true,
-          },
-        },
-      ],
+            modules: true
+          }
+        }
+      ]
     },
     {
       test: /\.css$/,
@@ -27,11 +27,11 @@ module.exports = async ({ config }) => {
           loader: "postcss-loader",
           options: {
             ident: "postcss",
-            plugins: [tailwindcss, autoprefixer],
-          },
-        },
+            plugins: [tailwindcss, autoprefixer]
+          }
+        }
       ],
-      include: resolve(__dirname, ".."),
+      include: resolve(__dirname, "..")
     }
   );
   return config;

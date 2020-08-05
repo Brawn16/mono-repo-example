@@ -9,11 +9,11 @@ afterEach(async () => restore());
 
 it("creates a presigned upload", async () => {
   const upload = new UploadEntity();
-  const { save } = stubEntity(stub, UploadEntity, [upload]);
-  const fields = { key: "value" };
+  upload.id = "id";
 
+  const { save } = stubEntity(stub, UploadEntity, [upload]);
   stub(S3.prototype, "createPresignedPost").yields(undefined, {
-    fields,
+    fields: { field: "value" },
     url: "url"
   });
 
@@ -26,11 +26,10 @@ it("creates a presigned upload", async () => {
 
   expect(save.called);
   expect(result).toMatchObject({
-    presignedPostHeaderJson: JSON.stringify(fields),
+    presignedPostJson: JSON.stringify({ field: "value" }),
     presignedPostUrl: "url",
     upload: {
       contentType: "contentType",
-      isUploaded: false,
       name: "name",
       size: 100,
       tags: ["tag"]

@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button,
+  Button
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import { Label } from "@sdh-project-services/nucleus-ui/dist/label";
@@ -33,7 +33,7 @@ export function Medical(): React.ReactElement {
       <Head title="Medical Questionnaire - New Starter Form" />
       <NewStarterLayout>
         <form
-          onSubmit={handleSubmit((data) => {
+          onSubmit={handleSubmit(data => {
             /* eslint-disable-next-line no-console */
             console.log("data", data);
           })}
@@ -66,8 +66,7 @@ export function Medical(): React.ReactElement {
                 componentRef={register(
                   medicalIssues
                     ? {
-                        required:
-                          "Please provide information of medical issues",
+                        required: "Please provide information of medical issues"
                       }
                     : {}
                 )}
@@ -106,7 +105,7 @@ export function Medical(): React.ReactElement {
                   medicationRequired
                     ? {
                         required:
-                          "Please provide information of medication requirements",
+                          "Please provide information of medication requirements"
                       }
                     : {}
                 )}

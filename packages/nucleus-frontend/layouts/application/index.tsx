@@ -4,7 +4,7 @@ import { Login } from "./login";
 import { Nav } from "./nav";
 
 export function Application({
-  children,
+  children
 }: React.PropsWithChildren<{}>): React.ReactElement {
   const year = new Date().getFullYear();
   const [{ token }] = useCookies();

@@ -37,7 +37,7 @@ it("updates a user", async () => {
   const { save } = stubEntity(stub, UserEntity, [user]);
 
   const result = await new UserResolver().updateUser("id", {
-    email: "updated",
+    email: "updated"
   });
   expect(save.called);
   expect(result).toMatchObject({ ...user, email: "updated" });

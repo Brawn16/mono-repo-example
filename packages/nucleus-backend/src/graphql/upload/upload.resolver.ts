@@ -13,10 +13,7 @@ export class UploadResolver {
     @Arg("data") data: CreatePresignedUploadInput
   ): Promise<CreatePresignedUploadDto> {
     // Create upload record
-    const upload = await plainToClass(UploadEntity, {
-      ...data,
-      isUploaded: false
-    }).save();
+    const upload = await plainToClass(UploadEntity, data).save();
 
     const s3 = new S3({
       accessKeyId: env.AWS_UPLOAD_ACCESS_KEY,
