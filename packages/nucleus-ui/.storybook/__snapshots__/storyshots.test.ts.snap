@@ -1071,7 +1071,7 @@ exports[`Storyshots Steps Disabled Steps 1`] = `
   className="flex flex-wrap -mt-2 text-lg text-gray-600 uppercase"
 >
   <a
-    className="mt-2"
+    className="hidden mt-2 md:block"
     data-testid="step-link"
     onClick={[Function]}
   >
@@ -1096,7 +1096,7 @@ exports[`Storyshots Steps Steps 1`] = `
   className="flex flex-wrap -mt-2 text-lg text-gray-600 uppercase"
 >
   <a
-    className="mt-2"
+    className="hidden mt-2 md:block"
     data-testid="step-link"
     onClick={[Function]}
   >
@@ -1114,7 +1114,7 @@ exports[`Storyshots Steps Steps 1`] = `
     </div>
   </a>
   <a
-    className="mt-2"
+    className="hidden mt-2 md:block"
     data-testid="step-link"
     onClick={[Function]}
   >
@@ -1135,7 +1135,7 @@ exports[`Storyshots Steps Steps 1`] = `
     </div>
   </a>
   <a
-    className="mt-2"
+    className="hidden mt-2 md:block"
     data-testid="step-link"
     onClick={[Function]}
   >

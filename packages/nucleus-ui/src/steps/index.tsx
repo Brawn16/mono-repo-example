@@ -37,7 +37,7 @@ export function Steps(props: StepProps) {
     return (
       <a
         key={href || index}
-        className="mt-2"
+        className="hidden mt-2 md:block"
         data-testid="step-link"
         href={href}
         onClick={handleClick}

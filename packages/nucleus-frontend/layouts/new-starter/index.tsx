@@ -60,6 +60,11 @@ export function NewStarter({
             New Starter Form
           </h1>
           <Steps active={active} steps={steps} />
+          <span>
+            <div className="flex items-center justify-center  w-full h-10 text-white bg-orange-500 text-bold md:hidden">
+              {active?.toUpperCase()}
+            </div>
+          </span>
           <div className="pt-8">{children}</div>
         </main>
         <footer className="p-8 text-xs text-center text-gray-400">
