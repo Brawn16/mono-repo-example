@@ -3,7 +3,7 @@ import {
   CreateDateColumn,
   PrimaryGeneratedColumn,
   BaseEntity as TypeORMBaseEntity,
-  UpdateDateColumn,
+  UpdateDateColumn
 } from "typeorm";
 
 @ObjectType({ isAbstract: true })

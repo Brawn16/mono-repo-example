@@ -6,7 +6,7 @@ import {
   SaveOptions,
   RemoveOptions,
   ObjectID,
-  DeleteResult,
+  DeleteResult
 } from "typeorm";
 
 export interface StubEntityResult {
@@ -55,6 +55,6 @@ export function stubEntity(
     find,
     findOne,
     findOneOrFail,
-    save,
+    save
   };
 }

@@ -2,7 +2,7 @@ import UniversalCookie, {
   Cookie,
   CookieChangeOptions,
   CookieParseOptions,
-  CookieSetOptions,
+  CookieSetOptions
 } from "universal-cookie";
 
 export class Cookies extends UniversalCookie {

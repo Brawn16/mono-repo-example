@@ -1,9 +1,14 @@
 service: nucleus-backend
 plugins:
   - serverless-offline
+  - serverless-s3-local
 
 provider:
   name: aws
+
+custom:
+  s3:
+    cors: cors.xml
 
 functions:
   graphql:
@@ -17,3 +22,10 @@ functions:
           method: post
           path: graphql
     handler: dist/graphql/index.graphqlHandler
+
+resources:
+  Resources:
+    uploads:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: uploads
