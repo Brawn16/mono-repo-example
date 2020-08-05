@@ -3,7 +3,7 @@ import { Accordion } from ".";
 
 export default {
   component: Accordion,
-  title: "Accordion",
+  title: "Accordion"
 };
 
 export const accordion = () => {
