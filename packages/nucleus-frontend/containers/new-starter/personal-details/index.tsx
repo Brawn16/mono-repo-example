@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button,
+  Button
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
@@ -45,7 +45,7 @@ export function PersonalDetails(): React.ReactElement {
               <Input
                 className="md:pr-2 md:w-1/2"
                 componentRef={register({
-                  required: "First name is required",
+                  required: "First name is required"
                 })}
                 error={errors.firstName}
                 label="First Name"
@@ -55,7 +55,7 @@ export function PersonalDetails(): React.ReactElement {
               <Input
                 className="md:pl-2 md:w-1/2"
                 componentRef={register({
-                  required: "Last name is required",
+                  required: "Last name is required"
                 })}
                 error={errors.lastName}
                 label="Last Name"
@@ -68,7 +68,7 @@ export function PersonalDetails(): React.ReactElement {
               <Input
                 className="md:pr-2 md:w-1/2"
                 componentRef={register({
-                  required: "Phone number is required",
+                  required: "Phone number is required"
                 })}
                 error={errors.phoneNumber}
                 iconType={FiPhone}
@@ -84,9 +84,9 @@ export function PersonalDetails(): React.ReactElement {
                 componentRef={register({
                   pattern: {
                     message: "Invalid email address.",
-                    value: /^[\w%+.-]+@[\d.a-z-]+\.[a-z]{2,5}$/i,
+                    value: /^[\w%+.-]+@[\d.a-z-]+\.[a-z]{2,5}$/i
                   },
-                  required: "Email is required",
+                  required: "Email is required"
                 })}
                 error={errors.email}
                 iconType={AiOutlineMail}
@@ -102,7 +102,7 @@ export function PersonalDetails(): React.ReactElement {
               <Input
                 className="md:pr-2 md:w-1/2"
                 componentRef={register({
-                  required: "Emergency contact name is required",
+                  required: "Emergency contact name is required"
                 })}
                 error={errors.emergencyContactName}
                 label="Emergency Contact Name"
@@ -112,7 +112,7 @@ export function PersonalDetails(): React.ReactElement {
               <Input
                 className="md:pl-2 md:w-1/2"
                 componentRef={register({
-                  required: "Emergency contact number is required",
+                  required: "Emergency contact number is required"
                 })}
                 error={errors.emergencyContactNumber}
                 iconType={FiPhone}

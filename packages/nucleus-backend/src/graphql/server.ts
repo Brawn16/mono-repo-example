@@ -6,7 +6,7 @@ import { getSchema } from "./core/schema";
 
 const config: Config = {
   context,
-  schema: getSchema(),
+  schema: getSchema()
 };
 
 // If playground is enabled, update config and enable tracing
@@ -18,8 +18,8 @@ if (env.APOLLO_PLAYGROUND_ENABLED === "true") {
     // Disable polling by default so we don't flood the
     // console with requests with running locally
     settings: {
-      "schema.polling.enable": false,
-    } as Partial<ISettings>,
+      "schema.polling.enable": false
+    } as Partial<ISettings>
   };
 }
 

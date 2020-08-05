@@ -3,7 +3,7 @@ import {
   leftArrow,
   leftArrowActive,
   rightArrow,
-  rightArrowActive,
+  rightArrowActive
 } from "./index.module.css";
 import { StepProps, Step } from "./types";
 
@@ -35,7 +35,13 @@ export function Steps(props: StepProps) {
     }
 
     return (
-      <a key={href || index} className="mt-2" href={href} onClick={handleClick}>
+      <a
+        key={href || index}
+        className="hidden mt-2 md:block"
+        data-testid="step-link"
+        href={href}
+        onClick={handleClick}
+      >
         <div className="flex">
           {index !== 0 && <div className={leftArrowClassName} />}
           <div

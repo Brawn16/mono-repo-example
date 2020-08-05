@@ -3,7 +3,7 @@ import {
   ApolloClient,
   ApolloLink,
   InMemoryCache,
-  HttpLink,
+  HttpLink
 } from "@apollo/client";
 import { AppProps } from "next/app";
 import Head from "next/head";
@@ -22,8 +22,8 @@ export const authLink = new ApolloLink((operation, forward) => {
       ...context,
       headers: {
         ...context.headers,
-        authorization: `Bearer ${token}`,
-      },
+        authorization: `Bearer ${token}`
+      }
     }));
   }
 
@@ -31,13 +31,13 @@ export const authLink = new ApolloLink((operation, forward) => {
 });
 
 export const httpLink = new HttpLink({
-  uri: process.env.NEXT_PUBLIC_APOLLO_URI,
+  uri: process.env.NEXT_PUBLIC_APOLLO_URI
 });
 
 const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
   link: ApolloLink.from([authLink, httpLink]),
-  ssrMode: true,
+  ssrMode: true
 });
 
 export function App({ Component, pageProps }: AppProps): React.ReactElement {

@@ -1,5 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Storyshots Accordion Accordion 1`] = `
+<div>
+  <div
+    className="flex justify-between"
+  >
+    <p
+      className="text-lg text-gray-600"
+    >
+      Items
+    </p>
+    <button
+      className="pt-1 outline-none focus:outline-none"
+      onClick={[Function]}
+      type="button"
+    >
+      <svg
+        className="transform rotate-180"
+        fill="currentColor"
+        height="1em"
+        stroke="currentColor"
+        strokeWidth="0"
+        style={
+          Object {
+            "color": undefined,
+          }
+        }
+        viewBox="0 0 16 16"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clipRule="evenodd"
+          d="M1.646 4.646a.5.5 0 01.708 0L8 10.293l5.646-5.647a.5.5 0 01.708.708l-6 6a.5.5 0 01-.708 0l-6-6a.5.5 0 010-.708z"
+          fillRule="evenodd"
+        />
+      </svg>
+    </button>
+  </div>
+  <div>
+    <div>
+      item 1
+    </div>
+    <div>
+      item 2
+    </div>
+    <div>
+      item 3
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Storyshots Address Lookup Address Lookup 1`] = `
 <form
   onSubmit={[Function]}
@@ -9,7 +61,7 @@ exports[`Storyshots Address Lookup Address Lookup 1`] = `
   >
     <label
       className="block mb-1 text-gray-600"
-      htmlFor="addressLookup"
+      htmlFor="addressLookupPostcode"
     >
       Postcode
     </label>
@@ -30,7 +82,7 @@ exports[`Storyshots Address Lookup Address Lookup 1`] = `
         </div>
       </div>
       <button
-        className="text-white bg-blue-600 hover:bg-blue-700 active:bg-red-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
+        className="text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
         type="submit"
       >
         <span
@@ -167,7 +219,7 @@ exports[`Storyshots Button Button With Icon 1`] = `
   className="flex space-x-2"
 >
   <button
-    className="text-white bg-blue-600 hover:bg-blue-700 active:bg-red-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
+    className="text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
     onClick={[Function]}
     type="submit"
   >
@@ -197,7 +249,7 @@ exports[`Storyshots Button Button With Icon 1`] = `
     </span>
   </button>
   <button
-    className="text-white bg-blue-600 hover:bg-blue-700 active:bg-red-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
+    className="text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
     onClick={[Function]}
     type="submit"
   >
@@ -227,7 +279,7 @@ exports[`Storyshots Button Button With Icon 1`] = `
     </span>
   </button>
   <button
-    className="text-white bg-blue-600 hover:bg-blue-700 active:bg-red-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition cursor-not-allowed"
+    className="text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition cursor-not-allowed"
     onClick={[Function]}
     type="submit"
   >
@@ -285,7 +337,7 @@ exports[`Storyshots Button Primary Button 1`] = `
   className="space-x-2"
 >
   <button
-    className="text-white bg-blue-600 hover:bg-blue-700 active:bg-red-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
+    className="text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
     onClick={[Function]}
     type="submit"
   >
@@ -296,7 +348,7 @@ exports[`Storyshots Button Primary Button 1`] = `
     </span>
   </button>
   <button
-    className="text-white bg-blue-600 hover:bg-blue-700 active:bg-red-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition opacity-50 cursor-not-allowed"
+    className="text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition opacity-50 cursor-not-allowed"
     disabled={true}
     onClick={[Function]}
     type="submit"
@@ -393,6 +445,7 @@ exports[`Storyshots Date Picker Date Picker 1`] = `
     >
       <input
         className="block w-full form-input rounded-none text-gray-900 focus:shadow-none focus:border-blue-500   pr-10"
+        data-testid="date-picker-input"
         id="date-picker"
         label="Date Picker"
         name="date-picker"
@@ -441,6 +494,7 @@ exports[`Storyshots Date Picker Max Date 1`] = `
     >
       <input
         className="block w-full form-input rounded-none text-gray-900 focus:shadow-none focus:border-blue-500   pr-10"
+        data-testid="date-picker-input"
         id="date-picker"
         label="Date Picker"
         max="2099-01-01"
@@ -490,6 +544,7 @@ exports[`Storyshots Date Picker Min Date 1`] = `
     >
       <input
         className="block w-full form-input rounded-none text-gray-900 focus:shadow-none focus:border-blue-500   pr-10"
+        data-testid="date-picker-input"
         id="date-picker"
         label="Date Picker"
         min="2000-01-01"
@@ -527,7 +582,7 @@ exports[`Storyshots Date Picker Min Date 1`] = `
 
 exports[`Storyshots Fieldset Custom Class 1`] = `
 <fieldset
-  className="p-8 border border-gray-200 shadow-md bg-blue-50"
+  className="p-4 border border-gray-200 shadow-md bg-blue-50"
 >
   <div>
     <label
@@ -552,7 +607,7 @@ exports[`Storyshots Fieldset Custom Class 1`] = `
 
 exports[`Storyshots Fieldset Fieldset 1`] = `
 <fieldset
-  className="p-8 border border-gray-200 shadow-md undefined"
+  className="p-4 border border-gray-200 shadow-md "
 >
   <div>
     <label
@@ -588,7 +643,7 @@ exports[`Storyshots Form Form 1`] = `
         className="block mb-1 text-gray-600"
         htmlFor="firstName"
       >
-        FirstName
+        Firstname
       </label>
       <div
         className="relative"
@@ -596,7 +651,7 @@ exports[`Storyshots Form Form 1`] = `
         <input
           className="block w-full form-input rounded-none text-gray-900 focus:shadow-none focus:border-blue-500  "
           id="firstName"
-          label="FirstName"
+          label="Firstname"
           name="firstName"
         />
       </div>
@@ -625,7 +680,7 @@ exports[`Storyshots Form Form 1`] = `
       className="mt-8"
     >
       <button
-        className="text-white bg-blue-600 hover:bg-blue-700 active:bg-red-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
+        className="text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
         type="submit"
       >
         <span
@@ -1016,7 +1071,8 @@ exports[`Storyshots Steps Disabled Steps 1`] = `
   className="flex flex-wrap -mt-2 text-lg text-gray-600 uppercase"
 >
   <a
-    className="mt-2"
+    className="hidden mt-2 md:block"
+    data-testid="step-link"
     onClick={[Function]}
   >
     <div
@@ -1040,7 +1096,8 @@ exports[`Storyshots Steps Steps 1`] = `
   className="flex flex-wrap -mt-2 text-lg text-gray-600 uppercase"
 >
   <a
-    className="mt-2"
+    className="hidden mt-2 md:block"
+    data-testid="step-link"
     onClick={[Function]}
   >
     <div
@@ -1057,7 +1114,8 @@ exports[`Storyshots Steps Steps 1`] = `
     </div>
   </a>
   <a
-    className="mt-2"
+    className="hidden mt-2 md:block"
+    data-testid="step-link"
     onClick={[Function]}
   >
     <div
@@ -1077,7 +1135,8 @@ exports[`Storyshots Steps Steps 1`] = `
     </div>
   </a>
   <a
-    className="mt-2"
+    className="hidden mt-2 md:block"
+    data-testid="step-link"
     onClick={[Function]}
   >
     <div
@@ -1218,4 +1277,65 @@ exports[`Storyshots Tooltip Tooltip 1`] = `
     />
   </svg>
 </div>
+`;
+
+exports[`Storyshots Upload Upload 1`] = `
+Array [
+  <input
+    autoComplete="off"
+    multiple={false}
+    onChange={[Function]}
+    onClick={[Function]}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+    tabIndex={-1}
+    type="file"
+  />,
+  <div
+    onBlur={[Function]}
+    onClick={[Function]}
+    onDragEnter={[Function]}
+    onDragLeave={[Function]}
+    onDragOver={[Function]}
+    onDrop={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    tabIndex={0}
+  >
+    <button
+      className="w-48 mt-2 text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
+      type="button"
+    >
+      <span
+        className="uppercase relative flex items-center justify-center"
+      >
+        <span>
+          <svg
+            className="w-8 h-8 mx-auto mb-1 opacity-75"
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            strokeWidth="0"
+            style={
+              Object {
+                "color": undefined,
+              }
+            }
+            viewBox="0 0 640 512"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M537.6 226.6c4.1-10.7 6.4-22.4 6.4-34.6 0-53-43-96-96-96-19.7 0-38.1 6-53.3 16.2C367 64.2 315.3 32 256 32c-88.4 0-160 71.6-160 160 0 2.7.1 5.4.2 8.1C40.2 219.8 0 273.2 0 336c0 79.5 64.5 144 144 144h368c70.7 0 128-57.3 128-128 0-61.9-44-113.6-102.4-125.4zM393.4 288H328v112c0 8.8-7.2 16-16 16h-48c-8.8 0-16-7.2-16-16V288h-65.4c-14.3 0-21.4-17.2-11.3-27.3l105.4-105.4c6.2-6.2 16.4-6.2 22.6 0l105.4 105.4c10.1 10.1 2.9 27.3-11.3 27.3z"
+            />
+          </svg>
+          Choose file
+        </span>
+      </span>
+    </button>
+  </div>,
+]
 `;

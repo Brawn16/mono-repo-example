@@ -1,7 +1,7 @@
 import React from "react";
 
 export function CenterPage({
-  children,
+  children
 }: React.PropsWithChildren<{}>): React.ReactElement {
   const year = new Date().getFullYear();
 
