@@ -1,7 +1,5 @@
-import { ReactNode } from "react";
-
 export interface AccordionProps {
-  title: string;
-  children?: ReactNode;
+  headerChildren?: React.ReactNode;
   isOpen?: boolean;
+  title: string;
 }
