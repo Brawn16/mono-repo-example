@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button,
+  Button
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Select } from "@sdh-project-services/nucleus-ui/dist/select";
 import Router from "next/router";
@@ -11,7 +11,7 @@ import { Head } from "../../../components/head";
 import { FormContext, Context } from "../../../contexts/context";
 import {
   setFormWithLocalStorage,
-  initiatePageToLocal,
+  initiatePageToLocal
 } from "../../../helpers/helper";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { NewStarterWorkDetailsFormData } from "./types";
@@ -32,27 +32,27 @@ export function WorkDetails(): React.ReactElement {
       <Head title="Work Details - New Starter Form" />
       <NewStarterLayout>
         <form
-          onSubmit={handleSubmit((data) => {
+          onSubmit={handleSubmit(data => {
             setFormData("workDetails", data);
             Router.push("/new-starter/qualifications");
           })}
         >
           <Select
             componentRef={register({
-              required: "Workstream is required",
+              required: "Workstream is required"
             })}
             error={errors.workstream}
             label="Workstream"
             name="workstream"
-            options={[{ label: "city fibre", value: "city fibre" }]}
+            options={[{ label: "City Fibre", value: "City Fibre" }]}
             required
           />
           <Select
             className="mt-4"
             componentRef={register({
-              required: "Subcontractor is required",
+              required: "Subcontractor is required"
             })}
-            error={errors.workstream}
+            error={errors.subcontractor}
             label="Subcontractor"
             name="subcontractor"
             options={[{ label: "Terry's Telecom", value: "Terry's Telecom" }]}
