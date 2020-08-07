@@ -23,9 +23,9 @@ export function NewStarter({
     <DataProvider value={{}}>
       <div className="flex min-h-screen bg-white">
         <div className="flex w-full max-w-4xl">
-          <div className="flex flex-col w-full max-w-3xl p-8 mx-auto justify-between">
+          <div className="flex flex-col justify-between w-full max-w-3xl p-8 mx-auto">
             <div>
-              <h1 className="text-2xl font-extrabold text-gray-900 md:text-3xl mb-8">
+              <h1 className="mb-8 text-2xl font-extrabold text-gray-900 md:text-3xl">
                 <span className="md:hidden">New starter</span>
                 <span className="hidden md:inline">Register new starter</span>
               </h1>
