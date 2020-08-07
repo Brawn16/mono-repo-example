@@ -46,7 +46,7 @@ export function Medical(): React.ReactElement {
       <NewStarterLayout>
         <form
           onSubmit={handleSubmit(data => {
-            setFormData("personalDetails", data);
+            setFormData("medical", data);
             Router.push("/new-starter/summary");
           })}
         >
