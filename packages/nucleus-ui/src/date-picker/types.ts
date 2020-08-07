@@ -6,7 +6,7 @@ export interface DatePickerProps {
   componentRef?: Ref<HTMLInputElement>;
   disabled?: boolean;
   error?: FieldError;
-  label: string;
+  label?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   max?: Date;
   min?: Date;

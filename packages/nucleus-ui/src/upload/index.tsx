@@ -19,7 +19,7 @@ export function Upload(props: UploadProps) {
     multiple,
     onChange,
     required,
-    tags
+    tags,
   } = props;
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export function Upload(props: UploadProps) {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     multiple: false,
     onDrop,
-    ...props
+    ...props,
   });
 
   // Render button
@@ -62,11 +62,11 @@ export function Upload(props: UploadProps) {
   }
 
   // Render in progress files
-  const inProgressFiles = inProgress.map(file => {
+  const inProgressFiles = inProgress.map((file) => {
     const handleDelete = () => {
-      setInProgress(inProgressState => {
+      setInProgress((inProgressState) => {
         const index = inProgressState.findIndex(
-          inProgressFile => inProgressFile === file
+          (inProgressFile) => inProgressFile === file
         );
 
         const updated = [...inProgressState];
@@ -76,8 +76,8 @@ export function Upload(props: UploadProps) {
     };
 
     const handleComplete = (id: string, fileName: string) => {
-      setFileNames(fileNamesState => ({ ...fileNamesState, [id]: fileName }));
-      setUploaded(uploadedState => [...uploadedState, id]);
+      setFileNames((fileNamesState) => ({ ...fileNamesState, [id]: fileName }));
+      setUploaded((uploadedState) => [...uploadedState, id]);
       handleDelete();
     };
 
