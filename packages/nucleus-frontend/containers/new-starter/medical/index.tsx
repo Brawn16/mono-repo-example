@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button,
+  Button
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Label } from "@sdh-project-services/nucleus-ui/dist/label";
 import { RadioButton } from "@sdh-project-services/nucleus-ui/dist/radio-button";
@@ -13,7 +13,7 @@ import { Head } from "../../../components/head";
 import { FormContext, Context } from "../../../contexts/context";
 import {
   setFormWithLocalStorage,
-  initiatePageToLocal,
+  initiatePageToLocal
 } from "../../../helpers/helper";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { NewStarterMedicalFormData } from "./types";
@@ -45,7 +45,7 @@ export function Medical(): React.ReactElement {
       <Head title="Medical Questionnaire - New Starter Form" />
       <NewStarterLayout>
         <form
-          onSubmit={handleSubmit((data) => {
+          onSubmit={handleSubmit(data => {
             setFormData("personalDetails", data);
             Router.push("/new-starter/summary");
           })}
@@ -77,7 +77,7 @@ export function Medical(): React.ReactElement {
               componentRef={register(
                 medicalIssues
                   ? {
-                      required: "Please provide information of medical issues",
+                      required: "Please provide information of medical issues"
                     }
                   : {}
               )}
@@ -116,7 +116,7 @@ export function Medical(): React.ReactElement {
                 medicationRequired
                   ? {
                       required:
-                        "Please provide information of medication requirements",
+                        "Please provide information of medication requirements"
                     }
                   : {}
               )}
@@ -126,7 +126,7 @@ export function Medical(): React.ReactElement {
             />
           )}
           <div className="flex justify-between mx-8 mt-8 md:mx-0">
-            <Anchor href="/new-starter/identification">
+            <Anchor href="/new-starter/my-photo">
               <Button>Back</Button>
             </Anchor>
             <PrimaryButton>Continue</PrimaryButton>

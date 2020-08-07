@@ -3,17 +3,18 @@ import { AddressLookup } from "@sdh-project-services/nucleus-ui/dist/address-loo
 import { AddressLookupAddress } from "@sdh-project-services/nucleus-ui/dist/address-lookup/types";
 import {
   PrimaryButton,
-  Button,
+  Button
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
 import Router from "next/router";
 import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { Anchor } from "../../../components/anchor";
 import { Head } from "../../../components/head";
 import { FormContext, Context } from "../../../contexts/context";
 import {
   setFormWithLocalStorage,
-  initiatePageToLocal,
+  initiatePageToLocal
 } from "../../../helpers/helper";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { NewStarterAddressFormData } from "./types";
@@ -54,7 +55,7 @@ export function AddressDetails() {
           </div>
         </div>
         <form
-          onSubmit={handleSubmit((data) => {
+          onSubmit={handleSubmit(data => {
             /* eslint-disable-next-line no-console */
             setFormData("addressDetails", data);
             Router.push("/new-starter/work-details");
@@ -64,7 +65,7 @@ export function AddressDetails() {
             <Input
               className="md:pr-4 md:w-1/2"
               componentRef={register({
-                required: "Address line 1 is required",
+                required: "Address line 1 is required"
               })}
               error={errors.line1}
               label="Address Line 1"
@@ -102,7 +103,7 @@ export function AddressDetails() {
             <Input
               className="mt-4 md:pl-4 md:w-1/2"
               componentRef={register({
-                required: "Postcode is required",
+                required: "Postcode is required"
               })}
               error={errors.postcode}
               label="Postcode"
@@ -111,7 +112,9 @@ export function AddressDetails() {
             />
           </div>
           <div className="flex justify-between mx-8 mt-8 md:mx-0">
-            <Button>Back</Button>
+            <Anchor href="/new-starter/personal-details">
+              <Button>Back</Button>
+            </Anchor>
             <PrimaryButton>Continue</PrimaryButton>
           </div>
         </form>

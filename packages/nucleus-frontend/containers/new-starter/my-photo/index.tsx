@@ -4,18 +4,30 @@ import {
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Upload } from "@sdh-project-services/nucleus-ui/dist/upload";
 import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewer";
-import React, { useState } from "react";
+import Router from "next/router";
+import React, { useState, useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Anchor } from "../../../components/anchor";
 import { Head } from "../../../components/head";
+import { Context } from "../../../contexts/context";
+import {
+  setFormWithLocalStorage,
+  initiatePageToLocal
+} from "../../../helpers/helper";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { NewStarterMyPhotoFormData } from "./types";
 
 export function MyPhoto(): React.ReactElement {
-  const { errors, handleSubmit, setValue } = useForm<
+  const { errors, getValues, handleSubmit, setValue } = useForm<
     NewStarterMyPhotoFormData
   >();
   const [photoId, setPhotoId] = useState<string>();
+  const { setFormData } = useContext<any>(Context);
+
+  useEffect(() => {
+    setFormWithLocalStorage("myPhoto", setValue);
+    initiatePageToLocal("myPhoto", setFormData);
+  }, []);
 
   const handleChange = ([id]: string[]) => {
     setValue("photoId", id);
@@ -27,9 +39,11 @@ export function MyPhoto(): React.ReactElement {
       <Head title="New Starter Form" />
       <NewStarterLayout>
         <form
-          onSubmit={handleSubmit(data => {
+          onSubmit={handleSubmit((data: any) => {
             /* eslint-disable-next-line no-console */
-            console.log("data", data);
+            const values = getValues();
+            console.log(values, data);
+            Router.push("/new-starter/medical");
           })}
         >
           <div>To create your worker profile we will need your photo:</div>
