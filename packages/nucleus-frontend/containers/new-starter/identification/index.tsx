@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button,
+  Button
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Upload } from "@sdh-project-services/nucleus-ui/dist/upload";
 import Router from "next/router";
@@ -11,7 +11,7 @@ import { Head } from "../../../components/head";
 import { FormContext, Context } from "../../../contexts/context";
 import {
   setFormWithLocalStorage,
-  initiatePageToLocal,
+  initiatePageToLocal
 } from "../../../helpers/helper";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { NewStarterIdentificationFormData } from "./types";
@@ -120,7 +120,7 @@ export function Identification(): React.ReactElement {
           </div>
 
           <div className="flex justify-between mx-8 mt-8 md:mx-0">
-            <Anchor href="/new-starter/address">
+            <Anchor href="/new-starter/qualifications">
               <Button>Back</Button>
             </Anchor>
             <PrimaryButton>Continue</PrimaryButton>
