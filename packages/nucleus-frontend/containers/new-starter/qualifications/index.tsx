@@ -1,19 +1,19 @@
 import {
   PrimaryButton,
-  Button,
+  Button
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Label } from "@sdh-project-services/nucleus-ui/dist/label";
 import { Select } from "@sdh-project-services/nucleus-ui/dist/select";
 import Router from "next/router";
 import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { FaAd, FaPlus } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 import { Anchor } from "../../../components/anchor";
 import { Head } from "../../../components/head";
 import { Context } from "../../../contexts/context";
 import {
   setFormWithLocalStorage,
-  initiatePageToLocal,
+  initiatePageToLocal
 } from "../../../helpers/helper";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { Qualification } from "./qualification";
