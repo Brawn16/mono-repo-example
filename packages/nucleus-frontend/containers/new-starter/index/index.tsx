@@ -1,8 +1,7 @@
-import { PrimaryButton } from "@sdh-project-services/nucleus-ui/dist/button";
 import React from "react";
-import { Anchor } from "../../components/anchor";
-import { Head } from "../../components/head";
-import { NewStarter as NewStarterLayout } from "../../layouts/new-starter";
+import { Head } from "../../../components/head";
+import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
+import { Form } from "./form";
 
 export function NewStarter(): React.ReactElement {
   return (
@@ -33,9 +32,7 @@ export function NewStarter(): React.ReactElement {
           </ul>
         </div>
         <div className="mx-8 mt-8 text-right md:mx-0">
-          <Anchor href="/new-starter/personal-details">
-            <PrimaryButton>Continue</PrimaryButton>
-          </Anchor>
+          <Form />
         </div>
       </NewStarterLayout>
     </>

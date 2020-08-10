@@ -56,7 +56,7 @@ export function Login({
         className="mt-8"
         componentRef={register({
           pattern: {
-            message: "Invalid email address.",
+            message: "Invalid email address",
             value: /^[\w%+.-]+@[\d.a-z-]+\.[a-z]{2,5}$/i
           },
           required: "Email is required"

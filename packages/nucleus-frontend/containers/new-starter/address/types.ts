@@ -1,3 +1,7 @@
-import { AddressLookupAddress } from "@sdh-project-services/nucleus-ui/dist/address-lookup/types";
-
-export interface NewStarterAddressFormData extends AddressLookupAddress {}
+export interface NewStarterAddressFormData {
+  line1: string;
+  line2?: string;
+  line3?: string;
+  townCity?: string;
+  postcode: string;
+}
