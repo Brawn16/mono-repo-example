@@ -5,7 +5,7 @@ import {
 import { Upload } from "@sdh-project-services/nucleus-ui/dist/upload";
 import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewer";
 import Router from "next/router";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Anchor } from "../../../components/anchor";
 import { Head } from "../../../components/head";
@@ -18,20 +18,27 @@ import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { NewStarterMyPhotoFormData } from "./types";
 
 export function MyPhoto(): React.ReactElement {
-  const { errors, getValues, handleSubmit, setValue } = useForm<
-    NewStarterMyPhotoFormData
-  >();
-  const [photoId, setPhotoId] = useState<string>();
+  const {
+    errors,
+    getValues,
+    handleSubmit,
+    register,
+    setValue,
+    watch
+  } = useForm<NewStarterMyPhotoFormData>();
   const { setFormData } = useContext<any>(Context);
+  const watchPhotoId = watch("photoId");
+  const { photoId } = getValues();
 
   useEffect(() => {
     setFormWithLocalStorage("myPhoto", setValue);
     initiatePageToLocal("myPhoto", setFormData);
+
+    register({ name: "photoId" }, { required: "Photo is required" });
   }, []);
 
   const handleChange = ([id]: string[]) => {
     setValue("photoId", id);
-    setPhotoId(id);
   };
 
   return (
@@ -75,7 +82,7 @@ export function MyPhoto(): React.ReactElement {
               onChange={handleChange}
               tags={["profile-pic", "public"]}
             />
-            {photoId && (
+            {watchPhotoId && (
               <UploadViewer id={photoId}>
                 {({ url }) => (
                   <img alt="Profile" className="block max-w-xs" src={url} />
