@@ -50,9 +50,7 @@ The frontend package provides the API backend for the Nucleus app, using Apollo 
 The following commands are available:
 
 - `build` - Creates a production-ready static bundle
-- `build-schema` - Build database schema
 - `dev` - Runs local development environment _(see setup instructions below)_
-- `seed` - Seed database with dummy data
 - `test` - Run test suite
 
 #### Setup Development Environment
@@ -64,10 +62,6 @@ The following commands are available:
    - Username: `nucleus`
    - Password: `nucleus`
    - Database: `nucleus`
-
-3. Run `build-schema` command. This will populate the database with all the required tables.
-
-4. Run `seed` command. This will populate the database with dummy data.
 
 You can then run the `dev` command to start the API environment.
 
