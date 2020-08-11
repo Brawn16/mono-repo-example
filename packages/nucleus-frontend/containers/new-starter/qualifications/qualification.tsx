@@ -6,6 +6,7 @@ import React from "react";
 import { FaTrash } from "react-icons/fa";
 
 const handleChange = ([id]: string[]) => {
+  /* eslint-disable-next-line no-console */
   console.log(id);
 };
 
