@@ -21,7 +21,7 @@ export function Select(props: SelectProps) {
     name,
     options,
     placeholder = "Select an option...",
-    required
+    required,
   } = props;
 
   // Build error classes
@@ -49,7 +49,7 @@ export function Select(props: SelectProps) {
           className={`block w-full form-input rounded-none text-gray-900 focus:shadow-none focus:border-blue-500 ${errorClassName}`}
           id={name}
         >
-          <option disabled hidden value="">
+          <option hidden value="">
             {placeholder}
           </option>
           {renderOptions(options)}
