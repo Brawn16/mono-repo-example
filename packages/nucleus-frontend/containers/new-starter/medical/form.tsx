@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button
+  Button,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Label } from "@sdh-project-services/nucleus-ui/dist/label";
 import { RadioButton } from "@sdh-project-services/nucleus-ui/dist/radio-button";
@@ -60,7 +60,7 @@ export function Form(): React.ReactElement {
           componentRef={register(
             medicalIssues
               ? {
-                  required: "Please provide information of medical issues"
+                  required: "Please provide information of medical issues",
                 }
               : {}
           )}
@@ -99,7 +99,7 @@ export function Form(): React.ReactElement {
             medicationRequired
               ? {
                   required:
-                    "Please provide information of medication requirements"
+                    "Please provide information of medication requirements",
                 }
               : {}
           )}

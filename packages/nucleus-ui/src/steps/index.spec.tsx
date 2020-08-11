@@ -7,7 +7,7 @@ describe("Steps", () => {
   const standard = [
     { label: "Dashboard", path: "javascript:void(0)" },
     { label: "Customers", path: "javascript:void(0)" },
-    { label: "Mr Smith", path: "javascript:void(0)" }
+    { label: "Mr Smith", path: "javascript:void(0)" },
   ];
 
   const singleStep = [{ label: "Dashboard", path: "javascript:void(0)" }];

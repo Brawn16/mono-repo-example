@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import {
   PrimaryButton,
-  Button
+  Button,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Select } from "@sdh-project-services/nucleus-ui/dist/select";
 import React, { useContext } from "react";
@@ -10,7 +10,7 @@ import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
 import {
   subcontractors as subcontractorsQuery,
-  workstreams as workstreamsQuery
+  workstreams as workstreamsQuery,
 } from "./queries.gql";
 import { NewStarterWorkDetailsFormData } from "./types";
 
@@ -21,7 +21,7 @@ function getOptions(data: any) {
 
   return data.map(({ id, name }: any) => ({
     label: name,
-    value: id
+    value: id,
   }));
 }
 
@@ -41,7 +41,7 @@ export function Form(): React.ReactElement {
     <form onSubmit={handleSubmit(handleFormSubmit)}>
       <Select
         componentRef={register({
-          required: "Workstream is required"
+          required: "Workstream is required",
         })}
         error={errors.workstream}
         label="Workstream"
@@ -52,7 +52,7 @@ export function Form(): React.ReactElement {
       <Select
         className="mt-4"
         componentRef={register({
-          required: "Subcontractor is required"
+          required: "Subcontractor is required",
         })}
         error={errors.subcontractor}
         label="Subcontractor"

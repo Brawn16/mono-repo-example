@@ -8,7 +8,7 @@ export function Anchor(
   const {
     children,
     className = "text-blue-600 hover:text-blue-500 focus:text-blue-500",
-    href
+    href,
   } = props;
 
   return (

@@ -15,12 +15,12 @@ function getLocalFormData(): NewStarterFormData {
 
   return {
     step: -1,
-    values: {}
+    values: {},
   };
 }
 
 export function NewStarter({
-  children
+  children,
 }: React.PropsWithChildren<{}>): React.ReactElement {
   const { values } = getLocalFormData();
   const year = new Date().getFullYear();
