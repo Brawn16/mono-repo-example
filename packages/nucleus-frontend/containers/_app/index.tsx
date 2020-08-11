@@ -44,13 +44,11 @@ export function App({ Component, pageProps }: AppProps): React.ReactElement {
   return (
     <CookiesProvider cookies={cookies}>
       <ApolloProvider client={apolloClient}>
-        <ContextProvider>
-          <Head>
-            <link href="/favicon.ico" rel="icon" />
-            <link href="//rsms.me/inter/inter.css" rel="stylesheet" />
-          </Head>
-          <Component {...pageProps} />
-        </ContextProvider>
+        <Head>
+          <link href="/favicon.ico" rel="icon" />
+          <link href="//rsms.me/inter/inter.css" rel="stylesheet" />
+        </Head>
+        <Component {...pageProps} />
       </ApolloProvider>
     </CookiesProvider>
   );
