@@ -13,8 +13,8 @@ export class CreateUserRecords1596099980332 implements MigrationInterface {
           email: "admin@localhost.local",
           password: await hash("password"),
           isActive: true,
-          isVerified: true,
-        },
+          isVerified: true
+        }
       ])
       .execute();
   }

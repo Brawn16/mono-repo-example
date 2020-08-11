@@ -4,7 +4,7 @@ import { Fieldset } from ".";
 
 export default {
   component: Fieldset,
-  title: "Fieldset",
+  title: "Fieldset"
 };
 
 export function fieldset() {

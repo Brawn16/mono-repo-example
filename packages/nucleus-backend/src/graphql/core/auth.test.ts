@@ -7,13 +7,13 @@ import { stubEntity } from "../../shared/tests/helpers/entity";
 import { getMockUserEntity } from "../../shared/tests/helpers/user";
 import {
   getMockContext,
-  getMockAuthenticatedAppContext,
+  getMockAuthenticatedAppContext
 } from "../tests/helpers/context";
 import {
   checkAuth,
   createAuthToken,
   getAuthUserFromContext,
-  verifyAuthToken,
+  verifyAuthToken
 } from "./auth";
 import { AuthenticatedAppContext } from "./context";
 
@@ -25,7 +25,7 @@ it("checks auth", async () => {
   stubEntity(stub, UserEntity, [user]);
 
   const resolverData = {
-    context: await getMockAuthenticatedAppContext(),
+    context: await getMockAuthenticatedAppContext()
   } as ResolverData<AuthenticatedAppContext>;
 
   await checkAuth(resolverData);
@@ -85,7 +85,7 @@ it("throws exception when no token is in request", async () => {
 
 it("throws exception when invalid token is in request", async () => {
   const context = getMockContext({
-    authorization: `Bearer invalid`,
+    authorization: `Bearer invalid`
   });
 
   const result = getAuthUserFromContext(context);

@@ -3,12 +3,13 @@ import {
   ApolloClient,
   ApolloLink,
   InMemoryCache,
-  HttpLink,
+  HttpLink
 } from "@apollo/client";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import React from "react";
 import { CookiesProvider } from "react-cookie";
+import { ContextProvider } from "../../contexts/context";
 import { Cookies } from "./cookies";
 
 const cookies = new Cookies();
@@ -21,8 +22,8 @@ export const authLink = new ApolloLink((operation, forward) => {
       ...context,
       headers: {
         ...context.headers,
-        authorization: `Bearer ${token}`,
-      },
+        authorization: `Bearer ${token}`
+      }
     }));
   }
 
@@ -30,24 +31,26 @@ export const authLink = new ApolloLink((operation, forward) => {
 });
 
 export const httpLink = new HttpLink({
-  uri: process.env.NEXT_PUBLIC_APOLLO_URI,
+  uri: process.env.NEXT_PUBLIC_APOLLO_URI
 });
 
 const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
   link: ApolloLink.from([authLink, httpLink]),
-  ssrMode: true,
+  ssrMode: true
 });
 
 export function App({ Component, pageProps }: AppProps): React.ReactElement {
   return (
     <CookiesProvider cookies={cookies}>
       <ApolloProvider client={apolloClient}>
-        <Head>
-          <link href="/favicon.ico" rel="icon" />
-          <link href="//rsms.me/inter/inter.css" rel="stylesheet" />
-        </Head>
-        <Component {...pageProps} />
+        <ContextProvider>
+          <Head>
+            <link href="/favicon.ico" rel="icon" />
+            <link href="//rsms.me/inter/inter.css" rel="stylesheet" />
+          </Head>
+          <Component {...pageProps} />
+        </ContextProvider>
       </ApolloProvider>
     </CookiesProvider>
   );

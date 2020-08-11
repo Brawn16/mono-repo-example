@@ -5,7 +5,7 @@ import { Input } from ".";
 
 export default {
   component: Input,
-  title: "Input",
+  title: "Input"
 };
 
 export const input = () => {
@@ -35,7 +35,7 @@ export const withIcon = () => {
 export const withError = () => {
   const error = {
     message: "Please provide a valid email",
-    type: "error",
+    type: "error"
   };
 
   return (
