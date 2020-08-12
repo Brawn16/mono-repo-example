@@ -36,7 +36,7 @@ export const proofOfAddressOptions = [
     value: "Utility Bill"
   },
   {
-    label: "UK Driving License (front and back)",
-    value: "UK Driving License"
+    label: "UK Driving Licence (front and back)",
+    value: "UK Driving Licence"
   }
 ];
