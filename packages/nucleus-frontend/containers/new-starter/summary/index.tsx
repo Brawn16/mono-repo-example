@@ -117,8 +117,8 @@ export function Summary(): React.ReactElement {
           <Anchor href="/new-starter/medical">
             <Button>Back</Button>
           </Anchor>
-          <Anchor href="/new-starter/summary">
-            <PrimaryButton>Continue</PrimaryButton>
+          <Anchor href="/new-starter/confirmation">
+            <PrimaryButton>Submit</PrimaryButton>
           </Anchor>
         </div>
       </NewStarterLayout>

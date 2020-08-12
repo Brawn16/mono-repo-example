@@ -4,7 +4,7 @@ import { Anchor } from "../../components/anchor";
 import { Context } from "./context";
 import { background, logo } from "./index.module.css";
 import { steps } from "./steps";
-import { NewStarterFormData, NewStarterStep } from "./types";
+import { NewStarterFormData, NewStarterStep, NewStarterProps } from "./types";
 
 function getLocalFormData(): NewStarterFormData {
   if (typeof window === "object") {
@@ -87,8 +87,9 @@ function renderSteps() {
 }
 
 export function NewStarter({
-  children
-}: React.PropsWithChildren<{}>): React.ReactElement {
+  children,
+  showSteps = true
+}: React.PropsWithChildren<NewStarterProps>): React.ReactElement {
   const { values } = getLocalFormData();
   const year = new Date().getFullYear();
   const router = useRouter();
@@ -119,7 +120,7 @@ export function NewStarter({
               <span className="hidden md:inline">Register</span> New Starter
             </h1>
             <div className="mt-8">
-              {renderMobileSteps()}
+              {showSteps && renderMobileSteps()}
               <Context.Provider value={{ submitStep, values }}>
                 {children}
               </Context.Provider>
@@ -132,7 +133,7 @@ export function NewStarter({
       </div>
       <div className={background}>
         <div className={logo} />
-        {renderSteps()}
+        {showSteps && renderSteps()}
       </div>
     </div>
   );
