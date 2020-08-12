@@ -1,11 +1,11 @@
 export interface NewStarterFormContext {
   submitStep: (step: number, values: any) => void;
-  values: { [key: string]: string };
+  values: { [key: string]: any };
 }
 
 export interface NewStarterFormData {
   step: number;
-  values: { [key: string]: string };
+  values: { [key: string]: any };
 }
 
 export interface NewStarterStep {
