@@ -45,7 +45,7 @@ export function Form(): React.ReactElement {
           label="Upload Photo"
           onChange={handleChange}
           tags={["profile-pic", "public"]}
-          values={[photoId]}
+          values={photoId ? [photoId] : undefined}
         />
         {photoId && (
           <div className="mt-4">
