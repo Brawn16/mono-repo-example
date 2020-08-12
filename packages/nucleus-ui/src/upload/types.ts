@@ -15,10 +15,13 @@ export interface UploadProps extends DropzoneOptions {
   onChange: (fileIds: string[]) => void;
   required?: boolean;
   tags: string[];
+  values?: string[];
 }
 
 export interface UploadUploadedProps {
+  buttonEntity: string;
   id: string;
+  index: number;
   name?: string;
   onDelete: () => void;
 }

@@ -45,13 +45,16 @@ export function Form(): React.ReactElement {
           label="Upload Photo"
           onChange={handleChange}
           tags={["profile-pic", "public"]}
+          values={[photoId]}
         />
         {photoId && (
-          <UploadViewer id={photoId}>
-            {({ url }) => (
-              <img alt="Profile" className="block max-w-xs" src={url} />
-            )}
-          </UploadViewer>
+          <div className="mt-4">
+            <UploadViewer id={photoId}>
+              {({ url }) => (
+                <img alt="Profile" className="block max-w-xs" src={url} />
+              )}
+            </UploadViewer>
+          </div>
         )}
       </div>
       <div className="flex justify-between mt-8">

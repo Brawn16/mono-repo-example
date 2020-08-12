@@ -1,9 +1,15 @@
-import React, { useState } from "react";
+import { capitalCase } from "change-case";
+import React from "react";
 import { FaTrash } from "react-icons/fa";
 import { UploadUploadedProps } from "./types";
 
-export function Uploaded({ name, onDelete }: UploadUploadedProps) {
-  const [fileName] = useState(name);
+export function Uploaded({
+  buttonEntity,
+  index,
+  name,
+  onDelete
+}: UploadUploadedProps) {
+  const fileName = name || `${capitalCase(buttonEntity)} ${index + 1}`;
 
   return (
     <div className="my-2 text-xs text-gray-500">

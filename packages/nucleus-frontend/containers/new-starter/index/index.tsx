@@ -10,7 +10,7 @@ export function NewStarter(): React.ReactElement {
       <NewStarterLayout>
         <h2 className="font-bold uppercase">Before You Start</h2>
         Please confirm you have the following:
-        <div className="pl-4 mt-8">
+        <div className="pl-4 mt-4">
           <ul className="list-disc">
             <li>
               At least one of the following:
