@@ -108,7 +108,7 @@ export function Form(): React.ReactElement {
           required
         />
       )}
-      <div className="flex justify-between mx-8 mt-8 md:mx-0">
+      <div className="flex justify-between mt-8">
         <Anchor href="/new-starter/my-photo">
           <Button>Back</Button>
         </Anchor>

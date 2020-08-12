@@ -35,7 +35,7 @@ export function Form(): React.ReactElement {
   }, []);
 
   const handleFormSubmit = (data: NewStarterIdentificationFormData) => {
-    submitStep(5, data);
+    submitStep(3, data);
   };
 
   const handleUploadOneChange = (fileIds: string[]) => {
@@ -84,8 +84,8 @@ export function Form(): React.ReactElement {
           />
         </div>
       </div>
-      <div className="flex justify-between mx-8 mt-8 md:mx-0">
-        <Anchor href="/new-starter/qualifications">
+      <div className="flex justify-between mt-8">
+        <Anchor href="/new-starter/address">
           <Button>Back</Button>
         </Anchor>
         <PrimaryButton>Continue</PrimaryButton>

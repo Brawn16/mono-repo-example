@@ -1,0 +1,24 @@
+.background {
+  background: url(./background.jpg);
+
+  @apply bg-cover flex-1 relative;
+}
+
+.background:before {
+  backdrop-filter: blur(0.15rem);
+  content: "";
+
+  @apply absolute bg-blue-900 bg-opacity-75 inset-0;
+}
+
+.logo {
+  background: url(./logo.png);
+
+  @apply absolute bg-cover bottom-0 right-0 hidden h-20 m-16 w-64;
+}
+
+@media (min-width: 1600px) {
+  .logo {
+    @apply block;
+  }
+}

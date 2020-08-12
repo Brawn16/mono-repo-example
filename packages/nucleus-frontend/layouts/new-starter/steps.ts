@@ -1,4 +1,6 @@
-export const steps = [
+import { NewStarterStep } from "./types";
+
+export const steps: NewStarterStep[] = [
   {
     href: "/new-starter",
     label: "Preparation",
@@ -12,16 +14,16 @@ export const steps = [
     label: "Address",
   },
   {
+    href: "/new-starter/identification",
+    label: "Identification",
+  },
+  {
     href: "/new-starter/work-details",
     label: "Work Details",
   },
   {
     href: "/new-starter/qualifications",
     label: "Qualifications",
-  },
-  {
-    href: "/new-starter/identification",
-    label: "Identification",
   },
   {
     href: "/new-starter/my-photo",

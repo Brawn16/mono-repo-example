@@ -9,29 +9,38 @@ export function NewStarter(): React.ReactElement {
       <Head title="New Starter Form" />
       <NewStarterLayout>
         <h2 className="font-bold uppercase">Before You Start</h2>
-        Please make sure you have the following to hand:
+        Please confirm you have the following:
         <div className="pl-4 mt-8">
           <ul className="list-disc">
             <li>
-              At least one of the following (preferably two):
+              At least one of the following:
               <ul className="pl-4 list-disc">
-                <li>Passport</li>
-                <li>Driving Licence</li>
-                <li>Full Birth Certificate</li>
+                <li>UK/EEA Passport</li>
+                <li>UK/EEA National identity card</li>
+                <li>Non-UK Passport (with work permit)</li>
+                <li>Biometric Residence Permit (with work permit)</li>
+                <li>
+                  UK Birth Certificate with Photo ID (passport sized photo that
+                  is countersigned on the back by someone who can confirm your
+                  identity)
+                </li>
               </ul>
             </li>
             <li className="mt-4">
-              At least one of the following (if you only have one of the above):
+              At least one of the following:
               <ul className="pl-4 list-disc">
                 <li>Bank statement no more than 3 months old</li>
                 <li>HMRC letter no more than 12 months old</li>
                 <li>Utility bill no more than 3 months old</li>
+                <li>UK Driving License</li>
               </ul>
             </li>
-            <li className="mt-4">Qualification certifcates</li>
+            <li className="mt-4">
+              All relevant qualifications and training information
+            </li>
           </ul>
         </div>
-        <div className="mx-8 mt-8 text-right md:mx-0">
+        <div className="mt-8 text-right">
           <Form />
         </div>
       </NewStarterLayout>

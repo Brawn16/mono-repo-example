@@ -27,41 +27,47 @@ function getOptions(data: any) {
 
 export function Form(): React.ReactElement {
   const { submitStep, values } = useContext(Context);
-  const { data: subcontractorsData = {} }: any = useQuery(subcontractorsQuery);
-  const { data: workstreamsData = {} }: any = useQuery(workstreamsQuery);
+  const { data: subcontractorsData }: any = useQuery(subcontractorsQuery);
+  const { data: workstreamsData }: any = useQuery(workstreamsQuery);
   const { register, handleSubmit, errors } = useForm<
     NewStarterWorkDetailsFormData
   >({ defaultValues: values });
 
   const handleFormSubmit = (data: NewStarterWorkDetailsFormData) => {
-    submitStep(3, data);
+    submitStep(4, data);
   };
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <Select
-        componentRef={register({
-          required: "Workstream is required",
-        })}
-        error={errors.workstream}
-        label="Workstream"
-        name="workstream"
-        options={getOptions(workstreamsData.workstreams)}
-        required
-      />
-      <Select
-        className="mt-4"
-        componentRef={register({
-          required: "Subcontractor is required",
-        })}
-        error={errors.subcontractor}
-        label="Subcontractor"
-        name="subcontractor"
-        options={getOptions(subcontractorsData.subcontractors)}
-        required
-      />
-      <div className="flex justify-between mx-8 mt-8 md:mx-0">
-        <Anchor href="/new-starter/address">
+      <div>
+        {workstreamsData && (
+          <Select
+            componentRef={register({
+              required: "Workstream is required",
+            })}
+            error={errors.workstream}
+            label="Workstream"
+            name="workstream"
+            options={getOptions(workstreamsData.workstreams)}
+            required
+          />
+        )}
+        {subcontractorsData && (
+          <Select
+            className="mt-4"
+            componentRef={register({
+              required: "Subcontractor is required",
+            })}
+            error={errors.subcontractor}
+            label="Subcontractor"
+            name="subcontractor"
+            options={getOptions(subcontractorsData.subcontractors)}
+            required
+          />
+        )}
+      </div>
+      <div className="flex justify-between mt-8">
+        <Anchor href="/new-starter/identification">
           <Button>Back</Button>
         </Anchor>
         <PrimaryButton>Continue</PrimaryButton>

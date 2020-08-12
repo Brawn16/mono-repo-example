@@ -7,3 +7,8 @@ export interface NewStarterFormData {
   step: number;
   values: { [key: string]: string };
 }
+
+export interface NewStarterStep {
+  href: string;
+  label: string;
+}

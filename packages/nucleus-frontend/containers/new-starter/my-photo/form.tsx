@@ -55,7 +55,7 @@ export function Form(): React.ReactElement {
         )}
       </div>
       <div className="flex justify-between mt-8">
-        <Anchor href="/new-starter/identification">
+        <Anchor href="/new-starter/qualifications">
           <Button>Back</Button>
         </Anchor>
         <PrimaryButton>Continue</PrimaryButton>

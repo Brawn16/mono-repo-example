@@ -2,42 +2,45 @@ import {
   PrimaryButton,
   Button,
 } from "@sdh-project-services/nucleus-ui/dist/button";
-import { Label } from "@sdh-project-services/nucleus-ui/dist/label";
-import { Select } from "@sdh-project-services/nucleus-ui/dist/select";
-import React, { useContext } from "react";
+import { Upload } from "@sdh-project-services/nucleus-ui/dist/upload";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { FaPlus } from "react-icons/fa";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
-import { Qualification } from "./qualification";
-
-const qualifications = [{ label: "CPCS Blue", value: "xxx" }];
+import { NewStarterQualificationsFormData } from "./types";
 
 export function Form(): React.ReactElement {
   const { submitStep, values } = useContext(Context);
-  const { handleSubmit } = useForm({ defaultValues: values });
+  const { handleSubmit, register, setValue } = useForm<
+    NewStarterQualificationsFormData
+  >({
+    defaultValues: values,
+  });
 
-  const handleFormSubmit = () => {
-    submitStep(4, {});
+  useEffect(() => {
+    register({ name: "qualificationPhotoIds" });
+  }, []);
+
+  const handleChange = (ids: string[]) => {
+    setValue("qualificationPhotoIds", ids);
+  };
+
+  const handleFormSubmit = (data: NewStarterQualificationsFormData) => {
+    submitStep(5, data);
   };
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <Qualification />
-      <div className="flex-col mt-8">
-        <Label label="Add Another Qualification" name="qualification" />
-        <div className="flex">
-          <Select
-            className="w-full"
-            name="qualification"
-            options={qualifications}
-          />
-          <PrimaryButton>
-            <FaPlus />
-          </PrimaryButton>
-        </div>
-      </div>
-      <div className="flex justify-between mx-8 mt-8 md:mx-0">
+      <div className="mb-8">Text to go here</div>
+      <Upload
+        accept="image/*"
+        buttonEntity="photo"
+        label="Upload Photos"
+        multiple
+        onChange={handleChange}
+        tags={["qualification", "public"]}
+      />
+      <div className="flex justify-between mt-8">
         <Anchor href="/new-starter/work-details">
           <Button>Back</Button>
         </Anchor>
