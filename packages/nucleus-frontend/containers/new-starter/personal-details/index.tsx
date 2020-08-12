@@ -7,7 +7,7 @@ export function PersonalDetails(): React.ReactElement {
   return (
     <>
       <Head title="Personal Details - New Starter Form" />
-      <NewStarterLayout>
+      <NewStarterLayout title="Personal Details">
         <Form />
       </NewStarterLayout>
     </>

@@ -7,7 +7,7 @@ export function Qualifications(): React.ReactElement {
   return (
     <>
       <Head title="Qualifications - New Starter Form" />
-      <NewStarterLayout>
+      <NewStarterLayout title="Qualifications">
         <div className="mb-8">
           Please upload all relevant qualifications, training certificates,
           professional competencies or any other documentary evidence confirming

@@ -10,6 +10,7 @@ export interface NewStarterFormData {
 
 export interface NewStarterProps {
   showSteps?: boolean;
+  title?: string;
 }
 
 export interface NewStarterStep {
