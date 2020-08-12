@@ -11,6 +11,7 @@ export function Uploader({ error, name, onChange, values = [] }: UploadProps) {
         multiple
         onChange={value => onChange(name, value)}
         tags={["identification", "public"]}
+        values={values}
       />
       {values.map(id => (
         <div key={id} className="mt-4">
