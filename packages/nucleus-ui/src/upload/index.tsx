@@ -11,7 +11,6 @@ import { Uploaded } from "./uploaded";
 export function Upload(props: UploadProps) {
   const [fileNames, setFileNames] = useState<{ [id: string]: string }>({});
   const [inProgress, setInProgress] = useState<File[]>([]);
-  const [uploaded, setUploaded] = useState<string[]>([]);
   const {
     buttonEntity = "file",
     error,
@@ -19,8 +18,10 @@ export function Upload(props: UploadProps) {
     multiple,
     onChange,
     required,
-    tags
+    tags,
+    values = []
   } = props;
+  const [uploaded, setUploaded] = useState<string[]>(values);
 
   useEffect(() => {
     onChange(uploaded);
@@ -101,7 +102,14 @@ export function Upload(props: UploadProps) {
     };
 
     return (
-      <Uploaded key={id} id={id} name={fileNames[id]} onDelete={handleDelete} />
+      <Uploaded
+        key={id}
+        buttonEntity={buttonEntity}
+        id={id}
+        index={index}
+        name={fileNames[id]}
+        onDelete={handleDelete}
+      />
     );
   });
 
