@@ -6,8 +6,8 @@ import { Form } from "./form";
 export function Medical(): React.ReactElement {
   return (
     <>
-      <Head title="Medical Questionnaire - New Starter Form" />
-      <NewStarterLayout>
+      <Head title="Medical - New Starter Form" />
+      <NewStarterLayout title="Medical">
         <Form />
       </NewStarterLayout>
     </>

@@ -7,7 +7,7 @@ export function AddressDetails() {
   return (
     <>
       <Head title="Address - New Starter Form" />
-      <NewStarterLayout>
+      <NewStarterLayout title="Address">
         <Form />
       </NewStarterLayout>
     </>

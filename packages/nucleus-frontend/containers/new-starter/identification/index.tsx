@@ -6,8 +6,8 @@ import { Form } from "./form";
 export function Identification(): React.ReactElement {
   return (
     <>
-      <Head title="Personal Details - New Starter Form" />
-      <NewStarterLayout>
+      <Head title="Identification - New Starter Form" />
+      <NewStarterLayout title="Identification">
         <div className="pl-4 my-8">
           <ul className="list-disc">
             To prove you have the right to work in the UK, please provide a

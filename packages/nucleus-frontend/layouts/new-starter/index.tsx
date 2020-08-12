@@ -88,7 +88,8 @@ function renderSteps() {
 
 export function NewStarter({
   children,
-  showSteps = true
+  showSteps = true,
+  title
 }: React.PropsWithChildren<NewStarterProps>): React.ReactElement {
   const { values } = getLocalFormData();
   const year = new Date().getFullYear();
@@ -118,6 +119,7 @@ export function NewStarter({
           <div>
             <h1 className="pb-2 text-2xl font-extrabold text-gray-900 border-b border-gray-200 md:mt-8 md:text-3xl">
               <span className="hidden md:inline">Register</span> New Starter
+              {title && <> - {title}</>}
             </h1>
             <div className="mt-8">
               {showSteps && renderMobileSteps()}

@@ -6,8 +6,8 @@ import { Form } from "./form";
 export function MyPhoto(): React.ReactElement {
   return (
     <>
-      <Head title="New Starter Form" />
-      <NewStarterLayout>
+      <Head title="My Photo - New Starter Form" />
+      <NewStarterLayout title="My Photo">
         <div>To create your worker profile we will need your photo:</div>
         <div className="mt-4">
           <div className="font-bold">The photo must:</div>
