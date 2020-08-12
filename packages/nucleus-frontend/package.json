@@ -18,6 +18,7 @@
     "@tailwindcss/ui": "^0.3.0",
     "autoprefixer": "^9.7.6",
     "babel-plugin-import-graphql": "^2.7.0",
+    "change-case": "^4.1.1",
     "date-fns": "^2.14.0",
     "filter-obj": "^2.0.1",
     "graphql": "^15.0.0",

@@ -4,7 +4,7 @@ import { Upload } from ".";
 
 export default {
   component: Upload,
-  title: "Upload",
+  title: "Upload"
 };
 
 export const upload = () => {

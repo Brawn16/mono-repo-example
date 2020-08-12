@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button,
+  Button
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import React from "react";
@@ -34,7 +34,7 @@ export function Summary(): React.ReactElement {
       <div className="flex justify-between">
         <p className="font-bold">{`${label}:`}</p>
         <div>
-          {values.map((value) => {
+          {values.map(value => {
             return <p>{value}</p>;
           })}
         </div>

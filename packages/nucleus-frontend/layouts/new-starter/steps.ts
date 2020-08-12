@@ -3,38 +3,38 @@ import { NewStarterStep } from "./types";
 export const steps: NewStarterStep[] = [
   {
     href: "/new-starter",
-    label: "Preparation",
+    label: "Preparation"
   },
   {
     href: "/new-starter/personal-details",
-    label: "Personal Details",
+    label: "Personal Details"
   },
   {
     href: "/new-starter/address",
-    label: "Address",
+    label: "Address"
   },
   {
     href: "/new-starter/identification",
-    label: "Identification",
+    label: "Identification"
   },
   {
     href: "/new-starter/work-details",
-    label: "Work Details",
+    label: "Work Details"
   },
   {
     href: "/new-starter/qualifications",
-    label: "Qualifications",
+    label: "Qualifications"
   },
   {
     href: "/new-starter/my-photo",
-    label: "My Photo",
+    label: "My Photo"
   },
   {
     href: "/new-starter/medical",
-    label: "Medical",
+    label: "Medical"
   },
   {
     href: "/new-starter/summary",
-    label: "Summary",
-  },
+    label: "Summary"
+  }
 ];

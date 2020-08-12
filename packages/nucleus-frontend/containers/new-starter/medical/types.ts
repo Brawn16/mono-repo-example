@@ -1,4 +1,6 @@
 export interface NewStarterMedicalFormData {
-  issues?: string;
-  medication?: string;
+  medicalIssues: boolean;
+  medicalIssuesNotes?: string;
+  medicationRequired: boolean;
+  medicationRequiredNotes?: string;
 }

@@ -11,7 +11,7 @@ describe("Input", () => {
 
     await act(async () => {
       fireEvent.change(getByLabelText("Firstname"), {
-        target: { value: "john" },
+        target: { value: "john" }
       });
     });
     expect(mockOnChange).toHaveBeenCalledTimes(1);

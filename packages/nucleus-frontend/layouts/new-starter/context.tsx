@@ -5,5 +5,5 @@ export const Context = createContext<NewStarterFormContext>({
   submitStep: () => {
     //
   },
-  values: {},
+  values: {}
 });

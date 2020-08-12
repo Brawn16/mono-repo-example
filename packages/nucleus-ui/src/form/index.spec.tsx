@@ -11,11 +11,11 @@ describe("Form", () => {
 
     await act(async () => {
       fireEvent.change(getByLabelText("Firstname"), {
-        target: { value: "john" },
+        target: { value: "john" }
       });
 
       fireEvent.change(getByLabelText("Lastname"), {
-        target: { value: "smith" },
+        target: { value: "smith" }
       });
 
       fireEvent.click(getByRole("button"));
@@ -24,7 +24,7 @@ describe("Form", () => {
     expect(mockSubmit).toHaveBeenCalledTimes(1);
     expect(mockSubmit).toHaveBeenCalledWith({
       firstName: "john",
-      lastName: "smith",
+      lastName: "smith"
     });
   });
 
@@ -36,10 +36,10 @@ describe("Form", () => {
 
     await act(async () => {
       fireEvent.change(getByLabelText("Firstname"), {
-        target: { value: "" },
+        target: { value: "" }
       });
       fireEvent.change(getByLabelText("Lastname"), {
-        target: { value: "smith" },
+        target: { value: "smith" }
       });
 
       fireEvent.click(getByRole("button"));
@@ -56,11 +56,11 @@ describe("Form", () => {
 
     await act(async () => {
       fireEvent.change(getByLabelText("Firstname"), {
-        target: { value: "john" },
+        target: { value: "john" }
       });
 
       fireEvent.change(getByLabelText("Lastname"), {
-        target: { value: "" },
+        target: { value: "" }
       });
 
       fireEvent.click(getByRole("button"));

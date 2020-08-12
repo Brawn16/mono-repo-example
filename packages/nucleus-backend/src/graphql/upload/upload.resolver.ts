@@ -18,7 +18,7 @@ export class UploadResolver {
     const s3 = new S3({
       accessKeyId: env.AWS_UPLOAD_ACCESS_KEY,
       endpoint: env.AWS_UPLOAD_ENDPOINT,
-      secretAccessKey: env.AWS_UPLOAD_ACCESS_SECRET,
+      secretAccessKey: env.AWS_UPLOAD_ACCESS_SECRET
     });
 
     // Build parameters with conditions to use when uploading.
@@ -29,9 +29,9 @@ export class UploadResolver {
         { bucket: env.AWS_UPLOAD_BUCKET },
         ["content-length-range", 100, 100000000],
         { "content-type": data.contentType },
-        { key: upload.id },
+        { key: upload.id }
       ],
-      Expires: 60,
+      Expires: 60
     };
 
     // Create presigned POST url. Note we are using this method rather
@@ -47,10 +47,10 @@ export class UploadResolver {
         resolve({
           presignedPostJson: JSON.stringify({
             ...fields,
-            key: upload.id,
+            key: upload.id
           }),
           presignedPostUrl: url,
-          upload,
+          upload
         });
       })
     );
@@ -64,7 +64,7 @@ export class UploadResolver {
     const s3 = new S3({
       accessKeyId: env.AWS_UPLOAD_ACCESS_KEY,
       endpoint: env.AWS_UPLOAD_ENDPOINT,
-      secretAccessKey: env.AWS_UPLOAD_ACCESS_SECRET,
+      secretAccessKey: env.AWS_UPLOAD_ACCESS_SECRET
     });
 
     // If upload does not have a public tag, throw exception. If you
@@ -77,7 +77,7 @@ export class UploadResolver {
     const presignedUrl = await s3.getSignedUrlPromise("getObject", {
       Bucket: env.AWS_UPLOAD_BUCKET,
       Expires: 60,
-      Key: id,
+      Key: id
     });
 
     return { presignedUrl };

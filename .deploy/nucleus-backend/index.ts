@@ -5,7 +5,7 @@ import {
   Port,
   SecurityGroup,
   SubnetType,
-  Vpc,
+  Vpc
 } from "@aws-cdk/aws-ec2";
 import { Code, Function, Runtime } from "@aws-cdk/aws-lambda";
 import { LambdaRestApi, Resource } from "@aws-cdk/aws-apigateway";
@@ -45,9 +45,9 @@ export class NucleusBackend {
           excludePunctuation: true,
           secretStringTemplate: "{}",
           generateStringKey: "TYPEORM_PASSWORD",
-          passwordLength: 30,
+          passwordLength: 30
         },
-        secretName: `${graphqlLambdaName}Secret`,
+        secretName: `${graphqlLambdaName}Secret`
       }
     );
 
@@ -58,7 +58,7 @@ export class NucleusBackend {
       {
         description: `Core database security group for Nucleus backend (${branch})`,
         securityGroupName: `${namePrefix}-CoreDatabaseSecurityGroup`,
-        vpc: this.vpc,
+        vpc: this.vpc
       }
     );
 
@@ -69,7 +69,7 @@ export class NucleusBackend {
       {
         dbSubnetGroupDescription: `Core database subnet group for Nucleus backend (${branch})`,
         dbSubnetGroupName: `${namePrefix}-CoreDatabaseSubnetGroup`.toLowerCase(),
-        subnetIds: this.vpc.privateSubnets.map((sub) => sub.subnetId),
+        subnetIds: this.vpc.privateSubnets.map(sub => sub.subnetId)
       }
     );
 
@@ -87,7 +87,7 @@ export class NucleusBackend {
       masterUserPassword: Fn.join("", [
         "{{resolve:secretsmanager:",
         this.graphqlLambdaSecret.secretArn,
-        ":SecretString:TYPEORM_PASSWORD}}",
+        ":SecretString:TYPEORM_PASSWORD}}"
       ]),
       preferredBackupWindow: "02:00-03:00",
       preferredMaintenanceWindow: "Mon:04:00-Mon:05:00",
@@ -95,10 +95,10 @@ export class NucleusBackend {
         autoPause: true,
         maxCapacity: 2,
         minCapacity: 2,
-        secondsUntilAutoPause: 300,
+        secondsUntilAutoPause: 300
       },
       storageEncrypted: true,
-      vpcSecurityGroupIds: [this.coreDatabaseSecurityGroup.securityGroupId],
+      vpcSecurityGroupIds: [this.coreDatabaseSecurityGroup.securityGroupId]
     });
 
     // Create graphql lambda security group
@@ -108,7 +108,7 @@ export class NucleusBackend {
       {
         description: `Graphql lambda security group for Nucleus backend (${branch})`,
         securityGroupName: `${namePrefix}-GraphqlLambdaSecurityGroup`,
-        vpc: this.vpc,
+        vpc: this.vpc
       }
     );
 
@@ -123,22 +123,22 @@ export class NucleusBackend {
             "!dist/**",
             "!node_modules/**",
             "!.env",
-            "!jwt.key",
-          ],
+            "!jwt.key"
+          ]
         }
       ),
       description: `Graphql lambda for Nucleus backend (${branch})`,
       environment: {
         APOLLO_PLAYGROUND_ENDPOINT: "/prod/graphql",
         AWS_SECRET: `${graphqlLambdaName}Secret`,
-        TYPEORM_HOST: this.coreDatabase.attrEndpointAddress,
+        TYPEORM_HOST: this.coreDatabase.attrEndpointAddress
       },
       functionName: graphqlLambdaName,
       handler: "dist/graphql/index.graphqlHandler",
       runtime: Runtime.NODEJS_12_X,
       securityGroups: [this.graphqlSecurityGroup],
       timeout: Duration.seconds(15),
-      vpc: this.vpc,
+      vpc: this.vpc
     });
 
     // Grant graphql lambda access to core database
@@ -162,7 +162,7 @@ export class NucleusBackend {
         handler: this.graphqlLambda,
         minimumCompressionSize: 0,
         proxy: false,
-        restApiName: `${namePrefix}-GraphqlGateway`,
+        restApiName: `${namePrefix}-GraphqlGateway`
       }
     );
 
@@ -180,7 +180,7 @@ export class NucleusBackend {
       {
         description: `Core VPC bastion security group for Nucleus backend (${branch})`,
         securityGroupName: `${namePrefix}-CoreVpcBastionSecurityGroup`,
-        vpc: this.vpc,
+        vpc: this.vpc
       }
     );
 
@@ -192,9 +192,9 @@ export class NucleusBackend {
         instanceName: `${namePrefix}-CoreVpcBastion`,
         securityGroup: this.coreVpcBastionSecurityGroup,
         subnetSelection: {
-          subnetType: SubnetType.PUBLIC,
+          subnetType: SubnetType.PUBLIC
         },
-        vpc: this.vpc,
+        vpc: this.vpc
       }
     );
 

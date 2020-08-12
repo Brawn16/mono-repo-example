@@ -6,7 +6,7 @@ import { Input } from "../input";
 import { InputTypes } from "./types";
 
 export default {
-  title: "Form",
+  title: "Form"
 };
 
 type Props = {

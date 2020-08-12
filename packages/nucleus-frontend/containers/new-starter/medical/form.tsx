@@ -1,11 +1,12 @@
 import {
   PrimaryButton,
-  Button,
+  Button
 } from "@sdh-project-services/nucleus-ui/dist/button";
+import { InputError } from "@sdh-project-services/nucleus-ui/dist/input-error";
 import { Label } from "@sdh-project-services/nucleus-ui/dist/label";
 import { RadioButton } from "@sdh-project-services/nucleus-ui/dist/radio-button";
 import { Textarea } from "@sdh-project-services/nucleus-ui/dist/textarea";
-import React, { useState, useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
@@ -13,18 +14,37 @@ import { NewStarterMedicalFormData } from "./types";
 
 export function Form(): React.ReactElement {
   const { submitStep, values } = useContext(Context);
-  const { errors, handleSubmit, register } = useForm<NewStarterMedicalFormData>(
-    { defaultValues: values }
-  );
-  const [medicalIssues, useMedicalIssues] = useState(false);
-  const [medicationRequired, useMedicationRequired] = useState(false);
+  const {
+    errors,
+    getValues,
+    handleSubmit,
+    register,
+    setValue,
+    watch
+  } = useForm<NewStarterMedicalFormData>({ defaultValues: values });
+  const { medicalIssues, medicationRequired } = getValues();
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.name === "medicalIssues") {
-      useMedicalIssues(!medicalIssues);
-    } else {
-      useMedicationRequired(!medicationRequired);
-    }
+  watch("medicalIssues");
+  watch("medicationRequired");
+  useEffect(() => {
+    register(
+      { name: "medicalIssues" },
+      {
+        validate: (value: boolean) =>
+          value === undefined ? "This question is required" : true
+      }
+    );
+    register(
+      { name: "medicationRequired" },
+      {
+        validate: (value: boolean) =>
+          value === undefined ? "This question is required" : true
+      }
+    );
+  }, []);
+
+  const handleChange = (name: string, value: boolean) => {
+    setValue(name, value);
   };
 
   const handleFormSubmit = (data: NewStarterMedicalFormData) => {
@@ -35,37 +55,32 @@ export function Form(): React.ReactElement {
     <form onSubmit={handleSubmit(handleFormSubmit)}>
       <Label
         label="Do you suffer from any medical issues or ailments?"
-        name="issuesRadio"
+        name="medicalIssues"
         required
       />
-      <div className="flex">
+      <div className="flex space-x-4">
         <RadioButton
           checked={medicalIssues}
           label="Yes"
           name="medicalIssues"
-          onChange={handleChange}
+          onChange={() => handleChange("medicalIssues", true)}
         />
-        <div className="ml-4">
-          <RadioButton
-            checked={!medicalIssues}
-            label="No"
-            name="medicalIssues"
-            onChange={handleChange}
-          />
-        </div>
+        <RadioButton
+          checked={medicalIssues === false}
+          label="No"
+          name="medicalIssues"
+          onChange={() => handleChange("medicalIssues", false)}
+        />
       </div>
+      {errors.medicalIssues && <InputError error={errors.medicalIssues} />}
       {medicalIssues && (
         <Textarea
           className="mt-4"
-          componentRef={register(
-            medicalIssues
-              ? {
-                  required: "Please provide information of medical issues",
-                }
-              : {}
-          )}
-          error={errors.issues}
-          name="issues"
+          componentRef={register({
+            required: "Please provide details of medical issues"
+          })}
+          error={errors.medicalIssuesNotes}
+          name="medicalIssuesNotes"
           required
         />
       )}
@@ -75,36 +90,32 @@ export function Form(): React.ReactElement {
           name="medicationRequired"
           required
         />
-        <div className="flex">
+        <div className="flex space-x-4">
           <RadioButton
             checked={medicationRequired}
             label="Yes"
             name="medicationRequired"
-            onChange={handleChange}
+            onChange={() => handleChange("medicationRequired", true)}
           />
-          <div className="ml-4">
-            <RadioButton
-              checked={!medicationRequired}
-              label="No"
-              name="medicationRadio"
-              onChange={handleChange}
-            />
-          </div>
+          <RadioButton
+            checked={medicationRequired === false}
+            label="No"
+            name="medicationRequired"
+            onChange={() => handleChange("medicationRequired", false)}
+          />
         </div>
+        {errors.medicationRequired && (
+          <InputError error={errors.medicationRequired} />
+        )}
       </div>
       {medicationRequired && (
         <Textarea
           className="mt-4"
-          componentRef={register(
-            medicationRequired
-              ? {
-                  required:
-                    "Please provide information of medication requirements",
-                }
-              : {}
-          )}
-          error={errors.medication}
-          name="medication"
+          componentRef={register({
+            required: "Please provide details of medication requirements"
+          })}
+          error={errors.medicationRequiredNotes}
+          name="medicationRequiredNotes"
           required
         />
       )}
