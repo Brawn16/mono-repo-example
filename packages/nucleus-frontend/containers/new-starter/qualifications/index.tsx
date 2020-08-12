@@ -7,7 +7,7 @@ import { Select } from "@sdh-project-services/nucleus-ui/dist/select";
 import Router from "next/router";
 import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { FaAd, FaPlus } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa";
 import { Anchor } from "../../../components/anchor";
 import { Head } from "../../../components/head";
 import { Context } from "../../../contexts/context";
