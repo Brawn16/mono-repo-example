@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button,
+  Button
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Upload } from "@sdh-project-services/nucleus-ui/dist/upload";
 import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewer";
@@ -18,11 +18,11 @@ export function Form(): React.ReactElement {
     handleSubmit,
     register,
     setValue,
-    watch,
+    watch
   } = useForm<NewStarterMyPhotoFormData>({ defaultValues: values });
-  const watchPhotoId = watch("photoId");
   const { photoId } = getValues();
 
+  watch("photoId");
   useEffect(() => {
     register({ name: "photoId" }, { required: "Photo is required" });
   }, []);
@@ -46,7 +46,7 @@ export function Form(): React.ReactElement {
           onChange={handleChange}
           tags={["profile-pic", "public"]}
         />
-        {watchPhotoId && (
+        {photoId && (
           <UploadViewer id={photoId}>
             {({ url }) => (
               <img alt="Profile" className="block max-w-xs" src={url} />

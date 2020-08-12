@@ -12,7 +12,7 @@ export function Input(props: InputProps): React.ReactElement {
     name,
     required,
     iconType: Icon,
-    positionIconLeft,
+    positionIconLeft
   } = props;
   const iconPostionClassName = positionIconLeft ? "left-0" : "right-0";
 

@@ -16,12 +16,12 @@ export const resolvers = [
   UploadResolver,
   UserResolver,
   WorkPackResolver,
-  WorkstreamResolver,
+  WorkstreamResolver
 ];
 
 export function getSchema(): GraphQLSchema {
   return buildSchemaSync({
     authChecker: checkAuth,
-    resolvers,
+    resolvers
   });
 }

@@ -12,7 +12,7 @@ config();
 function getSecret(SecretId: string): Promise<{ [key: string]: string }> {
   return new Promise((resolve, reject) => {
     new SecretsManager({
-      region: env.AWS_REGION,
+      region: env.AWS_REGION
     }).getSecretValue({ SecretId }, (error, data) => {
       if (error) {
         reject(error);
@@ -36,7 +36,7 @@ export async function bootstrap() {
   // Load secrets
   if (env.AWS_SECRET) {
     const secrets = await getSecret(env.AWS_SECRET);
-    Object.keys(secrets).forEach((key) => {
+    Object.keys(secrets).forEach(key => {
       env[key] = secrets[key];
     });
   }
@@ -44,6 +44,6 @@ export async function bootstrap() {
   // Create database connection and run migrations
   const connection = await createConnection();
   await connection.runMigrations({
-    transaction: "each",
+    transaction: "each"
   });
 }

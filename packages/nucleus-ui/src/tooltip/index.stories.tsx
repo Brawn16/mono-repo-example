@@ -3,7 +3,7 @@ import { Tooltip } from ".";
 
 export default {
   component: Tooltip,
-  title: "Tooltip",
+  title: "Tooltip"
 };
 
 export const tooltip = () => {

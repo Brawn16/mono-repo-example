@@ -13,13 +13,13 @@ export class NucleusStack extends Stack {
       description: `Stack for Nucleus (${branch})`,
       env: {
         account: "303003277076",
-        region: "eu-west-1",
+        region: "eu-west-1"
       },
       tags: {
         branch,
-        project: "nucleus",
+        project: "nucleus"
       },
-      terminationProtection: protection,
+      terminationProtection: protection
     });
 
     this.nucleusBackend = new NucleusBackend(this, branch, protection);

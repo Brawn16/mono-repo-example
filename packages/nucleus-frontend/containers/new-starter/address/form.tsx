@@ -2,9 +2,10 @@ import { AddressLookup } from "@sdh-project-services/nucleus-ui/dist/address-loo
 import { AddressLookupAddress } from "@sdh-project-services/nucleus-ui/dist/address-lookup/types";
 import {
   PrimaryButton,
-  Button,
+  Button
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
+import { capitalCase } from "change-case";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Anchor } from "../../../components/anchor";
@@ -20,7 +21,7 @@ export function Form() {
   const handleAddressSelection = (address: AddressLookupAddress) => {
     const keys = Object.keys(address) as (keyof AddressLookupAddress)[];
     keys.forEach((key: keyof AddressLookupAddress) => {
-      setValue(key, address[key]);
+      setValue(`address${capitalCase(key)}`, address[key]);
     });
   };
 
@@ -31,7 +32,7 @@ export function Form() {
   return (
     <>
       <div className="md:flex-col md:items-center md:flex w-all">
-        <div className="flex flex-col md:w-1/2">
+        <div className="flex flex-col">
           <AddressLookup onAddressSelect={handleAddressSelection} />
           <div className="flex items-center justify-center  py-6">
             <hr className="w-1/2 border-orange-600" />
@@ -48,18 +49,18 @@ export function Form() {
           <Input
             className="md:pr-4 md:w-1/2"
             componentRef={register({
-              required: "Address line 1 is required",
+              required: "Address line 1 is required"
             })}
             error={errors.line1}
             label="Address Line 1"
-            name="line1"
+            name="addressLine1"
             required
           />
           <Input
             className="mt-4 md:mt-0 md:pl-4 md:w-1/2"
             componentRef={register}
             label="Address Line 2"
-            name="line2"
+            name="addressLine2"
           />
         </div>
         <div className="md:flex">
@@ -67,13 +68,13 @@ export function Form() {
             className="mt-4 md:pr-4 md:w-1/2"
             componentRef={register}
             label="Address Line 3"
-            name="line3"
+            name="addressLine3"
           />
           <Input
             className="mt-4 md:pl-4 md:w-1/2"
             componentRef={register}
             label="Town/City"
-            name="townCity"
+            name="addressTownCity"
           />
         </div>
         <div className="md:flex">
@@ -81,16 +82,16 @@ export function Form() {
             className="mt-4 md:pr-4 md:w-1/2"
             componentRef={register}
             label="County"
-            name="county"
+            name="addressCounty"
           />
           <Input
             className="mt-4 md:pl-4 md:w-1/2"
             componentRef={register({
-              required: "Postcode is required",
+              required: "Postcode is required"
             })}
             error={errors.postcode}
             label="Postcode"
-            name="postcode"
+            name="addressPostcode"
             required
           />
         </div>

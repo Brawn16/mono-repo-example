@@ -3,7 +3,7 @@ import { FieldsetProps } from "./types";
 
 export function Fieldset({
   children,
-  className = "",
+  className = ""
 }: React.PropsWithChildren<FieldsetProps>) {
   return (
     <fieldset className={`p-4 border border-gray-200 ${className}`}>

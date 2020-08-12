@@ -10,7 +10,7 @@ export function InProgress({
   file,
   onComplete,
   onDelete,
-  tags,
+  tags
 }: UploadInProgressProps) {
   const [error, setError] = useState<string>();
   const [progress, setProgress] = useState(1);
@@ -30,9 +30,9 @@ export function InProgress({
             contentType: type,
             name,
             size,
-            tags,
-          },
-        },
+            tags
+          }
+        }
       });
 
       // Parse presigned data
@@ -43,14 +43,14 @@ export function InProgress({
 
       // Build form data
       const formData = new FormData();
-      postFieldKeys.forEach((key) => formData.append(key, postFields[key]));
+      postFieldKeys.forEach(key => formData.append(key, postFields[key]));
       formData.append("file", file);
 
       // Upload file
       await axios.post(presignedPostUrl, formData, {
         onUploadProgress: ({ loaded, total }: ProgressEvent) => {
           setProgress((loaded / total) * 100);
-        },
+        }
       });
 
       onComplete(upload.id, file.name);

@@ -14,7 +14,7 @@ export class CreateSubcontractorRecords1597135089904
         { name: "DW" },
         { name: "Pioneer" },
         { name: "NE Construction" },
-        { name: "BPH" },
+        { name: "BPH" }
       ])
       .execute();
   }

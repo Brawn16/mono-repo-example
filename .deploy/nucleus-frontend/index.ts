@@ -2,7 +2,7 @@ import { RemovalPolicy } from "@aws-cdk/core";
 import { sanitizeBranch } from "../utils";
 import {
   CloudFrontWebDistribution,
-  OriginAccessIdentity,
+  OriginAccessIdentity
 } from "@aws-cdk/aws-cloudfront";
 import { Bucket, BlockPublicAccess } from "@aws-cdk/aws-s3";
 import { BucketDeployment, Source } from "@aws-cdk/aws-s3-deployment";
@@ -22,7 +22,7 @@ export class NucleusFrontend {
     this.bucket = new Bucket(stack, "NucleusFrontendBucket", {
       blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
       bucketName: `${namePrefix}-Bucket`.toLowerCase(),
-      removalPolicy: RemovalPolicy.DESTROY,
+      removalPolicy: RemovalPolicy.DESTROY
     });
 
     // Create cloudfront OAI
@@ -30,7 +30,7 @@ export class NucleusFrontend {
       stack,
       "NucleusFrontendCloudFrontOriginAccessIdentity",
       {
-        comment: `CloudFront origin access identity for Nucleus frontend (${branch})`,
+        comment: `CloudFront origin access identity for Nucleus frontend (${branch})`
       }
     );
 
@@ -47,22 +47,22 @@ export class NucleusFrontend {
           {
             errorCode: 404,
             responseCode: 200,
-            responsePagePath: "/index.html",
-          },
+            responsePagePath: "/index.html"
+          }
         ],
         originConfigs: [
           {
             behaviors: [
               {
-                isDefaultBehavior: true,
-              },
+                isDefaultBehavior: true
+              }
             ],
             s3OriginSource: {
               originAccessIdentity: this.cloudFrontOriginAccessIdentity,
-              s3BucketSource: this.bucket,
-            },
-          },
-        ],
+              s3BucketSource: this.bucket
+            }
+          }
+        ]
       }
     );
 
@@ -76,8 +76,8 @@ export class NucleusFrontend {
         sources: [
           Source.asset(
             resolve(__dirname, "../../packages/nucleus-frontend/out")
-          ),
-        ],
+          )
+        ]
       }
     );
   }
