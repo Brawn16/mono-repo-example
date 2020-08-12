@@ -3,42 +3,24 @@ import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewe
 import React from "react";
 import { UploadProps } from "./types";
 
-export const Uploader = (props: UploadProps) => {
-  const {
-    name,
-    error,
-    label,
-    multiple,
-    onChange,
-    tags,
-    watch,
-    getValues,
-  } = props;
-
-  const watchIdArray = watch(name, []);
-  const idArray: [] = getValues(name);
-
+export function Uploader({ error, name, onChange, values = [] }: UploadProps) {
   return (
-    <div className="py-4">
+    <div className="mt-4">
       <Upload
         error={error}
-        label={label}
-        multiple={multiple}
-        onChange={(fileIds) => onChange(fileIds, name)}
-        tags={tags}
+        multiple
+        onChange={value => onChange(name, value)}
+        tags={["identification", "public"]}
       />
-      {watchIdArray.length > 0 &&
-        idArray.map((id) => {
-          return (
-            <div className="border">
-              <UploadViewer key={id} id={id}>
-                {({ url }) => (
-                  <img alt="Profile" className="block max-w-xs" src={url} />
-                )}
-              </UploadViewer>
-            </div>
-          );
-        })}
+      {values.map(id => (
+        <div key={id} className="mt-4">
+          <UploadViewer id={id}>
+            {({ url }) => (
+              <img alt="Profile" className="block max-w-xs" src={url} />
+            )}
+          </UploadViewer>
+        </div>
+      ))}
     </div>
   );
-};
+}
