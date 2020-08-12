@@ -1,6 +1,17 @@
+import { FieldError } from "react-hook-form";
+
 export interface NewStarterIdentificationFormData {
-  idOneUploadOne: string;
-  idOneUploadTwo: string;
-  idTwo: string;
-  idThree: string;
+  identification: NewStarterIdentificationFormDataIdentification[];
+}
+
+export interface NewStarterIdentificationFormDataIdentification {
+  photos: string[];
+  type: string;
+}
+
+export interface UploadProps {
+  error?: FieldError;
+  onChange: (name: string, value: string[]) => void;
+  name: string;
+  values?: string[];
 }

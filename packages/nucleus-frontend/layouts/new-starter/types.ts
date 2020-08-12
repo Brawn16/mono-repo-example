@@ -8,6 +8,10 @@ export interface NewStarterFormData {
   values: { [key: string]: any };
 }
 
+export interface NewStarterProps {
+  showSteps?: boolean;
+}
+
 export interface NewStarterStep {
   href: string;
   label: string;
