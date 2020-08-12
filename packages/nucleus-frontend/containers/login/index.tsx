@@ -10,7 +10,7 @@ export function Login(): React.ReactElement {
       <Head title="Login" />
       <SplitScreen>
         <h1 className="text-2xl font-extrabold text-gray-900 md:text-3xl">
-          Login <span className="hidden md:inline">to your account</span>
+          Login
         </h1>
         <LoginForm onSuccess={() => Router.push("/dashboard")} />
       </SplitScreen>

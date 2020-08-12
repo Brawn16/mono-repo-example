@@ -4,7 +4,7 @@ import { Textarea } from ".";
 
 export default {
   component: Textarea,
-  title: "Textarea"
+  title: "Textarea",
 };
 
 export const textarea = () => {
@@ -16,7 +16,7 @@ export const textarea = () => {
 export const withError = () => {
   const error = {
     message: "Please provide some text",
-    type: "error"
+    type: "error",
   };
 
   return (

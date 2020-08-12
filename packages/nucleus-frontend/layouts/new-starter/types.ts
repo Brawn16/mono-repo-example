@@ -1,7 +1,14 @@
-import { createContext } from "react";
+export interface NewStarterFormContext {
+  submitStep: (step: number, values: any) => void;
+  values: { [key: string]: string };
+}
 
-const context = createContext({});
+export interface NewStarterFormData {
+  step: number;
+  values: { [key: string]: string };
+}
 
-export const { Consumer: DataConsumer } = context;
-
-export const { Provider: DataProvider } = context;
+export interface NewStarterStep {
+  href: string;
+  label: string;
+}

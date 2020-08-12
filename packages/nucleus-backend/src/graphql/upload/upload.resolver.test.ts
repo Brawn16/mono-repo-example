@@ -14,14 +14,14 @@ it("creates a presigned upload", async () => {
   const { save } = stubEntity(stub, UploadEntity, [upload]);
   stub(S3.prototype, "createPresignedPost").yields(undefined, {
     fields: { field: "value" },
-    url: "url"
+    url: "url",
   });
 
   const result = await new UploadResolver().createPresignedUpload({
     contentType: "contentType",
     name: "name",
     size: 100,
-    tags: ["tag"]
+    tags: ["tag"],
   });
 
   expect(save.called);
@@ -32,7 +32,7 @@ it("creates a presigned upload", async () => {
       contentType: "contentType",
       name: "name",
       size: 100,
-      tags: ["tag"]
-    }
+      tags: ["tag"],
+    },
   });
 });

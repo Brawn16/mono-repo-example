@@ -1,0 +1,13 @@
+query subcontractors {
+  subcontractors {
+    id
+    name
+  }
+}
+
+query workstreams {
+  workstreams {
+    id
+    name
+  }
+}
