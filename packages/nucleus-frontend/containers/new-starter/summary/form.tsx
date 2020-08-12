@@ -4,6 +4,7 @@ import {
   Button,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
+import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewer";
 import React, { useContext } from "react";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
@@ -13,24 +14,15 @@ import {
 } from "../work-details/queries.gql";
 import { Field } from "./field";
 import { Fields } from "./fields";
-import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewer";
 
-const findWorkstreamValue = (workValues: any, id: string) => {
+const findWorkValue = (workValues: any, workValueName: string, id: string) => {
   if (workValues) {
     const value =
-      workValues.workstreams.find((workValue: any) => workValue.id === id) ||
+      workValues[workValueName].find((workValue: any) => workValue.id === id) ||
       {};
     return value.name;
   }
-};
-
-const findSubcontractorValue = (workValues: any, id: string) => {
-  if (workValues) {
-    const value =
-      workValues.subcontractors.find((workValue: any) => workValue.id === id) ||
-      {};
-    return value.name;
-  }
+  return "";
 };
 
 export function Form(): React.ReactElement {
@@ -69,12 +61,17 @@ export function Form(): React.ReactElement {
       <Fieldset className="mt-4">
         <Field
           label="Workstream"
-          value={findWorkstreamValue(workstreamsData, values.workstream)}
+          value={findWorkValue(
+            workstreamsData,
+            "workstreams",
+            values.workstream
+          )}
         />
         <Field
           label="Sub-Contractor"
-          value={findSubcontractorValue(
+          value={findWorkValue(
             subcontractorsData,
+            "subcontractors",
             values.subcontractor
           )}
         />
@@ -162,7 +159,7 @@ export function Form(): React.ReactElement {
           <Button>Back</Button>
         </Anchor>
         <Anchor href="/new-starter/summary">
-          <PrimaryButton>Continue</PrimaryButton>
+          <PrimaryButton>Submit</PrimaryButton>
         </Anchor>
       </div>
     </>
