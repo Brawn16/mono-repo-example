@@ -8,7 +8,11 @@ export const Fields = (props: FieldsProps) => {
       <p className="font-bold">{`${label}:`}</p>
       <div>
         {values.map((value) => {
-          return <p key={value}>{value}</p>;
+          return (
+            <p key={value} className="text-right">
+              {value}
+            </p>
+          );
         })}
       </div>
     </div>
