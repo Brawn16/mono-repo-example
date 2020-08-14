@@ -6,8 +6,8 @@ import { Form } from "./form";
 export function Summary(): React.ReactElement {
   return (
     <>
-      <Head title="Personal Details - New Starter Form" />
-      <NewStarterLayout>
+      <Head title="Summary - New Starter Form" />
+      <NewStarterLayout title="Summary">
         <Form />
       </NewStarterLayout>
     </>

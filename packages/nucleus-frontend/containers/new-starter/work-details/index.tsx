@@ -7,7 +7,7 @@ export function WorkDetails(): React.ReactElement {
   return (
     <>
       <Head title="Work Details - New Starter Form" />
-      <NewStarterLayout>
+      <NewStarterLayout title="Work Details">
         <Form />
       </NewStarterLayout>
     </>

@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import {
   PrimaryButton,
-  Button,
+  Button
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewer";
@@ -10,7 +10,7 @@ import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
 import {
   subcontractors as subcontractorsQuery,
-  workstreams as workstreamsQuery,
+  workstreams as workstreamsQuery
 } from "../work-details/queries.gql";
 import { Field } from "./field";
 import { Fields } from "./fields";
@@ -51,7 +51,10 @@ export function Form(): React.ReactElement {
         </div>
       </Fieldset>
       <Fieldset className="mt-4">
-        <Fields label="Address" values={[values.line1, values.postcode]} />
+        <Fields
+          label="Address"
+          values={[values.addressLine1, values.addressPostcode]}
+        />
         <div className="mt-4 text-right">
           <Anchor href="/new-starter/address">
             <Button>Edit</Button>
@@ -84,9 +87,8 @@ export function Form(): React.ReactElement {
       <Fieldset className="mt-4">
         <Field
           label="Qualifications"
-          value={`${
-            values.qualificationPhotoIds && values.qualificationPhotoIds.length
-          } Qualifications Uploaded`}
+          value={`${values.qualificationPhotoIds &&
+            values.qualificationPhotoIds.length} Qualifications Uploaded`}
         />
         <div className="mt-4 text-right">
           <Anchor href="/new-starter/qualifications">
@@ -158,7 +160,7 @@ export function Form(): React.ReactElement {
         <Anchor href="/new-starter/medical">
           <Button>Back</Button>
         </Anchor>
-        <Anchor href="/new-starter/summary">
+        <Anchor href="/new-starter/confirmation">
           <PrimaryButton>Submit</PrimaryButton>
         </Anchor>
       </div>

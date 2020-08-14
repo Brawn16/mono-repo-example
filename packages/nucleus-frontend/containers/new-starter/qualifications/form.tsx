@@ -11,11 +11,12 @@ import { NewStarterQualificationsFormData } from "./types";
 
 export function Form(): React.ReactElement {
   const { submitStep, values } = useContext(Context);
-  const { handleSubmit, register, setValue } = useForm<
+  const { handleSubmit, getValues, register, setValue } = useForm<
     NewStarterQualificationsFormData
   >({
     defaultValues: values
   });
+  const { qualificationPhotoIds } = getValues();
 
   useEffect(() => {
     register({ name: "qualificationPhotoIds" });
@@ -31,7 +32,6 @@ export function Form(): React.ReactElement {
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <div className="mb-8">Text to go here</div>
       <Upload
         accept="image/*"
         buttonEntity="photo"
@@ -39,6 +39,7 @@ export function Form(): React.ReactElement {
         multiple
         onChange={handleChange}
         tags={["qualification", "public"]}
+        values={qualificationPhotoIds as string[]}
       />
       <div className="flex justify-between mt-8">
         <Anchor href="/new-starter/work-details">

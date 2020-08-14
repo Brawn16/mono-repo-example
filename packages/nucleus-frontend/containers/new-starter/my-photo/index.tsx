@@ -6,10 +6,10 @@ import { Form } from "./form";
 export function MyPhoto(): React.ReactElement {
   return (
     <>
-      <Head title="New Starter Form" />
-      <NewStarterLayout>
+      <Head title="My Photo - New Starter Form" />
+      <NewStarterLayout title="My Photo">
         <div>To create your worker profile we will need your photo:</div>
-        <div className="mt-8">
+        <div className="mt-4">
           <div className="font-bold">The photo must:</div>
           <ul className="pl-4 list-disc">
             <li>contain no other objects or people</li>
@@ -17,7 +17,7 @@ export function MyPhoto(): React.ReactElement {
             <li>be in clear contrast to the background</li>
           </ul>
         </div>
-        <div className="mt-8">
+        <div className="mt-4">
           <div className="font-bold">And you must:</div>
           <ul className="pl-4 list-disc">
             <li>be facing forwards and looking straight at the camera</li>

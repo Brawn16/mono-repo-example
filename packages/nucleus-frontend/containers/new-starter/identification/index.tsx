@@ -7,24 +7,41 @@ export function Identification(): React.ReactElement {
   return (
     <>
       <Head title="Identification - New Starter Form" />
-      <NewStarterLayout>
+      <NewStarterLayout title="Identification">
         <div className="pl-4 my-8">
           <ul className="list-disc">
             To prove you have the right to work in the UK, please provide a
-            image of your Passport, National Identity Card or Biometric
-            Residency Permit, and one of the following:
-            <ul className="pl-4 mt-2 mb-4 list-disc">
-              <li>Driving Licence</li>
-              <li>Full Birth Certificate</li>
+            Valid (must be in date) copy of one of the following:
+            <ul className="pl-4 my-4 list-disc">
+              <li>UK/EEA Passport </li>
+              <li>UK/EEA National identity card</li>
+              <li>Non-UK passport (Photo page and Work permit Page)</li>
+              <li>Biometric Residence Permit (with right to work)</li>
+              <li>
+                UK Birth Certificate with Photo ID (3) (Passport sized photo
+                that is countersigned on the back by someone who can confirm
+                your identity)
+              </li>
             </ul>
-            If you do not have these, submit the following
-            <ul className="pl-4 mt-2 mb-4 list-disc">
-              <li>Bank statement no more than 3 months old</li>
-              <li>HMRC letter no more than 12 months old</li>
-              <li>Utility bill no more than 3 months old</li>
+            To confirm your address, please submit one of the following:
+            <ul className="pl-4 mt-4 list-disc">
+              <li>
+                Bank statement no more than 3 months old (relevant Address
+                showing date page)
+              </li>
+              <li>
+                HMRC letter no more than 12 months old (relevant Address showing
+                date page)
+              </li>
+              <li>
+                Utility bill no more than 3 months old (relevant Address showing
+                date page)
+              </li>
+              <li>
+                UK Driving License (please upload both front and back of card)
+              </li>
             </ul>
           </ul>
-          * if providing Driving License upload both front and back of card
         </div>
         <Form />
       </NewStarterLayout>
