@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import { Anchor } from "../../components/anchor";
 import { Context } from "./context";
 import { background, logo } from "./index.module.css";
@@ -16,7 +16,7 @@ function getLocalFormData(): NewStarterFormData {
 
   return {
     step: -1,
-    values: {}
+    values: {},
   };
 }
 
@@ -89,11 +89,28 @@ function renderSteps() {
 export function NewStarter({
   children,
   showSteps = true,
-  title
+  title,
 }: React.PropsWithChildren<NewStarterProps>): React.ReactElement {
   const { values } = getLocalFormData();
   const year = new Date().getFullYear();
   const router = useRouter();
+
+  useEffect(() => {
+    const { step } = getLocalFormData();
+    const { asPath } = router;
+
+    // If we are on confirmation, do not check
+    if (asPath === "/new-starter/confirmation") {
+      return;
+    }
+
+    const stepIndex =
+      steps.findIndex(({ href }: NewStarterStep) => href === asPath) || -1;
+
+    if (stepIndex > step - 1) {
+      router.push(steps[step + 1].href);
+    }
+  }, []);
 
   const submitStep = (
     step: number,

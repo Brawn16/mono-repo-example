@@ -6,12 +6,12 @@ import {
   PrimaryButton,
   DangerButton,
   SecondaryButton,
-  SuccessButton
+  SuccessButton,
 } from ".";
 
 export default {
   component: Button,
-  title: "Button"
+  title: "Button",
 };
 
 export const button = () => {

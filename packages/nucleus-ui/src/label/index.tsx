@@ -4,7 +4,7 @@ import { LabelProps } from "./types";
 export function Label({
   label,
   name,
-  required
+  required,
 }: LabelProps): React.ReactElement {
   return (
     <label className="block mb-1 text-gray-600" htmlFor={name}>

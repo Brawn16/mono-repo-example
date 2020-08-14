@@ -27,6 +27,7 @@
         "allowPattern": "^_"
       }
     ],
+    "import/no-cycle": "off",
     "import/no-default-export": "error",
     "import/no-extraneous-dependencies": "off",
     "import/order": [

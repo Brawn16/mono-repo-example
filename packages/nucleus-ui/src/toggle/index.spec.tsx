@@ -6,7 +6,7 @@ import { Toggle } from ".";
 describe("Toggle", () => {
   const toggleError: FieldError = {
     type: "toggle",
-    message: "toggle error"
+    message: "toggle error",
   };
   it("shows error state", () => {
     const { container } = render(

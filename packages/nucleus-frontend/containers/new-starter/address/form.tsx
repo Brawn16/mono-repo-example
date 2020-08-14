@@ -2,7 +2,7 @@ import { AddressLookup } from "@sdh-project-services/nucleus-ui/dist/address-loo
 import { AddressLookupAddress } from "@sdh-project-services/nucleus-ui/dist/address-lookup/types";
 import {
   PrimaryButton,
-  Button
+  Button,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
 import { capitalCase } from "change-case";
@@ -49,7 +49,7 @@ export function Form() {
           <Input
             className="md:pr-4 md:w-1/2"
             componentRef={register({
-              required: "Address line 1 is required"
+              required: "Address line 1 is required",
             })}
             error={errors.line1}
             label="Address Line 1"
@@ -87,7 +87,7 @@ export function Form() {
           <Input
             className="mt-4 md:pl-4 md:w-1/2"
             componentRef={register({
-              required: "Postcode is required"
+              required: "Postcode is required",
             })}
             error={errors.postcode}
             label="Postcode"

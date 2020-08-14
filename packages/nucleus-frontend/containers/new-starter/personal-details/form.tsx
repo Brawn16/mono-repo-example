@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button
+  Button,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
 import React, { useContext } from "react";
@@ -27,7 +27,7 @@ export function Form(): React.ReactElement {
         <Input
           className="mt-4 md:mr-4 md:w-1/2"
           componentRef={register({
-            required: "First name is required"
+            required: "First name is required",
           })}
           error={errors.firstName}
           label="First Name"
@@ -37,7 +37,7 @@ export function Form(): React.ReactElement {
         <Input
           className="mt-4 md:ml-4 md:w-1/2"
           componentRef={register({
-            required: "Last name is required"
+            required: "Last name is required",
           })}
           error={errors.lastName}
           label="Last Name"
@@ -49,7 +49,7 @@ export function Form(): React.ReactElement {
         <Input
           className="mt-4 md:mr-4 md:w-1/2"
           componentRef={register({
-            required: "Phone number is required"
+            required: "Phone number is required",
           })}
           error={errors.phoneNumber}
           iconType={FiPhone}
@@ -65,24 +65,24 @@ export function Form(): React.ReactElement {
           componentRef={register({
             pattern: {
               message: "Invalid email address",
-              value: /^[\w%+.-]+@[\d.a-z-]+\.[a-z]{2,5}$/i
+              value: /^[\w%+.-]+@[\d.a-z-]+\.[a-z]{2,5}$/i,
             },
-            required: "Email is required"
+            required: "Email is required",
           })}
           error={errors.email}
           iconType={AiOutlineMail}
-          inputMode="email"
           label="Email"
           name="email"
           positionIconLeft
           required
+          type="email"
         />
       </div>
       <div className="md:flex">
         <Input
           className="mt-4 md:mr-4 md:w-1/2"
           componentRef={register({
-            required: "Emergency contact name is required"
+            required: "Emergency contact name is required",
           })}
           error={errors.emergencyContactName}
           label="Emergency Contact Name"
@@ -92,13 +92,13 @@ export function Form(): React.ReactElement {
         <Input
           className="mt-4 md:ml-4 md:w-1/2"
           componentRef={register({
-            required: "Emergency contact number is required"
+            required: "Emergency contact phone number is required",
           })}
           error={errors.emergencyContactNumber}
           iconType={FiPhone}
           inputMode="tel"
-          label="Emergency Contact Number"
-          name="emergencyContactNumber"
+          label="Emergency Contact Phone Number"
+          name="emergencyContactPhoneNumber"
           positionIconLeft
           required
           type="tel"

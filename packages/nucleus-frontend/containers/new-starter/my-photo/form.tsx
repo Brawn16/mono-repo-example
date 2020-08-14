@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button
+  Button,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Upload } from "@sdh-project-services/nucleus-ui/dist/upload";
 import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewer";
@@ -18,17 +18,17 @@ export function Form(): React.ReactElement {
     handleSubmit,
     register,
     setValue,
-    watch
+    watch,
   } = useForm<NewStarterMyPhotoFormData>({ defaultValues: values });
-  const { photoId } = getValues();
+  const { photoUpload } = getValues();
 
-  watch("photoId");
+  watch("photoUpload");
   useEffect(() => {
-    register({ name: "photoId" }, { required: "Photo is required" });
+    register({ name: "photoUpload" }, { required: "Photo is required" });
   }, []);
 
   const handleChange = ([id]: string[]) => {
-    setValue("photoId", id);
+    setValue("photoUpload", id);
   };
 
   const handleFormSubmit = (data: NewStarterMyPhotoFormData) => {
@@ -41,15 +41,15 @@ export function Form(): React.ReactElement {
         <Upload
           accept="image/*"
           buttonEntity="photo"
-          error={errors.photoId}
+          error={errors.photoUpload}
           label="Upload Photo"
           onChange={handleChange}
-          tags={["profile-pic", "public"]}
-          values={photoId ? [photoId] : undefined}
+          tags={["operativePhoto", "public"]}
+          values={photoUpload ? [photoUpload] : undefined}
         />
-        {photoId && (
+        {photoUpload && (
           <div className="mt-4">
-            <UploadViewer id={photoId}>
+            <UploadViewer id={photoUpload}>
               {({ url }) => (
                 <img alt="Profile" className="block max-w-xs" src={url} />
               )}

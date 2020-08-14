@@ -14,19 +14,19 @@ import { LoginFormData, LoginProps } from "./types";
 
 export function Login({
   children,
-  onSuccess = () => {}
+  onSuccess = () => {},
 }: React.PropsWithChildren<LoginProps>): React.ReactElement {
   const { errors, getValues, handleSubmit, register } = useForm<
     LoginFormData
   >();
   const [{ remember }, setCookie, removeCookie] = useCookies();
   const [login, { data, error }] = useMutation(loginMutation, {
-    errorPolicy: "all"
+    errorPolicy: "all",
   });
 
   const onSubmit = (formData: LoginFormData) => {
     login({
-      variables: filterObject(formData, ["email", "password"])
+      variables: filterObject(formData, ["email", "password"]),
     });
   };
 
@@ -59,15 +59,16 @@ export function Login({
         componentRef={register({
           pattern: {
             message: "Invalid email address",
-            value: /^[\w%+.-]+@[\d.a-z-]+\.[a-z]{2,5}$/i
+            value: /^[\w%+.-]+@[\d.a-z-]+\.[a-z]{2,5}$/i,
           },
-          required: "Email is required"
+          required: "Email is required",
         })}
         defaultValue={remember}
         error={errors.email}
         label="Email Address"
         name="email"
         required
+        type="email"
       />
       <Input
         autoComplete="current-password"
