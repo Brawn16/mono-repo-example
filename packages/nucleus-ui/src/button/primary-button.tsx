@@ -5,12 +5,14 @@ import { ButtonProps } from "./types";
 export function PrimaryButton(
   props: React.PropsWithChildren<ButtonProps>
 ): React.ReactElement {
-  const { children } = props;
+  const { children, className } = props;
   return (
     <Button
-      className="text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700"
-      loadingColor="#fff"
       {...props}
+      className={`font-semibold text-white bg-yellow-300 rounded hover:bg-yellow-400 active:bg-yellow-400 ${
+        className || ""
+      }`}
+      loadingColor="#fff"
     >
       {children}
     </Button>

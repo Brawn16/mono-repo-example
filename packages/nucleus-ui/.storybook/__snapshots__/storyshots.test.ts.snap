@@ -80,7 +80,7 @@ exports[`Storyshots Address Lookup Address Lookup 1`] = `
         </div>
       </div>
       <button
-        className="text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
+        className="font-semibold text-white bg-yellow-300 rounded hover:bg-yellow-400 active:bg-yellow-400  relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
         type="submit"
       >
         <span
@@ -217,7 +217,7 @@ exports[`Storyshots Button Button With Icon 1`] = `
   className="flex space-x-2"
 >
   <button
-    className="text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
+    className="font-semibold text-white bg-yellow-300 rounded hover:bg-yellow-400 active:bg-yellow-400  relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
     onClick={[Function]}
     type="submit"
   >
@@ -247,7 +247,7 @@ exports[`Storyshots Button Button With Icon 1`] = `
     </span>
   </button>
   <button
-    className="text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
+    className="font-semibold text-white bg-yellow-300 rounded hover:bg-yellow-400 active:bg-yellow-400  relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
     onClick={[Function]}
     type="submit"
   >
@@ -277,7 +277,7 @@ exports[`Storyshots Button Button With Icon 1`] = `
     </span>
   </button>
   <button
-    className="text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition cursor-not-allowed"
+    className="font-semibold text-white bg-yellow-300 rounded hover:bg-yellow-400 active:bg-yellow-400  relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition cursor-not-allowed"
     onClick={[Function]}
     type="submit"
   >
@@ -335,7 +335,7 @@ exports[`Storyshots Button Primary Button 1`] = `
   className="space-x-2"
 >
   <button
-    className="text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
+    className="font-semibold text-white bg-yellow-300 rounded hover:bg-yellow-400 active:bg-yellow-400  relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
     onClick={[Function]}
     type="submit"
   >
@@ -346,7 +346,7 @@ exports[`Storyshots Button Primary Button 1`] = `
     </span>
   </button>
   <button
-    className="text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition opacity-50 cursor-not-allowed"
+    className="font-semibold text-white bg-yellow-300 rounded hover:bg-yellow-400 active:bg-yellow-400  relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition opacity-50 cursor-not-allowed"
     disabled={true}
     onClick={[Function]}
     type="submit"
@@ -678,7 +678,7 @@ exports[`Storyshots Form Form 1`] = `
       className="mt-8"
     >
       <button
-        className="text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700 relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
+        className="font-semibold text-white bg-yellow-300 rounded hover:bg-yellow-400 active:bg-yellow-400  relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition"
         type="submit"
       >
         <span
