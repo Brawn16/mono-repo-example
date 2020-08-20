@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
+import { FiCheck } from "react-icons/fi";
 import { Anchor } from "../../components/anchor";
 import { Context } from "./context";
 import { background, logo } from "./index.module.css";
@@ -32,11 +33,13 @@ function renderStep({ href, label }: NewStarterStep, index: number) {
     <div className="flex flex-col align-center">
       <div>
         <div
-          className={`flex items-center justify-center w-8 h-8  text-xl ${
-            active ? "bg-white text-blue-900" : ""
+          className={`flex items-center justify-center w-8 h-8 text-xl ${
+            active || activePath ? "bg-white text-blue-900" : ""
           } font-bold border border-blue-300 rounded-full`}
         >
-          <div>{index + 1}</div>
+          <div>
+            {activePath ? <FiCheck className="font-bold" /> : index + 1}
+          </div>
         </div>
       </div>
 
@@ -121,7 +124,7 @@ export function NewStarter({
         {showSteps && renderSteps()}
       </div>
       <div className="flex w-full max-w-6xl border">
-        <div className="flex flex-col justify-between w-full mx-auto">
+        <div className="flex flex-col  w-full mx-auto">
           <div className="px-10 py-2 bg-gray-200">
             <h1 className="font-extrabold text-gray-900 border-b border-gray-200 text-md md:text-2xl">
               Register new starter
@@ -132,13 +135,13 @@ export function NewStarter({
             </div>
           </div>
           <div>
-            <div className=" px-10">
+            <div className="px-10">
               <Context.Provider value={{ submitStep, values }}>
                 {children}
               </Context.Provider>
             </div>
           </div>
-          <footer className="mt-8 text-xs text-gray-400">
+          <footer className="px-10 mt-8 text-xs text-gray-400">
             &copy; {year}. All Rights Reserved.
           </footer>
         </div>

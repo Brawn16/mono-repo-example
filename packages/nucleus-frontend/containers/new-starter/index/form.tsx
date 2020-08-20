@@ -44,7 +44,7 @@ export function Form(): React.ReactElement {
   const termsConsentWatch = watch("termsConsent");
   return (
     <>
-      <form onSubmit={handleSubmit(handleOnSubmit)}>
+      <form className="max-w-2xl" onSubmit={handleSubmit(handleOnSubmit)}>
         <Checkbox
           checked={requiredDocumentationWatch}
           className="my-2"
@@ -67,7 +67,9 @@ export function Form(): React.ReactElement {
             }}
           />
         </div>
-        <PrimaryButton className="w-full mt-5">Continue</PrimaryButton>
+        <PrimaryButton className="w-full mt-5 md:w-auto">
+          Continue
+        </PrimaryButton>
       </form>
     </>
   );

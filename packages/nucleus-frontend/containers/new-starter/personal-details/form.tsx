@@ -1,12 +1,11 @@
 import {
   PrimaryButton,
-  Button
+  SecondaryButton,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
+
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { AiOutlineMail } from "react-icons/ai";
-import { FiPhone } from "react-icons/fi";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
 import { NewStarterPersonalDetailsFormData } from "./types";
@@ -23,11 +22,17 @@ export function Form(): React.ReactElement {
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <div className="md:flex">
+      <Anchor className="flex mt-4 text-black" href="/new-starter">
+        {`<`}
+        <p className="underline">Back</p>
+      </Anchor>
+
+      <p className="mt-4 text-xl font-bold md:mt-8 md:text-3xl">Your details</p>
+      <div className="max-w-2xl font-bold md:flex">
         <Input
           className="mt-4 md:mr-4 md:w-1/2"
           componentRef={register({
-            required: "First name is required"
+            required: "First name is required",
           })}
           error={errors.firstName}
           label="First Name"
@@ -37,7 +42,7 @@ export function Form(): React.ReactElement {
         <Input
           className="mt-4 md:ml-4 md:w-1/2"
           componentRef={register({
-            required: "Last name is required"
+            required: "Last name is required",
           })}
           error={errors.lastName}
           label="Last Name"
@@ -45,14 +50,13 @@ export function Form(): React.ReactElement {
           required
         />
       </div>
-      <div className="md:flex">
+      <div className="max-w-2xl font-bold">
         <Input
-          className="mt-4 md:mr-4 md:w-1/2"
+          className="mt-4 md:w-full"
           componentRef={register({
-            required: "Phone number is required"
+            required: "Phone number is required",
           })}
           error={errors.phoneNumber}
-          iconType={FiPhone}
           inputMode="tel"
           label="Phone Number"
           name="phoneNumber"
@@ -61,28 +65,26 @@ export function Form(): React.ReactElement {
           type="tel"
         />
         <Input
-          className="mt-4 md:ml-4 md:w-1/2"
+          className="mt-4 md:w-full"
           componentRef={register({
             pattern: {
               message: "Invalid email address",
-              value: /^[\w%+.-]+@[\d.a-z-]+\.[a-z]{2,5}$/i
+              value: /^[\w%+.-]+@[\d.a-z-]+\.[a-z]{2,5}$/i,
             },
-            required: "Email is required"
+            required: "Email is required",
           })}
           error={errors.email}
-          iconType={AiOutlineMail}
           inputMode="email"
           label="Email"
           name="email"
           positionIconLeft
           required
         />
-      </div>
-      <div className="md:flex">
+
         <Input
-          className="mt-4 md:mr-4 md:w-1/2"
+          className="mt-4 md:w-full"
           componentRef={register({
-            required: "Emergency contact name is required"
+            required: "Emergency contact name is required",
           })}
           error={errors.emergencyContactName}
           label="Emergency Contact Name"
@@ -90,12 +92,11 @@ export function Form(): React.ReactElement {
           required
         />
         <Input
-          className="mt-4 md:ml-4 md:w-1/2"
+          className="mt-4 md:w-full"
           componentRef={register({
-            required: "Emergency contact number is required"
+            required: "Emergency contact number is required",
           })}
           error={errors.emergencyContactNumber}
-          iconType={FiPhone}
           inputMode="tel"
           label="Emergency Contact Number"
           name="emergencyContactNumber"
@@ -104,11 +105,13 @@ export function Form(): React.ReactElement {
           type="tel"
         />
       </div>
-      <div className="flex justify-between mt-8">
+      <div className="flex justify-between max-w-2xl mt-8">
         <Anchor href="/new-starter">
-          <Button>Back</Button>
+          <div className="hidden md:block">
+            <SecondaryButton>Back</SecondaryButton>
+          </div>
         </Anchor>
-        <PrimaryButton>Continue</PrimaryButton>
+        <PrimaryButton className="w-full md:w-auto">Continue</PrimaryButton>
       </div>
     </form>
   );

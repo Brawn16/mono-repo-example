@@ -13,7 +13,7 @@ export function NewStarter(): React.ReactElement {
       <NewStarterLayout>
         <h2 className="py-5 text-xl font-bold md:text-3xl">Before you start</h2>
         <p className="font-semibold">Please confirm you have the following:</p>
-        <div className="mt-4">
+        <div className="max-w-2xl mt-4">
           <Fieldset>
             <div className="flex">
               <FaRegIdCard className="text-5xl text-gray-400" />
