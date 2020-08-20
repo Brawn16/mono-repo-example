@@ -4,11 +4,14 @@ import { Checkbox } from "@sdh-project-services/nucleus-ui/dist/checkbox";
 import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Context } from "../../../layouts/new-starter/context";
+import { PreparationProps } from "./types";
 
 export function Form(): React.ReactElement {
   const { submitStep, values } = useContext(Context);
 
-  const { errors, handleSubmit, register, setValue, watch } = useForm<any>({
+  const { errors, handleSubmit, register, setValue, watch } = useForm<
+    PreparationProps
+  >({
     defaultValues: values,
   });
   useEffect(() => {

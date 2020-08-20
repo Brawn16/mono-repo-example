@@ -141,7 +141,7 @@ export function NewStarter({
               </Context.Provider>
             </div>
           </div>
-          <footer className="px-10 mt-8 text-xs text-gray-400">
+          <footer className="bottom-0 px-10 mt-8 text-xs text-gray-400 absolute">
             &copy; {year}. All Rights Reserved.
           </footer>
         </div>

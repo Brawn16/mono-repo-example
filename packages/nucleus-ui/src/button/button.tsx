@@ -19,11 +19,11 @@ export function Button(
     postionIconRight,
     disabled,
     loading,
-    loadingColor
+    loadingColor,
   } = props;
-  let innerClassName = "uppercase relative flex items-center justify-center";
+  let innerClassName = "truncate relative flex items-center justify-center";
   let {
-    className = "text-gray-800 border border-gray-300 hover:border-gray-400 active:border-gray-400"
+    className = "text-gray-800 border border-gray-300 hover:border-gray-400 active:border-gray-400",
   } = props;
 
   className +=

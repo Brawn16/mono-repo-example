@@ -4,15 +4,17 @@
 }
 
 .background:before {
-  backdrop-filter: blur(0.15rem);
+  backdrop-filter: blur(0.08rem);
   content: "";
 
-  @apply absolute bg-blue-900 bg-opacity-50 inset-0 flex h-16;
+  @apply absolute bg-blue-900 bg-opacity-75 inset-0 flex h-16;
 }
 .logo {
   background: url(./logo.png);
   position: sticky;
-  @apply absolute bg-contain top-0 left-0 h-6 mx-5 inset-y-4 w-20 mt-1;
+  background-repeat: no-repeat;
+  @apply absolute bg-contain top-0 left-0 h-6 mx-5
+    inset-y-4 w-20 mt-1;
 }
 
 @media (min-width: 1024px) {
@@ -29,7 +31,7 @@
   }
 
   .background:before {
-    backdrop-filter: blur(0.15rem);
+    backdrop-filter: blur(0.08rem);
     content: "";
     @apply h-auto;
   }

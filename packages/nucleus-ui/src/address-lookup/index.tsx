@@ -10,17 +10,17 @@ import { addressLookup as addressLookupQuery } from "./queries";
 import {
   AddressLookupFormData,
   AddressLookupProps,
-  AddressLookupAddress
+  AddressLookupAddress,
 } from "./types";
 
 export const AddressLookup = ({
   label = "Postcode",
-  onAddressSelect
+  onAddressSelect,
 }: AddressLookupProps) => {
   const { register, handleSubmit, errors } = useForm<AddressLookupFormData>();
   const [showDropdown, setShowDropdown] = useState(false);
   const [addressLookup, { data, error }] = useLazyQuery(addressLookupQuery, {
-    errorPolicy: "all"
+    errorPolicy: "all",
   });
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -31,7 +31,7 @@ export const AddressLookup = ({
   const onSubmit = ({ addressLookupPostcode }: AddressLookupFormData) => {
     setShowDropdown(true);
     addressLookup({
-      variables: { postcode: addressLookupPostcode }
+      variables: { postcode: addressLookupPostcode },
     });
   };
 
@@ -42,23 +42,27 @@ export const AddressLookup = ({
         index
       ) => {
         const optionLabel = [line1, line2, line3, townCity, postcode]
-          .filter(value => value)
+          .filter((value) => value)
           .join(", ");
 
         return {
           label: optionLabel,
-          value: index.toString()
+          value: index.toString(),
         };
       }
     );
 
     return (
-      <Select
-        className="mt-1"
-        name="addressLookupAddresses"
-        onChange={handleChange}
-        options={options}
-      />
+      <div>
+        <p className="py-2 text-gray-900">Select your address from the list</p>
+        <Select
+          className="mt-1"
+          name="addressLookupAddresses"
+          onChange={handleChange}
+          options={options}
+          placeholder="Please select your address"
+        />
+      </div>
     );
   };
 
@@ -69,13 +73,13 @@ export const AddressLookup = ({
           <Label label={label} name="addressLookupPostcode" />
           <div className="flex">
             <Input
-              className="w-full"
+              className="w-full mr-4"
               componentRef={register({
-                required: "Postcode is required"
+                required: "Postcode is required",
               })}
               name="addressLookupPostcode"
             />
-            <PrimaryButton>Search</PrimaryButton>
+            <PrimaryButton>Find Address</PrimaryButton>
           </div>
           {error && (
             <InputError error={{ message: error.message, type: "apollo" }} />
