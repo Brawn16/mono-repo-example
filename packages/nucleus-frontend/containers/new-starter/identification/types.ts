@@ -1,12 +1,12 @@
 import { FieldError } from "react-hook-form";
 
 export interface NewStarterIdentificationFormData {
-  identification: NewStarterIdentificationFormDataIdentification[];
+  identifications: NewStarterIdentificationFormDataIdentification[];
 }
 
 export interface NewStarterIdentificationFormDataIdentification {
-  photos: string[];
   type: string;
+  uploads: string[];
 }
 
 export interface UploadProps {

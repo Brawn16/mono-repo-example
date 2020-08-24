@@ -10,7 +10,7 @@ export function Uploader({ error, name, onChange, values = [] }: UploadProps) {
         error={error}
         multiple
         onChange={(value) => onChange(name, value)}
-        tags={["identification", "public"]}
+        tags={["operativeIdentification", "public"]}
         values={values}
       />
       {values.map((id) => (

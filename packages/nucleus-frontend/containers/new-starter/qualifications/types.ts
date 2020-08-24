@@ -1,3 +1,3 @@
 export interface NewStarterQualificationsFormData {
-  qualificationPhotoIds: string[];
+  qualificationUploadIds: string[];
 }

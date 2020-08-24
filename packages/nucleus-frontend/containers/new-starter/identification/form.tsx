@@ -31,14 +31,14 @@ export function Form(): React.ReactElement {
     setValue,
     getValues,
   } = useForm<NewStarterIdentificationFormData>({ defaultValues: values });
-  const watchIdentificationOne = watch("identification[0].type");
-  const watchIdentificationTwo = watch("identification[1].type");
-  watch(["identification[0].photos"]);
-  watch(["identification[1].photos"]);
+  const watchIdentificationsOne = watch("identifications[0].type");
+  const watchIdentificationsTwo = watch("identifications[1].type");
+  watch(["identifications[0].uploads"]);
+  watch(["identifications[1].uploads"]);
 
   useEffect(() => {
-    register({ name: "identification[0].photos" }, { validate });
-    register({ name: "identification[1].photos" }, { validate });
+    register({ name: "identifications[0].uploads" }, { validate });
+    register({ name: "identifications[1].uploads" }, { validate });
   }, []);
 
   const handleChange = (name: string, value: string[]) => {
@@ -60,23 +60,23 @@ export function Form(): React.ReactElement {
               required: "This field is required",
             })}
             error={
-              errors.identification &&
-              errors.identification[0] &&
-              errors.identification[0].type
+              errors.identifications &&
+              errors.identifications[0] &&
+              errors.identifications[0].type
             }
-            name="identification[0].type"
+            name="identifications[0].type"
             options={rightToworkOptions}
           />
-          {watchIdentificationOne && (
+          {watchIdentificationsOne && (
             <Uploader
               error={
-                errors.identification &&
-                errors.identification[0] &&
-                (errors.identification[0].photos as any)
+                errors.identifications &&
+                errors.identifications[0] &&
+                (errors.identifications[0].uploads as any)
               }
-              name="identification[0].photos"
+              name="identifications[0].uploads"
               onChange={handleChange}
-              values={getValues("identification[0].photos")}
+              values={getValues("identification[0].uploads")}
             />
           )}
         </Fieldset>
@@ -89,24 +89,24 @@ export function Form(): React.ReactElement {
               required: "This field is required",
             })}
             error={
-              errors.identification &&
-              errors.identification[1] &&
-              errors.identification[1].type
+              errors.identifications &&
+              errors.identifications[1] &&
+              errors.identifications[1].type
             }
-            name="identification[1].type"
+            name="identifications[1].type"
             options={proofOfAddressOptions}
           />
-          {watchIdentificationTwo && (
+          {watchIdentificationsTwo && (
             <Uploader
               error={
-                errors.identification &&
-                errors.identification[1] &&
-                errors.identification[1].photos &&
-                (errors.identification[1].photos as any)
+                errors.identifications &&
+                errors.identifications[1] &&
+                errors.identifications[1].uploads &&
+                (errors.identifications[1].uploads as any)
               }
-              name="identification[1].photos"
+              name="identifications[1].uploads"
               onChange={handleChange}
-              values={getValues("identification[1].photos")}
+              values={getValues("identifications[1].uploads")}
             />
           )}
         </Fieldset>

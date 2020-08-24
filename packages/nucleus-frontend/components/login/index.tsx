@@ -68,6 +68,7 @@ export function Login({
         label="Email Address"
         name="email"
         required
+        type="email"
       />
       <Input
         autoComplete="current-password"

@@ -71,11 +71,11 @@ export function Form(): React.ReactElement {
           })}
           error={errors.email}
           iconType={AiOutlineMail}
-          inputMode="email"
           label="Email"
           name="email"
           positionIconLeft
           required
+          type="email"
         />
       </div>
       <div className="md:flex">
@@ -92,13 +92,13 @@ export function Form(): React.ReactElement {
         <Input
           className="mt-4 md:ml-4 md:w-1/2"
           componentRef={register({
-            required: "Emergency contact number is required",
+            required: "Emergency contact phone number is required",
           })}
           error={errors.emergencyContactNumber}
           iconType={FiPhone}
           inputMode="tel"
-          label="Emergency Contact Number"
-          name="emergencyContactNumber"
+          label="Emergency Contact Phone Number"
+          name="emergencyContactPhoneNumber"
           positionIconLeft
           required
           type="tel"

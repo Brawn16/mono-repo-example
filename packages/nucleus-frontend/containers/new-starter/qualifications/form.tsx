@@ -16,14 +16,14 @@ export function Form(): React.ReactElement {
   >({
     defaultValues: values,
   });
-  const { qualificationPhotoIds } = getValues();
+  const { qualificationUploadIds } = getValues();
 
   useEffect(() => {
-    register({ name: "qualificationPhotoIds" });
+    register({ name: "qualificationUploadIds" });
   }, []);
 
   const handleChange = (ids: string[]) => {
-    setValue("qualificationPhotoIds", ids);
+    setValue("qualificationUploadIds", ids);
   };
 
   const handleFormSubmit = (data: NewStarterQualificationsFormData) => {
@@ -38,8 +38,8 @@ export function Form(): React.ReactElement {
         label="Upload Photos"
         multiple
         onChange={handleChange}
-        tags={["qualification", "public"]}
-        values={qualificationPhotoIds as string[]}
+        tags={["operativeQualification", "public"]}
+        values={qualificationUploadIds as string[]}
       />
       <div className="flex justify-between mt-8">
         <Anchor href="/new-starter/work-details">
