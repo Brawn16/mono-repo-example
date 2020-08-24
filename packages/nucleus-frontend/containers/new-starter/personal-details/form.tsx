@@ -12,7 +12,7 @@ import { NewStarterPersonalDetailsFormData } from "./types";
 
 export function Form(): React.ReactElement {
   const { submitStep, values } = useContext(Context);
-  const { errors, handleSubmit, register } = useForm<
+  const { errors, handleSubmit, register, clearErrors } = useForm<
     NewStarterPersonalDetailsFormData
   >({ defaultValues: values });
 
@@ -37,6 +37,9 @@ export function Form(): React.ReactElement {
           error={errors.firstName}
           label="First Name"
           name="firstName"
+          onKeyDown={() => {
+            clearErrors("firstName");
+          }}
           required
         />
         <Input
@@ -47,6 +50,9 @@ export function Form(): React.ReactElement {
           error={errors.lastName}
           label="Last Name"
           name="lastName"
+          onFocus={() => {
+            clearErrors("lastName");
+          }}
           required
         />
       </div>
@@ -60,6 +66,9 @@ export function Form(): React.ReactElement {
           inputMode="tel"
           label="Phone Number"
           name="phoneNumber"
+          onFocus={() => {
+            clearErrors("phoneNumber");
+          }}
           positionIconLeft
           required
           type="tel"
@@ -77,6 +86,9 @@ export function Form(): React.ReactElement {
           inputMode="email"
           label="Email"
           name="email"
+          onFocus={() => {
+            clearErrors("email");
+          }}
           positionIconLeft
           required
         />
@@ -89,6 +101,9 @@ export function Form(): React.ReactElement {
           error={errors.emergencyContactName}
           label="Emergency Contact Name"
           name="emergencyContactName"
+          onFocus={() => {
+            clearErrors("emergencyContactName");
+          }}
           required
         />
         <Input
@@ -100,6 +115,9 @@ export function Form(): React.ReactElement {
           inputMode="tel"
           label="Emergency Contact Number"
           name="emergencyContactNumber"
+          onFocus={() => {
+            clearErrors("emergencyContactNumber");
+          }}
           positionIconLeft
           required
           type="tel"
@@ -108,10 +126,10 @@ export function Form(): React.ReactElement {
       <div className="flex justify-between max-w-2xl mt-8">
         <Anchor href="/new-starter">
           <div className="hidden md:block">
-            <SecondaryButton>Back</SecondaryButton>
+            <SecondaryButton>Previous</SecondaryButton>
           </div>
         </Anchor>
-        <PrimaryButton className="w-full md:w-auto">Continue</PrimaryButton>
+        <PrimaryButton className="w-full md:w-auto">Next</PrimaryButton>
       </div>
     </form>
   );

@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button,
+  SecondaryButton,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import { Select } from "@sdh-project-services/nucleus-ui/dist/select";
@@ -29,7 +29,8 @@ export function Form(): React.ReactElement {
     register,
     watch,
     setValue,
-    getValues
+    getValues,
+    clearErrors,
   } = useForm<NewStarterIdentificationFormData>({ defaultValues: values });
   const watchIdentificationOne = watch("identification[0].type");
   const watchIdentificationTwo = watch("identification[1].type");
@@ -42,6 +43,7 @@ export function Form(): React.ReactElement {
   }, []);
 
   const handleChange = (name: string, value: string[]) => {
+    clearErrors(name);
     setValue(name, value);
   };
 
@@ -51,13 +53,13 @@ export function Form(): React.ReactElement {
   };
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)}>
+    <form className="max-w-2xl" onSubmit={handleSubmit(handleFormSubmit)}>
       <div className="py-4">
         <Fieldset>
           <Select
             className="w-full"
             componentRef={register({
-              required: "This field is required"
+              required: "This field is required",
             })}
             error={
               errors.identification &&
@@ -86,7 +88,7 @@ export function Form(): React.ReactElement {
           <Select
             className="w-full"
             componentRef={register({
-              required: "This field is required"
+              required: "This field is required",
             })}
             error={
               errors.identification &&
@@ -111,11 +113,13 @@ export function Form(): React.ReactElement {
           )}
         </Fieldset>
       </div>
-      <div className="flex justify-between mx-8 mt-8 md:mx-0">
-        <Anchor href="/new-starter/address">
-          <Button>Back</Button>
+      <div className="flex justify-between  mt-8">
+        <Anchor href="/new-starter/personal-details">
+          <div className="hidden md:block">
+            <SecondaryButton>Previous</SecondaryButton>
+          </div>
         </Anchor>
-        <PrimaryButton>Continue</PrimaryButton>
+        <PrimaryButton className="w-full md:w-auto">Next</PrimaryButton>
       </div>
     </form>
   );

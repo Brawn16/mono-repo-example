@@ -6,7 +6,7 @@ import {
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
 import { capitalCase } from "change-case";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
@@ -14,9 +14,25 @@ import { NewStarterAddressFormData } from "./types";
 
 export function Form() {
   const { submitStep, values } = useContext(Context);
-  const { errors, handleSubmit, register, setValue, watch } = useForm<
-    NewStarterAddressFormData
-  >({ defaultValues: values });
+  const {
+    errors,
+    clearErrors,
+    handleSubmit,
+    register,
+    setValue,
+    watch,
+    reset,
+  } = useForm<NewStarterAddressFormData>({ defaultValues: values });
+
+  const [resetFlag, setResetFlag] = useState(false);
+
+  useEffect(() => {
+    register({ name: "addressLine1" }, { required: true });
+    register({ name: "addressLine2" });
+    register({ name: "addressTownCity" });
+    register({ name: "addressCounty" });
+    register({ name: "addressPostcode" }, { required: true });
+  }, [resetFlag]);
 
   const handleAddressSelection = (address: AddressLookupAddress) => {
     const keys = Object.keys(address) as (keyof AddressLookupAddress)[];
@@ -25,14 +41,6 @@ export function Form() {
       setValue(`address${capitalCase(key).replace(/\s/g, "")}`, address[key]);
     });
   };
-
-  useEffect(() => {
-    register({ name: "addressLine1" });
-    register({ name: "addressLine2" });
-    register({ name: "addressTownCity" });
-    register({ name: "addressCounty" });
-    register({ name: "addressPostcode" });
-  }, []);
 
   const handleFormSubmit = (data: NewStarterAddressFormData) => {
     submitStep(2, data);
@@ -46,6 +54,8 @@ export function Form() {
     addressPostcode,
     addressTownCity,
   } = watchAddress;
+  const hasError = errors.addressLine1 || errors.addressPostcode;
+  console.log(errors);
 
   return (
     <>
@@ -58,8 +68,20 @@ export function Form() {
       </p>
       <div className="max-w-2xl md:flex-col md:items-center">
         {!addressLine1 && (
-          <div className="flex flex-col py-4 font-bold">
+          <div
+            className="flex flex-col py-4 font-bold"
+            onFocus={() => {
+              clearErrors();
+            }}
+          >
             <AddressLookup onAddressSelect={handleAddressSelection} />
+            <div>
+              {hasError && (
+                <p className="font-normal text-red-600">
+                  Please select your address
+                </p>
+              )}
+            </div>
           </div>
         )}
       </div>
@@ -70,7 +92,7 @@ export function Form() {
               {" "}
               <Input
                 className=""
-                error={errors.line1}
+                error={errors.addressLine1}
                 label="Address"
                 name="addressLine1"
                 value={addressLine1}
@@ -100,22 +122,35 @@ export function Form() {
               />
               <Input
                 className="mt-4"
-                error={errors.postcode}
+                error={errors.addressPostcode}
                 label="Postcode"
                 name="addressPostcode"
                 value={addressPostcode}
               />
             </>
           )}
+          {addressLine1 && (
+            // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+            <div
+              className="my-4 underline"
+              onClick={() => {
+                setResetFlag(!resetFlag);
+                reset();
+              }}
+              // eslint-disable-next-line jsx-a11y/aria-role
+              role="input"
+            >
+              Search for another address
+            </div>
+          )}
         </div>
-
         <div className="flex justify-between max-w-2xl mt-8">
           <Anchor href="/new-starter/personal-details">
             <div className="hidden md:block">
-              <SecondaryButton>Back</SecondaryButton>
+              <SecondaryButton>Previous</SecondaryButton>
             </div>
           </Anchor>
-          <PrimaryButton className="w-full md:w-auto">Continue</PrimaryButton>
+          <PrimaryButton className="w-full md:w-auto">Next</PrimaryButton>
         </div>
       </form>
     </>

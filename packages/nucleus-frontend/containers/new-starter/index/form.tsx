@@ -9,9 +9,14 @@ import { PreparationProps } from "./types";
 export function Form(): React.ReactElement {
   const { submitStep, values } = useContext(Context);
 
-  const { errors, handleSubmit, register, setValue, watch } = useForm<
-    PreparationProps
-  >({
+  const {
+    errors,
+    handleSubmit,
+    register,
+    setValue,
+    watch,
+    clearErrors,
+  } = useForm<PreparationProps>({
     defaultValues: values,
   });
   useEffect(() => {
@@ -40,6 +45,7 @@ export function Form(): React.ReactElement {
   };
 
   const onChange = (name: string, value: any) => {
+    clearErrors(name);
     setValue(name, value);
   };
 
@@ -70,9 +76,7 @@ export function Form(): React.ReactElement {
             }}
           />
         </div>
-        <PrimaryButton className="w-full mt-5 md:w-auto">
-          Continue
-        </PrimaryButton>
+        <PrimaryButton className="w-full mt-5 md:w-auto">Next</PrimaryButton>
       </form>
     </>
   );

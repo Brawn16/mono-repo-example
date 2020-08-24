@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button,
+  SecondaryButton,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { InputError } from "@sdh-project-services/nucleus-ui/dist/input-error";
 import { Label } from "@sdh-project-services/nucleus-ui/dist/label";
@@ -38,6 +38,8 @@ export function Form(): React.ReactElement {
   const handleFormSubmit = (data: NewStarterMedicalFormData) => {
     submitStep(7, data);
   };
+
+  console.log(medicalIssues, values);
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -109,9 +111,11 @@ export function Form(): React.ReactElement {
       )}
       <div className="flex justify-between mt-8">
         <Anchor href="/new-starter/my-photo">
-          <Button>Back</Button>
+          <div className="hidden md:block">
+            <SecondaryButton>Previous</SecondaryButton>
+          </div>
         </Anchor>
-        <PrimaryButton>Continue</PrimaryButton>
+        <PrimaryButton className="w-full md:w-auto">Next</PrimaryButton>
       </div>
     </form>
   );

@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button
+  SecondaryButton,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Upload } from "@sdh-project-services/nucleus-ui/dist/upload";
 import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewer";
@@ -18,7 +18,8 @@ export function Form(): React.ReactElement {
     handleSubmit,
     register,
     setValue,
-    watch
+    watch,
+    clearErrors,
   } = useForm<NewStarterMyPhotoFormData>({ defaultValues: values });
   const { photoId } = getValues();
 
@@ -28,6 +29,7 @@ export function Form(): React.ReactElement {
   }, []);
 
   const handleChange = ([id]: string[]) => {
+    clearErrors("photoId");
     setValue("photoId", id);
   };
 
@@ -59,9 +61,11 @@ export function Form(): React.ReactElement {
       </div>
       <div className="flex justify-between mt-8">
         <Anchor href="/new-starter/qualifications">
-          <Button>Back</Button>
+          <div className="hidden md:block">
+            <SecondaryButton>Previous</SecondaryButton>
+          </div>
         </Anchor>
-        <PrimaryButton>Continue</PrimaryButton>
+        <PrimaryButton className="w-full md:w-auto">Next</PrimaryButton>
       </div>
     </form>
   );

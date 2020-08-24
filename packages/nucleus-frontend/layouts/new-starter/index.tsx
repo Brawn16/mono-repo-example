@@ -123,7 +123,7 @@ export function NewStarter({
         <div className={logo} />
         {showSteps && renderSteps()}
       </div>
-      <div className="flex w-full max-w-6xl border">
+      <div className="flex w-full max-w-6xl ">
         <div className="flex flex-col  w-full mx-auto">
           <div className="px-10 py-2 bg-gray-200">
             <h1 className="font-extrabold text-gray-900 border-b border-gray-200 text-md md:text-2xl">
@@ -141,7 +141,7 @@ export function NewStarter({
               </Context.Provider>
             </div>
           </div>
-          <footer className="bottom-0 px-10 mt-8 text-xs text-gray-400 absolute">
+          <footer className="bottom-0 px-10 mt-8 text-xs text-gray-400">
             &copy; {year}. All Rights Reserved.
           </footer>
         </div>

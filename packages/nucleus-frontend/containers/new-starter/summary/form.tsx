@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import {
   PrimaryButton,
-  Button
+  SecondaryButton,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewer";
@@ -10,7 +10,7 @@ import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
 import {
   subcontractors as subcontractorsQuery,
-  workstreams as workstreamsQuery
+  workstreams as workstreamsQuery,
 } from "../work-details/queries.gql";
 import { Field } from "./field";
 import { Fields } from "./fields";
@@ -46,7 +46,7 @@ export function Form(): React.ReactElement {
         />
         <div className="mt-4 text-right">
           <Anchor href="/new-starter/personal-details">
-            <Button>Edit</Button>
+            <SecondaryButton>Edit</SecondaryButton>
           </Anchor>
         </div>
       </Fieldset>
@@ -57,7 +57,7 @@ export function Form(): React.ReactElement {
         />
         <div className="mt-4 text-right">
           <Anchor href="/new-starter/address">
-            <Button>Edit</Button>
+            <SecondaryButton>Edit</SecondaryButton>
           </Anchor>
         </div>
       </Fieldset>
@@ -80,19 +80,20 @@ export function Form(): React.ReactElement {
         />
         <div className="mt-4 text-right">
           <Anchor href="/new-starter/work-details">
-            <Button>Edit</Button>
+            <SecondaryButton>Edit</SecondaryButton>
           </Anchor>
         </div>
       </Fieldset>
       <Fieldset className="mt-4">
         <Field
           label="Qualifications"
-          value={`${values.qualificationPhotoIds &&
-            values.qualificationPhotoIds.length} Qualifications Uploaded`}
+          value={`${
+            values.qualificationPhotoIds && values.qualificationPhotoIds.length
+          } Qualifications Uploaded`}
         />
         <div className="mt-4 text-right">
           <Anchor href="/new-starter/qualifications">
-            <Button>Edit</Button>
+            <SecondaryButton>Edit</SecondaryButton>
           </Anchor>
         </div>
       </Fieldset>
@@ -107,7 +108,7 @@ export function Form(): React.ReactElement {
         />
         <div className="mt-4 text-right">
           <Anchor href="/new-starter/identification">
-            <Button>Edit</Button>
+            <SecondaryButton>Edit</SecondaryButton>
           </Anchor>
         </div>
       </Fieldset>
@@ -125,7 +126,7 @@ export function Form(): React.ReactElement {
         <div className="clearfix" />
         <div className="mt-4 text-right">
           <Anchor href="/new-starter/my-photo">
-            <Button>Edit</Button>
+            <SecondaryButton>Edit</SecondaryButton>
           </Anchor>
         </div>
       </Fieldset>
@@ -152,17 +153,17 @@ export function Form(): React.ReactElement {
         )}
         <div className="mt-4 text-right">
           <Anchor href="/new-starter/medical">
-            <Button>Edit</Button>
+            <SecondaryButton>Edit</SecondaryButton>
           </Anchor>
         </div>
       </Fieldset>
       <div className="flex justify-between mt-8">
         <Anchor href="/new-starter/medical">
-          <Button>Back</Button>
+          <div className="hidden md:block">
+            <SecondaryButton>Previous</SecondaryButton>
+          </div>
         </Anchor>
-        <Anchor href="/new-starter/confirmation">
-          <PrimaryButton>Submit</PrimaryButton>
-        </Anchor>
+        <PrimaryButton className="w-full md:w-auto">Submit</PrimaryButton>
       </div>
     </>
   );

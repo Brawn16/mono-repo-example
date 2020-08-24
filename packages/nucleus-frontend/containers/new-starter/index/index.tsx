@@ -16,7 +16,7 @@ export function NewStarter(): React.ReactElement {
         <div className="max-w-2xl mt-4">
           <Fieldset>
             <div className="flex">
-              <FaRegIdCard className="text-5xl text-gray-400" />
+              <FaRegIdCard className="text-6xl text-gray-400" />
               <div className="px-4 pt-1">
                 <p className="font-semibold">At least one of the following:</p>
                 <ul className="pl-4 ml-6 text-gray-500 list-disc">
