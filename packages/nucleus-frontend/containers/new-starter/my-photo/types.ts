@@ -1,3 +1,3 @@
 export interface NewStarterMyPhotoFormData {
-  photoId: string;
+  photoUpload: string;
 }

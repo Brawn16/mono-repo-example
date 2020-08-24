@@ -12,6 +12,6 @@ export interface AuthenticatedAppContext extends AppContext {
 
 export function context({ event }: any): AppContext {
   return {
-    headers: event.headers
+    headers: event.headers,
   };
 }

@@ -2,7 +2,7 @@ import { env } from "process";
 import {
   APIGatewayProxyCallback,
   APIGatewayProxyEvent,
-  Context as LambdaContext
+  Context as LambdaContext,
 } from "aws-lambda";
 import { bootstrap } from "./bootstrap";
 import { server } from "./server";
@@ -12,8 +12,8 @@ const handler = server.createHandler({
   cors: {
     allowedHeaders: ["authorization", "content-type"],
     methods: ["POST"],
-    origin: env.APOLLO_CORS_ORIGIN
-  }
+    origin: env.APOLLO_CORS_ORIGIN,
+  },
 });
 
 async function executeHandler(

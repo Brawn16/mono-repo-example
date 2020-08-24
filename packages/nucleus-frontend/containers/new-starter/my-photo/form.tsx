@@ -21,16 +21,15 @@ export function Form(): React.ReactElement {
     watch,
     clearErrors,
   } = useForm<NewStarterMyPhotoFormData>({ defaultValues: values });
-  const { photoId } = getValues();
 
-  watch("photoId");
   useEffect(() => {
-    register({ name: "photoId" }, { required: "Photo is required" });
+    register({ name: "photoUpload" }, { required: "Photo is required" });
   }, []);
-
+  watch("photoUpload");
+  const { photoUpload } = getValues();
   const handleChange = ([id]: string[]) => {
-    clearErrors("photoId");
-    setValue("photoId", id);
+    clearErrors("photoUpload");
+    setValue("photoUpload", id);
   };
 
   const handleFormSubmit = (data: NewStarterMyPhotoFormData) => {
@@ -43,15 +42,15 @@ export function Form(): React.ReactElement {
         <Upload
           accept="image/*"
           buttonEntity="photo"
-          error={errors.photoId}
+          error={errors.photoUpload}
           label="Upload Photo"
           onChange={handleChange}
-          tags={["profile-pic", "public"]}
-          values={photoId ? [photoId] : undefined}
+          tags={["operativePhoto", "public"]}
+          values={photoUpload ? [photoUpload] : undefined}
         />
-        {photoId && (
+        {photoUpload && (
           <div className="mt-4">
-            <UploadViewer id={photoId}>
+            <UploadViewer id={photoUpload}>
               {({ url }) => (
                 <img alt="Profile" className="block max-w-xs" src={url} />
               )}

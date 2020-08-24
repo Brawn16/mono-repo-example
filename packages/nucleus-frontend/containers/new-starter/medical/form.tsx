@@ -50,7 +50,7 @@ export function Form(): React.ReactElement {
       />
       <div className="flex space-x-4">
         <RadioButton
-          checked={medicalIssues}
+          checked={medicalIssues === true}
           label="Yes"
           name="medicalIssues"
           onChange={() => handleChange("medicalIssues", true)}
@@ -82,7 +82,7 @@ export function Form(): React.ReactElement {
         />
         <div className="flex space-x-4">
           <RadioButton
-            checked={medicationRequired}
+            checked={medicationRequired === true}
             label="Yes"
             name="medicationRequired"
             onChange={() => handleChange("medicationRequired", true)}

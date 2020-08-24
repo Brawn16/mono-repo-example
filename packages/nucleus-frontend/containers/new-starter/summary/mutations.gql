@@ -1,0 +1,5 @@
+mutation createOperative($data: CreateOperativeInput!) {
+  createOperative(data: $data) {
+    id
+  }
+}

@@ -91,6 +91,7 @@ export function Form(): React.ReactElement {
           }}
           positionIconLeft
           required
+          type="email"
         />
 
         <Input
@@ -109,7 +110,7 @@ export function Form(): React.ReactElement {
         <Input
           className="mt-4 md:w-full"
           componentRef={register({
-            required: "Emergency contact number is required",
+            required: "Emergency contact phone number is required",
           })}
           error={errors.emergencyContactNumber}
           inputMode="tel"

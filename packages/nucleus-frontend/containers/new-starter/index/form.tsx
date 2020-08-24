@@ -44,7 +44,7 @@ export function Form(): React.ReactElement {
     submitStep(0, data);
   };
 
-  const onChange = (name: string, value: any) => {
+  const onChange = (name: any, value: any) => {
     clearErrors(name);
     setValue(name, value);
   };
