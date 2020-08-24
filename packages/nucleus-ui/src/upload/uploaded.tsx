@@ -7,7 +7,7 @@ export function Uploaded({
   buttonEntity,
   index,
   name,
-  onDelete
+  onDelete,
 }: UploadUploadedProps) {
   const fileName = name || `${capitalCase(buttonEntity)} ${index + 1}`;
 

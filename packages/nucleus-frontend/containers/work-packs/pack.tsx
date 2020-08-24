@@ -7,11 +7,7 @@ function formatDate(date: string | null) {
   }
 
   // Don't judge me, just a quick method for POC!
-  return date
-    .slice(0, 10)
-    .split("-")
-    .reverse()
-    .join("/");
+  return date.slice(0, 10).split("-").reverse().join("/");
 }
 
 export function Pack({ pack }: { pack: WorkPack }): React.ReactElement {

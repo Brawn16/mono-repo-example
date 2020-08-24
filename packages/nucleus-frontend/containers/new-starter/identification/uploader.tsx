@@ -9,11 +9,11 @@ export function Uploader({ error, name, onChange, values = [] }: UploadProps) {
       <Upload
         error={error}
         multiple
-        onChange={value => onChange(name, value)}
+        onChange={(value) => onChange(name, value)}
         tags={["identification", "public"]}
         values={values}
       />
-      {values.map(id => (
+      {values.map((id) => (
         <div key={id} className="mt-4">
           <UploadViewer id={id}>
             {({ url }) => (

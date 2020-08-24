@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button
+  Button,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Upload } from "@sdh-project-services/nucleus-ui/dist/upload";
 import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewer";
@@ -18,7 +18,7 @@ export function Form(): React.ReactElement {
     handleSubmit,
     register,
     setValue,
-    watch
+    watch,
   } = useForm<NewStarterMyPhotoFormData>({ defaultValues: values });
   const { photoId } = getValues();
 

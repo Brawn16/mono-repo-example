@@ -11,7 +11,7 @@ export class CreateWorkstreamRecords1597135083310
       .values([
         { name: "BT Openreach" },
         { name: "City Fibre" },
-        { name: "Morrison Utility Services" }
+        { name: "Morrison Utility Services" },
       ])
       .execute();
   }

@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button
+  Button,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Upload } from "@sdh-project-services/nucleus-ui/dist/upload";
 import React, { useContext, useEffect } from "react";
@@ -14,7 +14,7 @@ export function Form(): React.ReactElement {
   const { handleSubmit, getValues, register, setValue } = useForm<
     NewStarterQualificationsFormData
   >({
-    defaultValues: values
+    defaultValues: values,
   });
   const { qualificationPhotoIds } = getValues();
 

@@ -29,7 +29,7 @@ export function Form(): React.ReactElement {
     register,
     watch,
     setValue,
-    getValues
+    getValues,
   } = useForm<NewStarterIdentificationFormData>({ defaultValues: values });
   const watchIdentificationOne = watch("identification[0].type");
   const watchIdentificationTwo = watch("identification[1].type");
@@ -57,7 +57,7 @@ export function Form(): React.ReactElement {
           <Select
             className="w-full"
             componentRef={register({
-              required: "This field is required"
+              required: "This field is required",
             })}
             error={
               errors.identification &&
@@ -86,7 +86,7 @@ export function Form(): React.ReactElement {
           <Select
             className="w-full"
             componentRef={register({
-              required: "This field is required"
+              required: "This field is required",
             })}
             error={
               errors.identification &&

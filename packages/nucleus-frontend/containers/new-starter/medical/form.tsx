@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button
+  Button,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { InputError } from "@sdh-project-services/nucleus-ui/dist/input-error";
 import { Label } from "@sdh-project-services/nucleus-ui/dist/label";
@@ -20,7 +20,7 @@ export function Form(): React.ReactElement {
     handleSubmit,
     register,
     setValue,
-    watch
+    watch,
   } = useForm<NewStarterMedicalFormData>({ defaultValues: values });
   const { medicalIssues, medicationRequired } = getValues();
 
@@ -31,14 +31,14 @@ export function Form(): React.ReactElement {
       { name: "medicalIssues" },
       {
         validate: (value: boolean) =>
-          value === undefined ? "This question is required" : true
+          value === undefined ? "This question is required" : true,
       }
     );
     register(
       { name: "medicationRequired" },
       {
         validate: (value: boolean) =>
-          value === undefined ? "This question is required" : true
+          value === undefined ? "This question is required" : true,
       }
     );
   }, []);
@@ -77,7 +77,7 @@ export function Form(): React.ReactElement {
         <Textarea
           className="mt-4"
           componentRef={register({
-            required: "Please provide details of medical issues"
+            required: "Please provide details of medical issues",
           })}
           error={errors.medicalIssuesNotes}
           name="medicalIssuesNotes"
@@ -112,7 +112,7 @@ export function Form(): React.ReactElement {
         <Textarea
           className="mt-4"
           componentRef={register({
-            required: "Please provide details of medication requirements"
+            required: "Please provide details of medication requirements",
           })}
           error={errors.medicationRequiredNotes}
           name="medicationRequiredNotes"

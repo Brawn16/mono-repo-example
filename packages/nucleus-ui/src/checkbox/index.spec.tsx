@@ -6,7 +6,7 @@ import { Checkbox } from ".";
 describe("Checkbox", () => {
   const checkboxError: FieldError = {
     type: "checkbox",
-    message: "checkbox error"
+    message: "checkbox error",
   };
   it("shows error state", () => {
     const { container } = render(

@@ -1,12 +1,12 @@
 module.exports = {
   globals: {
     "ts-jest": {
-      tsConfig: "tsconfig.test.json"
-    }
+      tsConfig: "tsconfig.test.json",
+    },
   },
   moduleNameMapper: {
-    "\\.css$": "identity-obj-proxy"
+    "\\.css$": "identity-obj-proxy",
   },
   preset: "ts-jest",
-  testPathIgnorePatterns: ["node_modules"]
+  testPathIgnorePatterns: ["node_modules"],
 };

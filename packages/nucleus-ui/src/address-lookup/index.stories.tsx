@@ -4,7 +4,7 @@ import { AddressLookup } from ".";
 
 export default {
   component: AddressLookup,
-  title: "Address Lookup"
+  title: "Address Lookup",
 };
 
 export const addressLookup = () => (
