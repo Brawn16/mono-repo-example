@@ -35,11 +35,12 @@ export function Form(): React.ReactElement {
     handleSubmit,
     errors,
     setValue,
+    getValues,
     watch,
     clearErrors,
   } = useForm<NewStarterWorkDetailsFormData>({ defaultValues: values });
 
-  const handleOnChange = (name: any, value: string) => {
+  const handleOnChange = (name: any, value: any) => {
     clearErrors(name);
     setValue(name, value);
   };
@@ -50,13 +51,12 @@ export function Form(): React.ReactElement {
   }, []);
 
   const handleFormSubmit = (data: NewStarterWorkDetailsFormData) => {
-    console.log(data);
-
     submitStep(4, data);
   };
 
-  const watchSubcontractor = watch("subcontractor");
-  const watchWorkstream = watch("workstream");
+  const { workstream, subcontractor } = getValues();
+  watch("subcontractor");
+  watch("workstream");
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -74,14 +74,14 @@ export function Form(): React.ReactElement {
               {getOptions(workstreamsData.workstreams).map(
                 (item: WorkStreamProps) => {
                   const activeWorkstream =
-                    watchWorkstream === item.label ? "border-gray-700" : "";
+                    workstream === item.value ? "border-gray-700" : "";
                   return (
                     <div
                       key={item.value}
                       aria-hidden
                       className="flex w-1/4 px-2 "
                       onClick={() => {
-                        handleOnChange("workstream", item.label);
+                        handleOnChange("workstream", item.value);
                       }}
                       role="button"
                     >
@@ -103,13 +103,13 @@ export function Form(): React.ReactElement {
                 aria-hidden
                 className="flex justify-between w-1/4 px-2 align-center"
                 onClick={() => {
-                  handleOnChange("workstream", "don't know");
+                  handleOnChange("workstream", undefined);
                 }}
                 role="button"
               >
                 <div
                   className={`flex flex-col justify-center w-full text-center border rounded ${
-                    watchWorkstream === "don't know" ? "border-gray-700" : ""
+                    workstream === "don't know" ? "border-gray-700" : ""
                   }`}
                 >
                   <p className="text-middle">Do not know</p>
@@ -133,11 +133,11 @@ export function Form(): React.ReactElement {
               return (
                 <div key={item.label} className="my-2">
                   <RadioButton
-                    checked={watchSubcontractor === item.label}
+                    checked={subcontractor === item.value}
                     label={item.label}
                     name="subcontractor"
                     onChange={() => {
-                      handleOnChange("subcontractor", item.label);
+                      handleOnChange("subcontractor", item.value);
                     }}
                   />
                 </div>

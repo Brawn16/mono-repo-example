@@ -22,6 +22,7 @@ export function Form(): React.ReactElement {
     setValue,
     watch,
   } = useForm<NewStarterMedicalFormData>({ defaultValues: values });
+
   const { medicalIssues, medicationRequired } = getValues();
 
   watch("medicalIssues");
@@ -29,6 +30,7 @@ export function Form(): React.ReactElement {
   useEffect(() => {
     register({ name: "medicalIssues" });
     register({ name: "medicationRequired" });
+    setValue("medicalIssues", values.medicalIssues);
   }, []);
 
   const handleChange = (name: string, value: boolean) => {
@@ -38,8 +40,6 @@ export function Form(): React.ReactElement {
   const handleFormSubmit = (data: NewStarterMedicalFormData) => {
     submitStep(7, data);
   };
-
-  console.log(medicalIssues, values);
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>

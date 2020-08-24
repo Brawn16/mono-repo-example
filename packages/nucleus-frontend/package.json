@@ -27,7 +27,7 @@
     "react": "^16.13.1",
     "react-cookie": "^4.0.3",
     "react-dom": "^16.13.1",
-    "react-hook-form": "6.0.5",
+    "react-hook-form": "^6.0.5",
     "react-icons": "^3.10.0",
     "react-spinners": "^0.9.0",
     "tailwindcss": "^1.4.6",

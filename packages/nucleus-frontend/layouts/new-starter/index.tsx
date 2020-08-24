@@ -108,7 +108,7 @@ export function NewStarter({
     const stepIndex =
       steps.findIndex(({ href }: NewStarterStep) => href === asPath) || -1;
 
-    if (stepIndex > step - 1) {
+    if (stepIndex > step + 1) {
       router.push(steps[step + 1].href);
     }
   }, []);
