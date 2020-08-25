@@ -1,20 +1,21 @@
 import { ForbiddenError } from "apollo-server-core";
 import { verify } from "argon2";
-import { Arg, Authorized, Ctx, Mutation, Query, Resolver } from "type-graphql";
-import { UserEntity } from "../../shared/entity/user.entity";
-import { createAuthToken } from "../core/auth";
-import { AuthenticatedAppContext } from "../core/context";
+import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import { UserEntity } from "../../../shared/entity/user.entity";
+import { createAuthToken } from "../../core/auth";
+import { AuthenticatedAppContext } from "../../core/context";
+import { Public } from "../../decorators/public";
 import { LoginDto } from "./login.dto";
 
 @Resolver()
 export class AuthResolver {
-  @Authorized()
   @Query(() => UserEntity)
   public currentUser(@Ctx() { user }: AuthenticatedAppContext): UserEntity {
     return user;
   }
 
   @Mutation(() => LoginDto)
+  @Public()
   public async login(
     @Arg("email") email: string,
     @Arg("password") password: string

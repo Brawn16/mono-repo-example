@@ -1,10 +1,12 @@
 import { env } from "process";
 import { get } from "request-promise";
 import { Query, Resolver, Arg } from "type-graphql";
+import { Public } from "../../decorators/public";
 import { AddressLookupDto } from "./address-lookup.dto";
 
 @Resolver()
 export class AddressLookupResolver {
+  @Public()
   @Query(() => [AddressLookupDto])
   public async addressLookup(
     @Arg("postcode") requestedPostcode: string
