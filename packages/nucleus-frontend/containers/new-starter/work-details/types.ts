@@ -3,12 +3,12 @@ export interface NewStarterWorkDetailsFormData {
   subcontractor: string;
 }
 
-export interface WorkStreamProps {
+export interface WorkStreamDataItem {
   label: string;
   value: string;
 }
 
-export interface SubcontractorProps {
+export interface SubcontractorDataItem {
   label: string;
   value: string;
 }

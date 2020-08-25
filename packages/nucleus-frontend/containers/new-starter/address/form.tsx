@@ -5,8 +5,8 @@ import {
   SecondaryButton,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
-import { capitalCase } from "change-case";
-import React, { useContext, useEffect, useState } from "react";
+import { pascalCase } from "change-case";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
@@ -18,34 +18,32 @@ export function Form() {
     errors,
     clearErrors,
     handleSubmit,
+    getValues,
     register,
     setValue,
     watch,
     reset,
   } = useForm<NewStarterAddressFormData>({ defaultValues: values });
 
-  const [resetFlag, setResetFlag] = useState(false);
-
-  useEffect(() => {
-    register({ name: "addressLine1" }, { required: true });
-    register({ name: "addressLine2" });
-    register({ name: "addressTownCity" });
-    register({ name: "addressCounty" });
-    register({ name: "addressPostcode" }, { required: true });
-  }, [resetFlag]);
+  register({ name: "addressLine1" }, { required: true });
+  register({ name: "addressLine2" });
+  register({ name: "addressTownCity" });
+  register({ name: "addressCounty" });
+  register({ name: "addressPostcode" }, { required: true });
 
   const handleAddressSelection = (address: AddressLookupAddress) => {
     const keys = Object.keys(address) as (keyof AddressLookupAddress)[];
 
     keys.forEach((key: keyof AddressLookupAddress) => {
-      setValue(`address${capitalCase(key).replace(/\s/g, "")}`, address[key]);
+      setValue(`address${pascalCase(key)}`, address[key]);
     });
   };
 
   const handleFormSubmit = (data: NewStarterAddressFormData) => {
     submitStep(2, data);
   };
-  const watchAddress = watch();
+
+  const watchAddressLine1 = watch("addressLine1");
 
   const {
     addressLine1,
@@ -53,9 +51,9 @@ export function Form() {
     addressCounty,
     addressPostcode,
     addressTownCity,
-  } = watchAddress;
+  } = getValues();
+
   const hasError = errors.addressLine1 || errors.addressPostcode;
-  console.log(errors);
 
   return (
     <>
@@ -67,7 +65,7 @@ export function Form() {
         What is your home address?
       </p>
       <div className="max-w-2xl md:flex-col md:items-center">
-        {!addressLine1 && (
+        {!watchAddressLine1 && (
           <div
             className="flex flex-col py-4 font-bold"
             onFocus={() => {
@@ -87,7 +85,7 @@ export function Form() {
       </div>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <div className="max-w-2xl py-6">
-          {watchAddress.addressLine1 && (
+          {watchAddressLine1 && (
             <>
               {" "}
               <Input
@@ -106,7 +104,7 @@ export function Form() {
           )}
         </div>
         <div className="max-w-2xl">
-          {watchAddress.addressLine1 && (
+          {watchAddressLine1 && (
             <>
               <Input
                 className="mt-4"
@@ -129,19 +127,14 @@ export function Form() {
               />
             </>
           )}
-          {addressLine1 && (
-            // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-            <div
+          {watchAddressLine1 && (
+            <button
               className="my-4 underline"
-              onClick={() => {
-                setResetFlag(!resetFlag);
-                reset();
-              }}
-              // eslint-disable-next-line jsx-a11y/aria-role
-              role="input"
+              onClick={reset as any}
+              type="button"
             >
               Search for another address
-            </div>
+            </button>
           )}
         </div>
         <div className="flex justify-between max-w-2xl mt-8">

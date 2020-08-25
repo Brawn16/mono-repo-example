@@ -17,14 +17,14 @@
     inset-y-4 w-20 mt-1;
 }
 
-@media (min-width: 1024px) {
+@screen lg {
   .logo {
     position: sticky;
     @apply block h-16 w-52;
   }
 }
 
-@media (min-width: 1024px) {
+@screen lg {
   .background {
     background: url(./background.jpg);
     @apply flex-1 bg-fixed flex-col relative h-auto;

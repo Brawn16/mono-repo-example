@@ -4,7 +4,7 @@ import {
   SecondaryButton,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { RadioButton } from "@sdh-project-services/nucleus-ui/dist/radio-button";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
@@ -13,7 +13,11 @@ import {
   subcontractors as subcontractorsQuery,
   workstreams as workstreamsQuery,
 } from "./queries.gql";
-import { NewStarterWorkDetailsFormData, WorkStreamProps } from "./types";
+import {
+  NewStarterWorkDetailsFormData,
+  WorkStreamDataItem,
+  SubcontractorDataItem,
+} from "./types";
 
 function getOptions(data: any) {
   if (data === undefined) {
@@ -25,6 +29,65 @@ function getOptions(data: any) {
     value: id,
   }));
 }
+
+const getSubcontractorOptions = (
+  subcontractorData: SubcontractorDataItem[],
+  subcontractor: string,
+  handleOnChange: (
+    name: "workstream" | "subcontractor",
+    value: string | undefined
+  ) => void
+) => {
+  return getOptions(subcontractorData).map((item: SubcontractorDataItem) => {
+    return (
+      <div key={item.label} className="my-2">
+        <RadioButton
+          checked={subcontractor === item.value}
+          label={item.label}
+          name="subcontractor"
+          onChange={() => {
+            handleOnChange("subcontractor", item.value);
+          }}
+        />
+      </div>
+    );
+  });
+};
+
+const getWorkstreamOptions = (
+  workstreamsData: WorkStreamDataItem[],
+  workstream: string,
+  handleOnChange: (
+    name: "workstream" | "subcontractor",
+    value: string | undefined
+  ) => void
+) => {
+  return getOptions(workstreamsData).map((item: WorkStreamDataItem) => {
+    const activeWorkstream = workstream === item.value ? "border-gray-700" : "";
+
+    return (
+      <div
+        key={item.value}
+        aria-hidden
+        className="flex w-1/4 px-2 "
+        onClick={() => {
+          handleOnChange("workstream", item.value);
+        }}
+        role="button"
+      >
+        <div
+          className={`flex flex-col justify-center border rounded ${activeWorkstream}`}
+        >
+          <img
+            alt="workstream logo"
+            className="bg-no-repeat"
+            src={imageData[item.label]}
+          />
+        </div>
+      </div>
+    );
+  });
+};
 
 export function Form(): React.ReactElement {
   const { submitStep, values } = useContext(Context);
@@ -40,15 +103,16 @@ export function Form(): React.ReactElement {
     clearErrors,
   } = useForm<NewStarterWorkDetailsFormData>({ defaultValues: values });
 
-  const handleOnChange = (name: any, value: any) => {
+  const handleOnChange = (
+    name: "workstream" | "subcontractor",
+    value: string | undefined
+  ) => {
     clearErrors(name);
     setValue(name, value);
   };
 
-  useEffect(() => {
-    register({ name: "subcontractor" }, { required: true });
-    register({ name: "workstream" }, { required: true });
-  }, []);
+  register({ name: "subcontractor" }, { required: true });
+  register({ name: "workstream" }, { required: true });
 
   const handleFormSubmit = (data: NewStarterWorkDetailsFormData) => {
     submitStep(4, data);
@@ -71,32 +135,10 @@ export function Form(): React.ReactElement {
           <input className="hidden" name="workstream" />
           {workstreamsData && (
             <>
-              {getOptions(workstreamsData.workstreams).map(
-                (item: WorkStreamProps) => {
-                  const activeWorkstream =
-                    workstream === item.value ? "border-gray-700" : "";
-                  return (
-                    <div
-                      key={item.value}
-                      aria-hidden
-                      className="flex w-1/4 px-2 "
-                      onClick={() => {
-                        handleOnChange("workstream", item.value);
-                      }}
-                      role="button"
-                    >
-                      <div
-                        className={`flex flex-col justify-center border rounded ${activeWorkstream}`}
-                      >
-                        <img
-                          alt="workstream logo"
-                          className="bg-no-repeat"
-                          src={imageData[item.label]}
-                        />
-                      </div>
-                    </div>
-                  );
-                }
+              {getWorkstreamOptions(
+                workstreamsData.workstreams,
+                workstream,
+                handleOnChange
               )}
               <div
                 key={"don't know"}
@@ -109,7 +151,7 @@ export function Form(): React.ReactElement {
               >
                 <div
                   className={`flex flex-col justify-center w-full text-center border rounded ${
-                    workstream === "don't know" ? "border-gray-700" : ""
+                    workstream === undefined ? "border-gray-700" : ""
                   }`}
                 >
                   <p className="text-middle">Do not know</p>
@@ -129,20 +171,11 @@ export function Form(): React.ReactElement {
                 <p className="text-red-600">please select a option *</p>
               )}
             </div>
-            {getOptions(subcontractorsData.subcontractors).map((item: any) => {
-              return (
-                <div key={item.label} className="my-2">
-                  <RadioButton
-                    checked={subcontractor === item.value}
-                    label={item.label}
-                    name="subcontractor"
-                    onChange={() => {
-                      handleOnChange("subcontractor", item.value);
-                    }}
-                  />
-                </div>
-              );
-            })}
+            {getSubcontractorOptions(
+              subcontractorsData.subcontractors,
+              subcontractor,
+              handleOnChange
+            )}
           </div>
         )}
       </div>
