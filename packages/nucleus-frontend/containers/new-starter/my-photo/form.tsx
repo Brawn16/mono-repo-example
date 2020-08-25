@@ -12,17 +12,11 @@ import { NewStarterMyPhotoFormData } from "./types";
 
 export function Form(): React.ReactElement {
   const { submitStep, values } = useContext(Context);
-  const {
-    errors,
-    getValues,
-    handleSubmit,
-    register,
-    setValue,
-    watch,
-  } = useForm<NewStarterMyPhotoFormData>({ defaultValues: values });
-  const { photoUpload } = getValues();
+  const { errors, handleSubmit, register, setValue, watch } = useForm<
+    NewStarterMyPhotoFormData
+  >({ defaultValues: values });
+  const photoUpload = watch("photoUpload");
 
-  watch("photoUpload");
   useEffect(() => {
     register({ name: "photoUpload" }, { required: "Photo is required" });
   }, []);
