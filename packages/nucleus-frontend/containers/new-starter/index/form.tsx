@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/consistent-function-scoping */
 import { PrimaryButton } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Checkbox } from "@sdh-project-services/nucleus-ui/dist/checkbox";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Context } from "../../../layouts/new-starter/context";
 import { PreparationProps } from "./types";
@@ -13,32 +13,33 @@ export function Form(): React.ReactElement {
     errors,
     handleSubmit,
     register,
+    getValues,
     setValue,
     watch,
     clearErrors,
   } = useForm<PreparationProps>({
     defaultValues: values,
   });
-  useEffect(() => {
-    register(
-      { name: "requiredDocs" },
-      {
-        validate: (value: boolean) =>
-          value === undefined || value === false
-            ? "Confirmation required to continue"
-            : true,
-      }
-    );
-    register(
-      { name: "termsConsent" },
-      {
-        validate: (value: boolean) =>
-          value === undefined || value === false
-            ? "Confirmation required to continue"
-            : true,
-      }
-    );
-  }, []);
+
+  register(
+    { name: "requiredDocs" },
+    {
+      validate: (value: boolean) =>
+        value === undefined || value === false
+          ? "Confirmation required to continue"
+          : true,
+    }
+  );
+
+  register(
+    { name: "termsConsent" },
+    {
+      validate: (value: boolean) =>
+        value === undefined || value === false
+          ? "Confirmation required to continue"
+          : true,
+    }
+  );
 
   const handleOnSubmit = (data: any) => {
     submitStep(0, data);
@@ -49,8 +50,9 @@ export function Form(): React.ReactElement {
     setValue(name, value);
   };
 
-  const requiredDocumentationWatch = watch("requiredDocs");
+  const requiredDocumentationWatch = getValues("requiredDocs");
   const termsConsentWatch = watch("termsConsent");
+
   return (
     <>
       <form className="max-w-2xl" onSubmit={handleSubmit(handleOnSubmit)}>

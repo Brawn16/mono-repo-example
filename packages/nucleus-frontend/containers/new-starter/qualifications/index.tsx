@@ -1,6 +1,5 @@
 import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import React from "react";
-import { Anchor } from "../../../components/anchor";
 import { Head } from "../../../components/head";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { Form } from "./form";
@@ -9,15 +8,10 @@ export function Qualifications(): React.ReactElement {
   return (
     <>
       <Head title="Qualifications - New Starter Form" />
-      <NewStarterLayout title="Qualifications">
-        <Anchor
-          className="flex mt-4 text-black"
-          href="/new-starter/work-details"
-        >
-          {`<`}
-          <p className="underline">Back</p>
-        </Anchor>
-
+      <NewStarterLayout
+        backHref="/new-starter/work-details"
+        title="Qualifications"
+      >
         <p className="mt-4 text-xl font-bold md:mt-8 md:text-3xl">
           Your qualifications
         </p>

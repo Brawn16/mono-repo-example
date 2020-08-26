@@ -11,6 +11,7 @@ export interface NewStarterFormData {
 export interface NewStarterProps {
   showSteps?: boolean;
   title?: string;
+  backHref?: string | undefined;
 }
 
 export interface NewStarterStep {

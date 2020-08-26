@@ -6,7 +6,7 @@ import {
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
 import { pascalCase } from "change-case";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
@@ -23,13 +23,17 @@ export function Form() {
     setValue,
     watch,
     reset,
-  } = useForm<NewStarterAddressFormData>({ defaultValues: values });
+  } = useForm<NewStarterAddressFormData>({
+    defaultValues: values,
+  });
 
-  register({ name: "addressLine1" }, { required: true });
+  register({ name: "addressLine1" }, { required: "This field is required" });
   register({ name: "addressLine2" });
   register({ name: "addressTownCity" });
   register({ name: "addressCounty" });
-  register({ name: "addressPostcode" }, { required: true });
+  register({ name: "addressPostcode" }, { required: "This field is required" });
+
+  const [manualAddress, setManualAddress] = useState(false);
 
   const handleAddressSelection = (address: AddressLookupAddress) => {
     const keys = Object.keys(address) as (keyof AddressLookupAddress)[];
@@ -57,65 +61,80 @@ export function Form() {
 
   return (
     <>
-      <Anchor className="flex mt-4" href="/new-starter/personal-details">
-        {`<`}
-        <p className="underline">Back</p>
-      </Anchor>
       <p className="mt-4 text-xl font-bold md:mt-8 md:text-3xl">
         What is your home address?
       </p>
       <div className="max-w-2xl md:flex-col md:items-center">
-        {!watchAddressLine1 && (
+        {!watchAddressLine1 && manualAddress === false && (
           <div
             className="flex flex-col py-4 font-bold"
-            onFocus={() => {
-              clearErrors();
-            }}
+            onFocus={() => clearErrors()}
           >
             <AddressLookup onAddressSelect={handleAddressSelection} />
-            <div>
+            <>
               {hasError && (
                 <p className="font-normal text-red-600">
-                  Please select your address
+                  Please select your address.
                 </p>
               )}
-            </div>
+            </>
+            <button
+              className="mt-2 text-right text-gray-600 underline focus:outline-none"
+              onClick={() => {
+                setManualAddress(true);
+              }}
+              type="button"
+            >
+              Manually enter address
+            </button>
           </div>
         )}
       </div>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <div className="max-w-2xl py-6">
-          {watchAddressLine1 && (
+          {(watchAddressLine1 || manualAddress) && (
             <>
-              {" "}
               <Input
                 className=""
                 error={errors.addressLine1}
                 label="Address"
                 name="addressLine1"
+                onChange={(event) => {
+                  setValue("addressLine1", event.target.value);
+                }}
+                onKeyDown={() => clearErrors("addressLine1")}
                 value={addressLine1}
               />
               <Input
                 className="mt-4"
                 name="addressLine2"
+                onChange={(event) => {
+                  setValue("addressLine2", event.target.value);
+                }}
                 value={addressLine2}
               />
             </>
           )}
         </div>
         <div className="max-w-2xl">
-          {watchAddressLine1 && (
+          {(watchAddressLine1 || manualAddress) && (
             <>
               <Input
                 className="mt-4"
                 label="Town/City"
                 name="addressTownCity"
+                onChange={(event) => {
+                  setValue("addressTownCity", event.target.value);
+                }}
                 value={addressTownCity}
               />
               <Input
                 className="mt-4"
                 label="County"
                 name="addressCounty"
+                onChange={(event) => {
+                  setValue("addressCounty", event.target.value);
+                }}
                 value={addressCounty}
               />
               <Input
@@ -123,19 +142,26 @@ export function Form() {
                 error={errors.addressPostcode}
                 label="Postcode"
                 name="addressPostcode"
+                onChange={(event) => {
+                  setValue("addressPostcode", event.target.value);
+                }}
+                onKeyDown={() => {
+                  clearErrors("addressPostcode");
+                }}
                 value={addressPostcode}
               />
             </>
           )}
-          {watchAddressLine1 && (
-            <button
-              className="my-4 underline"
-              onClick={reset as any}
-              type="button"
-            >
-              Search for another address
-            </button>
-          )}
+          <button
+            className="my-4 underline focus:outline-none"
+            onClick={() => {
+              reset({});
+              setManualAddress(false);
+            }}
+            type="button"
+          >
+            Search for another address
+          </button>
         </div>
         <div className="flex justify-between max-w-2xl mt-8">
           <Anchor href="/new-starter/personal-details">

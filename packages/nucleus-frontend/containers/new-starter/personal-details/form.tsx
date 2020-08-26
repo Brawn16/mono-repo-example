@@ -22,11 +22,6 @@ export function Form(): React.ReactElement {
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <Anchor className="flex mt-4 text-black" href="/new-starter">
-        {`<`}
-        <p className="underline">Back</p>
-      </Anchor>
-
       <p className="mt-4 text-xl font-bold md:mt-8 md:text-3xl">Your details</p>
       <div className="max-w-2xl font-bold md:flex">
         <Input

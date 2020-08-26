@@ -28,17 +28,23 @@ function renderStep({ href, label }: NewStarterStep, index: number) {
 
   const stepIndex = steps.findIndex((step) => step.href === asPath);
   const activePath = index < stepIndex;
+  const activeStyle =
+    active || activePath || currentStep > index - 1
+      ? "bg-white text-blue-900"
+      : "";
 
   const number = (
     <div className="flex flex-col align-center">
       <div>
         <div
-          className={`flex items-center justify-center w-8 h-8 text-xl ${
-            active || activePath ? "bg-white text-blue-900" : ""
-          } font-bold border border-blue-300 rounded-full`}
+          className={`flex items-center justify-center w-8 h-8 text-xl ${activeStyle} font-bold border border-blue-300 rounded-full`}
         >
           <div>
-            {activePath ? <FiCheck className="font-bold" /> : index + 1}
+            {currentStep > index - 1 ? (
+              <FiCheck className="font-bold" />
+            ) : (
+              index + 1
+            )}
           </div>
         </div>
       </div>
@@ -91,6 +97,7 @@ export function NewStarter({
   children,
   showSteps = true,
   title,
+  backHref,
 }: React.PropsWithChildren<NewStarterProps>): React.ReactElement {
   const { values } = getLocalFormData();
   const year = new Date().getFullYear();
@@ -153,6 +160,13 @@ export function NewStarter({
           </div>
           <div>
             <div className="px-10">
+              {backHref && (
+                <Anchor className="flex mt-4" href={backHref}>
+                  {`<`}
+                  <p className="underline">Back</p>
+                </Anchor>
+              )}
+
               <Context.Provider value={{ submitStep, values }}>
                 {children}
               </Context.Provider>

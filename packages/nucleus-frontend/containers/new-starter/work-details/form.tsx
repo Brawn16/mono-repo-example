@@ -32,10 +32,10 @@ function getOptions(data: any) {
 
 const getSubcontractorOptions = (
   subcontractorData: SubcontractorDataItem[],
-  subcontractor: string,
+  subcontractor: string | null,
   handleOnChange: (
     name: "workstream" | "subcontractor",
-    value: string | undefined
+    value: string | null
   ) => void
 ) => {
   return getOptions(subcontractorData).map((item: SubcontractorDataItem) => {
@@ -56,10 +56,10 @@ const getSubcontractorOptions = (
 
 const getWorkstreamOptions = (
   workstreamsData: WorkStreamDataItem[],
-  workstream: string,
+  workstream: string | null,
   handleOnChange: (
     name: "workstream" | "subcontractor",
-    value: string | undefined
+    value: string | null
   ) => void
 ) => {
   return getOptions(workstreamsData).map((item: WorkStreamDataItem) => {
@@ -105,14 +105,17 @@ export function Form(): React.ReactElement {
 
   const handleOnChange = (
     name: "workstream" | "subcontractor",
-    value: string | undefined
+    value: string | null
   ) => {
     clearErrors(name);
     setValue(name, value);
   };
 
   register({ name: "subcontractor" }, { required: true });
-  register({ name: "workstream" }, { required: true });
+  register(
+    { name: "workstream" },
+    { validate: (value) => value !== undefined }
+  );
 
   const handleFormSubmit = (data: NewStarterWorkDetailsFormData) => {
     submitStep(4, data);
@@ -145,13 +148,13 @@ export function Form(): React.ReactElement {
                 aria-hidden
                 className="flex justify-between w-1/4 px-2 align-center"
                 onClick={() => {
-                  handleOnChange("workstream", undefined);
+                  handleOnChange("workstream", null);
                 }}
                 role="button"
               >
                 <div
                   className={`flex flex-col justify-center w-full text-center border rounded ${
-                    workstream === undefined ? "border-gray-700" : ""
+                    workstream === null ? "border-gray-700" : ""
                   }`}
                 >
                   <p className="text-middle">Do not know</p>

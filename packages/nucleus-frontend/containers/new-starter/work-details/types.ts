@@ -1,6 +1,6 @@
 export interface NewStarterWorkDetailsFormData {
-  workstream: string;
-  subcontractor: string;
+  workstream: string | null;
+  subcontractor: string | null;
 }
 
 export interface WorkStreamDataItem {

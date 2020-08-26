@@ -1,3 +1,7 @@
+import {
+  SecondaryButton,
+  PrimaryButton,
+} from "@sdh-project-services/nucleus-ui/dist/button";
 import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import React from "react";
 import { Anchor } from "../../../components/anchor";
@@ -9,11 +13,7 @@ export function Identification(): React.ReactElement {
   return (
     <>
       <Head title="Identification - New Starter Form" />
-      <NewStarterLayout title="Identification">
-        <Anchor className="flex mt-4" href="/new-starter/address">
-          {`<`}
-          <p className="underline">Back</p>
-        </Anchor>
+      <NewStarterLayout backHref="/new-starter/address" title="Identification">
         <p className="mt-4 text-xl font-bold md:mt-8 md:text-3xl">
           Your identification
         </p>
@@ -37,10 +37,8 @@ export function Identification(): React.ReactElement {
           </Fieldset>
           <Fieldset className="my-4">
             <p className="font-semibold">
-              {" "}
               To confirm your address, please submit one of the following:
             </p>
-
             <ul className="py-4 ml-6 text-gray-500 list-disc">
               <li>
                 Bank statement no more than 3 months old (relevant Address
@@ -61,6 +59,14 @@ export function Identification(): React.ReactElement {
           </Fieldset>
         </div>
         <Form />
+        <div className="flex justify-between max-w-2xl mt-8">
+          <Anchor href="/new-starter/personal-details">
+            <div className="hidden md:block">
+              <SecondaryButton>Previous</SecondaryButton>
+            </div>
+          </Anchor>
+          <PrimaryButton className="w-full md:w-auto">Next</PrimaryButton>
+        </div>
       </NewStarterLayout>
     </>
   );

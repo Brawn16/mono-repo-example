@@ -1,6 +1,5 @@
 import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import React from "react";
-import { Anchor } from "../../../components/anchor";
 import { Head } from "../../../components/head";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { Form } from "./form";
@@ -9,12 +8,8 @@ export function MyPhoto(): React.ReactElement {
   return (
     <>
       <Head title="My Photo - New Starter Form" />
-      <NewStarterLayout title="My Photo">
+      <NewStarterLayout backHref="/new-starter/qualifications" title="My Photo">
         <div className="max-w-2xl">
-          <Anchor className="flex mt-4" href="/new-starter/qualifications">
-            {`<`}
-            <p className="underline">Back</p>
-          </Anchor>
           <p className="mt-4 text-xl font-bold md:mt-8 md:text-3xl">
             Your photograph
           </p>
