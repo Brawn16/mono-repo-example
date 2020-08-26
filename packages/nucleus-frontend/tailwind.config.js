@@ -5,7 +5,6 @@ const { borderWidth } = require("tailwindcss/defaultTheme");
 module.exports = {
   plugins: [ui({ sidebar: true })],
   purge: false,
-  variants: { borderWidth: ["last, first"] },
   theme: {
     extend: {
       fontFamily: {
