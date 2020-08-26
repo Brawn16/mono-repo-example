@@ -31,6 +31,9 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
+    "@microsoft/microsoft-graph-client": "^2.0.0",
+    "@slack/web-api": "^5.11.0",
+    "@slack/webhook": "^5.0.3",
     "apollo-server-lambda": "^2.15.1",
     "argon2": "^0.26.2",
     "aws-sdk": "^2.725.0",

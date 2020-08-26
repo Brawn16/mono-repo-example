@@ -6,7 +6,6 @@ import {
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewer";
-import Router from "next/router";
 import React, { useContext } from "react";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
@@ -40,8 +39,8 @@ export function Form(): React.ReactElement {
     });
 
     if (errors === undefined) {
-      Router.push("/new-starter/confirmation");
-      localStorage.removeItem("new-starter");
+      // Router.push("/new-starter/confirmation");
+      // localStorage.removeItem("new-starter");
     }
   };
 

@@ -9,11 +9,11 @@ export default {
   title: "Form",
 };
 
-type Props = {
-  onSubmit?: (data: object) => any;
-};
+interface FormProps {
+  onSubmit?: (data: object) => void;
+}
 
-export const Form = (props: Props) => {
+export const Form = (props: FormProps) => {
   const { register, handleSubmit, errors } = useForm<InputTypes>();
   const { onSubmit = action("onSubmit") } = props;
 
@@ -42,6 +42,10 @@ export const Form = (props: Props) => {
       </form>
     </div>
   );
+};
+
+Form.defaultProps = {
+  onSubmit: action("onSubmit"),
 };
 
 export const form = () => <Form />;
