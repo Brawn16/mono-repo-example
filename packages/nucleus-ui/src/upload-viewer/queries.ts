@@ -1,7 +1,7 @@
-import { gql } from "@apollo/client";
+import { gql, DocumentNode } from "@apollo/client";
 
-export const presignedUploadUrl: any = gql`
-  query presignedUploadUrl($id: String!) {
+export const createPresignedUploadUrl: DocumentNode = gql`
+  query createPresignedUploadUrl($id: String!) {
     presignedUploadUrl(id: $id) {
       presignedUrl
     }

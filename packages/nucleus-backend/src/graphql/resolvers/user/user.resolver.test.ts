@@ -1,7 +1,7 @@
 import { createSandbox } from "sinon";
-import { UserEntity } from "../../shared/entity/user.entity";
-import { stubEntity } from "../../shared/tests/helpers/entity";
-import { getMockUserEntity } from "../../shared/tests/helpers/user";
+import { UserEntity } from "../../../shared/entity/user.entity";
+import { stubEntity } from "../../../shared/tests/helpers/entity";
+import { getMockUserEntity } from "../../../shared/tests/helpers/user";
 import { UserResolver } from "./user.resolver";
 
 const { restore, stub } = createSandbox();

@@ -1,7 +1,7 @@
 import { S3 } from "aws-sdk";
 import { createSandbox } from "sinon";
-import { UploadEntity } from "../../shared/entity/upload.entity";
-import { stubEntity } from "../../shared/tests/helpers/entity";
+import { UploadEntity } from "../../../shared/entity/upload.entity";
+import { stubEntity } from "../../../shared/tests/helpers/entity";
 import { UploadResolver } from "./upload.resolver";
 
 const { restore, stub } = createSandbox();

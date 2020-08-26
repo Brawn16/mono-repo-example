@@ -2,11 +2,11 @@ import { env } from "process";
 import { ISettings } from "@apollographql/graphql-playground-html/dist/render-playground-page";
 import { ApolloServer, Config } from "apollo-server-lambda";
 import { context } from "./core/context";
-import { getSchema } from "./core/schema";
+import { schema } from "./core/schema";
 
 const config: Config = {
   context,
-  schema: getSchema(),
+  schema,
 };
 
 // If playground is enabled, update config and enable tracing

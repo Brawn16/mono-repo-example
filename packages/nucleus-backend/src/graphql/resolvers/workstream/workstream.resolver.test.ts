@@ -1,6 +1,6 @@
 import { createSandbox } from "sinon";
-import { WorkstreamEntity } from "../../shared/entity/workstream.entity";
-import { stubEntity } from "../../shared/tests/helpers/entity";
+import { WorkstreamEntity } from "../../../shared/entity/workstream.entity";
+import { stubEntity } from "../../../shared/tests/helpers/entity";
 import { WorkstreamResolver } from "./workstream.resolver";
 
 const { restore, stub } = createSandbox();

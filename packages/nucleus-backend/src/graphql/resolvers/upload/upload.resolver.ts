@@ -3,7 +3,8 @@ import { ForbiddenError } from "apollo-server-core";
 import { S3 } from "aws-sdk";
 import { plainToClass } from "class-transformer";
 import { Mutation, Query, Resolver, Arg } from "type-graphql";
-import { UploadEntity } from "../../shared/entity/upload.entity";
+import { UploadEntity } from "../../../shared/entity/upload.entity";
+import { Public } from "../../decorators/public";
 import { CreatePresignedUploadUrlDto } from "./create-presigned-upload-url.dto";
 import { CreatePresignedUploadDto } from "./create-presigned-upload.dto";
 import { CreatePresignedUploadInput } from "./create-presigned-upload.input";
@@ -11,6 +12,7 @@ import { CreatePresignedUploadInput } from "./create-presigned-upload.input";
 @Resolver()
 export class UploadResolver {
   @Mutation(() => CreatePresignedUploadDto)
+  @Public()
   public async createPresignedUpload(
     @Arg("data") data: CreatePresignedUploadInput
   ): Promise<CreatePresignedUploadDto> {
@@ -57,7 +59,8 @@ export class UploadResolver {
   }
 
   @Query(() => CreatePresignedUploadUrlDto)
-  public async presignedUploadUrl(
+  @Public()
+  public async createPresignedUploadUrl(
     @Arg("id") id: string
   ): Promise<CreatePresignedUploadUrlDto> {
     const { tags = [] } = await UploadEntity.findOneOrFail(id);

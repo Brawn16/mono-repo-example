@@ -73,7 +73,6 @@ The following commands are available:
 
 - `build` - Creates a production-ready static bundle
 - `dev` - Runs local development environment
-- `seed` - Seed database
 - `test` - Run test suite
 
 **NB:** _The frontend requires a working backend, so make sure the backend is running to use the frontend with errors._
