@@ -1,15 +1,24 @@
 service: nucleus-backend
 plugins:
-  - serverless-offline
   - serverless-offline-sqs
-  - serverless-s3-local
+  - serverless-offline
 
 provider:
   name: aws
 
 custom:
-  s3:
-    cors: cors.xml
+  serverless-offline-sqs:
+    autoCreate: true
+    endpoint: http://0.0.0.0:9324
+
+resources:
+  Resources:
+    Queue:
+      Type: AWS::SQS::Queue
+      Properties:
+        ContentBasedDeduplication: true
+        FifoQueue: true
+        QueueName: Queue.fifo
 
 functions:
   graphql:
@@ -23,12 +32,11 @@ functions:
           method: post
           path: graphql
     handler: dist/graphql/index.graphqlHandler
-
-resources:
-  Resources:
-    Queue:
-      Type: AWS::SQS::Queue
-    Uploads:
-      Type: AWS::S3::Bucket
-      Properties:
-        BucketName: uploads.localhost
+  queue:
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - Queue
+              - Arn
+    handler: dist/queue/index.queueHandler

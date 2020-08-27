@@ -4,10 +4,9 @@ import {
   APIGatewayProxyEvent,
   Context as LambdaContext,
 } from "aws-lambda";
-import { bootstrap } from "./bootstrap";
+import { hasBooted } from "../shared/bootstrap";
 import { server } from "./server";
 
-const bootstrapped = bootstrap();
 const handler = server.createHandler({
   cors: {
     allowedHeaders: ["authorization", "content-type"],
@@ -16,19 +15,12 @@ const handler = server.createHandler({
   },
 });
 
-async function executeHandler(
-  event: APIGatewayProxyEvent,
-  context_: LambdaContext,
-  callback: APIGatewayProxyCallback
-) {
-  await bootstrapped;
-  handler(event, context_, callback);
-}
-
 export function graphqlHandler(
   event: APIGatewayProxyEvent,
   context_: LambdaContext,
   callback: APIGatewayProxyCallback
 ) {
-  executeHandler(event, context_, callback);
+  hasBooted.then(async () => {
+    handler(event, context_, callback);
+  });
 }

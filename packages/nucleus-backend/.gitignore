@@ -1,2 +1,4 @@
+.s3rver/
 .serverless/
-buckets/
+
+*.jar

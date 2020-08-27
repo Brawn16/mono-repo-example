@@ -1,6 +1,6 @@
 import { env } from "process";
 import { ForbiddenError } from "apollo-server-core";
-import { S3 } from "aws-sdk";
+import { S3, Credentials } from "aws-sdk";
 import { plainToClass } from "class-transformer";
 import { Mutation, Query, Resolver, Arg } from "type-graphql";
 import { UploadEntity } from "../../../shared/entity/upload.entity";
@@ -16,11 +16,24 @@ export class UploadResolver {
   public async createPresignedUpload(
     @Arg("data") data: CreatePresignedUploadInput
   ): Promise<CreatePresignedUploadDto> {
+    const accessKey = env.AWS_UPLOAD_ACCESS_KEY;
+    const accessSecret = env.AWS_UPLOAD_ACCESS_SECRET;
+    const endpoint = env.AWS_UPLOAD_ENDPOINT;
+    if (
+      accessKey === undefined ||
+      accessSecret === undefined ||
+      endpoint === undefined
+    ) {
+      throw new Error("Upload bucket is not configured.");
+    }
+
     const upload = await plainToClass(UploadEntity, data).save();
     const s3 = new S3({
-      accessKeyId: env.AWS_UPLOAD_ACCESS_KEY,
-      endpoint: env.AWS_UPLOAD_ENDPOINT,
-      secretAccessKey: env.AWS_UPLOAD_ACCESS_SECRET,
+      credentials: new Credentials({
+        accessKeyId: accessKey,
+        secretAccessKey: accessSecret,
+      }),
+      endpoint,
     });
 
     // Build parameters with conditions to use when uploading.

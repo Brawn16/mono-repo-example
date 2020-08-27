@@ -6,7 +6,11 @@
     "build": "run-s build:rimraf build:tsc",
     "build:rimraf": "rimraf dist",
     "build:tsc": "tsc",
-    "dev": "tsc-watch --onSuccess 'sls offline --httpPort 5000'",
+    "dev": "run-p dev:elasticmq dev:s3rver dev:tsc-watch",
+    "dev:elasticmq": "java -jar elasticmq.jar",
+    "dev:s3rver": "s3rver --configure-bucket uploads.localhost cors.xml --directory .s3rver",
+    "dev:sls": "export NODE_ENV=test && sls offline --httpPort 5000",
+    "dev:tsc-watch": "tsc-watch --onSuccess 'yarn dev:sls'",
     "test": "jest",
     "typeorm": "typeorm"
   },
@@ -19,12 +23,14 @@
     "@types/jest": "^25.2.1",
     "@types/request-promise": "^4.1.46",
     "@types/sinon": "^9.0.0",
+    "@types/uuid": "^8.3.0",
     "jest": "^25.5.4",
     "npm-run-all": "^4.1.5",
     "rimraf": "^3.0.2",
+    "s3rver": "^3.6.1",
     "serverless": "^1.74.1",
-    "serverless-offline": "^6.4.0",
-    "serverless-s3-local": "^0.6.4",
+    "serverless-offline": "6.6.0",
+    "serverless-offline-sqs": "^4.1.0",
     "sinon": "^9.0.2",
     "ts-jest": "^25.5.0",
     "tsc-watch": "^4.2.5",
@@ -32,7 +38,6 @@
   },
   "dependencies": {
     "@microsoft/microsoft-graph-client": "^2.0.0",
-    "@slack/web-api": "^5.11.0",
     "@slack/webhook": "^5.0.3",
     "apollo-server-lambda": "^2.15.1",
     "argon2": "^0.26.2",
@@ -48,8 +53,8 @@
     "reflect-metadata": "^0.1.13",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
-    "serverless-offline-sqs": "^4.1.0",
     "type-graphql": "^0.17.6",
-    "typeorm": "^0.2.24"
+    "typeorm": "^0.2.24",
+    "uuid": "^8.3.0"
   }
 }
