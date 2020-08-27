@@ -6,7 +6,7 @@ import {
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
 import { pascalCase } from "change-case";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
@@ -33,7 +33,7 @@ export function Form() {
   register({ name: "addressCounty" });
   register({ name: "addressPostcode" }, { required: "This field is required" });
 
-  const [manualAddress, setManualAddress] = useState(false);
+  // const [manualAddress, setManualAddress] = useState(false);
 
   const handleAddressSelection = (address: AddressLookupAddress) => {
     const keys = Object.keys(address) as (keyof AddressLookupAddress)[];
@@ -65,23 +65,21 @@ export function Form() {
         What is your home address?
       </p>
       <div className="max-w-2xl md:flex-col md:items-center">
-        {!watchAddressLine1 && manualAddress === false && (
+        {!watchAddressLine1 && (
           <div
             className="flex flex-col py-4 font-bold"
             onFocus={() => clearErrors()}
           >
             <AddressLookup onAddressSelect={handleAddressSelection} />
-            <>
-              {hasError && (
-                <p className="font-normal text-red-600">
-                  Please select your address.
-                </p>
-              )}
-            </>
+            {hasError && (
+              <p className="font-normal text-red-600">
+                Please select your address.
+              </p>
+            )}
             <button
               className="mt-2 text-right text-gray-600 underline focus:outline-none"
               onClick={() => {
-                setManualAddress(true);
+                setValue("addressLine1", "");
               }}
               type="button"
             >
@@ -92,14 +90,14 @@ export function Form() {
       </div>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <div className="max-w-2xl py-6">
-          {(watchAddressLine1 || manualAddress) && (
+          {watchAddressLine1 !== undefined && (
             <>
               <Input
                 className=""
                 error={errors.addressLine1}
                 label="Address"
                 name="addressLine1"
-                onChange={(event) => {
+                onChange={event => {
                   setValue("addressLine1", event.target.value);
                 }}
                 onKeyDown={() => clearErrors("addressLine1")}
@@ -108,7 +106,7 @@ export function Form() {
               <Input
                 className="mt-4"
                 name="addressLine2"
-                onChange={(event) => {
+                onChange={event => {
                   setValue("addressLine2", event.target.value);
                 }}
                 value={addressLine2}
@@ -117,13 +115,13 @@ export function Form() {
           )}
         </div>
         <div className="max-w-2xl">
-          {(watchAddressLine1 || manualAddress) && (
+          {watchAddressLine1 !== undefined && (
             <>
               <Input
                 className="mt-4"
                 label="Town/City"
                 name="addressTownCity"
-                onChange={(event) => {
+                onChange={event => {
                   setValue("addressTownCity", event.target.value);
                 }}
                 value={addressTownCity}
@@ -132,7 +130,7 @@ export function Form() {
                 className="mt-4"
                 label="County"
                 name="addressCounty"
-                onChange={(event) => {
+                onChange={event => {
                   setValue("addressCounty", event.target.value);
                 }}
                 value={addressCounty}
@@ -142,7 +140,7 @@ export function Form() {
                 error={errors.addressPostcode}
                 label="Postcode"
                 name="addressPostcode"
-                onChange={(event) => {
+                onChange={event => {
                   setValue("addressPostcode", event.target.value);
                 }}
                 onKeyDown={() => {
@@ -156,7 +154,6 @@ export function Form() {
             className="my-4 underline focus:outline-none"
             onClick={() => {
               reset({});
-              setManualAddress(false);
             }}
             type="button"
           >

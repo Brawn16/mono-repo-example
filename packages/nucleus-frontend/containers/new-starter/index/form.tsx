@@ -22,21 +22,21 @@ export function Form(): React.ReactElement {
   });
 
   register(
-    { name: "requiredDocs" },
+    { name: "acceptedRequiredDocs" },
     {
       validate: (value: boolean) =>
         value === undefined || value === false
-          ? "Confirmation required to continue"
+          ? "Confirmation required to continue."
           : true,
     }
   );
 
   register(
-    { name: "termsConsent" },
+    { name: "acceptedTermsConsent" },
     {
       validate: (value: boolean) =>
         value === undefined || value === false
-          ? "Confirmation required to continue"
+          ? "Confirmation required to continue."
           : true,
     }
   );
@@ -50,31 +50,34 @@ export function Form(): React.ReactElement {
     setValue(name, value);
   };
 
-  const requiredDocumentationWatch = getValues("requiredDocs");
-  const termsConsentWatch = watch("termsConsent");
+  const acceptedRequiredDocumentationWatch = getValues("acceptedRequiredDocs");
+  const acceptedTermsConsentWatch = watch("acceptedTermsConsent");
 
   return (
     <>
       <form className="max-w-2xl" onSubmit={handleSubmit(handleOnSubmit)}>
         <Checkbox
-          checked={requiredDocumentationWatch}
+          checked={acceptedRequiredDocumentationWatch}
           className="my-2"
-          error={errors.requiredDocs}
+          error={errors.acceptedRequiredDocs}
           label="Yes, I have the required documents to hand and would like to proceed"
-          name="requiredDocs"
+          name="acceptedRequiredDocs"
           onChange={() => {
-            onChange("requiredDocs", !requiredDocumentationWatch);
+            onChange(
+              "acceptedRequiredDocs",
+              !acceptedRequiredDocumentationWatch
+            );
           }}
         />
         <div>
           <Checkbox
-            checked={termsConsentWatch}
+            checked={acceptedTermsConsentWatch}
             className="my-2 text-align-l"
-            error={errors.termsConsent}
+            error={errors.acceptedTermsConsent}
             label="To proceed please confirm that you have read, consent and agree to our Full Terms and Privacy Policy"
             name="terms"
             onChange={() => {
-              onChange("termsConsent", !termsConsentWatch);
+              onChange("acceptedTermsConsent", !acceptedTermsConsentWatch);
             }}
           />
         </div>

@@ -9,9 +9,9 @@ export interface NewStarterFormData {
 }
 
 export interface NewStarterProps {
+  backHref?: string | undefined;
   showSteps?: boolean;
   title?: string;
-  backHref?: string | undefined;
 }
 
 export interface NewStarterStep {

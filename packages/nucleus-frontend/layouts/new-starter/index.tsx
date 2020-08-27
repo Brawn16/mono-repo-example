@@ -26,7 +26,7 @@ function renderStep({ href, label }: NewStarterStep, index: number) {
   const { asPath } = useRouter();
   const active = steps[index].href === asPath;
 
-  const stepIndex = steps.findIndex((step) => step.href === asPath);
+  const stepIndex = steps.findIndex(step => step.href === asPath);
   const activePath = index < stepIndex;
   const activeStyle =
     active || activePath || currentStep > index - 1
@@ -137,7 +137,7 @@ export function NewStarter({
     router.push(href);
   };
   const { asPath } = useRouter();
-  const stepIndex = steps.findIndex((step) => {
+  const stepIndex = steps.findIndex(step => {
     return step.href === asPath;
   });
 

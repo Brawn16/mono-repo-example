@@ -1,9 +1,13 @@
+import {
+  SecondaryButton,
+  PrimaryButton,
+} from "@sdh-project-services/nucleus-ui/dist/button";
 import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import { Select } from "@sdh-project-services/nucleus-ui/dist/select";
 import Router from "next/router";
 import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
-
+import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
 import { rightToworkOptions, proofOfAddressOptions } from "./options";
 import { NewStarterIdentificationFormData } from "./types";
@@ -110,6 +114,14 @@ export function Form(): React.ReactElement {
             />
           )}
         </Fieldset>
+        <div className="flex justify-between max-w-2xl mt-8">
+          <Anchor href="/new-starter/personal-details">
+            <div className="hidden md:block">
+              <SecondaryButton>Previous</SecondaryButton>
+            </div>
+          </Anchor>
+          <PrimaryButton className="w-full md:w-auto">Next</PrimaryButton>
+        </div>
       </div>
     </form>
   );

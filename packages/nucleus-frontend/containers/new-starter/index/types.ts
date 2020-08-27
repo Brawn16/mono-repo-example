@@ -1,4 +1,4 @@
 export interface PreparationProps {
-  requiredDocs: boolean | undefined;
-  termsConsent: boolean | undefined;
+  acceptedRequiredDocs: boolean | undefined;
+  acceptedTermsConsent: boolean | undefined;
 }

@@ -1,10 +1,5 @@
-import {
-  SecondaryButton,
-  PrimaryButton,
-} from "@sdh-project-services/nucleus-ui/dist/button";
 import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import React from "react";
-import { Anchor } from "../../../components/anchor";
 import { Head } from "../../../components/head";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { Form } from "./form";
@@ -59,14 +54,6 @@ export function Identification(): React.ReactElement {
           </Fieldset>
         </div>
         <Form />
-        <div className="flex justify-between max-w-2xl mt-8">
-          <Anchor href="/new-starter/personal-details">
-            <div className="hidden md:block">
-              <SecondaryButton>Previous</SecondaryButton>
-            </div>
-          </Anchor>
-          <PrimaryButton className="w-full md:w-auto">Next</PrimaryButton>
-        </div>
       </NewStarterLayout>
     </>
   );
