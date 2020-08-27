@@ -7,8 +7,8 @@ import { OperativeIdentificationEntity } from "../../../shared/entity/operative-
 import { OperativeEntity } from "../../../shared/entity/operative.entity";
 import { SubcontractorEntity } from "../../../shared/entity/subcontractor.entity";
 import { WorkstreamEntity } from "../../../shared/entity/workstream.entity";
-import { getMSGraphClient } from "../../../shared/ms-graph/get-ms-graph-client";
-import { callSlackWebhook } from "../../../shared/slack/call-slack-webhook";
+import { getMSGraphClient } from "../../../shared/ms-graph/client";
+import { callSlackWebhook } from "../../../shared/slack/webhook";
 import { Public } from "../../decorators/public";
 import { CreateOperativeIdentificationInput } from "./create-operative.identification.input";
 import { CreateOperativeInput } from "./create-operative.input";

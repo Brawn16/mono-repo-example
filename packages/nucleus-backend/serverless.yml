@@ -1,6 +1,7 @@
 service: nucleus-backend
 plugins:
   - serverless-offline
+  - serverless-offline-sqs
   - serverless-s3-local
 
 provider:
@@ -25,7 +26,9 @@ functions:
 
 resources:
   Resources:
-    uploads:
+    Queue:
+      Type: AWS::SQS::Queue
+    Uploads:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: uploads.localhost

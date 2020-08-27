@@ -48,6 +48,7 @@
     "reflect-metadata": "^0.1.13",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
+    "serverless-offline-sqs": "^4.1.0",
     "type-graphql": "^0.17.6",
     "typeorm": "^0.2.24"
   }

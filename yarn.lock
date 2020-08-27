@@ -5369,6 +5369,21 @@ aws-sdk@^2.624.0, aws-sdk@^2.725.0, aws-sdk@^2.738.0, aws-sdk@^2.739.0:
     uuid "3.3.2"
     xml2js "0.4.19"
 
+aws-sdk@^2.698.0:
+  version "2.740.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.740.0.tgz#3ed1a9ad27d7f3e4fd289266f6e6d63d34dfd5ff"
+  integrity sha512-cSedIe7g5/S5o23jHvm9+vWhcYysmuKrmbML1Z0pO9KxlqOA9s4Z5f6Il7ZmvAktfmrxu1SyQu4YEoP5DL4/zw==
+  dependencies:
+    buffer "4.9.2"
+    events "1.1.1"
+    ieee754 "1.1.13"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.3.2"
+    xml2js "0.4.19"
+
 aws-sign2@~0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.7.0.tgz#b46e890934a9591f2d2f6f86d7e6a9f1b3fe76a8"
@@ -15467,7 +15482,7 @@ p-queue@^2.4.2:
   resolved "https://registry.yarnpkg.com/p-queue/-/p-queue-2.4.2.tgz#03609826682b743be9a22dba25051bd46724fc34"
   integrity sha512-n8/y+yDJwBjoLQe1GSJbbaYQLTI7QHNZI2+rpmCDbe++WLf9HC3gf6iqj5yfPAV71W4UF3ql5W1+UBPXoXTxng==
 
-p-queue@^6.3.0:
+p-queue@^6.3.0, p-queue@^6.4.0:
   version "6.6.1"
   resolved "https://registry.yarnpkg.com/p-queue/-/p-queue-6.6.1.tgz#578891ada028a61371ec2692b26614d1b7d2b10a"
   integrity sha512-miQiSxLYPYBxGkrldecZC18OTLjdUqnlRebGzPRiVxB8mco7usCmm7hFuxiTvp93K18JnLtE4KMMycjAu/cQQg==
@@ -18044,6 +18059,15 @@ serve-static@1.14.1:
     escape-html "~1.0.3"
     parseurl "~1.3.3"
     send "0.17.1"
+
+serverless-offline-sqs@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/serverless-offline-sqs/-/serverless-offline-sqs-4.1.0.tgz#0df315b67019f8dcfe314e3e35aff24bdbbb32bf"
+  integrity sha512-3kjIAlXXZ3X86TmPvAf1jcJWaIMJbhHX3J/8fyDj5pjGorAg8Ie0hjQa7w0qqYtdEDk7Mptra59fCgAf9zP8nw==
+  dependencies:
+    aws-sdk "^2.698.0"
+    lodash "^4.17.15"
+    p-queue "^6.4.0"
 
 serverless-offline@^6.4.0, serverless-offline@^6.5.0:
   version "6.6.0"
