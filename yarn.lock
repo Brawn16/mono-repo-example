@@ -18010,7 +18010,42 @@ serve-static@1.14.1:
     parseurl "~1.3.3"
     send "0.17.1"
 
-serverless-offline@^6.4.0, serverless-offline@^6.5.0:
+serverless-offline@6.6.0:
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-6.6.0.tgz#5eac42b1a7c45afb7907a6c84af5d5c28a5f8f99"
+  integrity sha512-NDOrAI/Pnn2UG6etzoUzNlgM9QFxuoj7y7+dyIErdDXdd972vMdYrL5s4O3yoBgCyOXMp5E8LYK7FmOTVSdnXA==
+  dependencies:
+    "@hapi/boom" "^7.4.11"
+    "@hapi/h2o2" "^8.3.2"
+    "@hapi/hapi" "^18.4.1"
+    aws-sdk "^2.624.0"
+    boxen "^4.2.0"
+    chalk "^3.0.0"
+    cuid "^2.1.8"
+    execa "^4.0.0"
+    extend "^3.0.2"
+    fs-extra "^8.1.0"
+    java-invoke-local "0.0.6"
+    js-string-escape "^1.0.1"
+    jsonpath-plus "^3.0.0"
+    jsonschema "^1.2.6"
+    jsonwebtoken "^8.5.1"
+    jszip "^3.2.2"
+    luxon "^1.22.0"
+    node-fetch "^2.6.0"
+    node-schedule "^1.3.2"
+    object.fromentries "^2.0.2"
+    p-memoize "^4.0.0"
+    p-queue "^6.3.0"
+    p-retry "^4.2.0"
+    please-upgrade-node "^3.2.0"
+    portfinder "^1.0.25"
+    semver "^7.1.3"
+    update-notifier "^4.1.0"
+    velocityjs "^2.0.0"
+    ws "^7.2.1"
+
+serverless-offline@^6.5.0:
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/serverless-offline/-/serverless-offline-6.7.0.tgz#8873630e400e8f4314e12bb339d49ddb0dc1bce4"
   integrity sha512-N/5vUk8PzSzViwRjeLIM/o5LYk6NudaSEoZRlwQFSGeLuQSHZuFUvNZlCSK3e4N3gs1CLKMP0Ks1H0/jHD/8gQ==
