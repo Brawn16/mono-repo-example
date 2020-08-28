@@ -1,19 +1,18 @@
 import {
   PrimaryButton,
-  Button,
+  SecondaryButton,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
+
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { AiOutlineMail } from "react-icons/ai";
-import { FiPhone } from "react-icons/fi";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
 import { NewStarterPersonalDetailsFormData } from "./types";
 
 export function Form(): React.ReactElement {
   const { submitStep, values } = useContext(Context);
-  const { errors, handleSubmit, register } = useForm<
+  const { errors, handleSubmit, register, clearErrors } = useForm<
     NewStarterPersonalDetailsFormData
   >({ defaultValues: values });
 
@@ -23,7 +22,8 @@ export function Form(): React.ReactElement {
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <div className="md:flex">
+      <p className="mt-4 text-xl font-bold md:mt-8 md:text-3xl">Your details</p>
+      <div className="max-w-2xl font-bold md:flex">
         <Input
           className="mt-4 md:mr-4 md:w-1/2"
           componentRef={register({
@@ -32,6 +32,9 @@ export function Form(): React.ReactElement {
           error={errors.firstName}
           label="First Name"
           name="firstName"
+          onKeyDown={() => {
+            clearErrors("firstName");
+          }}
           required
         />
         <Input
@@ -42,26 +45,31 @@ export function Form(): React.ReactElement {
           error={errors.lastName}
           label="Last Name"
           name="lastName"
+          onFocus={() => {
+            clearErrors("lastName");
+          }}
           required
         />
       </div>
-      <div className="md:flex">
+      <div className="max-w-2xl font-bold">
         <Input
-          className="mt-4 md:mr-4 md:w-1/2"
+          className="mt-4 md:w-full"
           componentRef={register({
             required: "Phone number is required",
           })}
           error={errors.phoneNumber}
-          iconType={FiPhone}
           inputMode="tel"
           label="Phone Number"
           name="phoneNumber"
+          onFocus={() => {
+            clearErrors("phoneNumber");
+          }}
           positionIconLeft
           required
           type="tel"
         />
         <Input
-          className="mt-4 md:ml-4 md:w-1/2"
+          className="mt-4 md:w-full"
           componentRef={register({
             pattern: {
               message: "Invalid email address",
@@ -70,45 +78,54 @@ export function Form(): React.ReactElement {
             required: "Email is required",
           })}
           error={errors.email}
-          iconType={AiOutlineMail}
+          inputMode="email"
           label="Email"
           name="email"
+          onFocus={() => {
+            clearErrors("email");
+          }}
           positionIconLeft
           required
           type="email"
         />
-      </div>
-      <div className="md:flex">
+
         <Input
-          className="mt-4 md:mr-4 md:w-1/2"
+          className="mt-4 md:w-full"
           componentRef={register({
             required: "Emergency contact name is required",
           })}
           error={errors.emergencyContactName}
           label="Emergency Contact Name"
           name="emergencyContactName"
+          onFocus={() => {
+            clearErrors("emergencyContactName");
+          }}
           required
         />
         <Input
-          className="mt-4 md:ml-4 md:w-1/2"
+          className="mt-4 md:w-full"
           componentRef={register({
             required: "Emergency contact phone number is required",
           })}
           error={errors.emergencyContactNumber}
-          iconType={FiPhone}
           inputMode="tel"
-          label="Emergency Contact Phone Number"
-          name="emergencyContactPhoneNumber"
+          label="Emergency Contact Number"
+          name="emergencyContactNumber"
+          onFocus={() => {
+            clearErrors("emergencyContactNumber");
+          }}
           positionIconLeft
           required
           type="tel"
         />
       </div>
-      <div className="flex justify-between mt-8">
+      <div className="flex justify-between max-w-2xl mt-8">
         <Anchor href="/new-starter">
-          <Button>Back</Button>
+          <div className="hidden md:block">
+            <SecondaryButton>Previous</SecondaryButton>
+          </div>
         </Anchor>
-        <PrimaryButton>Continue</PrimaryButton>
+        <PrimaryButton className="w-full md:w-auto">Next</PrimaryButton>
       </div>
     </form>
   );

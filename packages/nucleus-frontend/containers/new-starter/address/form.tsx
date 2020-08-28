@@ -2,10 +2,10 @@ import { AddressLookup } from "@sdh-project-services/nucleus-ui/dist/address-loo
 import { AddressLookupAddress } from "@sdh-project-services/nucleus-ui/dist/address-lookup/types";
 import {
   PrimaryButton,
-  Button,
+  SecondaryButton,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
-import { capitalCase } from "change-case";
+import { pascalCase } from "change-case";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Anchor } from "../../../components/anchor";
@@ -14,14 +14,30 @@ import { NewStarterAddressFormData } from "./types";
 
 export function Form() {
   const { submitStep, values } = useContext(Context);
-  const { errors, handleSubmit, register, setValue } = useForm<
-    NewStarterAddressFormData
-  >({ defaultValues: values });
+  const {
+    errors,
+    clearErrors,
+    handleSubmit,
+    getValues,
+    register,
+    setValue,
+    watch,
+    reset,
+  } = useForm<NewStarterAddressFormData>({
+    defaultValues: values,
+  });
+
+  register({ name: "addressLine1" }, { required: "This field is required" });
+  register({ name: "addressLine2" });
+  register({ name: "addressTownCity" });
+  register({ name: "addressCounty" });
+  register({ name: "addressPostcode" }, { required: "This field is required" });
 
   const handleAddressSelection = (address: AddressLookupAddress) => {
     const keys = Object.keys(address) as (keyof AddressLookupAddress)[];
+
     keys.forEach((key: keyof AddressLookupAddress) => {
-      setValue(`address${capitalCase(key)}`, address[key]);
+      setValue(`address${pascalCase(key)}`, address[key]);
     });
   };
 
@@ -29,77 +45,109 @@ export function Form() {
     submitStep(2, data);
   };
 
+  const watchAddressLine1 = watch("addressLine1");
+
+  const {
+    addressLine1,
+    addressLine2,
+    addressCounty,
+    addressPostcode,
+    addressTownCity,
+  } = getValues();
+
+  const hasError = errors.addressLine1 || errors.addressPostcode;
+
   return (
     <>
-      <div className="md:flex-col md:items-center md:flex w-all">
-        <div className="flex flex-col">
-          <AddressLookup onAddressSelect={handleAddressSelection} />
-          <div className="flex items-center justify-center  py-6">
-            <hr className="w-1/2 border-orange-600" />
-            <p className="px-2 text-gray-500">OR</p>
-            <hr className="w-1/2 border-orange-600" />
+      <p className="mt-4 text-xl font-bold md:mt-8 md:text-3xl">
+        What is your home address?
+      </p>
+      <div className="max-w-2xl md:flex-col md:items-center">
+        {!watchAddressLine1 && (
+          <div
+            className="flex flex-col py-4 font-bold"
+            onFocus={() => clearErrors()}
+          >
+            <AddressLookup onAddressSelect={handleAddressSelection} />
+            {hasError && (
+              <p className="font-normal text-red-600">
+                Please select your address.
+              </p>
+            )}
+            <button
+              className="mt-2 text-right text-gray-600 underline focus:outline-none"
+              onClick={() => setValue("addressLine1", "")}
+              type="button"
+            >
+              Manually enter address
+            </button>
           </div>
-          <div className="flex justify-center pb-5 text-gray-500 uppercase">
-            Enter your address manually
-          </div>
-        </div>
+        )}
       </div>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
-        <div className="md:flex">
-          <Input
-            className="md:pr-4 md:w-1/2"
-            componentRef={register({
-              required: "Address line 1 is required",
-            })}
-            error={errors.line1}
-            label="Address Line 1"
-            name="addressLine1"
-            required
-          />
-          <Input
-            className="mt-4 md:mt-0 md:pl-4 md:w-1/2"
-            componentRef={register}
-            label="Address Line 2"
-            name="addressLine2"
-          />
+        <div className="max-w-2xl py-6">
+          {watchAddressLine1 !== undefined && (
+            <>
+              <Input
+                error={errors.addressLine1}
+                label="Address"
+                name="addressLine1"
+                onChange={event => setValue("addressLine1", event.target.value)}
+                onKeyDown={() => clearErrors("addressLine1")}
+                value={addressLine1}
+              />
+              <Input
+                className="mt-4"
+                name="addressLine2"
+                onChange={event => setValue("addressLine2", event.target.value)}
+                value={addressLine2}
+              />
+            </>
+          )}
         </div>
-        <div className="md:flex">
-          <Input
-            className="mt-4 md:pr-4 md:w-1/2"
-            componentRef={register}
-            label="Address Line 3"
-            name="addressLine3"
-          />
-          <Input
-            className="mt-4 md:pl-4 md:w-1/2"
-            componentRef={register}
-            label="Town/City"
-            name="addressTownCity"
-          />
+        <div className="max-w-2xl">
+          {watchAddressLine1 !== undefined && (
+            <>
+              <Input
+                className="mt-4"
+                label="Town/City"
+                name="addressTownCity"
+                onChange={event => setValue("addressTownCity", event.target.value)}
+                value={addressTownCity}
+              />
+              <Input
+                className="mt-4"
+                label="County"
+                name="addressCounty"
+                onChange={event => setValue("addressCounty", event.target.value)}
+                value={addressCounty}
+              />
+              <Input
+                className="mt-4"
+                error={errors.addressPostcode}
+                label="Postcode"
+                name="addressPostcode"
+                onChange={event => setValue("addressPostcode", event.target.value)}
+                onKeyDown={() => clearErrors("addressPostcode")}
+                value={addressPostcode}
+              />
+            </>
+          )}
+          <button
+            className="my-4 underline focus:outline-none"
+            onClick={() => reset({})}
+            type="button"
+          >
+            Search for another address
+          </button>
         </div>
-        <div className="md:flex">
-          <Input
-            className="mt-4 md:pr-4 md:w-1/2"
-            componentRef={register}
-            label="County"
-            name="addressCounty"
-          />
-          <Input
-            className="mt-4 md:pl-4 md:w-1/2"
-            componentRef={register({
-              required: "Postcode is required",
-            })}
-            error={errors.postcode}
-            label="Postcode"
-            name="addressPostcode"
-            required
-          />
-        </div>
-        <div className="flex justify-between mt-8">
+        <div className="flex justify-between max-w-2xl mt-8">
           <Anchor href="/new-starter/personal-details">
-            <Button>Back</Button>
+            <div className="hidden md:block">
+              <SecondaryButton>Previous</SecondaryButton>
+            </div>
           </Anchor>
-          <PrimaryButton>Continue</PrimaryButton>
+          <PrimaryButton className="w-full md:w-auto">Next</PrimaryButton>
         </div>
       </form>
     </>

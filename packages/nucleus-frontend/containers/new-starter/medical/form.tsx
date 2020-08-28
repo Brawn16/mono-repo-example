@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button,
+  SecondaryButton,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { InputError } from "@sdh-project-services/nucleus-ui/dist/input-error";
 import { Label } from "@sdh-project-services/nucleus-ui/dist/label";
@@ -20,21 +20,13 @@ export function Form(): React.ReactElement {
   const medicalIssues = watch("medicalIssues");
   const medicationRequired = watch("medicationRequired");
 
+  watch("medicalIssues");
+  watch("medicationRequired");
+
   useEffect(() => {
-    register(
-      { name: "medicalIssues" },
-      {
-        validate: (value: boolean) =>
-          value === undefined ? "This question is required" : true,
-      }
-    );
-    register(
-      { name: "medicationRequired" },
-      {
-        validate: (value: boolean) =>
-          value === undefined ? "This question is required" : true,
-      }
-    );
+    register({ name: "medicalIssues" });
+    register({ name: "medicationRequired" });
+    setValue("medicalIssues", values.medicalIssues);
   }, []);
 
   const handleChange = (name: string, value: boolean) => {
@@ -115,9 +107,11 @@ export function Form(): React.ReactElement {
       )}
       <div className="flex justify-between mt-8">
         <Anchor href="/new-starter/my-photo">
-          <Button>Back</Button>
+          <div className="hidden md:block">
+            <SecondaryButton>Previous</SecondaryButton>
+          </div>
         </Anchor>
-        <PrimaryButton>Continue</PrimaryButton>
+        <PrimaryButton className="w-full md:w-auto">Next</PrimaryButton>
       </div>
     </form>
   );

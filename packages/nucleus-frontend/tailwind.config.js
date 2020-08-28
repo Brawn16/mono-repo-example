@@ -1,5 +1,6 @@
 const ui = require("@tailwindcss/ui");
 const theme = require("tailwindcss/defaultTheme");
+const { borderWidth } = require("tailwindcss/defaultTheme");
 
 module.exports = {
   plugins: [ui({ sidebar: true })],

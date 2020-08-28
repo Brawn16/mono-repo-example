@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button,
+  SecondaryButton,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Upload } from "@sdh-project-services/nucleus-ui/dist/upload";
 import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewer";
@@ -12,16 +12,23 @@ import { NewStarterMyPhotoFormData } from "./types";
 
 export function Form(): React.ReactElement {
   const { submitStep, values } = useContext(Context);
-  const { errors, handleSubmit, register, setValue, watch } = useForm<
-    NewStarterMyPhotoFormData
-  >({ defaultValues: values });
-  const photoUpload = watch("photoUpload");
+  const {
+    errors,
+    getValues,
+    handleSubmit,
+    register,
+    setValue,
+    watch,
+    clearErrors,
+  } = useForm<NewStarterMyPhotoFormData>({ defaultValues: values });
 
   useEffect(() => {
     register({ name: "photoUpload" }, { required: "Photo is required" });
   }, []);
-
+  watch("photoUpload");
+  const { photoUpload } = getValues();
   const handleChange = ([id]: string[]) => {
+    clearErrors("photoUpload");
     setValue("photoUpload", id);
   };
 
@@ -53,9 +60,11 @@ export function Form(): React.ReactElement {
       </div>
       <div className="flex justify-between mt-8">
         <Anchor href="/new-starter/qualifications">
-          <Button>Back</Button>
+          <div className="hidden md:block">
+            <SecondaryButton>Previous</SecondaryButton>
+          </div>
         </Anchor>
-        <PrimaryButton>Continue</PrimaryButton>
+        <PrimaryButton className="w-full md:w-auto">Next</PrimaryButton>
       </div>
     </form>
   );

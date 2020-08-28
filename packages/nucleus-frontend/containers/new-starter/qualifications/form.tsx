@@ -1,6 +1,6 @@
 import {
   PrimaryButton,
-  Button,
+  SecondaryButton,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Upload } from "@sdh-project-services/nucleus-ui/dist/upload";
 import React, { useContext, useEffect } from "react";
@@ -31,7 +31,7 @@ export function Form(): React.ReactElement {
   };
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)}>
+    <form className="max-w-2xl" onSubmit={handleSubmit(handleFormSubmit)}>
       <Upload
         accept="image/*"
         buttonEntity="photo"
@@ -41,11 +41,13 @@ export function Form(): React.ReactElement {
         tags={["operativeQualification", "public"]}
         values={qualificationUploadIds as string[]}
       />
-      <div className="flex justify-between mt-8">
+      <div className="flex justify-between max-w-2xl mt-8">
         <Anchor href="/new-starter/work-details">
-          <Button>Back</Button>
+          <div className="hidden md:block">
+            <SecondaryButton>Previous</SecondaryButton>
+          </div>
         </Anchor>
-        <PrimaryButton>Continue</PrimaryButton>
+        <PrimaryButton className="w-full md:w-auto">Next</PrimaryButton>
       </div>
     </form>
   );

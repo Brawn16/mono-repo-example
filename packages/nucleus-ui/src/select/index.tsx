@@ -46,7 +46,7 @@ export function Select(props: SelectProps) {
           defaultValue=""
           {...selectProperties}
           ref={componentRef}
-          className={`block w-full form-input rounded-none text-gray-900 focus:shadow-none focus:border-blue-500 ${errorClassName}`}
+          className={`block w-full form-input rounded text-gray-900 focus:shadow-none focus:border-blue-500 ${errorClassName}`}
           id={name}
         >
           <option hidden value="">

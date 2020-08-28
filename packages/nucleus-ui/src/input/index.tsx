@@ -44,7 +44,7 @@ export function Input(props: InputProps): React.ReactElement {
         <input
           {...inputProperties}
           ref={componentRef}
-          className={`block w-full form-input rounded-none text-gray-900 focus:shadow-none focus:border-blue-500 ${errorClassName} ${iconClassName}`}
+          className={`block w-full form-input rounded text-gray-900 focus:shadow-none focus:border-blue-500 ${errorClassName} ${iconClassName}`}
           id={name}
         />
         {Icon && (

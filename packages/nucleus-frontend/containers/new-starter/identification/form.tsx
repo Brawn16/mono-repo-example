@@ -1,6 +1,6 @@
 import {
+  SecondaryButton,
   PrimaryButton,
-  Button,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
 import { Select } from "@sdh-project-services/nucleus-ui/dist/select";
@@ -30,10 +30,13 @@ export function Form(): React.ReactElement {
     watch,
     setValue,
     getValues,
+    clearErrors,
   } = useForm<NewStarterIdentificationFormData>({ defaultValues: values });
   const watchIdentificationsOne = watch("identifications[0].type");
   const watchIdentificationsTwo = watch("identifications[1].type");
-  watch(["identification[0].uploads", "identification[1].uploads"]);
+
+  watch(["identifications[0].uploads"]);
+  watch(["identifications[1].uploads"]);
 
   useEffect(() => {
     register({ name: "identifications[0].uploads" }, { validate });
@@ -41,6 +44,7 @@ export function Form(): React.ReactElement {
   }, []);
 
   const handleChange = (name: string, value: string[]) => {
+    clearErrors(name);
     setValue(name, value);
   };
 
@@ -50,7 +54,7 @@ export function Form(): React.ReactElement {
   };
 
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)}>
+    <form className="max-w-2xl" onSubmit={handleSubmit(handleFormSubmit)}>
       <div className="py-4">
         <Fieldset>
           <Select
@@ -109,12 +113,14 @@ export function Form(): React.ReactElement {
             />
           )}
         </Fieldset>
-      </div>
-      <div className="flex justify-between mx-8 mt-8 md:mx-0">
-        <Anchor href="/new-starter/address">
-          <Button>Back</Button>
-        </Anchor>
-        <PrimaryButton>Continue</PrimaryButton>
+        <div className="flex justify-between max-w-2xl mt-8">
+          <Anchor href="/new-starter/personal-details">
+            <div className="hidden md:block">
+              <SecondaryButton>Previous</SecondaryButton>
+            </div>
+          </Anchor>
+          <PrimaryButton className="w-full md:w-auto">Next</PrimaryButton>
+        </div>
       </div>
     </form>
   );

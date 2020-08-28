@@ -5,10 +5,12 @@ import { ButtonProps } from "./types";
 export function SecondaryButton(
   props: React.PropsWithChildren<ButtonProps>
 ): React.ReactElement {
-  const { children } = props;
+  const { children, className } = props;
   return (
     <Button
-      className="text-white bg-gray-700 hover:bg-gray-800 active:bg-gray-800"
+      className={`font-semibold text-gray-500 bg-gray-200 rounded hover:bg-gray-300 active:bg-gray-400 ${
+        className || ""
+      }`}
       loadingColor="#fff"
       {...props}
     >
