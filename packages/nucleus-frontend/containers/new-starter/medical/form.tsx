@@ -22,11 +22,11 @@ export function Form(): React.ReactElement {
     setValue,
     watch,
   } = useForm<NewStarterMedicalFormData>({ defaultValues: values });
-
   const { medicalIssues, medicationRequired } = getValues();
 
   watch("medicalIssues");
   watch("medicationRequired");
+
   useEffect(() => {
     register({ name: "medicalIssues" });
     register({ name: "medicationRequired" });
