@@ -1,9 +1,9 @@
 import { ForbiddenError } from "apollo-server-core";
 import { createSandbox } from "sinon";
-import { UserEntity } from "../../shared/entity/user.entity";
-import { stubEntity } from "../../shared/tests/helpers/entity";
-import { getMockUserEntity } from "../../shared/tests/helpers/user";
-import { getMockAuthenticatedAppContext } from "../tests/helpers/context";
+import { UserEntity } from "../../../shared/entity/user.entity";
+import { stubEntity } from "../../../shared/tests/helpers/entity";
+import { getMockUserEntity } from "../../../shared/tests/helpers/user";
+import { getMockAuthenticatedAppContext } from "../../tests/helpers/context";
 import { AuthResolver } from "./auth.resolver";
 
 const { restore, stub } = createSandbox();

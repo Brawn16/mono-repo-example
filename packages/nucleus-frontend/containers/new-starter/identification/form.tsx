@@ -32,17 +32,16 @@ export function Form(): React.ReactElement {
     getValues,
     clearErrors,
   } = useForm<NewStarterIdentificationFormData>({ defaultValues: values });
-
-  useEffect(() => {
-    register({ name: "identifications[0].uploads" }, { validate });
-    register({ name: "identifications[1].uploads" }, { validate });
-  }, []);
-
   const watchIdentificationsOne = watch("identifications[0].type");
   const watchIdentificationsTwo = watch("identifications[1].type");
 
   watch(["identifications[0].uploads"]);
   watch(["identifications[1].uploads"]);
+
+  useEffect(() => {
+    register({ name: "identifications[0].uploads" }, { validate });
+    register({ name: "identifications[1].uploads" }, { validate });
+  }, []);
 
   const handleChange = (name: string, value: string[]) => {
     clearErrors(name);

@@ -1,6 +1,6 @@
 import { createSandbox } from "sinon";
-import { SubcontractorEntity } from "../../shared/entity/subcontractor.entity";
-import { stubEntity } from "../../shared/tests/helpers/entity";
+import { SubcontractorEntity } from "../../../shared/entity/subcontractor.entity";
+import { stubEntity } from "../../../shared/tests/helpers/entity";
 import { SubcontractorResolver } from "./subcontractor.resolver";
 
 const { restore, stub } = createSandbox();

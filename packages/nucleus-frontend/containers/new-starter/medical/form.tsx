@@ -14,15 +14,11 @@ import { NewStarterMedicalFormData } from "./types";
 
 export function Form(): React.ReactElement {
   const { submitStep, values } = useContext(Context);
-  const {
-    errors,
-    getValues,
-    handleSubmit,
-    register,
-    setValue,
-    watch,
-  } = useForm<NewStarterMedicalFormData>({ defaultValues: values });
-  const { medicalIssues, medicationRequired } = getValues();
+  const { errors, handleSubmit, register, setValue, watch } = useForm<
+    NewStarterMedicalFormData
+  >({ defaultValues: values });
+  const medicalIssues = watch("medicalIssues");
+  const medicationRequired = watch("medicationRequired");
 
   watch("medicalIssues");
   watch("medicationRequired");

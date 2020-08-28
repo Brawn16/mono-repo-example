@@ -36,10 +36,14 @@ export async function getAuthUserFromContext({
   }
 }
 
-export async function checkAuth({
-  context,
-}: ResolverData<AuthenticatedAppContext>): Promise<boolean> {
-  context.user = await getAuthUserFromContext(context);
+export async function checkAuth(
+  { context }: ResolverData<AuthenticatedAppContext>,
+  roles: string[]
+): Promise<boolean> {
+  if (roles.includes("public") === false) {
+    context.user = await getAuthUserFromContext(context);
+  }
+
   return true;
 }
 

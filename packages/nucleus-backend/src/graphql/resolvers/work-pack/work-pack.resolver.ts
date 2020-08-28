@@ -2,12 +2,11 @@ import { env } from "process";
 import { plainToClass } from "class-transformer";
 import { CoreOptions, Response } from "request";
 import { post } from "request-promise";
-import { Authorized, Query, Resolver } from "type-graphql";
+import { Query, Resolver } from "type-graphql";
 import { WorkPackDto } from "./work-pack.dto";
 
 @Resolver()
 export class WorkPackResolver {
-  @Authorized()
   @Query(() => [WorkPackDto])
   public async workPacks(): Promise<WorkPackDto[]> {
     // Send login request
