@@ -89,7 +89,6 @@ export function Form() {
           {watchAddressLine1 !== undefined && (
             <>
               <Input
-                className=""
                 error={errors.addressLine1}
                 label="Address"
                 name="addressLine1"
