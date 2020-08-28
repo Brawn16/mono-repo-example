@@ -76,9 +76,7 @@ export function Form() {
             )}
             <button
               className="mt-2 text-right text-gray-600 underline focus:outline-none"
-              onClick={() => {
-                setValue("addressLine1", "");
-              }}
+              onClick={() => setValue("addressLine1", "")}
               type="button"
             >
               Manually enter address
@@ -95,18 +93,14 @@ export function Form() {
                 error={errors.addressLine1}
                 label="Address"
                 name="addressLine1"
-                onChange={event => {
-                  setValue("addressLine1", event.target.value);
-                }}
+                onChange={event => setValue("addressLine1", event.target.value)}
                 onKeyDown={() => clearErrors("addressLine1")}
                 value={addressLine1}
               />
               <Input
                 className="mt-4"
                 name="addressLine2"
-                onChange={event => {
-                  setValue("addressLine2", event.target.value);
-                }}
+                onChange={event => setValue("addressLine2", event.target.value)}
                 value={addressLine2}
               />
             </>
@@ -119,18 +113,14 @@ export function Form() {
                 className="mt-4"
                 label="Town/City"
                 name="addressTownCity"
-                onChange={event => {
-                  setValue("addressTownCity", event.target.value);
-                }}
+                onChange={event => setValue("addressTownCity", event.target.value)}
                 value={addressTownCity}
               />
               <Input
                 className="mt-4"
                 label="County"
                 name="addressCounty"
-                onChange={event => {
-                  setValue("addressCounty", event.target.value);
-                }}
+                onChange={event => setValue("addressCounty", event.target.value)}
                 value={addressCounty}
               />
               <Input
@@ -138,21 +128,15 @@ export function Form() {
                 error={errors.addressPostcode}
                 label="Postcode"
                 name="addressPostcode"
-                onChange={event => {
-                  setValue("addressPostcode", event.target.value);
-                }}
-                onKeyDown={() => {
-                  clearErrors("addressPostcode");
-                }}
+                onChange={event => setValue("addressPostcode", event.target.value)}
+                onKeyDown={() => clearErrors("addressPostcode")}
                 value={addressPostcode}
               />
             </>
           )}
           <button
             className="my-4 underline focus:outline-none"
-            onClick={() => {
-              reset({});
-            }}
+            onClick={() => reset({})}
             type="button"
           >
             Search for another address
