@@ -33,8 +33,6 @@ export function Form() {
   register({ name: "addressCounty" });
   register({ name: "addressPostcode" }, { required: "This field is required" });
 
-  // const [manualAddress, setManualAddress] = useState(false);
-
   const handleAddressSelection = (address: AddressLookupAddress) => {
     const keys = Object.keys(address) as (keyof AddressLookupAddress)[];
 
