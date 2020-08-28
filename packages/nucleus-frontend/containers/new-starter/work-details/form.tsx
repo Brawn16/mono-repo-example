@@ -112,7 +112,10 @@ export function Form(): React.ReactElement {
   };
 
   register({ name: "subcontractor" }, { required: true });
-  register({ name: "workstream" }, { validate: value => value !== undefined });
+  register(
+    { name: "workstream" },
+    { validate: (value) => value !== undefined }
+  );
 
   const handleFormSubmit = (data: NewStarterWorkDetailsFormData) => {
     submitStep(4, data);

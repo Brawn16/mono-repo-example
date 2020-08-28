@@ -30,7 +30,7 @@ export class AddressLookupResolver {
         address.line_3,
         address.line_4,
         address.locality,
-      ].filter(line => line !== "");
+      ].filter((line) => line !== "");
 
       record.line1 = line1;
       record.line2 = line2;

@@ -9,8 +9,9 @@ export function PrimaryButton(
   return (
     <Button
       {...props}
-      className={`font-semibold text-white bg-yellow-300 rounded hover:bg-yellow-400 active:bg-yellow-400 ${className ||
-        ""}`}
+      className={`font-semibold text-white bg-yellow-300 rounded hover:bg-yellow-400 active:bg-yellow-400 ${
+        className || ""
+      }`}
       loadingColor="#fff"
     >
       {children}

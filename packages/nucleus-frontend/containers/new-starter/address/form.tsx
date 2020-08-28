@@ -92,14 +92,18 @@ export function Form() {
                 error={errors.addressLine1}
                 label="Address"
                 name="addressLine1"
-                onChange={event => setValue("addressLine1", event.target.value)}
+                onChange={(event) =>
+                  setValue("addressLine1", event.target.value)
+                }
                 onKeyDown={() => clearErrors("addressLine1")}
                 value={addressLine1}
               />
               <Input
                 className="mt-4"
                 name="addressLine2"
-                onChange={event => setValue("addressLine2", event.target.value)}
+                onChange={(event) =>
+                  setValue("addressLine2", event.target.value)
+                }
                 value={addressLine2}
               />
             </>
@@ -112,7 +116,7 @@ export function Form() {
                 className="mt-4"
                 label="Town/City"
                 name="addressTownCity"
-                onChange={event =>
+                onChange={(event) =>
                   setValue("addressTownCity", event.target.value)
                 }
                 value={addressTownCity}
@@ -121,7 +125,7 @@ export function Form() {
                 className="mt-4"
                 label="County"
                 name="addressCounty"
-                onChange={event =>
+                onChange={(event) =>
                   setValue("addressCounty", event.target.value)
                 }
                 value={addressCounty}
@@ -131,7 +135,7 @@ export function Form() {
                 error={errors.addressPostcode}
                 label="Postcode"
                 name="addressPostcode"
-                onChange={event =>
+                onChange={(event) =>
                   setValue("addressPostcode", event.target.value)
                 }
                 onKeyDown={() => clearErrors("addressPostcode")}
