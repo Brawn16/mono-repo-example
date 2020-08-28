@@ -44,4 +44,8 @@ export const Form = (props: Props) => {
   );
 };
 
+Form.defaultProps = {
+  onSubmit: action("onSubmit"),
+};
+
 export const form = () => <Form />;

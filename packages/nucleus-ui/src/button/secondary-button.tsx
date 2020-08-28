@@ -8,9 +8,8 @@ export function SecondaryButton(
   const { children, className } = props;
   return (
     <Button
-      className={`font-semibold text-gray-500 bg-gray-200 rounded hover:bg-gray-300 active:bg-gray-400 ${
-        className || ""
-      }`}
+      className={`font-semibold text-gray-500 bg-gray-200 rounded hover:bg-gray-300 active:bg-gray-400 ${className ||
+        ""}`}
       loadingColor="#fff"
       {...props}
     >

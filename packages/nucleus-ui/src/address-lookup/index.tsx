@@ -42,7 +42,7 @@ export const AddressLookup = ({
         index
       ) => {
         const optionLabel = [line1, line2, line3, townCity, postcode]
-          .filter((value) => value)
+          .filter(value => value)
           .join(", ");
 
         return {

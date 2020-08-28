@@ -7,7 +7,7 @@ export const Fields = (props: FieldsProps) => {
     <div className="flex justify-between">
       <p className="font-bold">{`${label}:`}</p>
       <div>
-        {values.map((value) => {
+        {values.map(value => {
           return (
             <p key={value} className="text-right">
               {value}

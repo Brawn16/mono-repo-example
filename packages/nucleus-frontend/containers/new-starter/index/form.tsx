@@ -77,7 +77,10 @@ export function Form(): React.ReactElement {
             label="To proceed please confirm that you have read, consent and agree to our Full Terms and Privacy Policy"
             name="terms"
             onChange={() => {
-              onChange("acceptedTermsConsent", acceptedTermsConsentWatch === false);
+              onChange(
+                "acceptedTermsConsent",
+                acceptedTermsConsentWatch === false
+              );
             }}
           />
         </div>

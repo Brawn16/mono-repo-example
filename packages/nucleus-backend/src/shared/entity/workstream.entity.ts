@@ -6,7 +6,10 @@ import { OperativeEntity } from "./operative.entity";
 @Entity("workstream")
 @ObjectType()
 export class WorkstreamEntity extends BaseEntity {
-  @OneToMany(() => OperativeEntity, (operative) => operative.workstream)
+  @OneToMany(
+    () => OperativeEntity,
+    operative => operative.workstream
+  )
   public operatives?: OperativeEntity[];
 
   @Column()
