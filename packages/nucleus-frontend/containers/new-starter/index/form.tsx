@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/consistent-function-scoping */
 import { PrimaryButton } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Checkbox } from "@sdh-project-services/nucleus-ui/dist/checkbox";
 import React, { useContext } from "react";
@@ -6,6 +5,14 @@ import { useForm } from "react-hook-form";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
 import { PreparationProps } from "./types";
+
+function validate(value?: boolean) {
+  if (value === undefined || value === false) {
+    return "Confirmation required to continue";
+  }
+
+  return true;
+}
 
 export function Form(): React.ReactElement {
   const { submitStep, values } = useContext(Context);
@@ -21,25 +28,11 @@ export function Form(): React.ReactElement {
     defaultValues: values,
   });
 
-  register(
-    { name: "acceptedRequiredDocs" },
-    {
-      validate: (value: boolean) =>
-        value === undefined || value === false
-          ? "Confirmation required to continue"
-          : true,
-    }
-  );
+  register({ name: "acceptedRequiredDocs" }, { validate });
+  register({ name: "acceptedTermsConsent" }, { validate });
+  watch(["acceptedRequiredDocs", "acceptedTermsConsent"]);
 
-  register(
-    { name: "acceptedTermsConsent" },
-    {
-      validate: (value: boolean) =>
-        value === undefined || value === false
-          ? "Confirmation required to continue"
-          : true,
-    }
-  );
+  const { acceptedRequiredDocs, acceptedTermsConsent } = getValues();
 
   const handleChange = (
     name: "acceptedRequiredDocs" | "acceptedTermsConsent",
@@ -53,14 +46,11 @@ export function Form(): React.ReactElement {
     submitStep(0, data);
   };
 
-  const acceptedRequiredDocumentationWatch = getValues("acceptedRequiredDocs");
-  const acceptedTermsConsentWatch = watch("acceptedTermsConsent");
-
   return (
     <>
       <form className="max-w-2xl" onSubmit={handleSubmit(handleFormSubmit)}>
         <Checkbox
-          checked={acceptedRequiredDocumentationWatch}
+          checked={acceptedRequiredDocs}
           className="my-2"
           error={errors.acceptedRequiredDocs}
           label="Yes, I have all the required documents to hand and would like to proceed."
@@ -68,12 +58,12 @@ export function Form(): React.ReactElement {
           onChange={() => {
             handleChange(
               "acceptedRequiredDocs",
-              acceptedRequiredDocumentationWatch === false
+              acceptedRequiredDocs === false
             );
           }}
         />
         <Checkbox
-          checked={acceptedTermsConsentWatch}
+          checked={acceptedTermsConsent}
           className="my-2 text-align-l"
           error={errors.acceptedTermsConsent}
           label={
@@ -88,7 +78,7 @@ export function Form(): React.ReactElement {
           onChange={() => {
             handleChange(
               "acceptedTermsConsent",
-              acceptedTermsConsentWatch === false
+              acceptedTermsConsent === false
             );
           }}
         />

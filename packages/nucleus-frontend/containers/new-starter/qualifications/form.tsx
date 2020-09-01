@@ -3,7 +3,7 @@ import {
   SecondaryButton,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Upload } from "@sdh-project-services/nucleus-ui/dist/upload";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
@@ -16,11 +16,10 @@ export function Form(): React.ReactElement {
   >({
     defaultValues: values,
   });
-  const { qualificationUploadIds } = getValues();
 
-  useEffect(() => {
-    register({ name: "qualificationUploadIds" });
-  }, []);
+  register({ name: "qualificationUploadIds" });
+
+  const { qualificationUploadIds } = getValues();
 
   const handleChange = (ids: string[]) => {
     setValue("qualificationUploadIds", ids);

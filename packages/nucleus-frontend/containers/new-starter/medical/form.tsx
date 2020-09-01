@@ -6,7 +6,7 @@ import { InputError } from "@sdh-project-services/nucleus-ui/dist/input-error";
 import { Label } from "@sdh-project-services/nucleus-ui/dist/label";
 import { RadioButton } from "@sdh-project-services/nucleus-ui/dist/radio-button";
 import { Textarea } from "@sdh-project-services/nucleus-ui/dist/textarea";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
@@ -14,20 +14,20 @@ import { NewStarterMedicalFormData } from "./types";
 
 export function Form(): React.ReactElement {
   const { submitStep, values } = useContext(Context);
-  const { errors, handleSubmit, register, setValue, watch } = useForm<
-    NewStarterMedicalFormData
-  >({ defaultValues: values });
-  const medicalIssues = watch("medicalIssues");
-  const medicationRequired = watch("medicationRequired");
+  const {
+    errors,
+    getValues,
+    handleSubmit,
+    register,
+    setValue,
+    watch,
+  } = useForm<NewStarterMedicalFormData>({ defaultValues: values });
 
-  watch("medicalIssues");
-  watch("medicationRequired");
+  register({ name: "medicalIssues" });
+  register({ name: "medicationRequired" });
+  watch(["medicalIssues", "medicationRequired"]);
 
-  useEffect(() => {
-    register({ name: "medicalIssues" });
-    register({ name: "medicationRequired" });
-    setValue("medicalIssues", values.medicalIssues);
-  }, []);
+  const { medicalIssues, medicationRequired } = getValues();
 
   const handleChange = (name: string, value: boolean) => {
     setValue(name, value);

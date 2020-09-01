@@ -4,7 +4,7 @@ import {
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Select } from "@sdh-project-services/nucleus-ui/dist/select";
 import Router from "next/router";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
@@ -31,16 +31,24 @@ export function Form(): React.ReactElement {
     getValues,
     clearErrors,
   } = useForm<NewStarterIdentificationFormData>({ defaultValues: values });
-  const watchIdentificationsOne = watch("identifications[0].type");
-  const watchIdentificationsTwo = watch("identifications[1].type");
 
-  watch(["identifications[0].uploads"]);
-  watch(["identifications[1].uploads"]);
+  register({ name: "identifications[0].uploads" }, { validate });
+  register({ name: "identifications[1].uploads" }, { validate });
+  watch([
+    "identifications[0].type",
+    "identifications[0].uploads",
+    "identifications[1].type",
+    "identifications[1].uploads",
+  ]);
 
-  useEffect(() => {
-    register({ name: "identifications[0].uploads" }, { validate });
-    register({ name: "identifications[1].uploads" }, { validate });
-  }, []);
+  const identificationOneType = getValues("identifications[0].type");
+  const identificationOneUploads: string[] = getValues(
+    "identifications[0].uploads"
+  );
+  const identificationTwoType = getValues("identifications[1].type");
+  const identificationTwoUploads: string[] = getValues(
+    "identifications[1].uploads"
+  );
 
   const handleChange = (name: string, value: string[]) => {
     clearErrors(name);
@@ -68,7 +76,7 @@ export function Form(): React.ReactElement {
         name="identifications[0].type"
         options={rightToworkOptions}
       />
-      {watchIdentificationsOne && (
+      {identificationOneType && (
         <Uploader
           error={
             errors.identifications &&
@@ -77,7 +85,7 @@ export function Form(): React.ReactElement {
           }
           name="identifications[0].uploads"
           onChange={handleChange}
-          values={getValues("identification[0].uploads")}
+          values={identificationOneUploads}
         />
       )}
       <Select
@@ -94,7 +102,7 @@ export function Form(): React.ReactElement {
         name="identifications[1].type"
         options={proofOfAddressOptions}
       />
-      {watchIdentificationsTwo && (
+      {identificationTwoType && (
         <Uploader
           error={
             errors.identifications &&
@@ -104,7 +112,7 @@ export function Form(): React.ReactElement {
           }
           name="identifications[1].uploads"
           onChange={handleChange}
-          values={getValues("identifications[1].uploads")}
+          values={identificationTwoUploads}
         />
       )}
       <div className="flex justify-between max-w-2xl mt-8">

@@ -77,6 +77,10 @@ function renderWorkstreams(
   );
 }
 
+function validate(value?: string) {
+  return value !== undefined;
+}
+
 export function Form(): React.ReactElement {
   const { submitStep, values } = useContext(Context);
   const { data: subcontractorsData }: any = useQuery(subcontractorsQuery);
@@ -90,8 +94,12 @@ export function Form(): React.ReactElement {
     watch,
     clearErrors,
   } = useForm<NewStarterWorkDetailsFormData>({ defaultValues: values });
+
+  register({ name: "workstream" }, { validate });
+  register({ name: "subcontractor" }, { validate });
+
   const { workstream, subcontractor } = getValues();
-  const activeWorkstream = workstream === null ? "border-gray-700" : "";
+  const activeWorkstream = workstream === null ? "border-blue-600" : "";
 
   const handleChange = (
     name: "workstream" | "subcontractor",
@@ -100,15 +108,6 @@ export function Form(): React.ReactElement {
     clearErrors(name);
     setValue(name, value);
   };
-
-  register(
-    { name: "workstream" },
-    { validate: (value) => value !== undefined }
-  );
-  register(
-    { name: "subcontractor" },
-    { validate: (value) => value !== undefined }
-  );
 
   const handleFormSubmit = (data: NewStarterWorkDetailsFormData) => {
     submitStep(4, data);
@@ -128,7 +127,7 @@ export function Form(): React.ReactElement {
             handleChange
           )}
           <button
-            className={`flex flex-col items-center justify-center w-full p-4 border rounded ${activeWorkstream}`}
+            className={`flex flex-col items-center justify-center w-full p-4 border-2 rounded focus:outline-none ${activeWorkstream}`}
             onClick={() => handleChange("workstream", null)}
             type="button"
           >

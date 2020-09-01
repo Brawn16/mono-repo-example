@@ -24,6 +24,14 @@ export function Form() {
     defaultValues: values,
   });
   const hasError = errors.addressLine1 || errors.addressPostcode;
+
+  register({ name: "addressLine1" }, { required: "This field is required" });
+  register({ name: "addressLine2" });
+  register({ name: "addressTownCity" });
+  register({ name: "addressCounty" });
+  register({ name: "addressPostcode" }, { required: "This field is required" });
+  watch("addressLine1");
+
   const {
     addressLine1,
     addressLine2,
@@ -31,14 +39,6 @@ export function Form() {
     addressPostcode,
     addressTownCity,
   } = getValues();
-
-  register({ name: "addressLine1" }, { required: "This field is required" });
-  register({ name: "addressLine2" });
-  register({ name: "addressTownCity" });
-  register({ name: "addressCounty" });
-  register({ name: "addressPostcode" }, { required: "This field is required" });
-
-  watch("addressLine1");
 
   const handleAddressSelection = (address: AddressLookupAddress) => {
     const keys = Object.keys(address) as (keyof AddressLookupAddress)[];

@@ -4,7 +4,7 @@ import {
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Upload } from "@sdh-project-services/nucleus-ui/dist/upload";
 import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewer";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
@@ -22,11 +22,11 @@ export function Form(): React.ReactElement {
     clearErrors,
   } = useForm<NewStarterMyPhotoFormData>({ defaultValues: values });
 
-  useEffect(() => {
-    register({ name: "photoUpload" }, { required: "Photo is required" });
-  }, []);
+  register({ name: "photoUpload" }, { required: "Photo is required" });
   watch("photoUpload");
+
   const { photoUpload } = getValues();
+
   const handleChange = ([id]: string[]) => {
     clearErrors("photoUpload");
     setValue("photoUpload", id);
