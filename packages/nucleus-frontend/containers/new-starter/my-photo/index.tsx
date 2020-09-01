@@ -1,4 +1,4 @@
-import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
+import { Panel } from "@sdh-project-services/nucleus-ui/dist/panel";
 import React from "react";
 import { Head } from "../../../components/head";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
@@ -16,7 +16,7 @@ export function MyPhoto(): React.ReactElement {
           <div className="max-w-2xl my-8">
             To create your worker profile we will need your photo:
           </div>
-          <Fieldset>
+          <Panel>
             <>
               <div className="font-bold">The photo must:</div>
               <ul className="pl-4 ml-6 text-gray-500 list-disc">
@@ -25,8 +25,8 @@ export function MyPhoto(): React.ReactElement {
                 <li>be in clear contrast to the background</li>
               </ul>
             </>
-          </Fieldset>
-          <Fieldset className="my-4">
+          </Panel>
+          <Panel className="my-4">
             <>
               <div className="font-bold">And you must:</div>
               <ul className="pl-4 ml-6 text-gray-500 list-disc">
@@ -43,7 +43,7 @@ export function MyPhoto(): React.ReactElement {
               className="w-1/2 my-2 md:w-1/5"
               src="https://www.dfa.ie/media/dfa/passport/passportphotographs/photojpen-117-300x450.jpg"
             />
-          </Fieldset>
+          </Panel>
 
           <Form />
         </div>

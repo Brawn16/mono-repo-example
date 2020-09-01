@@ -1,13 +1,11 @@
 import { useQuery } from "@apollo/client";
-import {
-  PrimaryButton,
-  SecondaryButton,
-} from "@sdh-project-services/nucleus-ui/dist/button";
+import { InputError } from "@sdh-project-services/nucleus-ui/dist/input-error";
+import { Label } from "@sdh-project-services/nucleus-ui/dist/label";
 import { RadioButton } from "@sdh-project-services/nucleus-ui/dist/radio-button";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
+import { Navigation } from "../../../layouts/new-starter/navigation";
 import { imageData } from "./images";
 import {
   subcontractors as subcontractorsQuery,
@@ -30,64 +28,54 @@ function getOptions(data: any) {
   }));
 }
 
-const getSubcontractorOptions = (
+function renderSubcontractors(
   subcontractorData: SubcontractorDataItem[],
   subcontractor: string | null,
-  handleOnChange: (
+  handleChange: (
     name: "workstream" | "subcontractor",
     value: string | null
   ) => void
-) => {
-  return getOptions(subcontractorData).map((item: SubcontractorDataItem) => {
-    return (
-      <div key={item.label} className="my-2">
+) {
+  return getOptions(subcontractorData).map(
+    ({ label, value }: SubcontractorDataItem) => {
+      return (
         <RadioButton
-          checked={subcontractor === item.value}
-          label={item.label}
+          key={value}
+          checked={subcontractor === value}
+          label={label}
           name="subcontractor"
-          onChange={() => {
-            handleOnChange("subcontractor", item.value);
-          }}
+          onChange={() => handleChange("subcontractor", value)}
         />
-      </div>
-    );
-  });
-};
+      );
+    }
+  );
+}
 
-const getWorkstreamOptions = (
+function renderWorkstreams(
   workstreamsData: WorkStreamDataItem[],
   workstream: string | null,
-  handleOnChange: (
+  handleChange: (
     name: "workstream" | "subcontractor",
     value: string | null
   ) => void
-) => {
-  return getOptions(workstreamsData).map((item: WorkStreamDataItem) => {
-    const activeWorkstream = workstream === item.value ? "border-gray-700" : "";
+) {
+  return getOptions(workstreamsData).map(
+    ({ label, value }: WorkStreamDataItem) => {
+      const activeWorkstream = workstream === value ? "border-blue-600" : "";
 
-    return (
-      <div
-        key={item.value}
-        aria-hidden
-        className="flex w-1/4 px-2 "
-        onClick={() => {
-          handleOnChange("workstream", item.value);
-        }}
-        role="button"
-      >
-        <div
-          className={`flex flex-col justify-center border rounded ${activeWorkstream}`}
+      return (
+        <button
+          key={value}
+          className={`flex flex-col items-center justify-center w-full p-4 border-2 rounded focus:outline-none ${activeWorkstream}`}
+          onClick={() => handleChange("workstream", value)}
+          type="button"
         >
-          <img
-            alt="workstream logo"
-            className="bg-no-repeat"
-            src={imageData[item.label]}
-          />
-        </div>
-      </div>
-    );
-  });
-};
+          <img alt={label} src={imageData[label]} />
+        </button>
+      );
+    }
+  );
+}
 
 export function Form(): React.ReactElement {
   const { submitStep, values } = useContext(Context);
@@ -102,8 +90,10 @@ export function Form(): React.ReactElement {
     watch,
     clearErrors,
   } = useForm<NewStarterWorkDetailsFormData>({ defaultValues: values });
+  const { workstream, subcontractor } = getValues();
+  const activeWorkstream = workstream === null ? "border-gray-700" : "";
 
-  const handleOnChange = (
+  const handleChange = (
     name: "workstream" | "subcontractor",
     value: string | null
   ) => {
@@ -111,9 +101,12 @@ export function Form(): React.ReactElement {
     setValue(name, value);
   };
 
-  register({ name: "subcontractor" }, { required: true });
   register(
     { name: "workstream" },
+    { validate: (value) => value !== undefined }
+  );
+  register(
+    { name: "subcontractor" },
     { validate: (value) => value !== undefined }
   );
 
@@ -121,75 +114,57 @@ export function Form(): React.ReactElement {
     submitStep(4, data);
   };
 
-  const { workstream, subcontractor } = getValues();
   watch("subcontractor");
   watch("workstream");
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <div className="max-w-2xl">
-        <p className="my-4 ml-2 font-semibold">Who will you be working for?</p>
-        <div>
-          {errors.workstream && (
-            <p className="mb-2 ml-2 text-red-600">please select a option *</p>
+      <Label label="Who will you be working for?" />
+      {workstreamsData && (
+        <div className="flex space-x-2">
+          {renderWorkstreams(
+            workstreamsData.workstreams,
+            workstream,
+            handleChange
           )}
+          <button
+            className={`flex flex-col items-center justify-center w-full p-4 border rounded ${activeWorkstream}`}
+            onClick={() => handleChange("workstream", null)}
+            type="button"
+          >
+            Don&apos;t know
+          </button>
         </div>
-        <div className="flex">
-          <input className="hidden" name="workstream" />
-          {workstreamsData && (
-            <>
-              {getWorkstreamOptions(
-                workstreamsData.workstreams,
-                workstream,
-                handleOnChange
-              )}
-              <div
-                key={"don't know"}
-                aria-hidden
-                className="flex justify-between w-1/4 px-2 align-center"
-                onClick={() => {
-                  handleOnChange("workstream", null);
-                }}
-                role="button"
-              >
-                <div
-                  className={`flex flex-col justify-center w-full text-center border rounded ${
-                    workstream === null ? "border-gray-700" : ""
-                  }`}
-                >
-                  <p className="text-middle">Do not know</p>
-                </div>
-              </div>
-            </>
-          )}
-        </div>
-
-        {subcontractorsData && (
-          <div className="py-6">
-            <p className="my-4 font-semibold">
-              Which subcontractor are you working for?
-            </p>
-            <div>
-              {errors.subcontractor && (
-                <p className="text-red-600">please select a option *</p>
-              )}
-            </div>
-            {getSubcontractorOptions(
+      )}
+      {errors.workstream && (
+        <InputError
+          error={{ message: "Please select an option", type: "manual" }}
+        />
+      )}
+      {subcontractorsData && (
+        <div className="mt-4">
+          <Label label="Which subcontractor are you working for?" />
+          <div className="space-y-2">
+            {renderSubcontractors(
               subcontractorsData.subcontractors,
               subcontractor,
-              handleOnChange
+              handleChange
             )}
+            <RadioButton
+              checked={subcontractor === null}
+              label="None"
+              name="subcontractor"
+              onChange={() => handleChange("subcontractor", null)}
+            />
           </div>
-        )}
-      </div>
-      <div className="flex justify-between max-w-2xl mt-8">
-        <Anchor href="/new-starter/identification">
-          <div className="hidden md:block">
-            <SecondaryButton>Previous</SecondaryButton>
-          </div>
-        </Anchor>
-        <PrimaryButton className="w-full md:w-auto">Next</PrimaryButton>
-      </div>
+          {errors.subcontractor && (
+            <InputError
+              error={{ message: "Please select an option", type: "manual" }}
+            />
+          )}
+        </div>
+      )}
+      <Navigation previousHref="/new-starter/identification" />
     </form>
   );
 }

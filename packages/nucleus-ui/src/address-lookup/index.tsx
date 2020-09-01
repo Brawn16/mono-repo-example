@@ -53,10 +53,9 @@ export const AddressLookup = ({
     );
 
     return (
-      <div>
-        <p className="py-2 text-gray-900">Select your address from the list</p>
+      <div className="mt-4">
+        <Label label="Select your address from the list" />
         <Select
-          className="mt-1"
           name="addressLookupAddresses"
           onChange={handleChange}
           options={options}
@@ -69,25 +68,23 @@ export const AddressLookup = ({
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex-col">
-          <Label label={label} name="addressLookupPostcode" />
-          <div className="flex">
-            <Input
-              className="w-full mr-4"
-              componentRef={register({
-                required: "Postcode is required",
-              })}
-              name="addressLookupPostcode"
-            />
-            <PrimaryButton>Find Address</PrimaryButton>
-          </div>
-          {error && (
-            <InputError error={{ message: error.message, type: "apollo" }} />
-          )}
-          {errors.addressLookupPostcode && (
-            <InputError error={errors.addressLookupPostcode} />
-          )}
+        <Label label={label} name="addressLookupPostcode" />
+        <div className="flex">
+          <Input
+            className="w-full mr-4"
+            componentRef={register({
+              required: "Postcode is required",
+            })}
+            name="addressLookupPostcode"
+          />
+          <PrimaryButton>Find address</PrimaryButton>
         </div>
+        {error && (
+          <InputError error={{ message: error.message, type: "apollo" }} />
+        )}
+        {errors.addressLookupPostcode && (
+          <InputError error={errors.addressLookupPostcode} />
+        )}
       </form>
       {showDropdown && data && renderAddresses(data.addressLookup)}
     </>

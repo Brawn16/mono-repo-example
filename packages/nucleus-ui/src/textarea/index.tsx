@@ -1,10 +1,11 @@
 import React from "react";
 import { InputError } from "../input-error";
+import { InputHelp } from "../input-help";
 import { Label } from "../label";
 import { TextareaProps } from "./types";
 
 export function Textarea(props: TextareaProps): React.ReactElement {
-  const { className, componentRef, error, label, name, required } = props;
+  const { className, componentRef, error, help, label, name, required } = props;
 
   // Build error classes
   let errorClassName = "";
@@ -28,6 +29,7 @@ export function Textarea(props: TextareaProps): React.ReactElement {
         className={`block w-full form-input rounded-none text-gray-900 focus:shadow-none focus:border-blue-500 ${errorClassName}`}
         id={name}
       />
+      {help && error === undefined && <InputHelp help={help} />}
       {error && <InputError error={error} />}
     </div>
   );

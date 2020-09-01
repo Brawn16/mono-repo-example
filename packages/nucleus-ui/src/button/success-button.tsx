@@ -10,7 +10,7 @@ export function SuccessButton(
 
   return (
     <Button
-      className="text-white bg-green-600 hover:bg-green-500 active:bg-green-800"
+      className="text-white bg-green-600 rounded hover:bg-green-500 active:bg-green-800"
       iconType={FaExclamation}
       loadingColor="#fff"
       {...props}

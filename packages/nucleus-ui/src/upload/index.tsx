@@ -50,7 +50,7 @@ export function Upload(props: UploadProps) {
     button = (
       <div {...getRootProps()}>
         <Button
-          className="w-48 mt-2 text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700"
+          className="w-48 text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700"
           type="button"
         >
           <span>

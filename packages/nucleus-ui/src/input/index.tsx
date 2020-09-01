@@ -1,5 +1,6 @@
 import React from "react";
 import { InputError } from "../input-error";
+import { InputHelp } from "../input-help";
 import { Label } from "../label";
 import { InputProps } from "./types";
 
@@ -8,6 +9,7 @@ export function Input(props: InputProps): React.ReactElement {
     className,
     componentRef,
     error,
+    help,
     label,
     name,
     required,
@@ -55,6 +57,7 @@ export function Input(props: InputProps): React.ReactElement {
           </div>
         )}
       </div>
+      {help && error === undefined && <InputHelp help={help} />}
       {error && <InputError error={error} />}
     </div>
   );

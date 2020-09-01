@@ -9,6 +9,7 @@ export interface TextareaProps
   className?: string;
   componentRef?: Ref<HTMLTextAreaElement>;
   error?: FieldError;
+  help?: string;
   label?: string;
   name: string;
 }

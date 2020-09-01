@@ -1,24 +1,24 @@
 import React from "react";
 import { Input } from "../input";
-import { Fieldset } from ".";
+import { Panel } from ".";
 
 export default {
-  component: Fieldset,
-  title: "Fieldset",
+  component: Panel,
+  title: "Panel",
 };
 
-export function fieldset() {
+export function panel() {
   return (
-    <Fieldset>
+    <Panel>
       <Input label="Input" name="input" />
-    </Fieldset>
+    </Panel>
   );
 }
 
 export function customClass() {
   return (
-    <Fieldset className="bg-blue-50">
+    <Panel className="bg-blue-50">
       <Input label="Input" name="input" />
-    </Fieldset>
+    </Panel>
   );
 }

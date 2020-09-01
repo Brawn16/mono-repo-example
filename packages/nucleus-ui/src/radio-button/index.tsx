@@ -3,23 +3,21 @@ import { RadioButtonProps } from "./types";
 
 export const RadioButton = (props: RadioButtonProps) => {
   const { checked, label } = props;
-  let radioButton = (
-    <div className="absolute w-4 h-4 mt-1 bg-gray-300 rounded-full" />
-  );
+  let radioButton = <div className="w-8 h-8 border rounded-full" />;
 
   if (checked) {
     radioButton = (
-      <div className="absolute flex items-center justify-center w-4 h-4 mt-1 bg-blue-600 rounded-full">
-        <div className="w-1 h-1 bg-white rounded-full" />
+      <div className="flex items-center justify-center w-8 h-8 border rounded-full">
+        <div className="w-4 h-4 bg-blue-600 rounded-full" />
       </div>
     );
   }
 
   return (
-    <label className="relative flex">
-      <input className="absolute opacity-0" type="radio" {...props} />
+    <label className="flex items-center">
+      <input className="absolute invisible" type="radio" {...props} />
       {radioButton}
-      <span className="ml-6">{label}</span>
+      <span className="ml-3">{label}</span>
     </label>
   );
 };

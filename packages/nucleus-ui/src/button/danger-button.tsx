@@ -8,7 +8,7 @@ export function DangerButton(
   const { children } = props;
   return (
     <Button
-      className="text-white bg-red-600 hover:bg-red-700 active:bg-red-700"
+      className="text-white bg-red-600 rounded hover:bg-red-700 active:bg-red-700"
       loadingColor="#fff"
       {...props}
     >

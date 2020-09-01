@@ -11,7 +11,7 @@ export function SplitScreen({
       <div className="flex w-full max-w-2xl">
         <div className="flex flex-col justify-center w-full max-w-md p-8 mx-auto">
           {children}
-          <footer className="mt-8 text-xs text-gray-400">
+          <footer className="mt-8 text-xs text-gray-600">
             &copy; {year}. All Rights Reserved.
           </footer>
         </div>

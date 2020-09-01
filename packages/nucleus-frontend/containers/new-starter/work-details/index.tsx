@@ -9,11 +9,9 @@ export function WorkDetails(): React.ReactElement {
       <Head title="Work Details - New Starter Form" />
       <NewStarterLayout
         backHref="/new-starter/identification"
+        headerTitle="Your Work Details"
         title="Work Details"
       >
-        <p className="mt-4 text-xl font-bold md:mt-8 md:text-3xl">
-          Your work details
-        </p>
         <Form />
       </NewStarterLayout>
     </>

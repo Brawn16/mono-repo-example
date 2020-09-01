@@ -1,4 +1,4 @@
-import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
+import { Panel } from "@sdh-project-services/nucleus-ui/dist/panel";
 import React from "react";
 import { Head } from "../../../components/head";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
@@ -16,7 +16,7 @@ export function Qualifications(): React.ReactElement {
           Your qualifications
         </p>
         <div className="max-w-2xl my-8">
-          <Fieldset>
+          <Panel>
             Please upload all relevant qualifications, training certificates,
             professional competencies or any other documentary evidence
             confirming that you possess the skills and training to practice your
@@ -25,7 +25,7 @@ export function Qualifications(): React.ReactElement {
               All uploads must be from a UK recognised competent
               authority/professional body/licensed body.
             </div>
-          </Fieldset>
+          </Panel>
         </div>
         <Form />
       </NewStarterLayout>
