@@ -41,8 +41,6 @@ export async function createOperativeSyncPhotos(operativeId: string) {
     ],
   });
 
-  const uploadEntity = await UploadEntity.find();
-
   const client = getMSGraphClient();
 
   const response = await client.api(newFileApi).post({
@@ -91,11 +89,9 @@ export async function createOperativeSyncPhotos(operativeId: string) {
         ) {
           const identificationName =
             operativeIdentification.identification.name || "";
-          operativeIdentification.uploads.forEach((item: string) => {
+          operativeIdentification.uploads.forEach(async (item: string) => {
+            const entity = await UploadEntity.findOne(item);
             i += 1;
-            const entity = uploadEntity.find(
-              (uploadItem) => uploadItem.id === item
-            );
             const fileExtension =
               entity && entity.name && entity.name.split(".")[1];
 
