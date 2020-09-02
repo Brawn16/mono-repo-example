@@ -4,7 +4,7 @@ import { Head } from "../../components/head";
 import { Login as LoginForm } from "../../components/login";
 import { SplitScreen } from "../../layouts/split-screen";
 
-export function Login(): React.ReactElement {
+export function Login() {
   return (
     <>
       <Head title="Login" />

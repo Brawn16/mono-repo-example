@@ -10,10 +10,6 @@ export interface NewStarterFormData {
   values: { [key: string]: any };
 }
 
-export interface NewStarterNavigationProps {
-  previousHref: string;
-}
-
 export interface NewStarterProps {
   backHref?: string | undefined;
   header?: ReactNode;

@@ -2,7 +2,7 @@ import React from "react";
 import { InputError } from "../input-error";
 import { CheckboxProps } from "./types";
 
-export function Checkbox(props: CheckboxProps): React.ReactElement {
+export function Checkbox(props: CheckboxProps) {
   const { className, componentRef, error, label, name } = props;
 
   // Build props to pass to input

@@ -1,11 +1,9 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { useCookies } from "react-cookie";
 import { Login } from "./login";
 import { Nav } from "./nav";
 
-export function Application({
-  children,
-}: React.PropsWithChildren<{}>): React.ReactElement {
+export function Application({ children }: PropsWithChildren<{}>) {
   const year = new Date().getFullYear();
   const [{ token }] = useCookies();
 

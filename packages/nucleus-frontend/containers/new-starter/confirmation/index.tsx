@@ -2,7 +2,7 @@ import React from "react";
 import { Head } from "../../../components/head";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 
-export function Confirmation(): React.ReactElement {
+export function Confirmation() {
   return (
     <>
       <Head title="Confirmation - New Starter Form" />

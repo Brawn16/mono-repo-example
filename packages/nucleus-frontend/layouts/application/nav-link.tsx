@@ -3,7 +3,7 @@ import React from "react";
 import { Anchor } from "../../components/anchor";
 import { NavLinkProps } from "./types";
 
-export function NavLink({ href, label }: NavLinkProps): React.ReactElement {
+export function NavLink({ href, label }: NavLinkProps) {
   const { asPath } = useRouter();
   let className = "text-blue-200 hover:bg-blue-600";
 

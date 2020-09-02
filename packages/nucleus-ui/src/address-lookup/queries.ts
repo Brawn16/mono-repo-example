@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const addressLookup: any = gql`
+export const addressLookup = gql`
   query addressLookup($postcode: String!) {
     addressLookup(postcode: $postcode) {
       line1

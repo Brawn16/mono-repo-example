@@ -39,7 +39,7 @@ const apolloClient = new ApolloClient({
   ssrMode: true,
 });
 
-export function App({ Component, pageProps }: AppProps): React.ReactElement {
+export function App({ Component, pageProps }: AppProps) {
   return (
     <CookiesProvider cookies={cookies}>
       <ApolloProvider client={apolloClient}>

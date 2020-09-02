@@ -14,7 +14,7 @@ function validate(value?: boolean) {
   return true;
 }
 
-export function Form(): React.ReactElement {
+export function Form() {
   const { submitStep, values } = useContext(Context);
   const {
     errors,
@@ -56,10 +56,7 @@ export function Form(): React.ReactElement {
           label="Yes, I have all the required documents to hand and would like to proceed."
           name="acceptedRequiredDocs"
           onChange={() => {
-            handleChange(
-              "acceptedRequiredDocs",
-              acceptedRequiredDocs === false
-            );
+            handleChange("acceptedRequiredDocs", acceptedRequiredDocs !== true);
           }}
         />
         <Checkbox
@@ -76,14 +73,13 @@ export function Form(): React.ReactElement {
           }
           name="terms"
           onChange={() => {
-            handleChange(
-              "acceptedTermsConsent",
-              acceptedTermsConsent === false
-            );
+            handleChange("acceptedTermsConsent", acceptedTermsConsent !== true);
           }}
         />
         <div className="mt-8 text-right">
-          <PrimaryButton className="w-full md:w-auto">Next</PrimaryButton>
+          <PrimaryButton className="w-full md:w-auto" type="submit">
+            Next
+          </PrimaryButton>
         </div>
       </form>
     </>

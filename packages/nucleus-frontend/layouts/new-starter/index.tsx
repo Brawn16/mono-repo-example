@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { PropsWithChildren, useEffect } from "react";
 import { FiCheck } from "react-icons/fi";
 import { Anchor } from "../../components/anchor";
 import { Context } from "./context";
@@ -82,7 +82,7 @@ export function NewStarter({
   showSteps = true,
   title,
   backHref,
-}: React.PropsWithChildren<NewStarterProps>): React.ReactElement {
+}: PropsWithChildren<NewStarterProps>) {
   const { values } = getLocalFormData();
   const year = new Date().getFullYear();
   const router = useRouter();
@@ -121,7 +121,7 @@ export function NewStarter({
     router.push(href);
   };
 
-  const stepIndex = steps.findIndex((step) => {
+  const stepIndex = steps.findIndex(step => {
     return step.href === router.asPath;
   });
 
@@ -142,7 +142,7 @@ export function NewStarter({
           </h2>
         </div>
         <div className="flex flex-col flex-1 md:overflow-auto">
-          <div className="flex-1 p-8 pb-0">
+          <div className="flex-1 max-w-3xl p-8 pb-0">
             {backHref && (
               <Anchor className="" href={backHref}>
                 &lt; <span className="underline">Back</span>
@@ -153,7 +153,7 @@ export function NewStarter({
                 {headerTitle || title}
               </h2>
             )}
-            <div className="max-w-2xl mt-8">
+            <div className="mt-8">
               <Context.Provider value={{ submitStep, values }}>
                 {children}
               </Context.Provider>

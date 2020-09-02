@@ -16,18 +16,21 @@ import { WorkstreamEntity } from "./workstream.entity";
 @Entity("operative")
 @ObjectType()
 export class OperativeEntity extends BaseEntity {
-  @ManyToOne(() => WorkstreamEntity, (workstream) => workstream.operatives)
+  @ManyToOne(
+    () => WorkstreamEntity,
+    workstream => workstream.operatives
+  )
   public workstream?: WorkstreamEntity;
 
   @ManyToOne(
     () => SubcontractorEntity,
-    (subcontractor) => subcontractor.operatives
+    subcontractor => subcontractor.operatives
   )
   public subcontractor?: WorkstreamEntity;
 
   @OneToMany(
     () => OperativeIdentificationEntity,
-    (operativeIdentification) => operativeIdentification.operative
+    operativeIdentification => operativeIdentification.operative
   )
   public identifications?: OperativeIdentificationEntity[];
 

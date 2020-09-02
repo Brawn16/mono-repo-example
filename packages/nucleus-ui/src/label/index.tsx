@@ -1,11 +1,7 @@
 import React from "react";
 import { LabelProps } from "./types";
 
-export function Label({
-  label,
-  name,
-  required,
-}: LabelProps): React.ReactElement {
+export function Label({ label, name, required }: LabelProps) {
   return (
     <label className="block mb-1 font-extrabold" htmlFor={name}>
       {label}

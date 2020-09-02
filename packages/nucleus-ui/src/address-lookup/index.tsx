@@ -42,7 +42,7 @@ export const AddressLookup = ({
         index
       ) => {
         const optionLabel = [line1, line2, line3, townCity, postcode]
-          .filter((value) => value)
+          .filter(value => value)
           .join(", ");
 
         return {
@@ -77,7 +77,7 @@ export const AddressLookup = ({
             })}
             name="addressLookupPostcode"
           />
-          <PrimaryButton>Find address</PrimaryButton>
+          <PrimaryButton type="submit">Find address</PrimaryButton>
         </div>
         {error && (
           <InputError error={{ message: error.message, type: "apollo" }} />

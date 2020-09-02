@@ -5,7 +5,7 @@ import { Head } from "../../../components/head";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { Form } from "./form";
 
-export function NewStarter(): React.ReactElement {
+export function NewStarter() {
   const header = (
     <>
       <h2 className="text-2xl font-extrabold md:text-3xl font-montserrat">

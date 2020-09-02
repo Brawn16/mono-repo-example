@@ -3,7 +3,7 @@ import { Head } from "../../../components/head";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { Form } from "./form";
 
-export function Medical(): React.ReactElement {
+export function Medical() {
   return (
     <>
       <Head title="Medical - New Starter Form" />

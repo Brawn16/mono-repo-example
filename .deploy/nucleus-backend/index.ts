@@ -69,7 +69,7 @@ export class NucleusBackend {
       {
         dbSubnetGroupDescription: `Core database subnet group for Nucleus backend (${branch})`,
         dbSubnetGroupName: `${namePrefix}-CoreDatabaseSubnetGroup`.toLowerCase(),
-        subnetIds: this.vpc.privateSubnets.map((sub) => sub.subnetId),
+        subnetIds: this.vpc.privateSubnets.map(sub => sub.subnetId),
       }
     );
 

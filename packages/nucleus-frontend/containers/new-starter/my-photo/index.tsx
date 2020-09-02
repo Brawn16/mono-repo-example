@@ -4,7 +4,7 @@ import { Head } from "../../../components/head";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { Form } from "./form";
 
-export function MyPhoto(): React.ReactElement {
+export function MyPhoto() {
   return (
     <>
       <Head title="My Photo - New Starter Form" />

@@ -5,7 +5,7 @@ import { Context } from "../../../layouts/new-starter/context";
 import { Navigation } from "../../../layouts/new-starter/navigation";
 import { NewStarterPersonalDetailsFormData } from "./types";
 
-export function Form(): React.ReactElement {
+export function Form() {
   const { submitStep, values } = useContext(Context);
   const { errors, handleSubmit, register, clearErrors } = useForm<
     NewStarterPersonalDetailsFormData
@@ -97,7 +97,7 @@ export function Form(): React.ReactElement {
         required
         type="tel"
       />
-      <Navigation previousHref="/new-starter" />
+      <Navigation />
     </form>
   );
 }

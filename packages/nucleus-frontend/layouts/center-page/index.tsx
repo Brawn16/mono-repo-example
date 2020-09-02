@@ -1,8 +1,6 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 
-export function CenterPage({
-  children,
-}: React.PropsWithChildren<{}>): React.ReactElement {
+export function CenterPage({ children }: PropsWithChildren<{}>) {
   const year = new Date().getFullYear();
 
   return (

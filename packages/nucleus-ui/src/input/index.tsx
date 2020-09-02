@@ -4,7 +4,7 @@ import { InputHelp } from "../input-help";
 import { Label } from "../label";
 import { InputProps } from "./types";
 
-export function Input(props: InputProps): React.ReactElement {
+export function Input(props: InputProps) {
   const {
     className,
     componentRef,
@@ -21,7 +21,7 @@ export function Input(props: InputProps): React.ReactElement {
   // Build error classes
   let errorClassName = "";
   if (error) {
-    errorClassName = "pr-10 text-red-600 border-red-600 focus:border-red-600";
+    errorClassName = "text-red-600 border-red-600 focus:border-red-600";
   }
 
   // Build icon classes

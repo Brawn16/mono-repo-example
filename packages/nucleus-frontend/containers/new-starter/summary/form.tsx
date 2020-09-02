@@ -5,9 +5,8 @@ import {
   SecondaryButton,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Panel } from "@sdh-project-services/nucleus-ui/dist/panel";
-import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewer";
 import Router from "next/router";
-import React, { useContext } from "react";
+import React, { FormEvent, useContext } from "react";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
 import {
@@ -23,7 +22,7 @@ function findValue(data: any = [], id: string) {
   return value.name;
 }
 
-export function Form(): React.ReactElement {
+export function Form() {
   const { data: subcontractorsData = {} }: any = useQuery(subcontractorsQuery);
   const { data: workstreamsData = {} }: any = useQuery(workstreamsQuery);
   const { values } = useContext(Context);
@@ -33,7 +32,7 @@ export function Form(): React.ReactElement {
     errorPolicy: "all",
   });
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { errors } = await createOperative({
       variables: { data: values },
@@ -125,15 +124,6 @@ export function Form(): React.ReactElement {
       </Panel>
       <Panel className="mt-4">
         <Field label="My Photo" value="" />
-        {values.photoUpload && (
-          <div className="float-right">
-            <UploadViewer id={values.photoUpload}>
-              {({ url }) => (
-                <img alt="Profile" className="block max-w-xs" src={url} />
-              )}
-            </UploadViewer>
-          </div>
-        )}
         <div className="clearfix" />
         <div className="mt-4 text-right">
           <Anchor href="/new-starter/my-photo">
@@ -172,7 +162,7 @@ export function Form(): React.ReactElement {
         <Anchor href="/new-starter/medical">
           <SecondaryButton>Back</SecondaryButton>
         </Anchor>
-        <PrimaryButton>Submit</PrimaryButton>
+        <PrimaryButton type="submit">Submit</PrimaryButton>
       </div>
     </form>
   );

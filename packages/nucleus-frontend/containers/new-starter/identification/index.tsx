@@ -4,7 +4,7 @@ import { Head } from "../../../components/head";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { Form } from "./form";
 
-export function Identification(): React.ReactElement {
+export function Identification() {
   return (
     <>
       <Head title="Identification - New Starter Form" />

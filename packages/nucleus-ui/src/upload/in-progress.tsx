@@ -1,6 +1,6 @@
 import { useApolloClient } from "@apollo/client";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
 import { FaTrash, FaRedo } from "react-icons/fa";
 import { InputError } from "../input-error";
 import { createPresignedUpload as createPresignedUploadMutation } from "./mutations";
@@ -43,7 +43,7 @@ export function InProgress({
 
       // Build form data
       const formData = new FormData();
-      postFieldKeys.forEach((key) => formData.append(key, postFields[key]));
+      postFieldKeys.forEach(key => formData.append(key, postFields[key]));
       formData.append("file", file);
 
       // Upload file
@@ -59,7 +59,7 @@ export function InProgress({
     }
   };
 
-  const handleRetry = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleRetry = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     uploadFile();
   };

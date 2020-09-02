@@ -4,13 +4,13 @@ import { InputHelp } from "../input-help";
 import { Label } from "../label";
 import { TextareaProps } from "./types";
 
-export function Textarea(props: TextareaProps): React.ReactElement {
+export function Textarea(props: TextareaProps) {
   const { className, componentRef, error, help, label, name, required } = props;
 
   // Build error classes
   let errorClassName = "";
   if (error) {
-    errorClassName = "pr-10 text-red-600 border-red-600 focus:border-red-600";
+    errorClassName = "text-red-600 border-red-600 focus:border-red-600";
   }
 
   // Build props to pass to textarea

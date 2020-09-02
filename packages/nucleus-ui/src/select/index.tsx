@@ -27,7 +27,7 @@ export function Select(props: SelectProps) {
   // Build error classes
   let errorClassName = "";
   if (error) {
-    errorClassName = "pr-10 text-red-600 border-red-600 focus:border-red-600";
+    errorClassName = "text-red-600 border-red-600 focus:border-red-600";
   }
 
   // Build props to pass to input

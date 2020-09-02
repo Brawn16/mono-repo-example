@@ -81,7 +81,7 @@ function validate(value?: string) {
   return value !== undefined;
 }
 
-export function Form(): React.ReactElement {
+export function Form() {
   const { submitStep, values } = useContext(Context);
   const { data: subcontractorsData }: any = useQuery(subcontractorsQuery);
   const { data: workstreamsData }: any = useQuery(workstreamsQuery);
@@ -163,7 +163,7 @@ export function Form(): React.ReactElement {
           )}
         </div>
       )}
-      <Navigation previousHref="/new-starter/identification" />
+      <Navigation />
     </form>
   );
 }

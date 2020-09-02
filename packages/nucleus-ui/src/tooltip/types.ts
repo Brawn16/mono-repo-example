@@ -1,3 +1,3 @@
 export interface TooltipProps {
-  message: React.ReactElement | string;
+  message: string;
 }
