@@ -9,7 +9,7 @@ import { steps } from "./steps";
 
 export function Navigation() {
   const { asPath } = useRouter();
-  const stepIndex = steps.findIndex(step => step.href === asPath);
+  const stepIndex = steps.findIndex((step) => step.href === asPath);
   const { href } = steps[stepIndex - 1];
 
   return (

@@ -121,7 +121,7 @@ export function NewStarter({
     router.push(href);
   };
 
-  const stepIndex = steps.findIndex(step => {
+  const stepIndex = steps.findIndex((step) => {
     return step.href === router.asPath;
   });
 

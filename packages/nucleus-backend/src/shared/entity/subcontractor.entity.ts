@@ -8,7 +8,7 @@ import { OperativeEntity } from "./operative.entity";
 export class SubcontractorEntity extends BaseEntity {
   @OneToMany(
     () => OperativeEntity,
-    operative => operative.subcontractor
+    (operative) => operative.subcontractor
   )
   public operatives?: OperativeEntity[];
 

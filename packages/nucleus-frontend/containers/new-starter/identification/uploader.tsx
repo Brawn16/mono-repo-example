@@ -8,7 +8,7 @@ export function Uploader({ error, name, onChange, values = [] }: UploadProps) {
       <Upload
         error={error}
         multiple
-        onChange={value => onChange(name, value)}
+        onChange={(value) => onChange(name, value)}
         tags={["operativeIdentification", "public"]}
         values={values}
       />

@@ -19,7 +19,7 @@ export function UploadDropzone(props: PropsWithChildren<UploadDropzoneProps>) {
     uploads = [],
   } = props;
   const [files, setFiles] = useState<UploadDropzoneFile[]>(
-    uploads.map(id => ({ id }))
+    uploads.map((id) => ({ id }))
   );
 
   // Build error classes
@@ -50,7 +50,7 @@ export function UploadDropzone(props: PropsWithChildren<UploadDropzoneProps>) {
   };
 
   const handleDrop = async (droppedFiles: File[]) => {
-    const newFiles = droppedFiles.map(file => ({ file }));
+    const newFiles = droppedFiles.map((file) => ({ file }));
     setFiles([...files, ...newFiles]);
   };
 

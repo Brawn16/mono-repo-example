@@ -39,7 +39,7 @@ export function UploadProgress({ file }: UploadProgressProps) {
 
       // Build form data
       const formData = new FormData();
-      postFieldKeys.forEach(key => formData.append(key, postFields[key]));
+      postFieldKeys.forEach((key) => formData.append(key, postFields[key]));
       formData.append("file", file);
 
       // Upload file
