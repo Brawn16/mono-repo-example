@@ -34,6 +34,7 @@ export class OperativeResolver {
     await Promise.all([
       sendQueueMessage("createOperativeSpreadsheetRow", id),
       sendQueueMessage("createOperativeTriggerSlackWebhook", id),
+      sendQueueMessage("createOperativeSyncPhotos", id),
     ]);
 
     return operative;

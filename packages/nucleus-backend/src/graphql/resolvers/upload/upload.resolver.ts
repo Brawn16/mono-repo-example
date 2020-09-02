@@ -18,10 +18,12 @@ export class UploadResolver {
   ): Promise<CreatePresignedUploadDto> {
     const accessKey = env.AWS_UPLOAD_ACCESS_KEY;
     const accessSecret = env.AWS_UPLOAD_ACCESS_SECRET;
+    const bucket = env.AWS_UPLOAD_BUCKET;
     const endpoint = env.AWS_UPLOAD_ENDPOINT;
     if (
       accessKey === undefined ||
       accessSecret === undefined ||
+      bucket === undefined ||
       endpoint === undefined
     ) {
       throw new Error("Upload bucket is not configured.");
@@ -39,9 +41,9 @@ export class UploadResolver {
     // Build parameters with conditions to use when uploading.
     // Content length is in bytes, so 100000000 = 100mb.
     const parameters = {
-      Bucket: env.AWS_UPLOAD_BUCKET,
+      Bucket: bucket,
       Conditions: [
-        { bucket: env.AWS_UPLOAD_BUCKET },
+        { bucket },
         ["content-length-range", 100, 100000000],
         { "content-type": data.contentType },
         { key: upload.id },

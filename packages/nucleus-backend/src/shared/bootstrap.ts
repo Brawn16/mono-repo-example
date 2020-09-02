@@ -36,7 +36,7 @@ async function bootstrap() {
   // Load secret
   if (env.AWS_SECRET) {
     const secrets = await getAWSSecret(env.AWS_SECRET);
-    Object.keys(secrets).forEach(key => {
+    Object.keys(secrets).forEach((key) => {
       env[key] = secrets[key];
     });
   }
