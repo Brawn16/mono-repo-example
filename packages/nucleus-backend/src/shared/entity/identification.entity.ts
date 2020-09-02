@@ -8,7 +8,7 @@ import { OperativeIdentificationEntity } from "./operative-identification.entity
 export class IdentificationEntity extends BaseEntity {
   @OneToMany(
     () => OperativeIdentificationEntity,
-    (OperativeIdentification) => OperativeIdentification.identification
+    OperativeIdentification => OperativeIdentification.identification
   )
   public operativeIdentifications?: OperativeIdentificationEntity[];
 

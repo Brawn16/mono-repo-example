@@ -6,7 +6,10 @@ import { OperativeEntity } from "./operative.entity";
 @Entity("subcontractor")
 @ObjectType()
 export class SubcontractorEntity extends BaseEntity {
-  @OneToMany(() => OperativeEntity, (operative) => operative.subcontractor)
+  @OneToMany(
+    () => OperativeEntity,
+    operative => operative.subcontractor
+  )
   public operatives?: OperativeEntity[];
 
   @Column()
