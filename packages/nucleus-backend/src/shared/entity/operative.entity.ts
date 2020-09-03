@@ -16,10 +16,7 @@ import { WorkstreamEntity } from "./workstream.entity";
 @Entity("operative")
 @ObjectType()
 export class OperativeEntity extends BaseEntity {
-  @ManyToOne(
-    () => WorkstreamEntity,
-    (workstream) => workstream.operatives
-  )
+  @ManyToOne(() => WorkstreamEntity, (workstream) => workstream.operatives)
   public workstream?: WorkstreamEntity;
 
   @ManyToOne(
