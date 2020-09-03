@@ -78,7 +78,8 @@ export class UploadResolver {
   public async createPresignedUploadUrl(
     @Arg("id") id: string
   ): Promise<CreatePresignedUploadUrlDto> {
-    const { tags = [] } = await UploadEntity.findOneOrFail(id);
+    const upload = await UploadEntity.findOneOrFail(id);
+    const { tags = [] } = upload;
     const s3 = new S3({
       accessKeyId: env.AWS_UPLOAD_ACCESS_KEY,
       endpoint: env.AWS_UPLOAD_ENDPOINT,
@@ -98,6 +99,6 @@ export class UploadResolver {
       Key: id,
     });
 
-    return { presignedUrl };
+    return { presignedUrl, upload };
   }
 }

@@ -1,14 +1,14 @@
 .background {
   background: url(./background.jpg);
 
-  @apply bg-cover flex-1 relative;
+  @apply bg-fixed flex-1 relative;
 }
 
 .background:before {
-  backdrop-filter: blur(0.15rem);
+  backdrop-filter: blur(0.1rem);
   content: "";
 
-  @apply absolute bg-blue-900 bg-opacity-75 inset-0;
+  @apply absolute bg-sdh-blue bg-opacity-75 inset-0;
 }
 
 .logo {

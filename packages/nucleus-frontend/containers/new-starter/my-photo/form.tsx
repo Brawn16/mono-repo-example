@@ -1,27 +1,29 @@
-import {
-  PrimaryButton,
-  Button,
-} from "@sdh-project-services/nucleus-ui/dist/button";
 import { Upload } from "@sdh-project-services/nucleus-ui/dist/upload";
-import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewer";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
+import { Navigation } from "../../../layouts/new-starter/navigation";
 import { NewStarterMyPhotoFormData } from "./types";
 
-export function Form(): React.ReactElement {
+export function Form() {
   const { submitStep, values } = useContext(Context);
-  const { errors, handleSubmit, register, setValue, watch } = useForm<
-    NewStarterMyPhotoFormData
-  >({ defaultValues: values });
-  const photoUpload = watch("photoUpload");
+  const {
+    errors,
+    getValues,
+    handleSubmit,
+    register,
+    setValue,
+    watch,
+    clearErrors,
+  } = useForm<NewStarterMyPhotoFormData>({ defaultValues: values });
 
-  useEffect(() => {
-    register({ name: "photoUpload" }, { required: "Photo is required" });
-  }, []);
+  register({ name: "photoUpload" }, { required: "Photo is required" });
+  watch("photoUpload");
+
+  const { photoUpload } = getValues();
 
   const handleChange = ([id]: string[]) => {
+    clearErrors("photoUpload");
     setValue("photoUpload", id);
   };
 
@@ -41,22 +43,8 @@ export function Form(): React.ReactElement {
           tags={["operativePhoto", "public"]}
           values={photoUpload ? [photoUpload] : undefined}
         />
-        {photoUpload && (
-          <div className="mt-4">
-            <UploadViewer id={photoUpload}>
-              {({ url }) => (
-                <img alt="Profile" className="block max-w-xs" src={url} />
-              )}
-            </UploadViewer>
-          </div>
-        )}
       </div>
-      <div className="flex justify-between mt-8">
-        <Anchor href="/new-starter/qualifications">
-          <Button>Back</Button>
-        </Anchor>
-        <PrimaryButton>Continue</PrimaryButton>
-      </div>
+      <Navigation />
     </form>
   );
 }

@@ -1,16 +1,15 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { Button } from "./button";
 import { ButtonProps } from "./types";
 
-export function PrimaryButton(
-  props: React.PropsWithChildren<ButtonProps>
-): React.ReactElement {
-  const { children } = props;
+export function PrimaryButton(props: PropsWithChildren<ButtonProps>) {
+  const { children, className } = props;
   return (
     <Button
-      className="text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700"
-      loadingColor="#fff"
       {...props}
+      className={`font-semibold text-white rounded bg-sdh-yellow hover:bg-yellow-400 active:bg-yellow-400 ${
+        className || ""
+      }`}
     >
       {children}
     </Button>

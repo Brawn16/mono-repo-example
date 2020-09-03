@@ -3,7 +3,7 @@ import { InputError } from "../input-error";
 import { checkbox, toggle, toggleHandle } from "./index.module.css";
 import { ToggleProps } from "./types";
 
-export function Toggle(props: ToggleProps): React.ReactElement {
+export function Toggle(props: ToggleProps) {
   const { className, componentRef, error, label, name } = props;
 
   // Build props to pass to input

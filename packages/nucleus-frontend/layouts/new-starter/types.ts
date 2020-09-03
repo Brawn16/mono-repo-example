@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface NewStarterFormContext {
   submitStep: (step: number, values: any) => void;
   values: { [key: string]: any };
@@ -9,6 +11,9 @@ export interface NewStarterFormData {
 }
 
 export interface NewStarterProps {
+  backHref?: string | undefined;
+  header?: ReactNode;
+  headerTitle?: string;
   showSteps?: boolean;
   title?: string;
 }

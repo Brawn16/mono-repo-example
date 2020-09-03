@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, InputHTMLAttributes, Ref } from "react";
+import { DetailedHTMLProps, InputHTMLAttributes, ReactNode, Ref } from "react";
 import { FieldError } from "react-hook-form";
 
 export interface CheckboxProps
@@ -9,6 +9,6 @@ export interface CheckboxProps
   className?: string;
   componentRef?: Ref<HTMLInputElement>;
   error?: FieldError;
-  label: string;
+  label: string | ReactNode;
   name: string;
 }

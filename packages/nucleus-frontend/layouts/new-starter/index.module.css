@@ -1,24 +1,25 @@
 .background {
   background: url(./background.jpg);
 
-  @apply bg-cover flex-1 relative;
+  @apply bg-fixed flex flex-col relative p-8 w-full;
 }
 
 .background:before {
-  backdrop-filter: blur(0.15rem);
+  backdrop-filter: blur(0.1rem);
   content: "";
 
-  @apply absolute bg-blue-900 bg-opacity-75 inset-0;
+  @apply absolute bg-sdh-blue bg-opacity-75 inset-0;
 }
 
 .logo {
   background: url(./logo.png);
+  background-repeat: no-repeat;
 
-  @apply absolute bg-cover bottom-0 right-0 hidden h-20 m-16 w-64;
+  @apply bg-contain h-10 relative;
 }
 
-@media (min-width: 1600px) {
-  .logo {
-    @apply block;
+@screen md {
+  .background {
+    width: 20rem;
   }
 }

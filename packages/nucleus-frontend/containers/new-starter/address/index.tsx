@@ -7,7 +7,11 @@ export function AddressDetails() {
   return (
     <>
       <Head title="Address - New Starter Form" />
-      <NewStarterLayout title="Address">
+      <NewStarterLayout
+        backHref="/new-starter/personal-details"
+        headerTitle="What is your home address?"
+        title="Address"
+      >
         <Form />
       </NewStarterLayout>
     </>

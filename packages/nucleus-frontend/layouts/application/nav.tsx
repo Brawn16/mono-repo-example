@@ -18,7 +18,7 @@ function getTimeOfDay() {
   return "Evening";
 }
 
-export function Nav(): React.ReactElement {
+export function Nav() {
   const [, , removeCookie] = useCookies();
 
   const handleLogout = async () => {

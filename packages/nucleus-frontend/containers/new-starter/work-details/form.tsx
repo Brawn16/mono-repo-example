@@ -1,18 +1,21 @@
 import { useQuery } from "@apollo/client";
-import {
-  PrimaryButton,
-  Button,
-} from "@sdh-project-services/nucleus-ui/dist/button";
-import { Select } from "@sdh-project-services/nucleus-ui/dist/select";
+import { InputError } from "@sdh-project-services/nucleus-ui/dist/input-error";
+import { Label } from "@sdh-project-services/nucleus-ui/dist/label";
+import { RadioButton } from "@sdh-project-services/nucleus-ui/dist/radio-button";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
+import { Navigation } from "../../../layouts/new-starter/navigation";
+import { imageData } from "./images";
 import {
   subcontractors as subcontractorsQuery,
   workstreams as workstreamsQuery,
 } from "./queries.gql";
-import { NewStarterWorkDetailsFormData } from "./types";
+import {
+  NewStarterWorkDetailsFormData,
+  WorkStreamDataItem,
+  SubcontractorDataItem,
+} from "./types";
 
 function getOptions(data: any) {
   if (data === undefined) {
@@ -25,53 +28,142 @@ function getOptions(data: any) {
   }));
 }
 
-export function Form(): React.ReactElement {
+function renderSubcontractors(
+  subcontractorData: SubcontractorDataItem[],
+  subcontractor: string | null,
+  handleChange: (
+    name: "workstream" | "subcontractor",
+    value: string | null
+  ) => void
+) {
+  return getOptions(subcontractorData).map(
+    ({ label, value }: SubcontractorDataItem) => {
+      return (
+        <RadioButton
+          key={value}
+          checked={subcontractor === value}
+          label={label}
+          name="subcontractor"
+          onChange={() => handleChange("subcontractor", value)}
+        />
+      );
+    }
+  );
+}
+
+function renderWorkstreams(
+  workstreamsData: WorkStreamDataItem[],
+  workstream: string | null,
+  handleChange: (
+    name: "workstream" | "subcontractor",
+    value: string | null
+  ) => void
+) {
+  return getOptions(workstreamsData).map(
+    ({ label, value }: WorkStreamDataItem) => {
+      const activeWorkstream = workstream === value ? "border-blue-600" : "";
+
+      return (
+        <button
+          key={value}
+          className={`flex flex-col items-center justify-center w-full p-4 border-2 rounded focus:outline-none ${activeWorkstream}`}
+          onClick={() => handleChange("workstream", value)}
+          type="button"
+        >
+          <img alt={label} src={imageData[label]} />
+        </button>
+      );
+    }
+  );
+}
+
+function validate(value?: string) {
+  return value !== undefined;
+}
+
+export function Form() {
   const { submitStep, values } = useContext(Context);
   const { data: subcontractorsData }: any = useQuery(subcontractorsQuery);
   const { data: workstreamsData }: any = useQuery(workstreamsQuery);
-  const { register, handleSubmit, errors } = useForm<
-    NewStarterWorkDetailsFormData
-  >({ defaultValues: values });
+  const {
+    register,
+    handleSubmit,
+    errors,
+    setValue,
+    getValues,
+    watch,
+    clearErrors,
+  } = useForm<NewStarterWorkDetailsFormData>({ defaultValues: values });
+
+  register({ name: "workstream" }, { validate });
+  register({ name: "subcontractor" }, { validate });
+
+  const { workstream, subcontractor } = getValues();
+  const activeWorkstream = workstream === null ? "border-blue-600" : "";
+
+  const handleChange = (
+    name: "workstream" | "subcontractor",
+    value: string | null
+  ) => {
+    clearErrors(name);
+    setValue(name, value);
+  };
 
   const handleFormSubmit = (data: NewStarterWorkDetailsFormData) => {
     submitStep(4, data);
   };
 
+  watch("subcontractor");
+  watch("workstream");
+
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <div>
-        {workstreamsData && (
-          <Select
-            componentRef={register({
-              required: "Workstream is required",
-            })}
-            error={errors.workstream}
-            label="Workstream"
-            name="workstream"
-            options={getOptions(workstreamsData.workstreams)}
-            required
-          />
-        )}
-        {subcontractorsData && (
-          <Select
-            className="mt-4"
-            componentRef={register({
-              required: "Subcontractor is required",
-            })}
-            error={errors.subcontractor}
-            label="Subcontractor"
-            name="subcontractor"
-            options={getOptions(subcontractorsData.subcontractors)}
-            required
-          />
-        )}
-      </div>
-      <div className="flex justify-between mt-8">
-        <Anchor href="/new-starter/identification">
-          <Button>Back</Button>
-        </Anchor>
-        <PrimaryButton>Continue</PrimaryButton>
-      </div>
+      <Label label="Who will you be working for?" />
+      {workstreamsData && (
+        <div className="flex space-x-2">
+          {renderWorkstreams(
+            workstreamsData.workstreams,
+            workstream,
+            handleChange
+          )}
+          <button
+            className={`flex flex-col items-center justify-center w-full p-4 border-2 rounded focus:outline-none ${activeWorkstream}`}
+            onClick={() => handleChange("workstream", null)}
+            type="button"
+          >
+            Don&apos;t know
+          </button>
+        </div>
+      )}
+      {errors.workstream && (
+        <InputError
+          error={{ message: "Please select an option", type: "manual" }}
+        />
+      )}
+      {subcontractorsData && (
+        <div className="mt-4">
+          <Label label="Which subcontractor are you working for?" />
+          <div className="space-y-2">
+            {renderSubcontractors(
+              subcontractorsData.subcontractors,
+              subcontractor,
+              handleChange
+            )}
+            <RadioButton
+              checked={subcontractor === null}
+              label="None"
+              name="subcontractor"
+              onChange={() => handleChange("subcontractor", null)}
+            />
+          </div>
+          {errors.subcontractor && (
+            <InputError
+              error={{ message: "Please select an option", type: "manual" }}
+            />
+          )}
+        </div>
+      )}
+      <Navigation />
     </form>
   );
 }

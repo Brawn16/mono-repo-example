@@ -1,13 +1,11 @@
 import NextLink from "next/link";
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { AnchorProps } from "./types";
 
-export function Anchor(
-  props: React.PropsWithChildren<AnchorProps>
-): React.ReactElement {
+export function Anchor(props: PropsWithChildren<AnchorProps>) {
   const {
     children,
-    className = "text-blue-600 hover:text-blue-500 focus:text-blue-500",
+    className = "text-blue-600 hover:text-blue-500 focus:text-blue-500 underline",
     href,
   } = props;
 

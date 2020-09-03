@@ -21,7 +21,7 @@ function renderPacks(packs: WorkPack[]) {
   return packs.map(pack => <Pack key={pack.jobReference} pack={pack} />);
 }
 
-export function WorkPacks(): React.ReactElement {
+export function WorkPacks() {
   const { data, loading } = useQuery<WorkPacksData>(workPacksQuery, {
     errorPolicy: "all",
   });

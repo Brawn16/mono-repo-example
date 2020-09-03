@@ -27,7 +27,7 @@ export function Select(props: SelectProps) {
   // Build error classes
   let errorClassName = "";
   if (error) {
-    errorClassName = "pr-10 text-red-600 border-red-600 focus:border-red-600";
+    errorClassName = "text-red-600 border-red-600 focus:border-red-600";
   }
 
   // Build props to pass to input
@@ -46,7 +46,7 @@ export function Select(props: SelectProps) {
           defaultValue=""
           {...selectProperties}
           ref={componentRef}
-          className={`block w-full form-input rounded-none text-gray-900 focus:shadow-none focus:border-blue-500 ${errorClassName}`}
+          className={`block w-full form-input rounded text-gray-900 focus:shadow-none focus:border-blue-500 ${errorClassName}`}
           id={name}
         >
           <option hidden value="">

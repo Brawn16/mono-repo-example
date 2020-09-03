@@ -39,13 +39,16 @@ const apolloClient = new ApolloClient({
   ssrMode: true,
 });
 
-export function App({ Component, pageProps }: AppProps): React.ReactElement {
+export function App({ Component, pageProps }: AppProps) {
   return (
     <CookiesProvider cookies={cookies}>
       <ApolloProvider client={apolloClient}>
         <Head>
           <link href="/favicon.ico" rel="icon" />
-          <link href="//rsms.me/inter/inter.css" rel="stylesheet" />
+          <link
+            href="//fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900|Montserrat:100,200,300,400,500,600,700,800,900"
+            rel="stylesheet"
+          />
         </Head>
         <Component {...pageProps} />
       </ApolloProvider>

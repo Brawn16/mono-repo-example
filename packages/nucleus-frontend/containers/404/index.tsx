@@ -4,7 +4,7 @@ import { Anchor } from "../../components/anchor";
 import { Head } from "../../components/head";
 import { CenterPage } from "../../layouts/center-page";
 
-export function PageNotFound(): React.ReactElement {
+export function PageNotFound() {
   return (
     <>
       <Head title="Page not found" />
