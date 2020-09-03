@@ -75,6 +75,7 @@ export function UploadDropzone(props: PropsWithChildren<UploadDropzoneProps>) {
     <Context.Provider
       value={{
         files,
+        multiple,
         onDelete: handleDelete,
         onDeleteAll: handleDeleteAll,
         onUploadComplete: handleUploadComplete,
