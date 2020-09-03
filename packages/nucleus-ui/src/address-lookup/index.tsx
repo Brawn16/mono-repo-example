@@ -6,6 +6,7 @@ import { Input } from "../input";
 import { InputError } from "../input-error";
 import { Label } from "../label";
 import { Select } from "../select";
+import { Spinner } from "../spinner";
 import { addressLookup as addressLookupQuery } from "./queries";
 import {
   AddressLookupFormData,
@@ -19,9 +20,12 @@ export const AddressLookup = ({
 }: AddressLookupProps) => {
   const { register, handleSubmit, errors } = useForm<AddressLookupFormData>();
   const [showDropdown, setShowDropdown] = useState(false);
-  const [addressLookup, { data, error }] = useLazyQuery(addressLookupQuery, {
-    errorPolicy: "all",
-  });
+  const [addressLookup, { data, error, loading }] = useLazyQuery(
+    addressLookupQuery,
+    {
+      errorPolicy: "all",
+    }
+  );
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
     onAddressSelect(data.addressLookup[event.target.value]);
@@ -67,7 +71,7 @@ export const AddressLookup = ({
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="relative" onSubmit={handleSubmit(onSubmit)}>
         <Label label={label} name="addressLookupPostcode" />
         <div className="flex">
           <Input
@@ -79,6 +83,11 @@ export const AddressLookup = ({
           />
           <PrimaryButton type="submit">Find address</PrimaryButton>
         </div>
+        {loading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75">
+            <Spinner />
+          </div>
+        )}
         {error && (
           <InputError error={{ message: error.message, type: "apollo" }} />
         )}
