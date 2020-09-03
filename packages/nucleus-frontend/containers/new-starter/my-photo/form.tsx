@@ -31,7 +31,7 @@ export function Form() {
   const handleFormSubmit = (data: NewStarterMyPhotoFormData) => {
     submitStep(6, data);
   };
-  const uploadData = photoUpload ? [photoUpload] : [];
+  const uploadData = photoUpload ? [photoUpload] : undefined;
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
       <div className="mt-8">
