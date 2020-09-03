@@ -4,6 +4,11 @@ import { OperativeEntity } from "../../shared/entity/operative.entity";
 import { UploadEntity } from "../../shared/entity/upload.entity";
 import { getMSGraphClient } from "../../shared/ms-graph/client";
 
+function getUploadExtension(upload: UploadEntity) {
+  const { name = "" } = upload;
+  return name.slice(name.lastIndexOf("."));
+}
+
 export async function createOperativeSyncPhotos(operativeId: string) {
   const api = env.SERVICE_NEW_STARTER_MS_GRAPH_SYNC_FILES_API;
   const newFileApi = `${api}:/children`;
@@ -78,9 +83,8 @@ export async function createOperativeSyncPhotos(operativeId: string) {
   // Upload photo
   const { photoUpload } = operative;
   if (photoUpload) {
-    const { id = "", name = "" } = photoUpload;
-    const extension = name.slice(name.lastIndexOf("."));
-    promises.push(upload(id, `Photo${extension}`));
+    const extension = getUploadExtension(photoUpload);
+    promises.push(upload(photoUpload.id || "", `Photo${extension}`));
   }
 
   const operativeIdentifications = operative.identifications || [];
@@ -92,15 +96,17 @@ export async function createOperativeSyncPhotos(operativeId: string) {
     let { name: idName = "Identification" } = identification;
     idName = idName.replace("/", " ");
     uploads.forEach(async (id: string) => {
-      const { name = "" } = await UploadEntity.findOneOrFail(id);
-      const extension = name.slice(name.lastIndexOf("."));
+      const uploadEntity = await UploadEntity.findOneOrFail(id);
+      const extension = getUploadExtension(uploadEntity);
       promises.push(upload(id, `${idName} ${(idCount += 1)}${extension}`));
     });
   });
 
   const { qualificationUploadIds = [] } = operative;
-  qualificationUploadIds.forEach((id: string, index: number) => {
-    promises.push(upload(id, `Qualification ${index + 1}.jpg`));
+  qualificationUploadIds.forEach(async (id: string, index: number) => {
+    const uploadEntity = await UploadEntity.findOneOrFail(id);
+    const extension = getUploadExtension(uploadEntity);
+    promises.push(upload(id, `Qualification ${index + 1}${extension}`));
   });
 
   return Promise.all(promises);
