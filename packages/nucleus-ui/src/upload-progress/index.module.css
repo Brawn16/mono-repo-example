@@ -1,7 +1,3 @@
-.circularProgressBack {
+.spinnerGray {
   @apply text-gray-100 !important;
-}
-
-.circularProgressFront {
-  @apply text-sdh-yellow !important;
 }

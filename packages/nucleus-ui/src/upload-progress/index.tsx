@@ -1,12 +1,9 @@
 import { useApolloClient } from "@apollo/client";
-import { CircularProgress } from "@material-ui/core";
 import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
+import { Spinner } from "../spinner";
 import { Context } from "../upload-dropzone/context";
-import {
-  circularProgressBack,
-  circularProgressFront,
-} from "./index.module.css";
+import { spinnerGray } from "./index.module.css";
 import { createPresignedUpload as createPresignedUploadMutation } from "./mutations";
 import { UploadProgressProps } from "./types";
 
@@ -62,22 +59,10 @@ export function UploadProgress({ file }: UploadProgressProps) {
   return (
     <>
       <div className="absolute inset-0 flex items-center justify-center">
-        <CircularProgress
-          className={circularProgressBack}
-          size={64}
-          thickness={4}
-          value={100}
-          variant="static"
-        />
+        <Spinner className={spinnerGray} value={100} variant="static" />
       </div>
       <div className="absolute inset-0 flex items-center justify-center">
-        <CircularProgress
-          className={circularProgressFront}
-          size={64}
-          thickness={4}
-          value={progress}
-          variant="static"
-        />
+        <Spinner value={progress} variant="static" />
       </div>
       <div className="absolute inset-0 flex items-center justify-center text-sm">
         {progress}%
