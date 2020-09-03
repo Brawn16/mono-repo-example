@@ -3,6 +3,7 @@ import { FieldError } from "react-hook-form";
 
 export interface UploadDropzoneContext {
   files: UploadDropzoneFile[];
+  multiple?: boolean;
   onDelete: (index: number) => void;
   onDeleteAll: () => void;
   onUploadComplete: (file: File, id: string) => void;

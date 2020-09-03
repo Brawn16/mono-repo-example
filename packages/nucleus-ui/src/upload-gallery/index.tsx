@@ -19,20 +19,27 @@ function renderFiles(files: UploadDropzoneFile[]) {
 }
 
 export function UploadGallery() {
-  const { files, onDeleteAll } = useContext(Context);
+  const { files, multiple, onDeleteAll } = useContext(Context);
+  let label = "Your Uploaded File";
+
+  if (multiple) {
+    label += "s";
+  }
 
   return (
     <div className="mt-4">
       <div className="flex items-center justify-between">
-        <Label label="Your Uploaded Files" />
-        <button
-          className="flex items-center hover:text-gray-800 focus:outline-none duration-150 ease-in-out transition"
-          onClick={onDeleteAll}
-          type="button"
-        >
-          <FaTrash />
-          <span className="pl-1 underline">Remove all</span>
-        </button>
+        <Label label={label} />
+        {multiple && (
+          <button
+            className="flex items-center hover:text-gray-800 focus:outline-none duration-150 ease-in-out transition"
+            onClick={onDeleteAll}
+            type="button"
+          >
+            <FaTrash />
+            <span className="pl-1 underline">Remove all</span>
+          </button>
+        )}
       </div>
       <div className="grid grid-cols-4 gap-4">{renderFiles(files)}</div>
     </div>

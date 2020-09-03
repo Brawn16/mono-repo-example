@@ -1,4 +1,5 @@
-import { Upload } from "@sdh-project-services/nucleus-ui/dist/upload";
+import { UploadDropzone } from "@sdh-project-services/nucleus-ui/dist/upload-dropzone";
+import { UploadGallery } from "@sdh-project-services/nucleus-ui/dist/upload-gallery";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Context } from "../../../layouts/new-starter/context";
@@ -34,15 +35,15 @@ export function Form() {
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
       <div className="mt-8">
-        <Upload
+        <UploadDropzone
           accept="image/*"
-          buttonEntity="photo"
-          error={errors.photoUpload}
-          label="Upload Photo"
+          error={errors.photoUpload as any}
           onChange={handleChange}
-          tags={["operativePhoto", "public"]}
-          values={photoUpload ? [photoUpload] : undefined}
-        />
+          tags={["operativeQualification", "public"]}
+          uploads={[photoUpload]}
+        >
+          <UploadGallery />
+        </UploadDropzone>
       </div>
       <Navigation />
     </form>
