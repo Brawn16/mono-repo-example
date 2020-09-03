@@ -11,7 +11,18 @@ export class AddressLookupResolver {
   public async addressLookup(
     @Arg("postcode") requestedPostcode: string
   ): Promise<AddressLookupDto[]> {
-    const response = await this.sendRequest(requestedPostcode);
+    const key = env.SERVICE_GETADDRESS_API_KEY;
+    if (key === undefined) {
+      throw new Error("Address lookup is not configured.");
+    }
+
+    const response = await get(
+      `https://api.getAddress.io/find/${requestedPostcode}?api-key=${key}&expand=true`,
+      {
+        json: true,
+        resolveWithFullResponse: true,
+      }
+    );
 
     if (response.statusCode === 404) {
       throw new Error("Unknown postcode.");
@@ -43,20 +54,5 @@ export class AddressLookupResolver {
 
       return record;
     });
-  }
-
-  private async sendRequest(postcode: string): Promise<any> {
-    const key = env.SERVICE_GETADDRESS_API_KEY;
-    if (key === undefined) {
-      throw new Error("Address lookup is unavailable.");
-    }
-
-    return get(
-      `https://api.getAddress.io/find/${postcode}?api-key=${key}&expand=true`,
-      {
-        json: true,
-        resolveWithFullResponse: true,
-      }
-    );
   }
 }

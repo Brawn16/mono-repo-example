@@ -3,6 +3,7 @@ import { Arg, Mutation, Resolver } from "type-graphql";
 import { IdentificationEntity } from "../../../shared/entity/identification.entity";
 import { OperativeIdentificationEntity } from "../../../shared/entity/operative-identification.entity";
 import { OperativeEntity } from "../../../shared/entity/operative.entity";
+import { sendQueueMessage } from "../../../shared/queue/send";
 import { Public } from "../../decorators/public";
 import { CreateOperativeIdentificationInput } from "./create-operative.identification.input";
 import { CreateOperativeInput } from "./create-operative.input";
@@ -18,6 +19,7 @@ export class OperativeResolver {
     const operative = plainToClass(OperativeEntity, data);
     const { identifications = [] } = data;
 
+    // Save identification records
     operative.identifications = await Promise.all(
       identifications.map((input: CreateOperativeIdentificationInput) =>
         plainToClass(OperativeIdentificationEntity, {
@@ -27,6 +29,14 @@ export class OperativeResolver {
       )
     );
 
-    return operative.save();
+    // Save entity and trigger events
+    const { id } = await operative.save();
+    await Promise.all([
+      sendQueueMessage("createOperativeSpreadsheetRow", id),
+      sendQueueMessage("createOperativeTriggerSlackWebhook", id),
+      sendQueueMessage("createOperativeSyncPhotos", id),
+    ]);
+
+    return operative;
   }
 }

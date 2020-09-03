@@ -23,8 +23,8 @@ export class NucleusBackend {
   public readonly graphqlGateway: LambdaRestApi;
   public readonly graphqlGatewayResource: Resource;
   public readonly graphqlLambda: Function;
-  public readonly graphqlLambdaSecret: Secret;
   public readonly graphqlSecurityGroup: SecurityGroup;
+  public readonly lambdaSecret: Secret;
   public readonly vpc: Vpc;
 
   constructor(stack: Stack, branch: string, deletionProtection: boolean) {
@@ -35,21 +35,17 @@ export class NucleusBackend {
     // Create core VPC
     this.vpc = new Vpc(stack, "NucleusBackendCoreVpc");
 
-    // Create graphql lambda secret
-    this.graphqlLambdaSecret = new Secret(
-      stack,
-      "NucleusBackendGraphqlLambdaSecret",
-      {
-        description: `Secret for Nucleus backend graphql lambda (${branch})`,
-        generateSecretString: {
-          excludePunctuation: true,
-          secretStringTemplate: "{}",
-          generateStringKey: "TYPEORM_PASSWORD",
-          passwordLength: 30,
-        },
-        secretName: `${graphqlLambdaName}Secret`,
-      }
-    );
+    // Create lambda secret
+    this.lambdaSecret = new Secret(stack, "NucleusBackendLambdaSecret", {
+      description: `Secret for Nucleus backend lambda (${branch})`,
+      generateSecretString: {
+        excludePunctuation: true,
+        secretStringTemplate: "{}",
+        generateStringKey: "TYPEORM_PASSWORD",
+        passwordLength: 30,
+      },
+      secretName: `${namePrefix}-LambdaSecret`,
+    });
 
     // Create core database security group
     this.coreDatabaseSecurityGroup = new SecurityGroup(
@@ -86,7 +82,7 @@ export class NucleusBackend {
       masterUsername: "nucleus",
       masterUserPassword: Fn.join("", [
         "{{resolve:secretsmanager:",
-        this.graphqlLambdaSecret.secretArn,
+        this.lambdaSecret.secretArn,
         ":SecretString:TYPEORM_PASSWORD}}",
       ]),
       preferredBackupWindow: "02:00-03:00",

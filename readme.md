@@ -8,9 +8,10 @@ Monorepo for SDH Nucleus project.
 
 ## Requirements
 
+- Java 8 (or newer, to run queues)
 - NodeJS, v12.9 < v13 (LTS, 12.9 onwards supports ES2020 natively)
 - PostgreSQL v12
-- Yarn, v1 < v2 (For working with monorepo)
+- Yarn, v1 < v2 (for working with monorepo)
 
 If you need multiple versions of NodeJS for different projects, consider using NVM/NVM-Windows:
 
