@@ -10,6 +10,7 @@ export interface InputProps
   className?: string;
   componentRef?: Ref<HTMLInputElement>;
   error?: FieldError;
+  help?: string;
   label?: string;
   name: string;
   iconType?: IconType;

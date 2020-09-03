@@ -50,7 +50,7 @@ export function Upload(props: UploadProps) {
     button = (
       <div {...getRootProps()}>
         <Button
-          className="w-48 mt-2 text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700"
+          className="w-48 text-white bg-blue-600 hover:bg-blue-700 active:bg-blue-700"
           type="button"
         >
           <span>
@@ -63,11 +63,11 @@ export function Upload(props: UploadProps) {
   }
 
   // Render in progress files
-  const inProgressFiles = inProgress.map(file => {
+  const inProgressFiles = inProgress.map((file) => {
     const handleDelete = () => {
-      setInProgress(inProgressState => {
+      setInProgress((inProgressState) => {
         const index = inProgressState.findIndex(
-          inProgressFile => inProgressFile === file
+          (inProgressFile) => inProgressFile === file
         );
 
         const updated = [...inProgressState];
@@ -77,8 +77,8 @@ export function Upload(props: UploadProps) {
     };
 
     const handleComplete = (id: string, fileName: string) => {
-      setFileNames(fileNamesState => ({ ...fileNamesState, [id]: fileName }));
-      setUploaded(uploadedState => [...uploadedState, id]);
+      setFileNames((fileNamesState) => ({ ...fileNamesState, [id]: fileName }));
+      setUploaded((uploadedState) => [...uploadedState, id]);
       handleDelete();
     };
 

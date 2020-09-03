@@ -1,14 +1,21 @@
-/* eslint-disable unicorn/consistent-function-scoping */
 import { PrimaryButton } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Checkbox } from "@sdh-project-services/nucleus-ui/dist/checkbox";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
 import { PreparationProps } from "./types";
 
-export function Form(): React.ReactElement {
-  const { submitStep, values } = useContext(Context);
+function validate(value?: boolean) {
+  if (value === undefined || value === false) {
+    return "Confirmation required to continue";
+  }
 
+  return true;
+}
+
+export function Form() {
+  const { submitStep, values } = useContext(Context);
   const {
     errors,
     handleSubmit,
@@ -21,70 +28,59 @@ export function Form(): React.ReactElement {
     defaultValues: values,
   });
 
-  register(
-    { name: "acceptedRequiredDocs" },
-    {
-      validate: (value: boolean) =>
-        value === undefined || value === false
-          ? "Confirmation required to continue."
-          : true,
-    }
-  );
+  register({ name: "acceptedRequiredDocs" }, { validate });
+  register({ name: "acceptedTermsConsent" }, { validate });
+  watch(["acceptedRequiredDocs", "acceptedTermsConsent"]);
 
-  register(
-    { name: "acceptedTermsConsent" },
-    {
-      validate: (value: boolean) =>
-        value === undefined || value === false
-          ? "Confirmation required to continue."
-          : true,
-    }
-  );
+  const { acceptedRequiredDocs, acceptedTermsConsent } = getValues();
 
-  const handleOnSubmit = (data: any) => {
-    submitStep(0, data);
-  };
-
-  const onChange = (name: any, value: any) => {
+  const handleChange = (
+    name: "acceptedRequiredDocs" | "acceptedTermsConsent",
+    value: boolean
+  ) => {
     clearErrors(name);
     setValue(name, value);
   };
 
-  const acceptedRequiredDocumentationWatch = getValues("acceptedRequiredDocs");
-  const acceptedTermsConsentWatch = watch("acceptedTermsConsent");
+  const handleFormSubmit = (data: any) => {
+    submitStep(0, data);
+  };
 
   return (
     <>
-      <form className="max-w-2xl" onSubmit={handleSubmit(handleOnSubmit)}>
+      <form className="max-w-2xl" onSubmit={handleSubmit(handleFormSubmit)}>
         <Checkbox
-          checked={acceptedRequiredDocumentationWatch}
+          checked={acceptedRequiredDocs}
           className="my-2"
           error={errors.acceptedRequiredDocs}
-          label="Yes, I have the required documents to hand and would like to proceed"
+          label="Yes, I have all the required documents to hand and would like to proceed."
           name="acceptedRequiredDocs"
           onChange={() => {
-            onChange(
-              "acceptedRequiredDocs",
-              acceptedRequiredDocumentationWatch === false
-            );
+            handleChange("acceptedRequiredDocs", acceptedRequiredDocs !== true);
           }}
         />
-        <div>
-          <Checkbox
-            checked={acceptedTermsConsentWatch}
-            className="my-2 text-align-l"
-            error={errors.acceptedTermsConsent}
-            label="To proceed please confirm that you have read, consent and agree to our Full Terms and Privacy Policy"
-            name="terms"
-            onChange={() => {
-              onChange(
-                "acceptedTermsConsent",
-                acceptedTermsConsentWatch === false
-              );
-            }}
-          />
+        <Checkbox
+          checked={acceptedTermsConsent}
+          className="my-2 text-align-l"
+          error={errors.acceptedTermsConsent}
+          label={
+            <>
+              To proceed please confirm that you have read, consent and agree to
+              our <Anchor href="">full terms</Anchor> and{" "}
+              <Anchor href="">privacy policy</Anchor>, and understand that you
+              can change communication and privacy preferences at request.
+            </>
+          }
+          name="terms"
+          onChange={() => {
+            handleChange("acceptedTermsConsent", acceptedTermsConsent !== true);
+          }}
+        />
+        <div className="mt-8 text-right">
+          <PrimaryButton className="w-full md:w-auto" type="submit">
+            Next
+          </PrimaryButton>
         </div>
-        <PrimaryButton className="w-full mt-5 md:w-auto">Next</PrimaryButton>
       </form>
     </>
   );

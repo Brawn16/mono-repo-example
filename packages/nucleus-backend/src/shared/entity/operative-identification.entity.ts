@@ -9,13 +9,13 @@ import { OperativeEntity } from "./operative.entity";
 export class OperativeIdentificationEntity extends BaseEntity {
   @ManyToOne(
     () => OperativeEntity,
-    operative => operative.identifications
+    (operative) => operative.identifications
   )
   public operative?: OperativeEntity;
 
   @ManyToOne(
     () => IdentificationEntity,
-    identification => identification.operativeIdentifications
+    (identification) => identification.operativeIdentifications
   )
   public identification?: IdentificationEntity;
 

@@ -1,38 +1,25 @@
 .background {
   background: url(./background.jpg);
-  @apply h-16 flex;
+
+  @apply bg-fixed flex flex-col relative p-8 w-full;
 }
 
 .background:before {
-  backdrop-filter: blur(0.08rem);
+  backdrop-filter: blur(0.1rem);
   content: "";
 
-  @apply absolute bg-blue-900 bg-opacity-75 inset-0 flex h-16;
+  @apply absolute bg-sdh-blue bg-opacity-75 inset-0;
 }
+
 .logo {
   background: url(./logo.png);
-  position: sticky;
   background-repeat: no-repeat;
-  @apply absolute bg-contain top-0 left-0 h-6 mx-5
-    inset-y-4 w-20 mt-1;
+
+  @apply bg-contain h-10 relative;
 }
 
-@screen lg {
-  .logo {
-    position: sticky;
-    @apply block h-16 w-52;
-  }
-}
-
-@screen lg {
+@screen md {
   .background {
-    background: url(./background.jpg);
-    @apply flex-1 bg-fixed flex-col relative h-auto;
-  }
-
-  .background:before {
-    backdrop-filter: blur(0.08rem);
-    content: "";
-    @apply h-auto;
+    width: 20rem;
   }
 }

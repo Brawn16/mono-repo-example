@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import { FaExclamationCircle } from "react-icons/fa";
 import { AlertProps } from "./types";
 
@@ -6,7 +6,7 @@ export function Alert({
   children,
   className = "text-white bg-red-600",
   iconType: Icon = FaExclamationCircle,
-}: React.PropsWithChildren<AlertProps>): React.ReactElement {
+}: PropsWithChildren<AlertProps>) {
   return (
     <div className={`p-4  ${className}`}>
       <div className="flex">

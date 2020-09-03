@@ -38,9 +38,6 @@ export const buttonWithIcon = () => {
       <PrimaryButton iconType={FaLock} onClick={action("onClick")}>
         Button
       </PrimaryButton>
-      <PrimaryButton iconType={FaLock} loading onClick={action("onClick")}>
-        Button
-      </PrimaryButton>
     </div>
   );
 };

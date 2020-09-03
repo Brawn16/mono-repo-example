@@ -1,29 +1,25 @@
-import {
-  PrimaryButton,
-  SecondaryButton,
-} from "@sdh-project-services/nucleus-ui/dist/button";
-import { Upload } from "@sdh-project-services/nucleus-ui/dist/upload";
-import React, { useContext, useEffect } from "react";
+import { UploadDropzone } from "@sdh-project-services/nucleus-ui/dist/upload-dropzone";
+import { UploadGallery } from "@sdh-project-services/nucleus-ui/dist/upload-gallery";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
+import { Navigation } from "../../../layouts/new-starter/navigation";
 import { NewStarterQualificationsFormData } from "./types";
 
-export function Form(): React.ReactElement {
+export function Form() {
   const { submitStep, values } = useContext(Context);
-  const { handleSubmit, getValues, register, setValue } = useForm<
+  const { errors, getValues, handleSubmit, register, setValue } = useForm<
     NewStarterQualificationsFormData
   >({
     defaultValues: values,
   });
+
+  register({ name: "qualificationUploadIds" });
+
   const { qualificationUploadIds } = getValues();
 
-  useEffect(() => {
-    register({ name: "qualificationUploadIds" });
-  }, []);
-
-  const handleChange = (ids: string[]) => {
-    setValue("qualificationUploadIds", ids);
+  const handleChange = (uploads: string[]) => {
+    setValue("qualificationUploadIds", uploads);
   };
 
   const handleFormSubmit = (data: NewStarterQualificationsFormData) => {
@@ -31,24 +27,18 @@ export function Form(): React.ReactElement {
   };
 
   return (
-    <form className="max-w-2xl" onSubmit={handleSubmit(handleFormSubmit)}>
-      <Upload
+    <form onSubmit={handleSubmit(handleFormSubmit)}>
+      <UploadDropzone
         accept="image/*"
-        buttonEntity="photo"
-        label="Upload Photos"
+        error={errors.qualificationUploadIds as any}
         multiple
         onChange={handleChange}
         tags={["operativeQualification", "public"]}
-        values={qualificationUploadIds as string[]}
-      />
-      <div className="flex justify-between max-w-2xl mt-8">
-        <Anchor href="/new-starter/work-details">
-          <div className="hidden md:block">
-            <SecondaryButton>Previous</SecondaryButton>
-          </div>
-        </Anchor>
-        <PrimaryButton className="w-full md:w-auto">Next</PrimaryButton>
-      </div>
+        uploads={qualificationUploadIds}
+      >
+        <UploadGallery />
+      </UploadDropzone>
+      <Navigation />
     </form>
   );
 }

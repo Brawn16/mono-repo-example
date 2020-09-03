@@ -4,10 +4,9 @@ import {
   PrimaryButton,
   SecondaryButton,
 } from "@sdh-project-services/nucleus-ui/dist/button";
-import { Fieldset } from "@sdh-project-services/nucleus-ui/dist/fieldset";
-import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewer";
+import { Panel } from "@sdh-project-services/nucleus-ui/dist/panel";
 import Router from "next/router";
-import React, { useContext } from "react";
+import React, { FormEvent, useContext } from "react";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
 import {
@@ -23,7 +22,7 @@ function findValue(data: any = [], id: string) {
   return value.name;
 }
 
-export function Form(): React.ReactElement {
+export function Form() {
   const { data: subcontractorsData = {} }: any = useQuery(subcontractorsQuery);
   const { data: workstreamsData = {} }: any = useQuery(workstreamsQuery);
   const { values } = useContext(Context);
@@ -33,7 +32,7 @@ export function Form(): React.ReactElement {
     errorPolicy: "all",
   });
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const { errors } = await createOperative({
       variables: { data: values },
@@ -50,7 +49,7 @@ export function Form(): React.ReactElement {
       {error && (
         <Alert className="mb-8 text-white bg-red-600">{error.message}</Alert>
       )}
-      <Fieldset>
+      <Panel>
         <Field label="Name" value={`${values.firstName} ${values.lastName}`} />
         <Field label="Email" value={values.email} />
         <Field label="Phone Number" value={values.phoneNumber} />
@@ -67,8 +66,8 @@ export function Form(): React.ReactElement {
             <SecondaryButton>Edit</SecondaryButton>
           </Anchor>
         </div>
-      </Fieldset>
-      <Fieldset className="mt-4">
+      </Panel>
+      <Panel className="mt-4">
         <Fields
           label="Address"
           values={[values.addressLine1, values.addressPostcode]}
@@ -78,8 +77,8 @@ export function Form(): React.ReactElement {
             <SecondaryButton>Edit</SecondaryButton>
           </Anchor>
         </div>
-      </Fieldset>
-      <Fieldset className="mt-4">
+      </Panel>
+      <Panel className="mt-4">
         <Field
           label="Workstream"
           value={findValue(workstreamsData.workstreams, values.workstream)}
@@ -96,8 +95,8 @@ export function Form(): React.ReactElement {
             <SecondaryButton>Edit</SecondaryButton>
           </Anchor>
         </div>
-      </Fieldset>
-      <Fieldset className="mt-4">
+      </Panel>
+      <Panel className="mt-4">
         <Field
           label="Qualifications"
           value={`${qualificationsUploaded} Photos Uploaded`}
@@ -107,8 +106,8 @@ export function Form(): React.ReactElement {
             <SecondaryButton>Edit</SecondaryButton>
           </Anchor>
         </div>
-      </Fieldset>
-      <Fieldset className="mt-4">
+      </Panel>
+      <Panel className="mt-4">
         <Field
           label="Identification 1"
           value={identifications[0] && identifications[0].type}
@@ -122,26 +121,17 @@ export function Form(): React.ReactElement {
             <SecondaryButton>Edit</SecondaryButton>
           </Anchor>
         </div>
-      </Fieldset>
-      <Fieldset className="mt-4">
+      </Panel>
+      <Panel className="mt-4">
         <Field label="My Photo" value="" />
-        {values.photoUpload && (
-          <div className="float-right">
-            <UploadViewer id={values.photoUpload}>
-              {({ url }) => (
-                <img alt="Profile" className="block max-w-xs" src={url} />
-              )}
-            </UploadViewer>
-          </div>
-        )}
         <div className="clearfix" />
         <div className="mt-4 text-right">
           <Anchor href="/new-starter/my-photo">
             <SecondaryButton>Edit</SecondaryButton>
           </Anchor>
         </div>
-      </Fieldset>
-      <Fieldset className="mt-4">
+      </Panel>
+      <Panel className="mt-4">
         <Field
           label="Do you suffer from any medical issues or ailment?"
           value={values.medicalIssues ? "Yes" : "No"}
@@ -167,12 +157,12 @@ export function Form(): React.ReactElement {
             <SecondaryButton>Edit</SecondaryButton>
           </Anchor>
         </div>
-      </Fieldset>
+      </Panel>
       <div className="flex justify-between mt-8">
         <Anchor href="/new-starter/medical">
           <SecondaryButton>Back</SecondaryButton>
         </Anchor>
-        <PrimaryButton>Submit</PrimaryButton>
+        <PrimaryButton type="submit">Submit</PrimaryButton>
       </div>
     </form>
   );

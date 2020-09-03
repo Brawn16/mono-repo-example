@@ -4,7 +4,7 @@ import { PrimaryButton } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Checkbox } from "@sdh-project-services/nucleus-ui/dist/checkbox";
 import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
 import filterObject from "filter-obj";
-import React, { useEffect } from "react";
+import React, { PropsWithChildren, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useForm } from "react-hook-form";
 import { FaLock } from "react-icons/fa";
@@ -15,7 +15,7 @@ import { LoginFormData, LoginProps } from "./types";
 export function Login({
   children,
   onSuccess = () => {},
-}: React.PropsWithChildren<LoginProps>): React.ReactElement {
+}: PropsWithChildren<LoginProps>) {
   const { errors, getValues, handleSubmit, register } = useForm<
     LoginFormData
   >();
@@ -80,7 +80,7 @@ export function Login({
         required
         type="password"
       />
-      <div className="flex justify-between mt-4 mb-8">
+      <div className="flex items-center justify-between mt-4 mb-8">
         <Checkbox
           componentRef={register}
           defaultChecked
@@ -89,10 +89,7 @@ export function Login({
         />
         <Anchor href="/reset-password">Forgot Password?</Anchor>
       </div>
-      <PrimaryButton
-        className="w-full text-white bg-blue-700 hover:bg-blue-600 active:bg-blue-800"
-        iconType={FaLock}
-      >
+      <PrimaryButton className="w-full" iconType={FaLock}>
         Login
       </PrimaryButton>
     </form>

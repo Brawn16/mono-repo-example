@@ -1,16 +1,11 @@
-import {
-  PrimaryButton,
-  SecondaryButton,
-} from "@sdh-project-services/nucleus-ui/dist/button";
 import { Upload } from "@sdh-project-services/nucleus-ui/dist/upload";
-import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewer";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
+import { Navigation } from "../../../layouts/new-starter/navigation";
 import { NewStarterMyPhotoFormData } from "./types";
 
-export function Form(): React.ReactElement {
+export function Form() {
   const { submitStep, values } = useContext(Context);
   const {
     errors,
@@ -22,11 +17,11 @@ export function Form(): React.ReactElement {
     clearErrors,
   } = useForm<NewStarterMyPhotoFormData>({ defaultValues: values });
 
-  useEffect(() => {
-    register({ name: "photoUpload" }, { required: "Photo is required" });
-  }, []);
+  register({ name: "photoUpload" }, { required: "Photo is required" });
   watch("photoUpload");
+
   const { photoUpload } = getValues();
+
   const handleChange = ([id]: string[]) => {
     clearErrors("photoUpload");
     setValue("photoUpload", id);
@@ -48,24 +43,8 @@ export function Form(): React.ReactElement {
           tags={["operativePhoto", "public"]}
           values={photoUpload ? [photoUpload] : undefined}
         />
-        {photoUpload && (
-          <div className="mt-4">
-            <UploadViewer id={photoUpload}>
-              {({ url }) => (
-                <img alt="Profile" className="block max-w-xs" src={url} />
-              )}
-            </UploadViewer>
-          </div>
-        )}
       </div>
-      <div className="flex justify-between mt-8">
-        <Anchor href="/new-starter/qualifications">
-          <div className="hidden md:block">
-            <SecondaryButton>Previous</SecondaryButton>
-          </div>
-        </Anchor>
-        <PrimaryButton className="w-full md:w-auto">Next</PrimaryButton>
-      </div>
+      <Navigation />
     </form>
   );
 }

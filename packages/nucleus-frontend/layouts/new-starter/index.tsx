@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { PropsWithChildren, useEffect } from "react";
 import { FiCheck } from "react-icons/fi";
 import { Anchor } from "../../components/anchor";
 import { Context } from "./context";
@@ -25,35 +25,19 @@ function renderStep({ href, label }: NewStarterStep, index: number) {
   const { step: currentStep } = getLocalFormData();
   const { asPath } = useRouter();
   const active = steps[index].href === asPath;
+  const activeStyle = active ? "bg-white text-blue-900" : "";
 
-  const stepIndex = steps.findIndex(step => step.href === asPath);
-  const activePath = index < stepIndex;
-  const activeStyle =
-    active || activePath || currentStep > index - 1
-      ? "bg-white text-blue-900"
-      : "";
-
-  const number = (
-    <div className="flex flex-col align-center">
-      <div>
-        <div
-          className={`flex items-center justify-center w-8 h-8 text-xl ${activeStyle} font-bold border border-blue-300 rounded-full`}
-        >
-          <div>
-            {currentStep > index - 1 ? (
-              <FiCheck className="font-bold" />
-            ) : (
-              index + 1
-            )}
-          </div>
-        </div>
-      </div>
-
+  const step = (
+    <div className="relative flex items-center">
       <div
-        className={`h-5 border-r-2 ${
-          activePath ? "" : "border-blue-400 border-opacity-50"
-        } w-1/2 ${index === 8 ? "border-none" : ""}`}
-      />
+        className={`flex items-center justify-center w-10 h-10 text-xl font-bold border border-white border-opacity-25 rounded-full ${activeStyle}`}
+      >
+        {currentStep > index - 1 ? <FiCheck /> : index + 1}
+        {label !== "Summary" && (
+          <div className="absolute h-4 border-r border-white top-10 border-opacity-25" />
+        )}
+      </div>
+      <div className="pl-3">{label}</div>
     </div>
   );
 
@@ -61,10 +45,7 @@ function renderStep({ href, label }: NewStarterStep, index: number) {
   if (currentStep < index - 1) {
     return (
       <li key={href}>
-        <div className="flex opacity-50 cursor-not-allowed">
-          {number}
-          <div className="pl-3 whitespace-no-wrap">{label}</div>
-        </div>
+        <div className="flex opacity-50 cursor-not-allowed">{step}</div>
       </li>
     );
   }
@@ -78,8 +59,7 @@ function renderStep({ href, label }: NewStarterStep, index: number) {
   return (
     <li key={href}>
       <Anchor className={className} href={href}>
-        {number}
-        <div className="pl-3 whitespace-no-wrap"> {label}</div>
+        {step}
       </Anchor>
     </li>
   );
@@ -87,18 +67,22 @@ function renderStep({ href, label }: NewStarterStep, index: number) {
 
 function renderSteps() {
   return (
-    <ul className="sticky hidden mx-16 text-lg text-white lg:block inset-y-52 ">
-      {steps.map((step, index) => renderStep(step, index))}
-    </ul>
+    <div className="items-center flex-1 hidden mt-8 md:flex">
+      <ul className="relative text-lg text-white space-y-4">
+        {steps.map((step, index) => renderStep(step, index))}
+      </ul>
+    </div>
   );
 }
 
 export function NewStarter({
   children,
+  header,
+  headerTitle,
   showSteps = true,
   title,
   backHref,
-}: React.PropsWithChildren<NewStarterProps>): React.ReactElement {
+}: PropsWithChildren<NewStarterProps>) {
   const { values } = getLocalFormData();
   const year = new Date().getFullYear();
   const router = useRouter();
@@ -136,43 +120,46 @@ export function NewStarter({
     const { href } = steps[step + 1];
     router.push(href);
   };
-  const { asPath } = useRouter();
-  const stepIndex = steps.findIndex(step => {
-    return step.href === asPath;
+
+  const stepIndex = steps.findIndex((step) => {
+    return step.href === router.asPath;
   });
 
   return (
-    <div className="flex flex-col min-h-screen lg:flex-row">
+    <div className="min-h-screen md:flex">
       <div className={background}>
         <div className={logo} />
         {showSteps && renderSteps()}
       </div>
-      <div className="flex w-full max-w-6xl ">
-        <div className="flex flex-col  w-full mx-auto">
-          <div className="px-10 py-2 bg-gray-200">
-            <h1 className="font-extrabold text-gray-900 border-b border-gray-200 text-md md:text-2xl">
-              Register new starter
-            </h1>
-            <div className="text-sm text-gray-500 md:text-xl">
-              {`${stepIndex + 1} of ${steps.length}`}
-              {(title && `: ${title}`) || ""}
-            </div>
-          </div>
-          <div>
-            <div className="px-10">
-              {backHref && (
-                <Anchor className="flex mt-4" href={backHref}>
-                  {`<`}
-                  <p className="underline">Back</p>
-                </Anchor>
-              )}
-
+      <div className="flex flex-col flex-1 max-h-screen">
+        <div className="px-8 py-4 bg-gray-200 border-b border-gray-300">
+          <h1 className="text-xl font-extrabold text-gray-900 md:text-2xl font-montserrat">
+            Register new starter
+          </h1>
+          <h2 className="text-xl text-gray-500">
+            {`${stepIndex + 1} of ${steps.length}`}
+            {(title && `: ${title}`) || ""}
+          </h2>
+        </div>
+        <div className="flex flex-col flex-1 md:overflow-auto">
+          <div className="flex-1 max-w-3xl p-8 pb-0">
+            {backHref && (
+              <Anchor className="" href={backHref}>
+                &lt; <span className="underline">Back</span>
+              </Anchor>
+            )}
+            {header || (
+              <h2 className="text-2xl font-extrabold md:text-3xl font-montserrat">
+                {headerTitle || title}
+              </h2>
+            )}
+            <div className="mt-8">
               <Context.Provider value={{ submitStep, values }}>
                 {children}
               </Context.Provider>
             </div>
           </div>
-          <footer className="bottom-0 px-10 mt-8 text-xs text-gray-400">
+          <footer className="p-8 text-xs text-gray-600">
             &copy; {year}. All Rights Reserved.
           </footer>
         </div>

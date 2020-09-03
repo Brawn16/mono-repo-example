@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Login as LoginForm } from "../../components/login";
 import { login as loginClassName } from "./login.module.css";
 
-export function Login(): React.ReactElement | null {
+export function Login() {
   const [render, setRender] = useState(false);
 
   // Delay render so the login doesn't flash while cookies are being parsed
