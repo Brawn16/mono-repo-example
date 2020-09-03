@@ -4,9 +4,11 @@ import {
   PrimaryButton,
   SecondaryButton,
 } from "@sdh-project-services/nucleus-ui/dist/button";
+import { Label } from "@sdh-project-services/nucleus-ui/dist/label";
 import { Panel } from "@sdh-project-services/nucleus-ui/dist/panel";
 import Router from "next/router";
 import React, { FormEvent, useContext } from "react";
+import { BsPencilSquare } from "react-icons/bs";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
 import {
@@ -50,6 +52,13 @@ export function Form() {
         <Alert className="mb-8 text-white bg-red-600">{error.message}</Alert>
       )}
       <Panel>
+        <div className="flex justify-between mb-4 font-montserrat">
+          <Label label="Personal Details" name="personalDetails" />
+          <Anchor href="/new-starter/personal-details">
+            <BsPencilSquare className="flex-shrink-0 text-2xl text-gray-400" />
+          </Anchor>
+        </div>
+
         <Field label="Name" value={`${values.firstName} ${values.lastName}`} />
         <Field label="Email" value={values.email} />
         <Field label="Phone Number" value={values.phoneNumber} />
@@ -61,24 +70,42 @@ export function Form() {
           label="Emergency Contact Number"
           value={values.emergencyContactNumber}
         />
-        <div className="mt-4 text-right">
-          <Anchor href="/new-starter/personal-details">
-            <SecondaryButton>Edit</SecondaryButton>
-          </Anchor>
-        </div>
       </Panel>
       <Panel className="mt-4">
+        <div className="flex justify-between mb-4 font-montserrat">
+          <Label label="Address" name="address" />
+          <Anchor href="/new-starter/address">
+            <BsPencilSquare className="flex-shrink-0 text-2xl text-gray-400" />
+          </Anchor>
+        </div>
         <Fields
           label="Address"
           values={[values.addressLine1, values.addressPostcode]}
         />
-        <div className="mt-4 text-right">
-          <Anchor href="/new-starter/address">
-            <SecondaryButton>Edit</SecondaryButton>
-          </Anchor>
-        </div>
       </Panel>
       <Panel className="mt-4">
+        <div className="flex justify-between mb-4 font-montserrat">
+          <Label label="Identification" name="identification" />
+          <Anchor href="/new-starter/identification">
+            <BsPencilSquare className="flex-shrink-0 text-2xl text-gray-400" />
+          </Anchor>
+        </div>
+        <Field
+          label="Identification 1"
+          value={identifications[0] && identifications[0].type}
+        />
+        <Field
+          label="Identification 2"
+          value={identifications[1] && identifications[1].type}
+        />
+      </Panel>
+      <Panel className="mt-4">
+        <div className="flex justify-between mb-4 font-montserrat">
+          <Label label="Work details" name="workDetails" />
+          <Anchor href="/new-starter/work-details">
+            <BsPencilSquare className="flex-shrink-0 text-2xl text-gray-400" />
+          </Anchor>
+        </div>
         <Field
           label="Workstream"
           value={findValue(workstreamsData.workstreams, values.workstream)}
@@ -90,48 +117,37 @@ export function Form() {
             values.subcontractor
           )}
         />
-        <div className="mt-4 text-right">
-          <Anchor href="/new-starter/work-details">
-            <SecondaryButton>Edit</SecondaryButton>
-          </Anchor>
-        </div>
       </Panel>
       <Panel className="mt-4">
+        <div className="flex justify-between mb-4 font-montserrat">
+          <Label label="Qualifications" name="qualifications" />
+          <Anchor href="/new-starter/qualifications">
+            <BsPencilSquare className="flex-shrink-0 text-2xl text-gray-400" />
+          </Anchor>
+        </div>
         <Field
           label="Qualifications"
           value={`${qualificationsUploaded} Photos Uploaded`}
         />
-        <div className="mt-4 text-right">
-          <Anchor href="/new-starter/qualifications">
-            <SecondaryButton>Edit</SecondaryButton>
+      </Panel>
+
+      <Panel className="mt-4">
+        <div className="flex justify-between mb-4 font-montserrat">
+          <Label label="My photo" name="myPhoto" />
+          <Anchor href="/new-starter/my-photo">
+            <BsPencilSquare className="flex-shrink-0 text-2xl text-gray-400" />
           </Anchor>
         </div>
-      </Panel>
-      <Panel className="mt-4">
-        <Field
-          label="Identification 1"
-          value={identifications[0] && identifications[0].type}
-        />
-        <Field
-          label="Identification 2"
-          value={identifications[1] && identifications[1].type}
-        />
-        <div className="mt-4 text-right">
-          <Anchor href="/new-starter/identification">
-            <SecondaryButton>Edit</SecondaryButton>
-          </Anchor>
-        </div>
-      </Panel>
-      <Panel className="mt-4">
         <Field label="My Photo" value="" />
         <div className="clearfix" />
-        <div className="mt-4 text-right">
-          <Anchor href="/new-starter/my-photo">
-            <SecondaryButton>Edit</SecondaryButton>
-          </Anchor>
-        </div>
       </Panel>
       <Panel className="mt-4">
+        <div className="flex justify-between mb-4›">
+          <Label label="Medical" name="medical" />
+          <Anchor href="/new-starter/medical">
+            <BsPencilSquare className="flex-shrink-0 text-2xl text-gray-400" />
+          </Anchor>
+        </div>
         <Field
           label="Do you suffer from any medical issues or ailment?"
           value={values.medicalIssues ? "Yes" : "No"}
@@ -152,11 +168,6 @@ export function Form() {
             value={values.medicationRequiredNotes}
           />
         )}
-        <div className="mt-4 text-right">
-          <Anchor href="/new-starter/medical">
-            <SecondaryButton>Edit</SecondaryButton>
-          </Anchor>
-        </div>
       </Panel>
       <div className="flex justify-between mt-8">
         <Anchor href="/new-starter/medical">
