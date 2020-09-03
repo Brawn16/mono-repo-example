@@ -48,7 +48,7 @@ export function Form() {
 
   return (
     <>
-      <form className="max-w-2xl" onSubmit={handleSubmit(handleFormSubmit)}>
+      <form onSubmit={handleSubmit(handleFormSubmit)}>
         <Checkbox
           checked={acceptedRequiredDocs === true}
           className="my-2"

@@ -33,18 +33,16 @@ export function Form() {
   };
   const uploadData = photoUpload ? [photoUpload] : undefined;
   return (
-    <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <div className="mt-8">
-        <UploadDropzone
-          accept="image/*"
-          error={errors.photoUpload as any}
-          onChange={handleChange}
-          tags={["operativeQualification", "public"]}
-          uploads={uploadData}
-        >
-          <UploadGallery />
-        </UploadDropzone>
-      </div>
+    <form className="mt-8" onSubmit={handleSubmit(handleFormSubmit)}>
+      <UploadDropzone
+        accept="image/*"
+        error={errors.photoUpload as any}
+        onChange={handleChange}
+        tags={["operativeQualification", "public"]}
+        uploads={uploadData}
+      >
+        <UploadGallery />
+      </UploadDropzone>
       <Navigation />
     </form>
   );

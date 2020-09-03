@@ -1,8 +1,5 @@
-export interface FieldProps {
-  label: string;
-  value: any;
-}
-export interface FieldsProps {
-  label: string;
-  values: string[];
+export interface PanelProps {
+  className?: string;
+  href: string;
+  title: string;
 }

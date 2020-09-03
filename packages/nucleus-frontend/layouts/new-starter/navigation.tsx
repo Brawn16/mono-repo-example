@@ -6,8 +6,9 @@ import { useRouter } from "next/router";
 import React from "react";
 import { Anchor } from "../../components/anchor";
 import { steps } from "./steps";
+import { NavigationProps } from "./types";
 
-export function Navigation() {
+export function Navigation({ nextLabel = "Next" }: NavigationProps) {
   const { asPath } = useRouter();
   const stepIndex = steps.findIndex((step) => step.href === asPath);
   const { href } = steps[stepIndex - 1];
@@ -20,7 +21,7 @@ export function Navigation() {
         </Anchor>
       </div>
       <PrimaryButton className="w-full md:w-auto" type="submit">
-        Next{" "}
+        {nextLabel}
       </PrimaryButton>
     </div>
   );

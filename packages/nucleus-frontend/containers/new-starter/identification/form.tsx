@@ -1,5 +1,5 @@
 import { Select } from "@sdh-project-services/nucleus-ui/dist/select";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Context } from "../../../layouts/new-starter/context";
 import { Navigation } from "../../../layouts/new-starter/navigation";
@@ -36,6 +36,10 @@ export function Form() {
   const idOneUploads: string[] = getValues("identifications[0].uploads");
   const idTwoType: string = getValues("identifications[1].type");
   const idTwoUploads: string[] = getValues("identifications[1].uploads");
+
+  useEffect(() => {
+    setValue("identifications[0].type", getValues("identifications[0].type"));
+  }, []);
 
   const handleChange = (name: string, uploads: string[]) => {
     clearErrors(name);

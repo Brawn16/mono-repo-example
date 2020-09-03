@@ -142,7 +142,7 @@ export function Form() {
       )}
       {subcontractorsData && (
         <div className="mt-4">
-          <Label label="Which subcontractor are you working for?" />
+          <Label label="Which subcontractor do you work for?" />
           <div className="space-y-2">
             {renderSubcontractors(
               subcontractorsData.subcontractors,

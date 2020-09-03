@@ -38,7 +38,7 @@ export function NewStarter() {
             </div>
           </div>
         </Panel>
-        <Panel className="my-4">
+        <Panel className="my-8">
           <div className="flex">
             <FaFile className="flex-shrink-0 text-5xl text-gray-400" />
             <div className="ml-4">
