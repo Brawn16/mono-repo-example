@@ -25,7 +25,7 @@ export function queueHandler(
   callback: Callback<void>
 ) {
   hasBooted.then(async () => {
-    await Promise.all(events.map(event => processEvent(event)));
+    await Promise.all(events.map((event) => processEvent(event)));
     callback();
   });
 }
