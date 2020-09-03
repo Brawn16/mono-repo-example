@@ -48,7 +48,7 @@ export function Form() {
   };
 
   const handleFormSubmit = (data: NewStarterAddressFormData) => {
-    submitStep(2, data);
+    submitStep(data);
   };
 
   return (

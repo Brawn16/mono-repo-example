@@ -100,20 +100,17 @@ export function NewStarter({
     }
   }, []);
 
-  const submitStep = (
-    step: number,
-    updatedValues: { [key: string]: string }
-  ) => {
+  const submitStep = (updatedValues: { [key: string]: string }) => {
     const data = getLocalFormData();
-    if (step > data.step) {
-      data.step = step;
+    if (stepIndex > data.step) {
+      data.step = stepIndex;
     }
 
     data.values = { ...data.values, ...updatedValues };
     localStorage.setItem("new-starter", JSON.stringify(data));
 
     // Navigate to next step
-    const { href } = steps[step + 1];
+    const { href } = steps[stepIndex + 1];
     router.push(href);
   };
 
@@ -124,15 +121,17 @@ export function NewStarter({
         {showSteps && renderSteps()}
       </div>
       <div className="flex flex-col flex-1 max-h-screen">
-        <div className="px-8 py-4 bg-gray-200 border-b border-gray-300">
-          <h1 className="text-xl font-extrabold text-gray-900 md:text-2xl font-montserrat">
-            Register new starter
-          </h1>
-          <h2 className="text-xl text-gray-500">
-            {`${stepIndex + 1} of ${steps.length}`}
-            {(title && `: ${title}`) || ""}
-          </h2>
-        </div>
+        {showSteps && (
+          <div className="px-8 py-4 bg-gray-200 border-b border-gray-300">
+            <h1 className="text-xl font-extrabold text-gray-900 md:text-2xl font-montserrat">
+              Register new starter
+            </h1>
+            <h2 className="text-xl text-gray-500">
+              {`${stepIndex + 1} of ${steps.length}`}
+              {(title && `: ${title}`) || ""}
+            </h2>
+          </div>
+        )}
         <div className="flex flex-col flex-1 md:overflow-auto">
           <div className="flex-1 max-w-3xl p-8 pb-0">
             {backHref && (

@@ -4,5 +4,5 @@ export interface NewStarterPersonalDetailsFormData {
   phoneNumber: string;
   email: string;
   emergencyContactName: string;
-  emergencyContactNumber: string;
+  emergencyContactPhoneNumber: string;
 }

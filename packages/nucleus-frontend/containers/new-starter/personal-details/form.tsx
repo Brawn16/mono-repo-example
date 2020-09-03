@@ -12,7 +12,7 @@ export function Form() {
   >({ defaultValues: values });
 
   const handleFormSubmit = (data: NewStarterPersonalDetailsFormData) => {
-    submitStep(1, data);
+    submitStep(data);
   };
 
   return (
@@ -89,11 +89,11 @@ export function Form() {
         componentRef={register({
           required: "Emergency contact phone number is required",
         })}
-        error={errors.emergencyContactNumber}
+        error={errors.emergencyContactPhoneNumber}
         inputMode="tel"
         label="Emergency Contact Number"
-        name="emergencyContactNumber"
-        onFocus={() => clearErrors("emergencyContactNumber")}
+        name="emergencyContactPhoneNumber"
+        onFocus={() => clearErrors("emergencyContactPhoneNumber")}
         required
         type="tel"
       />

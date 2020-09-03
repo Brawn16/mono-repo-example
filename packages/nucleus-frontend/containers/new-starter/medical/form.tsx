@@ -30,7 +30,7 @@ export function Form() {
   };
 
   const handleFormSubmit = (data: NewStarterMedicalFormData) => {
-    submitStep(7, data);
+    submitStep(data);
   };
 
   return (

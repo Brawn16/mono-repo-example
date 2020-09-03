@@ -34,8 +34,14 @@ export function Form() {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const data = {
+      ...values,
+      acceptedRequiredDocs: undefined,
+      acceptedTermsConsent: undefined,
+    };
+
     const { errors } = await createOperative({
-      variables: { data: values },
+      variables: { data },
     });
 
     if (errors === undefined) {

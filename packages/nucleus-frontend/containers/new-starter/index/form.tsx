@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
-import { PreparationProps } from "./types";
+import { NewStarterIndexFormData } from "./types";
 
 function validate(value?: boolean) {
   if (value === undefined || value === false) {
@@ -24,7 +24,7 @@ export function Form() {
     setValue,
     watch,
     clearErrors,
-  } = useForm<PreparationProps>({
+  } = useForm<NewStarterIndexFormData>({
     defaultValues: values,
   });
 
@@ -42,8 +42,8 @@ export function Form() {
     setValue(name, value);
   };
 
-  const handleFormSubmit = (data: any) => {
-    submitStep(0, data);
+  const handleFormSubmit = (data: NewStarterIndexFormData) => {
+    submitStep(data);
   };
 
   return (

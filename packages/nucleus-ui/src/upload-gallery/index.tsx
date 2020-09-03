@@ -20,8 +20,14 @@ function renderFiles(files: UploadDropzoneFile[]) {
 
 export function UploadGallery() {
   const { files, multiple, onDeleteAll } = useContext(Context);
-  let label = "Your Uploaded File";
 
+  // If we have no files, do not render
+  if (files.length === 0) {
+    return null;
+  }
+
+  // Parse label
+  let label = "Your Uploaded File";
   if (multiple) {
     label += "s";
   }

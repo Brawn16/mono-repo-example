@@ -110,7 +110,7 @@ export function Form() {
   };
 
   const handleFormSubmit = (data: NewStarterWorkDetailsFormData) => {
-    submitStep(4, data);
+    submitStep(data);
   };
 
   watch("subcontractor");
