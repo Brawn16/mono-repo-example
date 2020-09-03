@@ -11,7 +11,6 @@ export interface NewStarterFormData {
 }
 
 export interface NewStarterProps {
-  backHref?: string | undefined;
   header?: ReactNode;
   headerTitle?: string;
   showSteps?: boolean;

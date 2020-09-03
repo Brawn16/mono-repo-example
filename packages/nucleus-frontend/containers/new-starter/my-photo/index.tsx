@@ -8,7 +8,7 @@ export function MyPhoto() {
   return (
     <>
       <Head title="My Photo - New Starter Form" />
-      <NewStarterLayout backHref="/new-starter/qualifications" title="My Photo">
+      <NewStarterLayout title="My Photo">
         <div className="max-w-2xl">
           <p className="mt-4 text-xl font-bold md:mt-8 md:text-3xl">
             Your photograph

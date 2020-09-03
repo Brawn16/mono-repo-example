@@ -20,11 +20,7 @@ export function Qualifications() {
   return (
     <>
       <Head title="Qualifications - New Starter Form" />
-      <NewStarterLayout
-        backHref="/new-starter/work-details"
-        header={header}
-        title="Qualifications"
-      >
+      <NewStarterLayout header={header} title="Qualifications">
         <Form />
       </NewStarterLayout>
     </>

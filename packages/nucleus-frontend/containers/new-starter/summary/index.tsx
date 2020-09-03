@@ -7,7 +7,7 @@ export function Summary() {
   return (
     <>
       <Head title="Summary - New Starter Form" />
-      <NewStarterLayout backHref="/new-starter/medical" title="Summary">
+      <NewStarterLayout title="Summary">
         <div className="max-w-2xl">
           <p className="mt-4 text-xl font-bold md:mt-8 md:text-3xl">Summary</p>
           <Form />

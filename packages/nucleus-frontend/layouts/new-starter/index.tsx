@@ -81,26 +81,22 @@ export function NewStarter({
   headerTitle,
   showSteps = true,
   title,
-  backHref,
 }: PropsWithChildren<NewStarterProps>) {
-  const { values } = getLocalFormData();
+  const { step: submittedStep, values } = getLocalFormData();
   const year = new Date().getFullYear();
   const router = useRouter();
+  const { asPath } = router;
+  const stepIndex = steps.findIndex((step) => step.href === asPath);
+  const { href: backHref } = steps[stepIndex - 1] || {};
 
   useEffect(() => {
-    const { step } = getLocalFormData();
-    const { asPath } = router;
-
     // If we are on confirmation, do not check
     if (asPath === "/new-starter/confirmation") {
       return;
     }
 
-    const stepIndex =
-      steps.findIndex(({ href }: NewStarterStep) => href === asPath) || -1;
-
-    if (stepIndex > step + 1) {
-      router.push(steps[step + 1].href);
+    if (stepIndex > submittedStep + 1) {
+      router.push(steps[submittedStep + 1].href);
     }
   }, []);
 
@@ -120,10 +116,6 @@ export function NewStarter({
     const { href } = steps[step + 1];
     router.push(href);
   };
-
-  const stepIndex = steps.findIndex((step) => {
-    return step.href === router.asPath;
-  });
 
   return (
     <div className="min-h-screen md:flex">
