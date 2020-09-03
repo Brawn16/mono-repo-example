@@ -50,7 +50,7 @@ export function Form() {
     <>
       <form className="max-w-2xl" onSubmit={handleSubmit(handleFormSubmit)}>
         <Checkbox
-          checked={acceptedRequiredDocs}
+          checked={acceptedRequiredDocs === true}
           className="my-2"
           error={errors.acceptedRequiredDocs}
           label="Yes, I have all the required documents to hand and would like to proceed."
@@ -60,7 +60,7 @@ export function Form() {
           }}
         />
         <Checkbox
-          checked={acceptedTermsConsent}
+          checked={acceptedTermsConsent === true}
           className="my-2 text-align-l"
           error={errors.acceptedTermsConsent}
           label={

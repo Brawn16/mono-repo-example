@@ -7,11 +7,7 @@ export function PersonalDetails() {
   return (
     <>
       <Head title="Personal Details - New Starter Form" />
-      <NewStarterLayout
-        backHref="/new-starter"
-        headerTitle="Your details"
-        title="Personal Details"
-      >
+      <NewStarterLayout headerTitle="Your details" title="Personal Details">
         <Form />
       </NewStarterLayout>
     </>

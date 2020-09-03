@@ -62,6 +62,7 @@ export function Form() {
             required: "Please provide details of medical issues",
           })}
           error={errors.medicalIssuesNotes}
+          label="Please provide more details"
           name="medicalIssuesNotes"
           required
         />
@@ -97,6 +98,7 @@ export function Form() {
             required: "Please provide details of medication requirements",
           })}
           error={errors.medicationRequiredNotes}
+          label="Please provide more details"
           name="medicationRequiredNotes"
           required
         />

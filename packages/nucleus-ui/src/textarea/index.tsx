@@ -24,6 +24,7 @@ export function Textarea(props: TextareaProps) {
     <div className={className}>
       {label && <Label label={label} name={name} required={required} />}
       <textarea
+        rows={5}
         {...textareaProperties}
         ref={componentRef}
         className={`block w-full form-input rounded-none text-gray-900 focus:shadow-none focus:border-blue-500 ${errorClassName}`}

@@ -9,7 +9,6 @@ export function Identification() {
     <>
       <Head title="Identification - New Starter Form" />
       <NewStarterLayout
-        backHref="/new-starter/address"
         headerTitle="Your Identification"
         title="Identification"
       >
