@@ -6,6 +6,7 @@ import {
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Label } from "@sdh-project-services/nucleus-ui/dist/label";
 import { Panel } from "@sdh-project-services/nucleus-ui/dist/panel";
+import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewer";
 import Router from "next/router";
 import React, { FormEvent, useContext } from "react";
 import { BsPencilSquare } from "react-icons/bs";
@@ -18,6 +19,7 @@ import {
 import { Field } from "./field";
 import { Fields } from "./fields";
 import { createOperative as createOperativeMutation } from "./mutations.gql";
+import { UploadGallery } from "@sdh-project-services/nucleus-ui/dist/upload-gallery";
 
 function findValue(data: any = [], id: string) {
   const value = data.find((record: any) => record.id === id) || {};
@@ -45,6 +47,10 @@ export function Form() {
       localStorage.removeItem("new-starter");
     }
   };
+
+  const qualificationsText = `${qualificationsUploaded} Photo${
+    qualificationsUploaded > 1 ? "s" : ""
+  } Uploaded`;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -125,10 +131,7 @@ export function Form() {
             <BsPencilSquare className="flex-shrink-0 text-2xl text-gray-400" />
           </Anchor>
         </div>
-        <Field
-          label="Qualifications"
-          value={`${qualificationsUploaded} Photos Uploaded`}
-        />
+        <Field label="Qualifications" value={qualificationsText} />
       </Panel>
 
       <Panel className="mt-4">
@@ -138,7 +141,18 @@ export function Form() {
             <BsPencilSquare className="flex-shrink-0 text-2xl text-gray-400" />
           </Anchor>
         </div>
-        <Field label="My Photo" value="" />
+        <div className="h-44">
+          <UploadViewer id={values.photoUpload}>
+            {({ data = {} }) => (
+              <img
+                alt="Upload"
+                className="max-h-full"
+                src={data.presignedUrl}
+              />
+            )}
+          </UploadViewer>
+        </div>
+
         <div className="clearfix" />
       </Panel>
       <Panel className="mt-4">
