@@ -31,7 +31,7 @@ export function Form() {
   const handleFormSubmit = (data: NewStarterMyPhotoFormData) => {
     submitStep(data);
   };
-
+  const uploadData = photoUpload ? [photoUpload] : undefined;
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
       <div className="mt-8">
@@ -40,7 +40,7 @@ export function Form() {
           error={errors.photoUpload as any}
           onChange={handleChange}
           tags={["operativeQualification", "public"]}
-          uploads={[photoUpload]}
+          uploads={uploadData}
         >
           <UploadGallery />
         </UploadDropzone>

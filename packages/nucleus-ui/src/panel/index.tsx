@@ -6,6 +6,8 @@ export function Panel({
   className = "",
 }: PropsWithChildren<PanelProps>) {
   return (
-    <div className={`p-4 border border-gray-300 ${className}`}>{children}</div>
+    <div className={`p-4 border border-gray-300 rounded ${className}`}>
+      {children}
+    </div>
   );
 }
