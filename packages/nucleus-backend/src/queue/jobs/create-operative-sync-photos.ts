@@ -11,13 +11,13 @@ function getUploadExtension(upload: UploadEntity) {
 
 export async function createOperativeSyncPhotos(operativeId: string) {
   const api = env.SERVICE_NEW_STARTER_MS_GRAPH_SYNC_FILES_API;
-  const newFileApi = `${api}:/children`;
   const accessKey = env.AWS_UPLOAD_ACCESS_KEY;
   const accessSecret = env.AWS_UPLOAD_ACCESS_SECRET;
   const bucket = env.AWS_UPLOAD_BUCKET;
   const endpoint = env.AWS_UPLOAD_ENDPOINT;
+  const promises: Array<Promise<void>> = [];
+  const newFileApi = `${api}:/children`;
   const client = getMSGraphClient();
-  const promises = [];
   let idCount = 0;
 
   if (api === undefined) {
@@ -95,19 +95,25 @@ export async function createOperativeSyncPhotos(operativeId: string) {
 
     let { name: idName = "Identification" } = identification;
     idName = idName.replace("/", " ");
-    uploads.forEach(async (id: string) => {
-      const uploadEntity = await UploadEntity.findOneOrFail(id);
-      const extension = getUploadExtension(uploadEntity);
-      promises.push(upload(id, `${idName} ${(idCount += 1)}${extension}`));
-    });
+
+    promises.concat(
+      uploads.map(async (id: string) => {
+        const uploadEntity = await UploadEntity.findOneOrFail(id);
+        const extension = getUploadExtension(uploadEntity);
+        idCount += 1;
+        return upload(id, `${idName} ${idCount}${extension}`);
+      })
+    );
   });
 
   const { qualificationUploadIds = [] } = operative;
-  qualificationUploadIds.forEach(async (id: string, index: number) => {
-    const uploadEntity = await UploadEntity.findOneOrFail(id);
-    const extension = getUploadExtension(uploadEntity);
-    promises.push(upload(id, `Qualification ${index + 1}${extension}`));
-  });
+  promises.concat(
+    qualificationUploadIds.map(async (id: string, index: number) => {
+      const uploadEntity = await UploadEntity.findOneOrFail(id);
+      const extension = getUploadExtension(uploadEntity);
+      return upload(id, `Qualification ${index + 1}${extension}`);
+    })
+  );
 
   return Promise.all(promises);
 }
