@@ -5,6 +5,7 @@ import {
   SecondaryButton,
 } from "@sdh-project-services/nucleus-ui/dist/button";
 import { Panel } from "@sdh-project-services/nucleus-ui/dist/panel";
+import Router from "next/router";
 import React, { FormEvent, useContext } from "react";
 import { Anchor } from "../../../components/anchor";
 import { Context } from "../../../layouts/new-starter/context";
@@ -38,8 +39,8 @@ export function Form() {
     });
 
     if (errors === undefined) {
-      // Router.push("/new-starter/confirmation");
-      // localStorage.removeItem("new-starter");
+      Router.push("/new-starter/confirmation");
+      localStorage.removeItem("new-starter");
     }
   };
 
