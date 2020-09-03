@@ -28,7 +28,7 @@ it("checks auth", async () => {
     context: await getMockAuthenticatedAppContext(),
   } as ResolverData<AuthenticatedAppContext>;
 
-  await checkAuth(resolverData);
+  await checkAuth(resolverData, []);
   expect(resolverData.context.user).toMatchObject(user);
 });
 

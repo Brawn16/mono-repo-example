@@ -1,3 +1,4 @@
+import { env } from "process";
 import { S3 } from "aws-sdk";
 import { createSandbox } from "sinon";
 import { UploadEntity } from "../../../shared/entity/upload.entity";
@@ -10,6 +11,11 @@ afterEach(async () => restore());
 it("creates a presigned upload", async () => {
   const upload = new UploadEntity();
   upload.id = "id";
+
+  env.AWS_UPLOAD_ACCESS_KEY = "";
+  env.AWS_UPLOAD_ACCESS_SECRET = "";
+  env.AWS_UPLOAD_BUCKET = "";
+  env.AWS_UPLOAD_ENDPOINT = "";
 
   const { save } = stubEntity(stub, UploadEntity, [upload]);
   stub(S3.prototype, "createPresignedPost").yields(undefined, {

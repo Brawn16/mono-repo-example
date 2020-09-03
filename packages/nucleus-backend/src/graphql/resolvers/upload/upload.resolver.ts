@@ -20,6 +20,7 @@ export class UploadResolver {
     const accessSecret = env.AWS_UPLOAD_ACCESS_SECRET;
     const bucket = env.AWS_UPLOAD_BUCKET;
     const endpoint = env.AWS_UPLOAD_ENDPOINT;
+
     if (
       accessKey === undefined ||
       accessSecret === undefined ||
