@@ -80,47 +80,37 @@ export async function createOperativeSyncPhotos(operativeId: string) {
 
   let i = 0;
 
-  const identificationsPromises = () => {
-    if (operative.identifications && operative.identifications) {
-      operative.identifications.forEach((operativeIdentification) => {
-        if (
-          operativeIdentification.uploads &&
-          operativeIdentification.identification
-        ) {
-          const identificationName =
-            operativeIdentification.identification.name || "";
-          operativeIdentification.uploads.forEach(async (item: string) => {
-            const entity = await UploadEntity.findOne(item);
-            i += 1;
-            const fileExtension =
-              entity && entity.name && entity.name.split(".")[1];
-
-            promises.push(
-              upload(
-                item,
-                `${identificationName.replace("/", " ")} ${i}.${fileExtension}`
-              )
-            );
-          });
-        }
-      });
+  const operativeIdentifications = operative.identifications || [];
+  operativeIdentifications.forEach((operativeIdentification) => {
+    if (
+      operativeIdentification.uploads === undefined ||
+      operativeIdentification.identification === undefined
+    ) {
+      return;
     }
-  };
+    const identificationName =
+      operativeIdentification.identification.name || "";
+    operativeIdentification.uploads.forEach(async (item: string) => {
+      const entity = await UploadEntity.findOne(item);
+      i += 1;
+      const fileExtension = entity && entity.name && entity.name.split(".")[1];
 
-  const qualificationsPromises = () => {
-    if (operative.qualificationUploadIds) {
-      operative.qualificationUploadIds.forEach(
-        (qualification: string, index: number) => {
-          promises.push(
-            upload(qualification, `Qualification ${index + 1}.jpg`)
-          );
-        }
+      promises.push(
+        upload(
+          item,
+          `${identificationName.replace("/", " ")} ${i}.${fileExtension}`
+        )
       );
-    }
-  };
+    });
+  });
 
-  identificationsPromises();
-  qualificationsPromises();
+  if (operative.qualificationUploadIds) {
+    operative.qualificationUploadIds.forEach(
+      (qualification: string, index: number) => {
+        promises.push(upload(qualification, `Qualification ${index + 1}.jpg`));
+      }
+    );
+  }
 
   return Promise.all(promises);
 }
