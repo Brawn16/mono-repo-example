@@ -7,11 +7,18 @@ import { getMSGraphClient } from "../../shared/ms-graph/client";
 export async function createOperativeSyncPhotos(operativeId: string) {
   const api = env.SERVICE_NEW_STARTER_MS_GRAPH_SYNC_FILES_API;
   const newFileApi = `${api}:/children`;
-
   const accessKey = env.AWS_UPLOAD_ACCESS_KEY;
   const accessSecret = env.AWS_UPLOAD_ACCESS_SECRET;
   const bucket = env.AWS_UPLOAD_BUCKET;
   const endpoint = env.AWS_UPLOAD_ENDPOINT;
+  const client = getMSGraphClient();
+  const promises = [];
+  let idCount = 0;
+
+  if (api === undefined) {
+    throw new Error("MS Graph file creation is not configured.");
+  }
+
   if (
     accessKey === undefined ||
     accessSecret === undefined ||
@@ -29,10 +36,6 @@ export async function createOperativeSyncPhotos(operativeId: string) {
     endpoint,
   });
 
-  if (api === undefined) {
-    throw new Error("MS Graph file creation is not configured.");
-  }
-
   const operative = await OperativeEntity.findOneOrFail(operativeId, {
     relations: [
       "identifications",
@@ -41,14 +44,14 @@ export async function createOperativeSyncPhotos(operativeId: string) {
     ],
   });
 
-  const client = getMSGraphClient();
-
+  // Create folder
   const response = await client.api(newFileApi).post({
     name: operative.email,
     folder: {},
     "@microsoft.graph.conflictBehavior": "rename",
   });
 
+  // Upload file to folder
   const upload = async (Key: string, name: string) => {
     const stream = await new Promise((resolve, reject) => {
       s3.getObject(
@@ -72,44 +75,33 @@ export async function createOperativeSyncPhotos(operativeId: string) {
       .put(stream);
   };
 
-  const selfiePromise =
-    operative.photoUpload &&
-    upload(operative.photoUpload.id as string, "Selfie.jpg");
-
-  const promises = [selfiePromise];
-
-  let i = 0;
+  // Upload photo
+  const { photoUpload } = operative;
+  if (photoUpload) {
+    const { id = "", name = "" } = photoUpload;
+    const extension = name.slice(name.lastIndexOf("."));
+    promises.push(upload(id, `Photo${extension}`));
+  }
 
   const operativeIdentifications = operative.identifications || [];
-  operativeIdentifications.forEach((operativeIdentification) => {
-    if (
-      operativeIdentification.uploads === undefined ||
-      operativeIdentification.identification === undefined
-    ) {
+  operativeIdentifications.forEach(({ identification, uploads }) => {
+    if (identification === undefined || uploads === undefined) {
       return;
     }
-    const identificationName =
-      operativeIdentification.identification.name || "";
-    operativeIdentification.uploads.forEach(async (item: string) => {
-      const entity = await UploadEntity.findOne(item);
-      i += 1;
-      const fileExtension = entity && entity.name && entity.name.split(".")[1];
 
-      promises.push(
-        upload(
-          item,
-          `${identificationName.replace("/", " ")} ${i}.${fileExtension}`
-        )
-      );
+    let { name: idName = "Identification" } = identification;
+    idName = idName.replace("/", " ");
+    uploads.forEach(async (id: string) => {
+      const { name = "" } = await UploadEntity.findOneOrFail(id);
+      const extension = name.slice(name.lastIndexOf("."));
+      promises.push(upload(id, `${idName} ${(idCount += 1)}${extension}`));
     });
   });
 
-  if (operative.qualificationUploadIds) {
-    operative.qualificationUploadIds.forEach(
-      (qualification: string, index: number) => {
-        promises.push(upload(qualification, `Qualification ${index + 1}.jpg`));
-      }
-    );
-  }
+  const { qualificationUploadIds = [] } = operative;
+  qualificationUploadIds.forEach((id: string, index: number) => {
+    promises.push(upload(id, `Qualification ${index + 1}.jpg`));
+  });
+
   return Promise.all(promises);
 }
