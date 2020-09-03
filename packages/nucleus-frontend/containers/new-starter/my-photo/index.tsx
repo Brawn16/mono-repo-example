@@ -12,7 +12,7 @@ export function MyPhoto() {
         To create your worker profile we will need your photo:
         <Panel className="mt-4 grid grid-cols-2 gap-4">
           <div>
-            <div className="font-bold">The photo must:</div>
+            <strong>The photo must:</strong>
             <ul className="pl-4  text-gray-500 list-disc">
               <li>contain no other objects or people</li>
               <li>be taken against a plain light-coloured background</li>
@@ -20,7 +20,7 @@ export function MyPhoto() {
             </ul>
           </div>
           <div>
-            <div className="font-bold">And you must:</div>
+            <strong>And you must:</strong>
             <ul className="text-gray-500 list-disc pl-4s">
               <li>be facing forwards and looking straight at the camera</li>
               <li>have a plain expression and your mouth closed</li>
