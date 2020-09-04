@@ -9,6 +9,7 @@ export interface SelectProps
   className?: string;
   componentRef?: Ref<HTMLSelectElement>;
   error?: FieldError;
+  help?: string;
   label?: string;
   name: string;
   options: SelectOption[];

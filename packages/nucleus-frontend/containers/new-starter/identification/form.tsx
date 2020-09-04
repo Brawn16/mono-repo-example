@@ -1,21 +1,27 @@
+import { useQuery } from "@apollo/client";
 import { Select } from "@sdh-project-services/nucleus-ui/dist/select";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Context } from "../../../layouts/new-starter/context";
 import { Navigation } from "../../../layouts/new-starter/navigation";
-import { proofOfAddress, rightToWork } from "./options";
+import { identifications as identificationsQuery } from "./queries.gql";
 import { NewStarterIdentificationFormData } from "./types";
-import { Upload } from "./upload";
+import { Uploads } from "./uploads";
 
-function validate(value?: string[]) {
-  if (value === undefined || value.length === 0) {
-    return "Identification is required";
+function validate(uploads?: Array<string | undefined>) {
+  if (
+    uploads === undefined ||
+    uploads.length === 0 ||
+    uploads.includes(undefined)
+  ) {
+    return "Please provide all required photos";
   }
 
   return true;
 }
 
 export function Form() {
+  const { data: types }: any = useQuery(identificationsQuery);
   const { submitStep, values } = useContext(Context);
   const {
     clearErrors,
@@ -31,20 +37,42 @@ export function Form() {
   register({ name: "identifications[0].uploads" }, { validate });
   register({ name: "identifications[1].uploads" }, { validate });
   register(
-    { name: "identifications[0].type" },
+    { name: "identifications[0].identification" },
     { required: "Please select an ID type" }
   );
   register(
-    { name: "identifications[1].type" },
+    { name: "identifications[1].identification" },
     { required: "Please select a proof of address" }
   );
 
-  watch(["identifications[0].type", "identifications[1].type"]);
+  watch([
+    "identifications[0].identification",
+    "identifications[1].identification",
+    "identifications[0].uploads",
+    "identifications[1].uploads",
+  ]);
 
-  const idOneType: string = getValues("identifications[0].type");
+  const idOneType: string = getValues("identifications[0].identification");
+  const idTwoType: string = getValues("identifications[1].identification");
   const idOneUploads: string[] = getValues("identifications[0].uploads");
-  const idTwoType: string = getValues("identifications[1].type");
   const idTwoUploads: string[] = getValues("identifications[1].uploads");
+
+  const getOptions = (dropdownType: string) => {
+    return types.identifications
+      .filter(({ type }: any) => type === dropdownType)
+      .map(({ id, name }: any) => ({
+        label: name,
+        value: id,
+      }));
+  };
+
+  const getUploadTypes = (identification: string) => {
+    const type = types.identifications.find(
+      ({ id }: any) => id === identification
+    );
+
+    return type === undefined ? [] : type.uploadTypes;
+  };
 
   const handleChange = (name: string, value: string | string[]) => {
     clearErrors(name);
@@ -57,44 +85,53 @@ export function Form() {
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
-      <Select
-        error={idOneError && idOneError.type}
-        label="Select an ID type to upload"
-        name="identifications[0].type"
-        onChange={({ target: { name, value } }) => handleChange(name, value)}
-        options={rightToWork}
-        value={idOneType}
-      />
-      {idOneType && (
-        <Upload
-          error={idOneError && (idOneError.uploads as any)}
-          onChange={(uploads) =>
-            handleChange("identifications[0].uploads", uploads)
-          }
-          options={rightToWork}
-          type={idOneType}
-          uploads={idOneUploads}
-        />
-      )}
-      <Select
-        className="mt-8"
-        error={idTwoError && idTwoError.type}
-        label="Select a proof of address to upload"
-        name="identifications[1].type"
-        onChange={({ target: { name, value } }) => handleChange(name, value)}
-        options={proofOfAddress}
-        value={idTwoType}
-      />
-      {idTwoType && (
-        <Upload
-          error={idTwoError && (idTwoError.uploads as any)}
-          onChange={(uploads) =>
-            handleChange("identifications[1].uploads", uploads)
-          }
-          options={proofOfAddress}
-          type={idTwoType}
-          uploads={idTwoUploads}
-        />
+      {types && (
+        <>
+          <Select
+            error={idOneError && idOneError.identification}
+            label="Select an ID type to upload"
+            name="identifications[0].identification"
+            onChange={({ target: { name, value } }) => {
+              handleChange(name, value);
+              setValue("identifications[0].uploads", undefined);
+            }}
+            options={getOptions("id")}
+            value={idOneType}
+          />
+          {idOneType && (
+            <Uploads
+              error={idOneError && (idOneError.uploads as any)}
+              onChange={(uploads) =>
+                handleChange("identifications[0].uploads", uploads)
+              }
+              uploads={idOneUploads}
+              uploadTypes={getUploadTypes(idOneType)}
+            />
+          )}
+          <Select
+            className="mt-8"
+            error={idTwoError && idTwoError.identification}
+            help="If you have a UK driving licence, please use this as your proof of address."
+            label="Select a proof of address to upload"
+            name="identifications[1].identification"
+            onChange={({ target: { name, value } }) => {
+              handleChange(name, value);
+              setValue("identifications[1].uploads", undefined);
+            }}
+            options={getOptions("address")}
+            value={idTwoType}
+          />
+          {idTwoType && (
+            <Uploads
+              error={idTwoError && (idTwoError.uploads as any)}
+              onChange={(uploads) =>
+                handleChange("identifications[1].uploads", uploads)
+              }
+              uploads={idTwoUploads}
+              uploadTypes={getUploadTypes(idTwoType)}
+            />
+          )}
+        </>
       )}
       <Navigation />
     </form>

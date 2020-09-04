@@ -53,7 +53,7 @@ function renderStep({ href, label }: NewStarterStep, index: number) {
   // Parse anchor classes
   let className = "flex";
   if (asPath === href) {
-    className += " font-extrabold";
+    className += " font-extrabold text-xl";
   }
 
   return (
@@ -133,7 +133,7 @@ export function NewStarter({
           </div>
         )}
         <div className="flex flex-col flex-1 md:overflow-auto">
-          <div className="flex-1 max-w-3xl p-8 pb-0">
+          <div className="flex-1 max-w-4xl p-8 pb-0">
             {backHref && (
               <Anchor className="block mb-4" href={backHref}>
                 &lt; <span className="underline">Back</span>

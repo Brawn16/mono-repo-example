@@ -18,7 +18,6 @@ export async function createOperativeSyncPhotos(operativeId: string) {
   const promises: Array<Promise<void>> = [];
   const newFileApi = `${api}:/children`;
   const client = getMSGraphClient();
-  let idCount = 0;
 
   if (api === undefined) {
     throw new Error("MS Graph file creation is not configured.");
@@ -97,11 +96,10 @@ export async function createOperativeSyncPhotos(operativeId: string) {
     idName = idName.replace("/", " ");
 
     promises.concat(
-      uploads.map(async (id: string) => {
+      uploads.map(async (id: string, index: number) => {
         const uploadEntity = await UploadEntity.findOneOrFail(id);
         const extension = getUploadExtension(uploadEntity);
-        idCount += 1;
-        return upload(id, `${idName} ${idCount}${extension}`);
+        return upload(id, `${idName} ${index + 1}${extension}`);
       })
     );
   });

@@ -5,21 +5,19 @@ export interface NewStarterIdentificationFormData {
 }
 
 export interface NewStarterIdentificationFormDataIdentification {
-  type: string;
-  uploads: string[];
+  identification: string;
+  uploads: Array<string | undefined>;
 }
 
 export interface NewStarterIdentificationOption {
-  help: string;
   label: string;
-  requiredUploads: number;
+  uploadTypes: string[];
   value: string;
 }
 
 export interface UploadProps {
   error?: FieldError;
   onChange: (uploads: string[]) => void;
-  options: NewStarterIdentificationOption[];
-  type: string;
-  uploads?: string[];
+  uploads?: Array<string | undefined>;
+  uploadTypes: string[];
 }
