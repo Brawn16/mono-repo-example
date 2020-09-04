@@ -8,7 +8,7 @@ export function Button(props: PropsWithChildren<ButtonProps>) {
   } = props;
 
   className +=
-    " relative px-6 py-2 focus:outline-none duration-150 ease-in-out transition";
+    " relative px-8 py-3 font-montserrat focus:outline-none duration-150 ease-in-out transition";
 
   if (disabled) {
     className += " opacity-50 cursor-not-allowed";

@@ -33,8 +33,8 @@ function renderAddress(values: { [key: string]: any }) {
 function renderField(label: string, value?: string) {
   return (
     <div className="grid grid-cols-2 gap-4">
-      <strong>{label}</strong>
-      <div>{value}</div>
+      <strong className="truncate">{label}</strong>
+      <div className="truncate">{value}</div>
     </div>
   );
 }
@@ -152,7 +152,7 @@ export function Form() {
             values.medicationRequiredNotes
           )}
       </Panel>
-      <Navigation />
+      <Navigation nextLabel="Submit" />
     </form>
   );
 }

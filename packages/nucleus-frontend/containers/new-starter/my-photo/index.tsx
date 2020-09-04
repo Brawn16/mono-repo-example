@@ -21,7 +21,7 @@ export function MyPhoto() {
       <Head title="Your Photo - New Starter Form" />
       <NewStarterLayout header={header} title="My Photo">
         <Panel className="mt-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="md:grid grid-cols-2 gap-4">
             <div>
               <strong>The photo must:</strong>
               <ul className="pl-4  text-gray-500 list-disc">
@@ -30,7 +30,7 @@ export function MyPhoto() {
                 <li>be in clear contrast to the background</li>
               </ul>
             </div>
-            <div>
+            <div className="mt-4 md:mt-0">
               <strong>And you must:</strong>
               <ul className="pl-4 text-gray-500 list-disc">
                 <li>be facing forwards and looking straight at the camera</li>

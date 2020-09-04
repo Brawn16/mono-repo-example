@@ -31,7 +31,7 @@ export function Form() {
           required
         />
         <Input
-          className="md:ml-4 md:w-1/2"
+          className="mt-4 md:ml-4 md:mt-0 md:w-1/2"
           componentRef={register({
             required: "Last name is required",
           })}

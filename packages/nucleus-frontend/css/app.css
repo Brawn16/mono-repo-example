@@ -9,3 +9,7 @@ body {
 
   @apply antialiased text-base;
 }
+
+.form-input {
+  @apply px-4 py-3;
+}
