@@ -9,7 +9,7 @@ import {
   subcontractors as subcontractorsQuery,
   workstreams as workstreamsQuery,
 } from "../work-details/queries.gql";
-import { square } from "./file.module.css";
+import { square } from "./form.module.css";
 import { createOperative as createOperativeMutation } from "./mutations.gql";
 import { Panel } from "./panel";
 
