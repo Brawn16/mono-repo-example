@@ -1,5 +1,5 @@
 import { Select } from "@sdh-project-services/nucleus-ui/dist/select";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Context } from "../../../layouts/new-starter/context";
 import { Navigation } from "../../../layouts/new-starter/navigation";
@@ -30,6 +30,15 @@ export function Form() {
 
   register({ name: "identifications[0].uploads" }, { validate });
   register({ name: "identifications[1].uploads" }, { validate });
+  register(
+    { name: "identifications[0].type" },
+    { required: "Please select an ID type" }
+  );
+  register(
+    { name: "identifications[1].type" },
+    { required: "Please select a proof of address" }
+  );
+
   watch(["identifications[0].type", "identifications[1].type"]);
 
   const idOneType: string = getValues("identifications[0].type");
@@ -37,13 +46,9 @@ export function Form() {
   const idTwoType: string = getValues("identifications[1].type");
   const idTwoUploads: string[] = getValues("identifications[1].uploads");
 
-  useEffect(() => {
-    setValue("identifications[0].type", getValues("identifications[0].type"));
-  }, []);
-
-  const handleChange = (name: string, uploads: string[]) => {
+  const handleChange = (name: string, value: string | string[]) => {
     clearErrors(name);
-    setValue(name, uploads);
+    setValue(name, value);
   };
 
   const handleFormSubmit = (data: NewStarterIdentificationFormData) => {
@@ -53,13 +58,12 @@ export function Form() {
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
       <Select
-        componentRef={register({
-          required: "Please select an ID type",
-        })}
         error={idOneError && idOneError.type}
         label="Select an ID type to upload"
         name="identifications[0].type"
+        onChange={({ target: { name, value } }) => handleChange(name, value)}
         options={rightToWork}
+        value={idOneType}
       />
       {idOneType && (
         <Upload
@@ -74,13 +78,12 @@ export function Form() {
       )}
       <Select
         className="mt-8"
-        componentRef={register({
-          required: "Please select a proof of address",
-        })}
         error={idTwoError && idTwoError.type}
         label="Select a proof of address to upload"
         name="identifications[1].type"
+        onChange={({ target: { name, value } }) => handleChange(name, value)}
         options={proofOfAddress}
+        value={idTwoType}
       />
       {idTwoType && (
         <Upload
