@@ -23,7 +23,7 @@ export function Form() {
   };
 
   const handleFormSubmit = (data: NewStarterQualificationsFormData) => {
-    submitStep(5, data);
+    submitStep(data);
   };
 
   return (

@@ -105,7 +105,7 @@ export function UploadDropzone(props: PropsWithChildren<UploadDropzoneProps>) {
         <PrimaryButton>Choose photos</PrimaryButton>
       </div>
       {error && <InputError error={error} />}
-      {files[0] && renderedChildren}
+      {renderedChildren}
     </>
   );
 }

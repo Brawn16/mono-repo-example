@@ -35,6 +35,7 @@ export function Input(props: InputProps) {
   delete inputProperties.className;
   delete inputProperties.componentRef;
   delete inputProperties.error;
+  delete inputProperties.help;
   delete inputProperties.iconType;
   delete inputProperties.positionIconLeft;
   delete inputProperties.required;

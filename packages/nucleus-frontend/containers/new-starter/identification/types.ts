@@ -9,9 +9,17 @@ export interface NewStarterIdentificationFormDataIdentification {
   uploads: string[];
 }
 
+export interface NewStarterIdentificationOption {
+  help: string;
+  label: string;
+  requiredUploads: number;
+  value: string;
+}
+
 export interface UploadProps {
   error?: FieldError;
-  onChange: (name: string, value: string[]) => void;
-  name: string;
-  values?: string[];
+  onChange: (uploads: string[]) => void;
+  options: NewStarterIdentificationOption[];
+  type: string;
+  uploads?: string[];
 }

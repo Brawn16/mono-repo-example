@@ -21,7 +21,7 @@ export function NewStarter() {
       <NewStarterLayout header={header} title="Preparation">
         <Panel>
           <div className="flex">
-            <FaPassport className="flex-shrink-0 text-5xl text-gray-400" />
+            <FaPassport className="flex-shrink-0 hidden text-5xl text-gray-400 md:block" />
             <div className="ml-4">
               <strong>At least one of the following:</strong>
               <ul className="pl-8 mt-2 text-gray-500 list-disc space-y-2">
@@ -38,9 +38,9 @@ export function NewStarter() {
             </div>
           </div>
         </Panel>
-        <Panel className="my-4">
+        <Panel className="my-8">
           <div className="flex">
-            <FaFile className="flex-shrink-0 text-5xl text-gray-400" />
+            <FaFile className="flex-shrink-0 hidden text-5xl text-gray-400 md:block" />
             <div className="ml-4">
               <strong>At least one of the following:</strong>
               <ul className="pl-8 mt-2 text-gray-500 list-disc space-y-2">
@@ -54,7 +54,7 @@ export function NewStarter() {
         </Panel>
         <Panel>
           <div className="flex">
-            <FaAward className="flex-shrink-0 text-5xl text-gray-400" />
+            <FaAward className="flex-shrink-0 hidden text-5xl text-gray-400 md:block" />
             <strong className="ml-4">
               All relevant qualifications and training information
             </strong>

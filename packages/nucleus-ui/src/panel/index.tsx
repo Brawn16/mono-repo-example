@@ -1,4 +1,5 @@
 import React, { PropsWithChildren } from "react";
+import { panel } from "./index.module.css";
 import { PanelProps } from "./types";
 
 export function Panel({
@@ -6,8 +7,10 @@ export function Panel({
   className = "",
 }: PropsWithChildren<PanelProps>) {
   return (
-    <div className={`p-4 border border-gray-300 rounded ${className}`}>
-      {children}
+    <div className={`${panel} ${className}`}>
+      <div className="p-4 border border-t-0 border-gray-300 rounded-b">
+        {children}
+      </div>
     </div>
   );
 }

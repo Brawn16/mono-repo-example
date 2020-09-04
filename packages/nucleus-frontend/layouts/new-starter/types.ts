@@ -1,5 +1,9 @@
 import { ReactNode } from "react";
 
+export interface NavigationProps {
+  nextLabel?: string;
+}
+
 export interface NewStarterFormContext {
   submitStep: (step: number, values: any) => void;
   values: { [key: string]: any };

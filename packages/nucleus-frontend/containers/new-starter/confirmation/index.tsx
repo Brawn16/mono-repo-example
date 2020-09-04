@@ -6,7 +6,7 @@ export function Confirmation() {
   return (
     <>
       <Head title="Confirmation - New Starter Form" />
-      <NewStarterLayout showSteps={false} title="Confirmation">
+      <NewStarterLayout showSteps={false} title="New Starter Confirmation">
         Congratulations. You have now completed the Online Onboarding We are
         dealing with your application and will notify you of the outcome via
         contact details provided within X working days.

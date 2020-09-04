@@ -1,4 +1,4 @@
-export interface PreparationProps {
+export interface NewStarterIndexFormData {
   acceptedRequiredDocs?: boolean;
   acceptedTermsConsent?: boolean;
 }
