@@ -8,6 +8,7 @@ export function UploadViewer({ children, id }: UploadViewerProps) {
     createPresignedUploadUrl?: UploadViewerData;
   }>(createPresignedUploadUrlQuery, {
     errorPolicy: "all",
+    fetchPolicy: "no-cache",
     variables: { id },
   });
   const { createPresignedUploadUrl } = data || {};

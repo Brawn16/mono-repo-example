@@ -23,15 +23,18 @@ export function File({ file: { file, id }, index }: UploadGalleryFileProps) {
   const { onDelete } = useContext(Context);
 
   return (
-    <div className={square}>
-      {id && <UploadViewer id={id}>{renderUploadDetails}</UploadViewer>}
-      {file && <UploadProgress file={file} />}
+    <div>
+      <div className={square}>
+        {id && <UploadViewer id={id}>{renderUploadDetails}</UploadViewer>}
+        {file && <UploadProgress file={file} />}
+      </div>
       <button
-        className="absolute bottom-0 right-0 p-2 -mb-4 -mr-4 text-sm text-white bg-blue-600 rounded-full focus:outline-none duration-150 ease-in-out transition hover:bg-blue-500 focus:bg-blue-500"
+        className="flex items-center mt-1 text-sm hover:text-gray-800 focus:outline-none duration-150 ease-in-out transition"
         onClick={() => onDelete(index)}
         type="button"
       >
         <FaTrash />
+        <span className="pl-1 underline">Remove file</span>
       </button>
     </div>
   );

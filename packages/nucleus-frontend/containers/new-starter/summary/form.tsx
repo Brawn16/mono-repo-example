@@ -124,11 +124,11 @@ export function Form() {
       >
         {renderField(
           "Identification",
-          identifications[0] && identifications[0].type
+          identifications[0] && identifications[0].identification
         )}
         {renderField(
           "Proof of Address",
-          identifications[1] && identifications[1].type
+          identifications[1] && identifications[1].identification
         )}
       </Panel>
       <Panel

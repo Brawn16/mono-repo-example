@@ -1,0 +1,8 @@
+query identifications {
+  identifications {
+    id
+    name
+    type
+    uploadTypes
+  }
+}

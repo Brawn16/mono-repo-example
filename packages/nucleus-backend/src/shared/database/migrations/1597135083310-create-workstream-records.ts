@@ -1,19 +1,17 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
-import { WorkstreamEntity } from "../../entity/workstream.entity";
 
 export class CreateWorkstreamRecords1597135083310
   implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.connection
-      .createQueryBuilder()
-      .insert()
-      .into(WorkstreamEntity)
-      .values([
-        { name: "BT Openreach" },
-        { name: "City Fibre" },
-        { name: "Morrison Utility Services" },
-      ])
-      .execute();
+    await queryRunner.query(
+      `INSERT INTO "workstream" ("name") VALUES('BT Openreach')`
+    );
+    await queryRunner.query(
+      `INSERT INTO "workstream" ("name") VALUES('City Fibre')`
+    );
+    await queryRunner.query(
+      `INSERT INTO "workstream" ("name") VALUES('Morrison Utility Services')`
+    );
   }
 
   public async down(): Promise<void> {

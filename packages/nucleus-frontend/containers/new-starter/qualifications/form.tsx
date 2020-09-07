@@ -32,6 +32,7 @@ export function Form() {
       <UploadDropzone
         accept="image/*"
         error={errors.qualificationUploadIds as any}
+        fileLabel="photo"
         multiple
         onChange={handleChange}
         tags={["operativeQualification", "public"]}

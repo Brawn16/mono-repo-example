@@ -22,6 +22,12 @@ export function UploadDropzone(props: PropsWithChildren<UploadDropzoneProps>) {
     uploads.map((id) => ({ id }))
   );
 
+  // Build file label
+  let { fileLabel = "file" } = props;
+  if (multiple) {
+    fileLabel += "s";
+  }
+
   // Build error classes
   let errorClassName = "";
   if (error) {
@@ -75,6 +81,7 @@ export function UploadDropzone(props: PropsWithChildren<UploadDropzoneProps>) {
     <Context.Provider
       value={{
         files,
+        fileLabel,
         multiple,
         onDelete: handleDelete,
         onDeleteAll: handleDeleteAll,
@@ -101,8 +108,10 @@ export function UploadDropzone(props: PropsWithChildren<UploadDropzoneProps>) {
         className={`flex flex-col items-center p-6 bg-gray-100 border-2 border-dashed rounded cursor-pointer focus:outline-none focus:border-gray-400 focus:bg-gray-200 ${errorClassName}`}
       >
         <FaCloudUploadAlt className="text-6xl text-gray-400" />
-        <div className="pb-4">Drag photos to upload, or</div>
-        <PrimaryButton>Choose photos</PrimaryButton>
+        <div className="pb-4">
+          Drag {multiple ? "files" : "file"} to upload, or
+        </div>
+        <PrimaryButton>Choose {fileLabel}</PrimaryButton>
       </div>
       {error && <InputError error={error} />}
       {renderedChildren}
