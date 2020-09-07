@@ -1,5 +1,6 @@
 export { AuthResolver } from "./auth/auth.resolver";
 export { AddressLookupResolver } from "./address-lookup/address-lookup.resolver";
+export { IdentificationResolver } from "./identification/identification.resolver";
 export { OperativeResolver } from "./operative/operative.resolver";
 export { SubcontractorResolver } from "./subcontractor/subcontractor.resolver";
 export { UploadResolver } from "./upload/upload.resolver";

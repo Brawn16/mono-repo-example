@@ -1,6 +1,7 @@
 import React from "react";
 import { FaCaretDown, FaCaretUp } from "react-icons/fa";
 import { InputError } from "../input-error";
+import { InputHelp } from "../input-help";
 import { Label } from "../label";
 import { SelectProps, SelectOption } from "./types";
 
@@ -17,6 +18,7 @@ export function Select(props: SelectProps) {
     className,
     componentRef,
     error,
+    help,
     label,
     name,
     options,
@@ -61,6 +63,7 @@ export function Select(props: SelectProps) {
           </div>
         </div>
       </div>
+      {help && error === undefined && <InputHelp help={help} />}
       {error && <InputError error={error} />}
     </div>
   );
