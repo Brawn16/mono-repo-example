@@ -25,7 +25,7 @@ function findValue(data: any = [], id: string) {
 function renderField(label: string, value?: string) {
   return (
     <div className="py-1 grid grid-cols-2 gap-4">
-      <strong className="truncate font-montserrats">{label}</strong>
+      <strong className="truncate">{label}</strong>
       <div className="text-gray-600 truncate">{value}</div>
     </div>
   );
@@ -81,7 +81,7 @@ function renderIdentification(
   const { type, uploads } = identification;
   return (
     <div className="py-1 grid grid-cols-2 gap-4">
-      <strong className="truncate font-montserrats">{label}</strong>
+      <strong className="truncate">{label}</strong>
       <div className="text-gray-600">
         <p className="truncate">{type}</p>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
