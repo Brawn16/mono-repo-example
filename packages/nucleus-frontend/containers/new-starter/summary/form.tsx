@@ -12,7 +12,10 @@ import {
 import { square } from "./form.module.css";
 import { createOperative as createOperativeMutation } from "./mutations.gql";
 import { Panel } from "./panel";
-import { DesiredAddressProps } from "./types";
+import {
+  DesiredAddressProps,
+  RenderUploadsIndentificationProps,
+} from "./types";
 
 function findValue(data: any = [], id: string) {
   const value = data.find((record: any) => record.id === id) || {};
@@ -23,7 +26,7 @@ function renderField(label: string, value?: string) {
   return (
     <div className="py-1 grid grid-cols-2 gap-4">
       <strong className="truncate font-montserrats">{label}</strong>
-      <div className="text-gray-400 truncate">{value}</div>
+      <div className="text-gray-600 truncate">{value}</div>
     </div>
   );
 }
@@ -71,11 +74,30 @@ function renderUploads(uploads: string[]) {
   });
 }
 
+function renderIdentification(
+  label: string,
+  identification: RenderUploadsIndentificationProps
+) {
+  const { type, uploads } = identification;
+  return (
+    <div className="py-1 grid grid-cols-2 gap-4">
+      <strong className="truncate font-montserrats">{label}</strong>
+      <div className="text-gray-600">
+        <p className="truncate">{type}</p>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {renderUploads(uploads)}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function Form() {
   const { data: subcontractorsData = {} }: any = useQuery(subcontractorsQuery);
   const { data: workstreamsData = {} }: any = useQuery(workstreamsQuery);
   const { values } = useContext(Context);
   const { identifications = [], qualificationUploadIds = [] } = values;
+
   const [createOperative, { error }] = useMutation(createOperativeMutation, {
     errorPolicy: "all",
   });
@@ -122,14 +144,10 @@ export function Form() {
         href="/new-starter/identification"
         title="Identification"
       >
-        {renderField(
-          "Identification",
-          identifications[0] && identifications[0].identification
-        )}
-        {renderField(
-          "Proof of Address",
-          identifications[1] && identifications[1].identification
-        )}
+        {identifications[0] &&
+          renderIdentification("Identification", identifications[0])}
+        {identifications[1] &&
+          renderIdentification("Proof of Address", identifications[1])}
       </Panel>
       <Panel
         className="mt-8"
