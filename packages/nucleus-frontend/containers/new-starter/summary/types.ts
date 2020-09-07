@@ -12,8 +12,3 @@ export interface DesiredAddressProps {
   addressCounty: string;
   addressPostcode: string;
 }
-
-export interface RenderUploadsIndentificationProps {
-  type: string;
-  uploads: string[];
-}

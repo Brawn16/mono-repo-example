@@ -5,6 +5,7 @@ import Router from "next/router";
 import React, { FormEvent, useContext } from "react";
 import { Context } from "../../../layouts/new-starter/context";
 import { Navigation } from "../../../layouts/new-starter/navigation";
+import { identifications as identificationsQuery } from "../identification/queries.gql";
 import {
   subcontractors as subcontractorsQuery,
   workstreams as workstreamsQuery,
@@ -12,10 +13,7 @@ import {
 import { square } from "./form.module.css";
 import { createOperative as createOperativeMutation } from "./mutations.gql";
 import { Panel } from "./panel";
-import {
-  DesiredAddressProps,
-  RenderUploadsIndentificationProps,
-} from "./types";
+import { DesiredAddressProps } from "./types";
 
 function findValue(data: any = [], id: string) {
   const value = data.find((record: any) => record.id === id) || {};
@@ -76,14 +74,14 @@ function renderUploads(uploads: string[]) {
 
 function renderIdentification(
   label: string,
-  identification: RenderUploadsIndentificationProps
+  uploads: string[],
+  identification: string
 ) {
-  const { type, uploads } = identification;
   return (
     <div className="py-1 grid grid-cols-2 gap-4">
       <strong className="truncate">{label}</strong>
       <div className="text-gray-600">
-        <p className="truncate">{type}</p>
+        <p className="truncate">{identification}</p>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           {renderUploads(uploads)}
         </div>
@@ -95,6 +93,9 @@ function renderIdentification(
 export function Form() {
   const { data: subcontractorsData = {} }: any = useQuery(subcontractorsQuery);
   const { data: workstreamsData = {} }: any = useQuery(workstreamsQuery);
+  const { data: identificationsData = {} }: any = useQuery(
+    identificationsQuery
+  );
   const { values } = useContext(Context);
   const { identifications = [], qualificationUploadIds = [] } = values;
 
@@ -145,9 +146,23 @@ export function Form() {
         title="Identification"
       >
         {identifications[0] &&
-          renderIdentification("Identification", identifications[0])}
+          renderIdentification(
+            "Identification",
+            identifications[0].uploads,
+            findValue(
+              identificationsData.identifications,
+              identifications[0].identification
+            )
+          )}
         {identifications[1] &&
-          renderIdentification("Proof of Address", identifications[1])}
+          renderIdentification(
+            "Proof of Address",
+            identifications[1].uploads,
+            findValue(
+              identificationsData.identifications,
+              identifications[1].identification
+            )
+          )}
       </Panel>
       <Panel
         className="mt-8"
