@@ -1,7 +1,11 @@
 import { Panel } from "@sdh-project-services/nucleus-ui/dist/panel";
 import React from "react";
+import { FaCheck, FaTimes } from "react-icons/fa";
 import { Head } from "../../../components/head";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
+import examplePhotoCorrect from "./example-photo-correct.jpg";
+import examplePhotoIncorrect2 from "./example-photo-incorrect-2.jpg";
+import examplePhotoIncorrect from "./example-photo-incorrect.jpg";
 import { Form } from "./form";
 
 export function MyPhoto() {
@@ -40,6 +44,29 @@ export function MyPhoto() {
                 <li>not have a head covering</li>
                 <li>not wear sunglasses or tinted glasses</li>
               </ul>
+            </div>
+          </div>
+          <div className="hidden mt-4 md:block">
+            <strong>Examples:</strong>
+            <div className="mt-1 text-white grid grid-cols-4 gap-4">
+              <div className="relative p-1 border rounded">
+                <img alt="Correct" src={examplePhotoCorrect} />
+                <div className="absolute p-2 bg-green-500 rounded-full top-3 right-3">
+                  <FaCheck />
+                </div>
+              </div>
+              <div className="relative p-1 border rounded">
+                <img alt="Incorrect" src={examplePhotoIncorrect} />
+                <div className="absolute p-2 bg-red-600 rounded-full top-3 right-3">
+                  <FaTimes />
+                </div>
+              </div>
+              <div className="relative p-1 border rounded">
+                <img alt="Incorrect" src={examplePhotoIncorrect2} />
+                <div className="absolute p-2 bg-red-600 rounded-full top-3 right-3">
+                  <FaTimes />
+                </div>
+              </div>
             </div>
           </div>
         </Panel>

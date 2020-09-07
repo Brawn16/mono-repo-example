@@ -1,5 +1,9 @@
-export const imageData: any = {
-  "BT Openreach": "/images/openreach.jpg",
-  "City Fibre": "/images/cityfibre.jpg",
-  "Morrison Utility Services": "/images/morrisons.png",
+import logoBTOpenreach from "./logo-bt-openreach.jpg";
+import logoCityFibre from "./logo-city-fibre.jpg";
+import logoMorrisonUtilityServices from "./logo-morrison-utility-services.png";
+
+export const imageData = {
+  "BT Openreach": logoBTOpenreach,
+  "City Fibre": logoCityFibre,
+  "Morrison Utility Services": logoMorrisonUtilityServices,
 };
