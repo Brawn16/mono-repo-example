@@ -5,7 +5,7 @@ export interface NavigationProps {
 }
 
 export interface NewStarterFormContext {
-  submitStep: (step: number, values: any) => void;
+  submitStep: (values: { [key: string]: any }) => void;
   values: { [key: string]: any };
 }
 

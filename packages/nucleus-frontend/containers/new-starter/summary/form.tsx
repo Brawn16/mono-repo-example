@@ -12,6 +12,7 @@ import {
 import { square } from "./form.module.css";
 import { createOperative as createOperativeMutation } from "./mutations.gql";
 import { Panel } from "./panel";
+import { DesiredAddressProps } from "./types";
 
 function findValue(data: any = [], id: string) {
   const value = data.find((record: any) => record.id === id) || {};
@@ -22,13 +23,13 @@ function renderField(label: string, value?: string) {
   return (
     <div className="py-1 grid grid-cols-2 gap-4">
       <strong className="truncate font-montserrats">{label}</strong>
-      <div className="text-gray-400 truncate font-montserrats">{value}</div>
+      <div className="text-gray-400 truncate">{value}</div>
     </div>
   );
 }
 
-function renderAddress(values: { [key: string]: any }) {
-  const desiredAddressFields: any = {
+function renderAddress(values: { [key: string]: string }) {
+  const desiredAddressFields: DesiredAddressProps = {
     addressLine1: "Address Line 1",
     addressLine2: "Address Line 2",
     addressLine3: "Address Line 3",
@@ -36,7 +37,11 @@ function renderAddress(values: { [key: string]: any }) {
     addressCounty: "County",
     addressPostcode: "Postcode",
   };
-  return Object.keys(desiredAddressFields)
+
+  const keys = Object.keys(desiredAddressFields) as Array<
+    keyof DesiredAddressProps
+  >;
+  return keys
     .filter((value) => values[value])
     .map((addressValue) => {
       return renderField(
@@ -44,6 +49,26 @@ function renderAddress(values: { [key: string]: any }) {
         values[addressValue]
       );
     });
+}
+
+function renderUploads(uploads: string[]) {
+  return uploads.map((uploadId: string) => {
+    return (
+      <div key={uploadId} className={square}>
+        <UploadViewer id={uploadId}>
+          {({ data = {} }) => (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <img
+                alt="Upload"
+                className="max-h-full"
+                src={data.presignedUrl}
+              />
+            </div>
+          )}
+        </UploadViewer>
+      </div>
+    );
+  });
 }
 
 export function Form() {
@@ -126,48 +151,16 @@ export function Form() {
         title="Qualifications"
       >
         <div className="grid grid-cols-2">
-          <strong className="truncate">your uploaded files</strong>
+          <strong className="truncate">Your uploaded files</strong>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            {qualificationUploadIds.map((uploadId: string) => {
-              return (
-                <div>
-                  <div className={square}>
-                    <UploadViewer id={uploadId}>
-                      {({ data = {} }) => (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <img
-                            alt="Upload"
-                            className="max-h-full"
-                            src={data.presignedUrl}
-                          />
-                        </div>
-                      )}
-                    </UploadViewer>
-                  </div>
-                </div>
-              );
-            })}
+            {renderUploads(qualificationUploadIds)}
           </div>
         </div>
       </Panel>
       <Panel className="mt-8" href="/new-starter/my-photo" title="My Photo">
         <div className="grid grid-cols-2 gap-4">
-          <strong className="truncate">worker profile</strong>
-          <div className="w-32">
-            <div className={square}>
-              <UploadViewer id={values.photoUpload}>
-                {({ data = {} }) => (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <img
-                      alt="Upload"
-                      className="max-h-full"
-                      src={data.presignedUrl}
-                    />
-                  </div>
-                )}
-              </UploadViewer>
-            </div>
-          </div>
+          <strong className="truncate">Worker profile</strong>
+          <div className="w-32">{renderUploads([values.photoUpload])}</div>
         </div>
       </Panel>
       <Panel className="mt-8" href="/new-starter/medical" title="Medical">

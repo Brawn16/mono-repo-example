@@ -66,7 +66,7 @@ function renderWorkstreams(
       return (
         <button
           key={value}
-          className={`flex flex-col items-center justify-center w-full p-4 border-2 rounded focus:outline-none ${activeWorkstream}`}
+          className={`flex flex-col items-center justify-center  md:w-full p-4 border-2 rounded focus:outline-none ${activeWorkstream}`}
           onClick={() => handleChange("workstream", value)}
           type="button"
         >
@@ -120,7 +120,7 @@ export function Form() {
     <form onSubmit={handleSubmit(handleFormSubmit)}>
       <Label label="Who will you be working for?" />
       {workstreamsData && (
-        <div className="flex space-x-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
           {renderWorkstreams(
             workstreamsData.workstreams,
             workstream,

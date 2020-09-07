@@ -67,7 +67,7 @@ function renderStep({ href, label }: NewStarterStep, index: number) {
 
 function renderSteps() {
   return (
-    <div className="items-center flex-1 hidden mt-8 md:flex">
+    <div className="items-center flex-1 hidden mt-8 lg:flex">
       <ul className="relative text-lg text-white space-y-4">
         {steps.map((step, index) => renderStep(step, index))}
       </ul>
@@ -115,7 +115,7 @@ export function NewStarter({
   };
 
   return (
-    <div className="min-h-screen md:flex">
+    <div className="min-h-screen lg:flex">
       <div className={background}>
         <div className={logo} />
         {showSteps && renderSteps()}
