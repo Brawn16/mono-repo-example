@@ -6,7 +6,7 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Context } from "../../../layouts/new-starter/context";
 import { Navigation } from "../../../layouts/new-starter/navigation";
-import { imageData } from "./images";
+import { logos } from "./logos";
 import {
   subcontractors as subcontractorsQuery,
   workstreams as workstreamsQuery,
@@ -70,7 +70,7 @@ function renderWorkstreams(
           onClick={() => handleChange("workstream", value)}
           type="button"
         >
-          <img alt={label} src={imageData[label]} />
+          <img alt={label} src={logos[label]} />
         </button>
       );
     }

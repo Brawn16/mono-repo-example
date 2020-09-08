@@ -9,7 +9,11 @@ import { steps } from "./steps";
 import { NavigationProps } from "./types";
 
 export function Navigation({ nextLabel = "Next" }: NavigationProps) {
-  const { asPath } = useRouter();
+  let { asPath } = useRouter();
+  if (asPath.endsWith("/") === false) {
+    asPath += "/";
+  }
+
   const stepIndex = steps.findIndex((step) => step.href === asPath);
   const { href } = steps[stepIndex - 1];
 

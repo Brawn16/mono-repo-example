@@ -1,7 +1,6 @@
 import { Construct, Duration, Fn, Stack } from "@aws-cdk/core";
 import {
   BastionHostLinux,
-  Peer,
   Port,
   SecurityGroup,
   SubnetType,
@@ -16,9 +15,9 @@ import { Secret } from "@aws-cdk/aws-secretsmanager";
 import { sanitizeBranch } from "./utils";
 import {
   CloudFrontWebDistribution,
-  OriginAccessIdentity,
+  OriginProtocolPolicy,
 } from "@aws-cdk/aws-cloudfront";
-import { Bucket, BlockPublicAccess } from "@aws-cdk/aws-s3";
+import { Bucket, BlockPublicAccess, HttpMethods } from "@aws-cdk/aws-s3";
 import { BucketDeployment, Source } from "@aws-cdk/aws-s3-deployment";
 import { RemovalPolicy } from "@aws-cdk/core";
 
@@ -44,6 +43,46 @@ export class NucleusStack extends Stack {
         project: "nucleus",
       },
       terminationProtection,
+    });
+
+    // Create app bucket
+    const appBucket = new Bucket(this, "NucleusFrontendAppBucket", {
+      bucketName: `${namePrefixFrontend}-AppBucket`.toLowerCase(),
+      publicReadAccess: true,
+      removalPolicy: RemovalPolicy.DESTROY,
+      websiteErrorDocument: "404/index.html",
+      websiteIndexDocument: "index.html",
+    });
+
+    // Create cloudfront web distribution
+    const cloudFrontWebDistribution = new CloudFrontWebDistribution(
+      this,
+      "NucleusFrontendCloudFrontWebDistribution",
+      {
+        comment: `CloudFront web distribution for Nucleus frontend (${branch})`,
+        originConfigs: [
+          {
+            behaviors: [
+              {
+                isDefaultBehavior: true,
+              },
+            ],
+            customOriginSource: {
+              domainName: appBucket.bucketWebsiteDomainName,
+              originProtocolPolicy: OriginProtocolPolicy.HTTP_ONLY,
+            },
+          },
+        ],
+      }
+    );
+
+    // Create bucket deployment
+    new BucketDeployment(this, "NucleusFrontendBucketDeployment", {
+      destinationBucket: appBucket,
+      distribution: cloudFrontWebDistribution,
+      sources: [
+        Source.asset(resolve(__dirname, "../packages/nucleus-frontend/out")),
+      ],
     });
 
     // Create core VPC
@@ -120,6 +159,48 @@ export class NucleusStack extends Stack {
       retentionPeriod: Duration.days(14),
     });
 
+    // Create uploads bucket
+    const uploadsBucket = new Bucket(this, "NucleusBackendUploads", {
+      bucketName: `${namePrefixBackend}-UploadsBucket`.toLowerCase(),
+      blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
+      cors: [
+        {
+          allowedMethods: [HttpMethods.POST],
+          allowedOrigins: [
+            `https://${cloudFrontWebDistribution.distributionDomainName}`,
+          ],
+        },
+      ],
+      removalPolicy: RemovalPolicy.DESTROY,
+    });
+
+    // Create base lambda props
+    const baseLambdaProps = {
+      code: Code.fromAsset(resolve(__dirname, "../packages/nucleus-backend"), {
+        exclude: [
+          "*.*",
+          ".*",
+          "!dist/**",
+          "!node_modules/**",
+          "!.env",
+          "!jwt.key",
+        ],
+      }),
+      environment: {
+        APOLLO_CORS_ORIGIN: `https://${cloudFrontWebDistribution.distributionDomainName}`,
+        APOLLO_PLAYGROUND_ENDPOINT: "/prod/graphql",
+        AWS_QUEUE_ENDPOINT: "https://sqs.eu-west-1.amazonaws.com",
+        AWS_QUEUE_URL: coreQueue.queueUrl,
+        AWS_UPLOADS_BUCKET: uploadsBucket.bucketName,
+        AWS_UPLOADS_ENDPOINT: "https://s3.eu-west-1.amazonaws.com",
+        AWS_SECRET: `${namePrefixBackend}-LambdaSecret`,
+        TYPEORM_HOST: coreDatabase.attrEndpointAddress,
+      },
+      runtime: Runtime.NODEJS_12_X,
+      timeout: Duration.seconds(15),
+      vpc: vpc,
+    };
+
     // Create graphql lambda security group
     const graphqlSecurityGroup = new SecurityGroup(
       this,
@@ -133,47 +214,12 @@ export class NucleusStack extends Stack {
 
     // Create graphql lambda
     const graphqlLambda = new Function(this, "NucleusBackendGraphqlLambda", {
-      code: Code.fromAsset(resolve(__dirname, "../packages/nucleus-backend"), {
-        exclude: [
-          "*.*",
-          ".*",
-          "!dist/**",
-          "!node_modules/**",
-          "!.env",
-          "!jwt.key",
-        ],
-      }),
+      ...baseLambdaProps,
       description: `Graphql lambda for Nucleus backend (${branch})`,
-      environment: {
-        APOLLO_PLAYGROUND_ENDPOINT: "/prod/graphql",
-        AWS_QUEUE_ENDPOINT: "",
-        AWS_QUEUE_SSL: "true",
-        AWS_QUEUE_URL: coreQueue.queueUrl,
-        AWS_SECRET: `${namePrefixBackend}-LambdaSecret`,
-        TYPEORM_HOST: coreDatabase.attrEndpointAddress,
-      },
       functionName: `${namePrefixBackend}-GraphqlLambda`,
       handler: "dist/graphql/index.graphqlHandler",
-      runtime: Runtime.NODEJS_12_X,
       securityGroups: [graphqlSecurityGroup],
-      timeout: Duration.seconds(15),
-      vpc: vpc,
     });
-
-    // Grant graphql lambda access to graphql lambda secret
-    if (graphqlLambda.role) {
-      lambdaSecret.grantRead(graphqlLambda.role);
-    }
-
-    // Grant graphql lambda access to core database
-    coreDatabaseSecurityGroup.addIngressRule(
-      graphqlSecurityGroup,
-      Port.tcp(5432),
-      `Core database access for Nucleus backend graphql lambda (${branch})`
-    );
-
-    // Grant graphql lamba access to core queue
-    coreQueue.grantSendMessages(graphqlLambda);
 
     // Create graphql gateway
     const graphqlGateway = new LambdaRestApi(
@@ -193,6 +239,24 @@ export class NucleusStack extends Stack {
     graphqlGatewayResource.addMethod("GET");
     graphqlGatewayResource.addMethod("OPTIONS");
     graphqlGatewayResource.addMethod("POST");
+
+    // Grant lambdas access to lambda secret
+    if (graphqlLambda.role) {
+      lambdaSecret.grantRead(graphqlLambda.role);
+    }
+
+    // Grant lambdas access to core database
+    coreDatabaseSecurityGroup.addIngressRule(
+      graphqlSecurityGroup,
+      Port.tcp(5432),
+      `Core database access for Nucleus backend graphql lambda (${branch})`
+    );
+
+    // Grant lambdas access to core queue
+    coreQueue.grantSendMessages(graphqlLambda);
+
+    // Grant lambdas access to uploads bucket
+    uploadsBucket.grantReadWrite(graphqlLambda);
 
     // Create core VPC bastion security group
     const coreVpcBastionSecurityGroup = new SecurityGroup(
@@ -221,75 +285,5 @@ export class NucleusStack extends Stack {
       Port.tcp(5432),
       `Core database access for Nucleus backend core VPC bastion (${branch})`
     );
-
-    // Grant manchester office access to core VPC bastion
-    coreVpcBastionSecurityGroup.addIngressRule(
-      Peer.ipv4("212.36.35.198/32"),
-      Port.tcp(22),
-      `Manchester office access for Nucleus backend core VPC bastion (${branch})`
-    );
-
-    // Create frontend bucket
-    const frontendBucket = new Bucket(this, "NucleusFrontendBucket", {
-      blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
-      bucketName: `${namePrefixFrontend}-Bucket`.toLowerCase(),
-      removalPolicy: RemovalPolicy.DESTROY,
-    });
-
-    // Create cloudfront OAI
-    const cloudFrontOriginAccessIdentity = new OriginAccessIdentity(
-      this,
-      "NucleusFrontendCloudFrontOriginAccessIdentity",
-      {
-        comment: `CloudFront origin access identity for Nucleus frontend (${branch})`,
-      }
-    );
-
-    // Grant cloudfront OAI access to bucket
-    frontendBucket.grantRead(cloudFrontOriginAccessIdentity);
-
-    // Create cloudfront web distribution
-    const cloudFrontWebDistribution = new CloudFrontWebDistribution(
-      this,
-      "NucleusFrontendCloudFrontWebDistribution",
-      {
-        comment: `CloudFront web distribution for Nucleus frontend (${branch})`,
-        errorConfigurations: [
-          {
-            errorCode: 404,
-            responseCode: 200,
-            responsePagePath: "/index.html",
-          },
-        ],
-        originConfigs: [
-          {
-            behaviors: [
-              {
-                isDefaultBehavior: true,
-              },
-            ],
-            s3OriginSource: {
-              originAccessIdentity: cloudFrontOriginAccessIdentity,
-              s3BucketSource: frontendBucket,
-            },
-          },
-        ],
-      }
-    );
-
-    // Grant cloudfront web distribution access to graphql lambda
-    graphqlLambda.addEnvironment(
-      "APOLLO_CORS_ORIGIN",
-      `https://${cloudFrontWebDistribution.distributionDomainName}`
-    );
-
-    // Create bucket deployment
-    new BucketDeployment(this, "NucleusFrontendBucketDeployment", {
-      destinationBucket: frontendBucket,
-      distribution: cloudFrontWebDistribution,
-      sources: [
-        Source.asset(resolve(__dirname, "../packages/nucleus-frontend/out")),
-      ],
-    });
   }
 }

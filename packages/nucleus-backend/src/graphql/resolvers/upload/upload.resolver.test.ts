@@ -12,9 +12,7 @@ it("creates a presigned upload", async () => {
   const upload = new UploadEntity();
   upload.id = "id";
 
-  env.AWS_UPLOAD_ACCESS_KEY = "";
-  env.AWS_UPLOAD_ACCESS_SECRET = "";
-  env.AWS_UPLOAD_BUCKET = "";
+  env.AWS_UPLOADS_BUCKET = "";
   env.AWS_UPLOAD_ENDPOINT = "";
 
   const { save } = stubEntity(stub, UploadEntity, [upload]);

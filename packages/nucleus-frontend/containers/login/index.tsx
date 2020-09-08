@@ -12,7 +12,7 @@ export function Login() {
         <h1 className="text-2xl font-extrabold text-gray-900 md:text-3xl">
           Login
         </h1>
-        <LoginForm onSuccess={() => Router.push("/dashboard")} />
+        <LoginForm onSuccess={() => Router.push("/dashboard/")} />
       </SplitScreen>
     </>
   );

@@ -9,21 +9,14 @@ export function sendQueueMessage(
 ) {
   return new Promise((resolve, reject) => {
     const endpoint = env.AWS_QUEUE_ENDPOINT;
-    const ssl = env.AWS_QUEUE_SSL;
     const url = env.AWS_QUEUE_URL;
 
     // Check we have necessary configuration
-    if (endpoint === undefined || ssl === undefined || url === undefined) {
+    if (url === undefined || endpoint === undefined) {
       throw new Error("Queue is not configured.");
     }
 
-    // Create client
-    const sqs = new SQS({
-      endpoint,
-      sslEnabled: ssl === "true",
-    });
-
-    sqs.sendMessage(
+    new SQS({ endpoint }).sendMessage(
       {
         MessageBody: JSON.stringify({ jobName, payload }),
         MessageGroupId: messageGroupId,
