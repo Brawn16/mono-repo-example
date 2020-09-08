@@ -53,7 +53,7 @@ function renderStep({ href, label }: NewStarterStep, index: number) {
   // Parse anchor classes
   let className = "flex";
   if (asPath === href) {
-    className += " font-extrabold";
+    className += " font-extrabold text-xl";
   }
 
   return (
@@ -67,7 +67,7 @@ function renderStep({ href, label }: NewStarterStep, index: number) {
 
 function renderSteps() {
   return (
-    <div className="items-center flex-1 hidden mt-8 md:flex">
+    <div className="items-center flex-1 hidden mt-8 lg:flex">
       <ul className="relative text-lg text-white space-y-4">
         {steps.map((step, index) => renderStep(step, index))}
       </ul>
@@ -115,7 +115,7 @@ export function NewStarter({
   };
 
   return (
-    <div className="min-h-screen md:flex">
+    <div className="min-h-screen lg:flex">
       <div className={background}>
         <div className={logo} />
         {showSteps && renderSteps()}
@@ -133,7 +133,7 @@ export function NewStarter({
           </div>
         )}
         <div className="flex flex-col flex-1 md:overflow-auto">
-          <div className="flex-1 max-w-3xl p-8 pb-0">
+          <div className="flex-1 max-w-4xl p-8 pb-0">
             {backHref && (
               <Anchor className="block mb-4" href={backHref}>
                 &lt; <span className="underline">Back</span>

@@ -11,7 +11,7 @@ export function Identification() {
       </h2>
       <h3 className="text-lg">
         To work with us, you need to provide a form of identification and proof
-        of address.
+        of address. Please make sure your photos aren&apos;t blurry.
       </h3>
     </>
   );

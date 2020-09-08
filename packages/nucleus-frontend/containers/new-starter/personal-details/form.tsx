@@ -25,7 +25,7 @@ export function Form() {
           })}
           error={errors.firstName}
           help="Please enter your legal first name"
-          label="First Name"
+          label="First name"
           name="firstName"
           onKeyDown={() => clearErrors("firstName")}
           required
@@ -36,7 +36,7 @@ export function Form() {
             required: "Last name is required",
           })}
           error={errors.lastName}
-          label="Last Name"
+          label="Last name"
           name="lastName"
           onFocus={() => clearErrors("lastName")}
           required
@@ -49,7 +49,7 @@ export function Form() {
         })}
         error={errors.phoneNumber}
         inputMode="tel"
-        label="Phone Number"
+        label="Phone number"
         name="phoneNumber"
         onFocus={() => clearErrors("phoneNumber")}
         required
@@ -79,7 +79,7 @@ export function Form() {
         })}
         error={errors.emergencyContactName}
         help="We will only use these details in case of an emergency"
-        label="Emergency Contact Name"
+        label="Emergency contact name"
         name="emergencyContactName"
         onFocus={() => clearErrors("emergencyContactName")}
         required
@@ -91,7 +91,7 @@ export function Form() {
         })}
         error={errors.emergencyContactPhoneNumber}
         inputMode="tel"
-        label="Emergency Contact Number"
+        label="Emergency contact number"
         name="emergencyContactPhoneNumber"
         onFocus={() => clearErrors("emergencyContactPhoneNumber")}
         required

@@ -15,4 +15,12 @@ export class IdentificationEntity extends BaseEntity {
   @Column()
   @Field()
   public name?: string;
+
+  @Column()
+  @Field()
+  public type?: "Address" | "ID";
+
+  @Column("varchar", { array: true })
+  @Field(() => [String])
+  public uploadTypes?: string[];
 }

@@ -1,6 +1,5 @@
 import { plainToClass } from "class-transformer";
 import { Arg, Mutation, Resolver } from "type-graphql";
-import { IdentificationEntity } from "../../../shared/entity/identification.entity";
 import { OperativeIdentificationEntity } from "../../../shared/entity/operative-identification.entity";
 import { OperativeEntity } from "../../../shared/entity/operative.entity";
 import { sendQueueMessage } from "../../../shared/queue/send";
@@ -15,17 +14,13 @@ export class OperativeResolver {
   public async createOperative(
     @Arg("data") data: CreateOperativeInput
   ): Promise<OperativeEntity> {
-    const identification = await IdentificationEntity.findOneOrFail();
     const operative = plainToClass(OperativeEntity, data);
     const { identifications = [] } = data;
 
     // Save identification records
     operative.identifications = await Promise.all(
       identifications.map((input: CreateOperativeIdentificationInput) =>
-        plainToClass(OperativeIdentificationEntity, {
-          ...input,
-          identification,
-        }).save()
+        plainToClass(OperativeIdentificationEntity, input).save()
       )
     );
 

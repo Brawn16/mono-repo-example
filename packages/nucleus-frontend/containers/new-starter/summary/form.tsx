@@ -5,36 +5,87 @@ import Router from "next/router";
 import React, { FormEvent, useContext } from "react";
 import { Context } from "../../../layouts/new-starter/context";
 import { Navigation } from "../../../layouts/new-starter/navigation";
+import { identifications as identificationsQuery } from "../identification/queries.gql";
 import {
   subcontractors as subcontractorsQuery,
   workstreams as workstreamsQuery,
 } from "../work-details/queries.gql";
+import { square } from "./form.module.css";
 import { createOperative as createOperativeMutation } from "./mutations.gql";
 import { Panel } from "./panel";
+import { DesiredAddressProps } from "./types";
 
 function findValue(data: any = [], id: string) {
   const value = data.find((record: any) => record.id === id) || {};
   return value.name;
 }
 
-function renderAddress(values: { [key: string]: any }) {
-  return [
-    values.addressLine1 || "",
-    values.addressLine2 || "",
-    values.addressLine3 || "",
-    values.adressTownCity || "",
-    values.addressCounty || "",
-    values.addressPostcode || "",
-  ]
-    .filter((line) => line !== "")
-    .join(", ");
-}
-
 function renderField(label: string, value?: string) {
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="py-1 grid grid-cols-2 gap-4">
       <strong className="truncate">{label}</strong>
-      <div className="truncate">{value}</div>
+      <div className="text-gray-600 truncate">{value}</div>
+    </div>
+  );
+}
+
+function renderAddress(values: { [key: string]: string }) {
+  const desiredAddressFields: DesiredAddressProps = {
+    addressLine1: "Address Line 1",
+    addressLine2: "Address Line 2",
+    addressLine3: "Address Line 3",
+    addressTownCity: "Town/City",
+    addressCounty: "County",
+    addressPostcode: "Postcode",
+  };
+
+  const keys = Object.keys(desiredAddressFields) as Array<
+    keyof DesiredAddressProps
+  >;
+  return keys
+    .filter((value) => values[value])
+    .map((addressValue) => {
+      return renderField(
+        desiredAddressFields[addressValue],
+        values[addressValue]
+      );
+    });
+}
+
+function renderUploads(uploads: string[]) {
+  return uploads.map((uploadId: string) => {
+    return (
+      <div key={uploadId} className={square}>
+        <UploadViewer id={uploadId}>
+          {({ data = {} }) => (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <img
+                alt="Upload"
+                className="max-h-full"
+                src={data.presignedUrl}
+              />
+            </div>
+          )}
+        </UploadViewer>
+      </div>
+    );
+  });
+}
+
+function renderIdentification(
+  label: string,
+  uploads: string[],
+  identification: string
+) {
+  return (
+    <div className="py-1 grid grid-cols-2 gap-4">
+      <strong className="truncate">{label}</strong>
+      <div className="text-gray-600">
+        <p className="truncate">{identification}</p>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {renderUploads(uploads)}
+        </div>
+      </div>
     </div>
   );
 }
@@ -42,9 +93,12 @@ function renderField(label: string, value?: string) {
 export function Form() {
   const { data: subcontractorsData = {} }: any = useQuery(subcontractorsQuery);
   const { data: workstreamsData = {} }: any = useQuery(workstreamsQuery);
+  const { data: identificationsData = {} }: any = useQuery(
+    identificationsQuery
+  );
   const { values } = useContext(Context);
   const { identifications = [], qualificationUploadIds = [] } = values;
-  const { length: qualificationsUploaded } = qualificationUploadIds;
+
   const [createOperative, { error }] = useMutation(createOperativeMutation, {
     errorPolicy: "all",
   });
@@ -67,21 +121,14 @@ export function Form() {
     }
   };
 
-  let qualificationsText = `${qualificationsUploaded} photo`;
-  if (qualificationsUploaded !== 1) {
-    qualificationsText += "s";
-  }
-
   return (
     <form onSubmit={handleSubmit}>
       {error && (
         <Alert className="mb-8 text-white bg-red-600">{error.message}</Alert>
       )}
       <Panel href="/new-starter/personal-details" title="Personal Details">
-        {renderField(
-          "Name",
-          `${values.firstName || ""} ${values.lastName || ""}`
-        )}
+        {renderField("First Name", values.firstName)}
+        {renderField("Last Name", values.lastName)}
         {renderField("Email", values.email)}
         {renderField("Phone Number", values.phoneNumber)}
         {renderField("Emergency Contact Name", values.emergencyContactName)}
@@ -98,14 +145,24 @@ export function Form() {
         href="/new-starter/identification"
         title="Identification"
       >
-        {renderField(
-          "Identification",
-          identifications[0] && identifications[0].type
-        )}
-        {renderField(
-          "Proof of Address",
-          identifications[1] && identifications[1].type
-        )}
+        {identifications[0] &&
+          renderIdentification(
+            "Identification",
+            identifications[0].uploads,
+            findValue(
+              identificationsData.identifications,
+              identifications[0].identification
+            )
+          )}
+        {identifications[1] &&
+          renderIdentification(
+            "Proof of Address",
+            identifications[1].uploads,
+            findValue(
+              identificationsData.identifications,
+              identifications[1].identification
+            )
+          )}
       </Panel>
       <Panel
         className="mt-8"
@@ -126,31 +183,29 @@ export function Form() {
         href="/new-starter/qualifications"
         title="Qualifications"
       >
-        {qualificationsText} uploaded
+        <div className="grid grid-cols-2">
+          <strong className="truncate">Your uploaded files</strong>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {renderUploads(qualificationUploadIds)}
+          </div>
+        </div>
       </Panel>
       <Panel className="mt-8" href="/new-starter/my-photo" title="My Photo">
-        <UploadViewer id={values.photoUpload}>
-          {({ data = {} }) => (
-            <img alt="Upload" className="max-h-44" src={data.presignedUrl} />
-          )}
-        </UploadViewer>
+        <div className="grid grid-cols-2 gap-4">
+          <strong className="truncate">Worker profile</strong>
+          <div className="w-32">{renderUploads([values.photoUpload])}</div>
+        </div>
       </Panel>
       <Panel className="mt-8" href="/new-starter/medical" title="Medical">
         {renderField(
-          "Do you suffer from any medical issues or ailment?",
+          "Medical issues or ailments",
           values.medicalIssues ? "Yes" : "No"
         )}
         {values.medicalIssues &&
-          renderField("Details of medical issues", values.medicalIssuesNotes)}
-        {renderField(
-          "Do you take any medication that could impair your ability to work?",
-          values.medicationRequired ? "Yes" : "No"
-        )}
+          renderField("", `Details: ${values.medicalIssuesNotes}`)}
+        {renderField("Medication", values.medicationRequired ? "Yes" : "No")}
         {values.medicationRequired &&
-          renderField(
-            "Details of medical issues",
-            values.medicationRequiredNotes
-          )}
+          renderField("", `Details: ${values.medicationRequiredNotes}`)}
       </Panel>
       <Navigation nextLabel="Submit" />
     </form>
