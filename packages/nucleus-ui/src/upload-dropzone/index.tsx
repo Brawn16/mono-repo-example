@@ -11,6 +11,7 @@ export function UploadDropzone(props: PropsWithChildren<UploadDropzoneProps>) {
   const {
     children,
     error,
+    iconType: Icon = FaCloudUploadAlt,
     label,
     multiple,
     onChange,
@@ -107,7 +108,7 @@ export function UploadDropzone(props: PropsWithChildren<UploadDropzoneProps>) {
         {...getRootProps()}
         className={`flex flex-col items-center p-6 bg-gray-100 border-2 border-dashed rounded cursor-pointer focus:outline-none focus:border-gray-400 focus:bg-gray-200 ${errorClassName}`}
       >
-        <FaCloudUploadAlt className="text-6xl text-gray-400" />
+        <Icon className="text-6xl text-gray-400" />
         <div className="pb-4">
           Drag {multiple ? "files" : "file"} to upload, or
         </div>
