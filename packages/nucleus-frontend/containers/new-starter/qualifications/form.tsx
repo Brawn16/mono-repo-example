@@ -1,3 +1,4 @@
+import { InputHelp } from "@sdh-project-services/nucleus-ui/dist/input-help";
 import { UploadDropzone } from "@sdh-project-services/nucleus-ui/dist/upload-dropzone";
 import { UploadGallery } from "@sdh-project-services/nucleus-ui/dist/upload-gallery";
 import React, { useContext } from "react";
@@ -37,6 +38,9 @@ export function Form() {
         tags={["operativeQualification", "public"]}
         uploads={qualificationUploadIds}
       >
+        <div className="py-2">
+          <InputHelp help="All uploads must be from a UK recognised competent authority / professional body / licensed body" />
+        </div>
         <UploadGallery />
       </UploadDropzone>
       <Navigation />

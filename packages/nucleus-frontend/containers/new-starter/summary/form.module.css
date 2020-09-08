@@ -1,0 +1,4 @@
+.square {
+  padding: 0 0 75%;
+  @apply border h-0 relative rounded;
+}
