@@ -6,7 +6,7 @@ export class CreateUserRecords1596099980332 implements MigrationInterface {
     const password = await hash("password");
     await queryRunner.query(`
       INSERT INTO "user" ("email", "password", "isActive", "isVerified")
-      VALUES('admin@localhost.local', '$${password}', true, true)    
+      VALUES('admin@localhost.local', '${password}', true, true)    
     `);
   }
 

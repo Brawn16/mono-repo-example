@@ -28,6 +28,7 @@
     "@aws-cdk/aws-s3": "^1.55.0",
     "@aws-cdk/aws-s3-deployment": "^1.55.0",
     "@aws-cdk/aws-secretsmanager": "^1.54.0",
+    "@aws-cdk/aws-sqs": "^1.62.0",
     "@aws-cdk/core": "^1.54.0",
     "@typescript-eslint/eslint-plugin": "^2.30.0",
     "change-case": "^4.1.1",
