@@ -8,6 +8,7 @@ import {
 } from "@aws-cdk/aws-ec2";
 import { Queue, QueueEncryption } from "@aws-cdk/aws-sqs";
 import { Code, Function, Runtime } from "@aws-cdk/aws-lambda";
+import { SqsEventSource } from "@aws-cdk/aws-lambda-event-sources";
 import { LambdaRestApi } from "@aws-cdk/aws-apigateway";
 import { resolve } from "path";
 import { CfnDBCluster, CfnDBSubnetGroup } from "@aws-cdk/aws-rds";
@@ -157,6 +158,7 @@ export class NucleusStack extends Stack {
       fifo: true,
       queueName: `${namePrefixBackend}-CoreQueue.fifo`,
       retentionPeriod: Duration.days(14),
+      visibilityTimeout: Duration.seconds(75),
     });
 
     // Create uploads bucket
@@ -187,8 +189,6 @@ export class NucleusStack extends Stack {
         ],
       }),
       environment: {
-        APOLLO_CORS_ORIGIN: `https://${cloudFrontWebDistribution.distributionDomainName}`,
-        APOLLO_PLAYGROUND_ENDPOINT: "/prod/graphql",
         AWS_QUEUE_ENDPOINT: "https://sqs.eu-west-1.amazonaws.com",
         AWS_QUEUE_URL: coreQueue.queueUrl,
         AWS_UPLOADS_BUCKET: uploadsBucket.bucketName,
@@ -197,7 +197,6 @@ export class NucleusStack extends Stack {
         TYPEORM_HOST: coreDatabase.attrEndpointAddress,
       },
       runtime: Runtime.NODEJS_12_X,
-      timeout: Duration.seconds(15),
       vpc: vpc,
     };
 
@@ -216,9 +215,15 @@ export class NucleusStack extends Stack {
     const graphqlLambda = new Function(this, "NucleusBackendGraphqlLambda", {
       ...baseLambdaProps,
       description: `Graphql lambda for Nucleus backend (${branch})`,
+      environment: {
+        ...baseLambdaProps.environment,
+        APOLLO_CORS_ORIGIN: `https://${cloudFrontWebDistribution.distributionDomainName}`,
+        APOLLO_PLAYGROUND_ENDPOINT: "/prod/graphql",
+      },
       functionName: `${namePrefixBackend}-GraphqlLambda`,
       handler: "dist/graphql/index.graphqlHandler",
       securityGroups: [graphqlSecurityGroup],
+      timeout: Duration.seconds(15),
     });
 
     // Create graphql gateway
@@ -240,10 +245,31 @@ export class NucleusStack extends Stack {
     graphqlGatewayResource.addMethod("OPTIONS");
     graphqlGatewayResource.addMethod("POST");
 
+    // Create queue lambda security group
+    const queueSecurityGroup = new SecurityGroup(
+      this,
+      "NucleusBackendQueueLambdaSecurityGroup",
+      {
+        description: `Queue lambda security group for Nucleus backend (${branch})`,
+        securityGroupName: `${namePrefixBackend}-QueueLambdaSecurityGroup`,
+        vpc: vpc,
+      }
+    );
+
+    // Create queue lambda
+    const queueLambda = new Function(this, "NucleusBackendQueueLambda", {
+      ...baseLambdaProps,
+      description: `Queue lambda for Nucleus backend (${branch})`,
+      events: [new SqsEventSource(coreQueue)],
+      functionName: `${namePrefixBackend}-QueueLambda`,
+      handler: "dist/queue/index.queueHandler",
+      securityGroups: [queueSecurityGroup],
+      timeout: Duration.seconds(60),
+    });
+
     // Grant lambdas access to lambda secret
-    if (graphqlLambda.role) {
-      lambdaSecret.grantRead(graphqlLambda.role);
-    }
+    lambdaSecret.grantRead(graphqlLambda);
+    lambdaSecret.grantRead(queueLambda);
 
     // Grant lambdas access to core database
     coreDatabaseSecurityGroup.addIngressRule(
@@ -251,12 +277,19 @@ export class NucleusStack extends Stack {
       Port.tcp(5432),
       `Core database access for Nucleus backend graphql lambda (${branch})`
     );
+    coreDatabaseSecurityGroup.addIngressRule(
+      queueSecurityGroup,
+      Port.tcp(5432),
+      `Core database access for Nucleus backend queue lambda (${branch})`
+    );
 
     // Grant lambdas access to core queue
     coreQueue.grantSendMessages(graphqlLambda);
+    coreQueue.grantSendMessages(queueLambda);
 
     // Grant lambdas access to uploads bucket
     uploadsBucket.grantReadWrite(graphqlLambda);
+    uploadsBucket.grantReadWrite(queueLambda);
 
     // Create core VPC bastion security group
     const coreVpcBastionSecurityGroup = new SecurityGroup(
