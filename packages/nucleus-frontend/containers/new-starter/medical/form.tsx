@@ -8,25 +8,40 @@ import { Context } from "../../../layouts/new-starter/context";
 import { Navigation } from "../../../layouts/new-starter/navigation";
 import { NewStarterMedicalFormData } from "./types";
 
+function validate(value?: string) {
+  if (value === undefined) {
+    return "Please select an option";
+  }
+
+  return true;
+}
+
 export function Form() {
   const { submitStep, values } = useContext(Context);
   const {
     errors,
     getValues,
+    clearErrors,
     handleSubmit,
     register,
     setValue,
     watch,
   } = useForm<NewStarterMedicalFormData>({ defaultValues: values });
 
-  register({ name: "medicalIssues" });
+  register({ name: "medicalIssues" }, { validate });
   register({ name: "medicationRequired" });
+  register({ name: "medicationRequired" }, { validate });
+
   watch(["medicalIssues", "medicationRequired"]);
 
   const { medicalIssues, medicationRequired } = getValues();
 
-  const handleChange = (name: string, value: boolean) => {
+  const handleChange = (
+    name: keyof NewStarterMedicalFormData,
+    value: boolean
+  ) => {
     setValue(name, value);
+    clearErrors(name);
   };
 
   const handleFormSubmit = (data: NewStarterMedicalFormData) => {

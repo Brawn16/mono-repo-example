@@ -75,11 +75,6 @@ export function Form() {
     return type === undefined ? [] : type.uploadTypes;
   };
 
-  const handleChange = (name: string, value: string | string[]) => {
-    clearErrors(name);
-    setValue(name, value);
-  };
-
   const handleFormSubmit = (data: NewStarterIdentificationFormData) => {
     submitStep(data);
   };
@@ -94,7 +89,8 @@ export function Form() {
             label="Select an ID type to upload"
             name="identifications[0].identification"
             onChange={({ target: { name, value } }) => {
-              handleChange(name, value);
+              setValue(name, value);
+              clearErrors("identifications[0]");
               setValue("identifications[0].uploads", undefined);
             }}
             options={getOptions("id")}
@@ -103,9 +99,10 @@ export function Form() {
           {idOneType && (
             <Uploads
               error={idOneError && (idOneError.uploads as any)}
-              onChange={(uploads) =>
-                handleChange("identifications[0].uploads", uploads)
-              }
+              onChange={(uploads) => {
+                setValue("identifications[0].uploads", uploads);
+                clearErrors("identifications[0]");
+              }}
               uploads={idOneUploads}
               uploadTypes={getUploadTypes(idOneType)}
             />
@@ -117,7 +114,8 @@ export function Form() {
             label="Select a proof of address to upload"
             name="identifications[1].identification"
             onChange={({ target: { name, value } }) => {
-              handleChange(name, value);
+              setValue(name, value);
+              clearErrors("identifications[1]");
               setValue("identifications[1].uploads", undefined);
             }}
             options={getOptions("address")}
@@ -126,9 +124,10 @@ export function Form() {
           {idTwoType && (
             <Uploads
               error={idTwoError && (idTwoError.uploads as any)}
-              onChange={(uploads) =>
-                handleChange("identifications[1].uploads", uploads)
-              }
+              onChange={(uploads) => {
+                setValue("identifications[1].uploads", uploads);
+                clearErrors("identifications[1]");
+              }}
               uploads={idTwoUploads}
               uploadTypes={getUploadTypes(idTwoType)}
             />
