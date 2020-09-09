@@ -1,9 +1,24 @@
 import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
+import { PhoneNumberUtil } from "google-libphonenumber";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Context } from "../../../layouts/new-starter/context";
 import { Navigation } from "../../../layouts/new-starter/navigation";
 import { NewStarterPersonalDetailsFormData } from "./types";
+
+function validatePhoneNumber(value?: string) {
+  if (value === undefined || value === "") {
+    return "Phone number is required";
+  }
+
+  try {
+    new PhoneNumberUtil().parse(value, "GB");
+  } catch (error) {
+    return "Invalid phone number";
+  }
+
+  return true;
+}
 
 export function Form() {
   const { submitStep, values } = useContext(Context);
@@ -45,7 +60,7 @@ export function Form() {
       <Input
         className="mt-4 md:w-full"
         componentRef={register({
-          required: "Phone number is required",
+          validate: validatePhoneNumber,
         })}
         error={errors.phoneNumber}
         inputMode="tel"
@@ -87,7 +102,7 @@ export function Form() {
       <Input
         className="mt-4 md:w-full"
         componentRef={register({
-          required: "Emergency contact phone number is required",
+          validate: validatePhoneNumber,
         })}
         error={errors.emergencyContactPhoneNumber}
         inputMode="tel"

@@ -39,6 +39,7 @@ export function Form() {
         uploads={qualificationUploadIds}
       >
         <InputHelp help="All uploads must be from a UK recognised competent authority/professional body/licensed body." />
+        <InputHelp help="Make sure to upload the front and back of any qualification cards." />
         <UploadGallery />
       </UploadDropzone>
       <Navigation />

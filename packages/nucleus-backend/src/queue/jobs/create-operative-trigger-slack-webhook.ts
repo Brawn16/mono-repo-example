@@ -36,13 +36,14 @@ export async function createOperativeTriggerSlackWebhook(operativeId: string) {
           {
             short: true,
             title: "Workstream",
-            value: workstream && workstream.name ? workstream.name : "",
+            value:
+              workstream && workstream.name ? workstream.name : "Don't know",
           },
           {
             short: true,
             title: "Subcontractor",
             value:
-              subcontractor && subcontractor.name ? subcontractor.name : "",
+              subcontractor && subcontractor.name ? subcontractor.name : "None",
           },
         ],
       },

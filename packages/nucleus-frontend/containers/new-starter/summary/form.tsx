@@ -134,7 +134,7 @@ export function Form() {
         {renderField("Emergency Contact Name", values.emergencyContactName)}
         {renderField(
           "Emergency Contact Phone Number",
-          values.emegencyContactPhoneNumber
+          values.emergencyContactPhoneNumber
         )}
       </Panel>
       <Panel className="mt-8" href="/new-starter/address/" title="Address">
@@ -171,11 +171,17 @@ export function Form() {
       >
         {renderField(
           "Who will you be working for?",
-          findValue(workstreamsData.workstreams, values.workstream)
+          values.workstream ? (
+            findValue(workstreamsData.workstreams, values.workstream)
+          ) : (
+            <>Don&apos;t know</>
+          )
         )}
         {renderField(
           "Which subcontractor do you work for?",
-          findValue(subcontractorsData.subcontractors, values.subcontractor)
+          values.subcontractor
+            ? findValue(subcontractorsData.subcontractors, values.subcontractor)
+            : "None"
         )}
       </Panel>
       <Panel

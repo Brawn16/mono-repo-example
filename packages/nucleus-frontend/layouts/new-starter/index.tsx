@@ -24,7 +24,8 @@ function getLocalFormData(): NewStarterFormData {
 function renderStep({ href, label }: NewStarterStep, index: number) {
   const { step: currentStep } = getLocalFormData();
   const { asPath } = useRouter();
-  const active = steps[index].href === asPath;
+  const { href: stepHref } = steps[index];
+  const active = stepHref === asPath || stepHref === `${asPath}/`;
   const activeStyle = active ? "bg-white text-blue-900" : "";
 
   const step = (
@@ -52,7 +53,7 @@ function renderStep({ href, label }: NewStarterStep, index: number) {
 
   // Parse anchor classes
   let className = "flex";
-  if (asPath === href) {
+  if (active) {
     className += " font-extrabold text-xl";
   }
 

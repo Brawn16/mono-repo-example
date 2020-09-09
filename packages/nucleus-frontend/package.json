@@ -21,10 +21,12 @@
     "change-case": "^4.1.1",
     "date-fns": "^2.14.0",
     "filter-obj": "^2.0.1",
+    "google-libphonenumber": "^3.2.13",
     "graphql": "^15.0.0",
     "next": "^9.4.0",
     "next-images": "^1.4.1",
     "next-transpile-modules": "^4.0.2",
+    "postcode-validator": "^3.1.0",
     "react": "^16.13.1",
     "react-cookie": "^4.0.3",
     "react-dom": "^16.13.1",
@@ -35,6 +37,7 @@
     "universal-cookie": "^4.0.3"
   },
   "devDependencies": {
+    "@types/google-libphonenumber": "^7.4.19",
     "@types/node": "^14.0.14",
     "@types/react": "^16.9.35",
     "typescript": "^3.9.6"

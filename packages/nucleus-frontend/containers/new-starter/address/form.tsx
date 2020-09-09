@@ -3,11 +3,24 @@ import { AddressLookupAddress } from "@sdh-project-services/nucleus-ui/dist/addr
 import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
 import { InputError } from "@sdh-project-services/nucleus-ui/dist/input-error";
 import { pascalCase } from "change-case";
+import { postcodeValidator } from "postcode-validator";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Context } from "../../../layouts/new-starter/context";
 import { Navigation } from "../../../layouts/new-starter/navigation";
 import { NewStarterAddressFormData } from "./types";
+
+function validatePostcode(value?: string) {
+  if (value === undefined || value === "") {
+    return "Postcode is required";
+  }
+
+  if (postcodeValidator(value, "UK") === false) {
+    return "Invalid postcode";
+  }
+
+  return true;
+}
 
 export function Form() {
   const { submitStep, values } = useContext(Context);
@@ -29,7 +42,7 @@ export function Form() {
   register({ name: "addressLine2" });
   register({ name: "addressTownCity" });
   register({ name: "addressCounty" });
-  register({ name: "addressPostcode" }, { required: "This field is required" });
+  register({ name: "addressPostcode" }, { validate: validatePostcode });
   watch("addressLine1");
 
   const {
