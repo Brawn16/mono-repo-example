@@ -7,7 +7,7 @@ import {
   Vpc,
 } from "@aws-cdk/aws-ec2";
 import { Queue, QueueEncryption } from "@aws-cdk/aws-sqs";
-import { Code, Function, Runtime } from "@aws-cdk/aws-lambda";
+import { Code, Function, Runtime, Version } from "@aws-cdk/aws-lambda";
 import { SqsEventSource } from "@aws-cdk/aws-lambda-event-sources";
 import { LambdaRestApi } from "@aws-cdk/aws-apigateway";
 import { resolve } from "path";
@@ -222,6 +222,13 @@ export class NucleusStack extends Stack {
       handler: "dist/graphql/index.graphqlHandler",
       securityGroups: [graphqlSecurityGroup],
       timeout: Duration.seconds(25),
+    });
+
+    // Create graphql lambda version
+    new Version(this, "NucleusBackendGraphqlLambdaVersion", {
+      description: `Graphql lambda version for Nucleus backend (${branch})`,
+      lambda: graphqlLambda,
+      provisionedConcurrentExecutions: 10,
     });
 
     // Create graphql gateway
