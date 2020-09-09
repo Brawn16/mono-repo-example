@@ -35,7 +35,7 @@ export function Form() {
   return (
     <form className="mt-8" onSubmit={handleSubmit(handleFormSubmit)}>
       <UploadDropzone
-        accept="image/gif,image/jpeg,image/x-png"
+        accept="image/gif,image/jpeg,image/png"
         error={errors.photoUpload as any}
         fileLabel="photo"
         onChange={handleChange}
