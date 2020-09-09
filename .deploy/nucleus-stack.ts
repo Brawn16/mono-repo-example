@@ -234,7 +234,7 @@ export class NucleusStack extends Stack {
     );
 
     // Create graphql lambda version alias
-    const graphqlLambdaVersionAlias = graphqlLambdaVersion.addAlias(uuidv4(), {
+    const graphqlLambdaVersionAlias = graphqlLambdaVersion.addAlias("latest", {
       description: `Graphql lambda version alias for Nucleus backend (${branch})`,
       provisionedConcurrentExecutions: 20,
     });
