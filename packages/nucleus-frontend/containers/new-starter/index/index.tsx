@@ -1,6 +1,10 @@
 import { Panel } from "@sdh-project-services/nucleus-ui/dist/panel";
 import React from "react";
-import { FaAward, FaPassport, FaFile } from "react-icons/fa";
+import {
+  AiOutlineIdcard,
+  AiOutlineFileText,
+  AiOutlineSolution,
+} from "react-icons/ai";
 import { Head } from "../../../components/head";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import { Form } from "./form";
@@ -21,7 +25,7 @@ export function NewStarter() {
       <NewStarterLayout header={header} title="Preparation">
         <Panel>
           <div className="flex">
-            <FaPassport className="flex-shrink-0 hidden text-5xl text-gray-400 md:block" />
+            <AiOutlineIdcard className="flex-shrink-0 hidden text-5xl text-gray-400 md:block" />
             <div className="ml-4">
               <strong>At least one of the following:</strong>
               <ul className="pl-8 mt-2 text-gray-500 list-disc space-y-2">
@@ -40,7 +44,7 @@ export function NewStarter() {
         </Panel>
         <Panel className="my-8">
           <div className="flex">
-            <FaFile className="flex-shrink-0 hidden text-5xl text-gray-400 md:block" />
+            <AiOutlineFileText className="flex-shrink-0 hidden text-5xl text-gray-400 md:block" />
             <div className="ml-4">
               <strong>At least one of the following:</strong>
               <ul className="pl-8 mt-2 text-gray-500 list-disc space-y-2">
@@ -54,15 +58,13 @@ export function NewStarter() {
         </Panel>
         <Panel>
           <div className="flex">
-            <FaAward className="flex-shrink-0 hidden text-5xl text-gray-400 md:block" />
+            <AiOutlineSolution className="flex-shrink-0 hidden text-5xl text-gray-400 md:block" />
             <strong className="ml-4">
               All relevant qualifications and training information
             </strong>
           </div>
         </Panel>
-        <div className="mt-8">
-          <Form />
-        </div>
+        <Form />
       </NewStarterLayout>
     </>
   );

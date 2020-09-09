@@ -30,7 +30,7 @@ export function Form() {
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
       <UploadDropzone
-        accept="image/*"
+        accept="image/gif,image/jpeg,image/png"
         error={errors.qualificationUploadIds as any}
         fileLabel="photo"
         multiple

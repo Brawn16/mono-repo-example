@@ -17,6 +17,7 @@ export function Uploads(props: UploadProps) {
     return (
       <UploadDropzone
         key={uploadType}
+        accept="image/gif,image/jpeg,image/png"
         fileLabel={uploadType}
         onChange={handleChange}
         tags={["operativeIdentification", "public"]}

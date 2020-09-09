@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { FaTrash } from "react-icons/fa";
+import { AiOutlineDelete } from "react-icons/ai";
 import { Label } from "../label";
 import { Context } from "../upload-dropzone/context";
 import { UploadDropzoneFile } from "../upload-dropzone/types";
@@ -42,7 +42,7 @@ export function UploadGallery({
               onClick={onDeleteAll}
               type="button"
             >
-              <FaTrash />
+              <AiOutlineDelete />
               <span className="pl-1 underline">Remove all</span>
             </button>
           )}

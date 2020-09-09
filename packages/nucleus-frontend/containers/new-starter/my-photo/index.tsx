@@ -1,10 +1,11 @@
 import { Panel } from "@sdh-project-services/nucleus-ui/dist/panel";
 import React from "react";
-import { FaCheck, FaTimes } from "react-icons/fa";
+import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import { Head } from "../../../components/head";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import examplePhotoCorrect from "./example-photo-correct.jpg";
 import examplePhotoIncorrect2 from "./example-photo-incorrect-2.jpg";
+import examplePhotoIncorrect3 from "./example-photo-incorrect-3.jpg";
 import examplePhotoIncorrect from "./example-photo-incorrect.jpg";
 import { Form } from "./form";
 
@@ -52,19 +53,25 @@ export function MyPhoto() {
               <div className="relative p-1 border rounded">
                 <img alt="Correct" src={examplePhotoCorrect} />
                 <div className="absolute p-2 bg-green-500 rounded-full top-3 right-3">
-                  <FaCheck />
+                  <AiOutlineCheck />
                 </div>
               </div>
               <div className="relative p-1 border rounded">
                 <img alt="Incorrect" src={examplePhotoIncorrect} />
                 <div className="absolute p-2 bg-red-600 rounded-full top-3 right-3">
-                  <FaTimes />
+                  <AiOutlineClose />
                 </div>
               </div>
               <div className="relative p-1 border rounded">
                 <img alt="Incorrect" src={examplePhotoIncorrect2} />
                 <div className="absolute p-2 bg-red-600 rounded-full top-3 right-3">
-                  <FaTimes />
+                  <AiOutlineClose />
+                </div>
+              </div>
+              <div className="relative p-1 border rounded">
+                <img alt="Incorrect" src={examplePhotoIncorrect3} />
+                <div className="absolute p-2 bg-red-600 rounded-full top-3 right-3">
+                  <AiOutlineClose />
                 </div>
               </div>
             </div>

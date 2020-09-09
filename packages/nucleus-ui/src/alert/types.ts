@@ -1,4 +1,4 @@
-import { IconType } from "react-icons/lib/cjs";
+import { IconType } from "react-icons";
 
 export interface AlertProps {
   className?: string;

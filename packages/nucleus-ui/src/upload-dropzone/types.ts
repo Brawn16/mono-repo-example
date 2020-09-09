@@ -1,6 +1,6 @@
 import { DropzoneOptions } from "react-dropzone";
 import { FieldError } from "react-hook-form";
-import { IconType } from "react-icons/lib";
+import { IconType } from "react-icons";
 
 export interface UploadDropzoneContext {
   files: UploadDropzoneFile[];

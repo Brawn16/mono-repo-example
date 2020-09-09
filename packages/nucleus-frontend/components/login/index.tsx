@@ -7,7 +7,7 @@ import filterObject from "filter-obj";
 import React, { PropsWithChildren, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useForm } from "react-hook-form";
-import { FaLock } from "react-icons/fa";
+import { AiOutlineLock } from "react-icons/ai";
 import { Anchor } from "../anchor";
 import { login as loginMutation } from "./mutations.gql";
 import { LoginFormData, LoginProps } from "./types";
@@ -89,7 +89,7 @@ export function Login({
         />
         <Anchor href="/reset-password/">Forgot Password?</Anchor>
       </div>
-      <PrimaryButton className="w-full" iconType={FaLock} type="submit">
+      <PrimaryButton className="w-full" iconType={AiOutlineLock} type="submit">
         Login
       </PrimaryButton>
     </form>

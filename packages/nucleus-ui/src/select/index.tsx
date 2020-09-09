@@ -1,5 +1,5 @@
 import React from "react";
-import { FaCaretDown, FaCaretUp } from "react-icons/fa";
+import { AiOutlineCaretDown, AiOutlineCaretUp } from "react-icons/ai";
 import { InputError } from "../input-error";
 import { InputHelp } from "../input-help";
 import { Label } from "../label";
@@ -58,8 +58,8 @@ export function Select(props: SelectProps) {
         </select>
         <div className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-600 pointer-events-none">
           <div>
-            <FaCaretUp className="w-4 h-4 -mb-2" />
-            <FaCaretDown className="w-4 h-4 -mt-2" />
+            <AiOutlineCaretUp className="w-4 h-4 -mb-2" />
+            <AiOutlineCaretDown className="w-4 h-4 -mt-2" />
           </div>
         </div>
       </div>

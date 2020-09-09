@@ -82,6 +82,7 @@ export function Form() {
               name="addressLine1"
               onChange={(event) => setValue("addressLine1", event.target.value)}
               onKeyDown={() => clearErrors("addressLine1")}
+              required
               value={addressLine1}
             />
             <Input
@@ -117,6 +118,7 @@ export function Form() {
                 setValue("addressPostcode", event.target.value)
               }
               onKeyDown={() => clearErrors("addressPostcode")}
+              required
               value={addressPostcode}
             />
             <button

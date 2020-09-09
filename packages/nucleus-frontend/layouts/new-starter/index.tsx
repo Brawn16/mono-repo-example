@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { PropsWithChildren, useEffect } from "react";
-import { FiCheck } from "react-icons/fi";
+import { AiOutlineCheck } from "react-icons/ai";
 import { Anchor } from "../../components/anchor";
 import { Context } from "./context";
 import { background, logo } from "./index.module.css";
@@ -32,7 +32,7 @@ function renderStep({ href, label }: NewStarterStep, index: number) {
       <div
         className={`flex items-center justify-center w-10 h-10 text-xl font-bold border border-white border-opacity-25 rounded-full ${activeStyle}`}
       >
-        {currentStep > index - 1 ? <FiCheck /> : index + 1}
+        {currentStep > index - 1 ? <AiOutlineCheck /> : index + 1}
         {label !== "Summary" && (
           <div className="absolute h-4 border-r border-white top-10 border-opacity-25" />
         )}
