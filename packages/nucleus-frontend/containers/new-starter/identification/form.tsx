@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { Select } from "@sdh-project-services/nucleus-ui/dist/select";
+import { Spinner } from "@sdh-project-services/nucleus-ui/dist/spinner";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Context } from "../../../layouts/new-starter/context";
@@ -85,6 +86,7 @@ export function Form() {
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
+      {types === undefined && <Spinner />}
       {types && (
         <>
           <Select

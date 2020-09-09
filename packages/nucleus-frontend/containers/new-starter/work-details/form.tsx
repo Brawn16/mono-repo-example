@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client";
 import { InputError } from "@sdh-project-services/nucleus-ui/dist/input-error";
 import { Label } from "@sdh-project-services/nucleus-ui/dist/label";
 import { RadioButton } from "@sdh-project-services/nucleus-ui/dist/radio-button";
+import { Spinner } from "@sdh-project-services/nucleus-ui/dist/spinner";
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Context } from "../../../layouts/new-starter/context";
@@ -119,6 +120,7 @@ export function Form() {
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)}>
       <Label label="Who will you be working for?" />
+      {workstreamsData === undefined && <Spinner />}
       {workstreamsData && (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
           {renderWorkstreams(
@@ -140,9 +142,10 @@ export function Form() {
           error={{ message: "Please select an option", type: "manual" }}
         />
       )}
-      {subcontractorsData && (
-        <div className="mt-4">
-          <Label label="Which subcontractor do you work for?" />
+      <div className="mt-4">
+        <Label label="Which subcontractor do you work for?" />
+        {subcontractorsData === undefined && <Spinner />}
+        {subcontractorsData && (
           <div className="space-y-2">
             {renderSubcontractors(
               subcontractorsData.subcontractors,
@@ -156,13 +159,13 @@ export function Form() {
               onChange={() => handleChange("subcontractor", null)}
             />
           </div>
-          {errors.subcontractor && (
-            <InputError
-              error={{ message: "Please select an option", type: "manual" }}
-            />
-          )}
-        </div>
-      )}
+        )}
+        {errors.subcontractor && (
+          <InputError
+            error={{ message: "Please select an option", type: "manual" }}
+          />
+        )}
+      </div>
       <Navigation />
     </form>
   );

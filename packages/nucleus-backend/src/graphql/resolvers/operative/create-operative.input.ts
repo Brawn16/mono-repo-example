@@ -59,10 +59,10 @@ export class CreateOperativeInput {
   @Field(() => [String])
   public qualificationUploadIds?: string[];
 
-  @Field()
+  @Field({ nullable: true })
   public workstream?: string;
 
-  @Field()
+  @Field({ nullable: true })
   public subcontractor?: string;
 
   @Field(() => [CreateOperativeIdentificationInput])
