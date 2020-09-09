@@ -21,7 +21,7 @@ function renderFiles(files: UploadDropzoneFile[]) {
 
 export function UploadGallery({
   className = "mt-4",
-  gridClassName = "grid grid-cols-4 gap-4",
+  gridClassName = "grid grid-cols-2 md:grid-cols-4 gap-4",
   hideHeader,
 }: UploadGalleryProps) {
   const { files, fileLabel, multiple, onDeleteAll } = useContext(Context);
