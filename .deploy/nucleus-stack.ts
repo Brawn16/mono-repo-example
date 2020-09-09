@@ -261,7 +261,9 @@ export class NucleusStack extends Stack {
         maxCapacity: 100,
         minCapacity: 20,
       })
-      .scaleOnUtilization({ utilizationTarget: 0.5 });
+      .scaleOnUtilization({
+        utilizationTarget: 0.5,
+      });
 
     // Create graphql gateway
     const graphqlGateway = new LambdaRestApi(
