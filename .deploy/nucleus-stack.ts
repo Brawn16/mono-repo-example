@@ -7,7 +7,14 @@ import {
   Vpc,
 } from "@aws-cdk/aws-ec2";
 import { Queue, QueueEncryption } from "@aws-cdk/aws-sqs";
-import { Code, Function, Runtime, Tracing } from "@aws-cdk/aws-lambda";
+import {
+  Code,
+  Function,
+  Runtime,
+  Tracing,
+  Alias,
+  Version,
+} from "@aws-cdk/aws-lambda";
 import { SqsEventSource } from "@aws-cdk/aws-lambda-event-sources";
 import { LambdaRestApi } from "@aws-cdk/aws-apigateway";
 import { resolve } from "path";
@@ -227,20 +234,29 @@ export class NucleusStack extends Stack {
     });
 
     // Create graphql lambda version
-    const graphqlLambdaVersion = graphqlLambda.addVersion(
-      uuidv4(),
-      undefined,
-      `Graphql lambda version for Nucleus backend (${branch})`
+    const graphqlLambdaVersion = new Version(
+      this,
+      "NucleusBackendGraphqlLambdaVersion",
+      {
+        description: `Graphql lambda version for Nucleus backend (${branch})`,
+        lambda: graphqlLambda,
+      }
     );
 
-    // Create graphql lambda version alias
-    const graphqlLambdaVersionAlias = graphqlLambdaVersion.addAlias("latest", {
-      description: `Graphql lambda version alias for Nucleus backend (${branch})`,
-      provisionedConcurrentExecutions: 20,
-    });
+    // Create graphql lambda alias
+    const graphqlLambdaAlias = new Alias(
+      this,
+      "NucleusBackendGraphqlLambdaAlias",
+      {
+        aliasName: uuidv4(),
+        description: `Graphql lambda version alias for Nucleus backend (${branch})`,
+        provisionedConcurrentExecutions: 20,
+        version: graphqlLambdaVersion,
+      }
+    );
 
-    // Configure graphql lambda version alias autoscaling
-    graphqlLambdaVersionAlias
+    // Configure graphql lambda alias autoscaling
+    graphqlLambdaAlias
       .addAutoScaling({
         maxCapacity: 100,
         minCapacity: 20,
