@@ -38,9 +38,7 @@ export function Form() {
         tags={["operativeQualification", "public"]}
         uploads={qualificationUploadIds}
       >
-        <div className="py-2">
-          <InputHelp help="All uploads must be from a UK recognised competent authority / professional body / licensed body" />
-        </div>
+        <InputHelp help="All uploads must be from a UK recognised competent authority/professional body/licensed body." />
         <UploadGallery />
       </UploadDropzone>
       <Navigation />

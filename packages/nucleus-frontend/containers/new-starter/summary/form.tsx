@@ -22,7 +22,7 @@ function findValue(data: any = [], id: string) {
 
 function renderField(label: string, value?: string) {
   return (
-    <div className="py-1 grid grid-cols-2 gap-4">
+    <div key={label} className="py-1 grid grid-cols-2 gap-4">
       <strong className="truncate">{label}</strong>
       <div className="text-gray-600 truncate">{value}</div>
     </div>

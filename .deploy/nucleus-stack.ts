@@ -158,7 +158,7 @@ export class NucleusStack extends Stack {
       fifo: true,
       queueName: `${namePrefixBackend}-CoreQueue.fifo`,
       retentionPeriod: Duration.days(14),
-      visibilityTimeout: Duration.seconds(75),
+      visibilityTimeout: Duration.seconds(120),
     });
 
     // Create uploads bucket
@@ -189,10 +189,8 @@ export class NucleusStack extends Stack {
         ],
       }),
       environment: {
-        AWS_QUEUE_ENDPOINT: "https://sqs.eu-west-1.amazonaws.com",
         AWS_QUEUE_URL: coreQueue.queueUrl,
         AWS_UPLOADS_BUCKET: uploadsBucket.bucketName,
-        AWS_UPLOADS_ENDPOINT: "https://s3.eu-west-1.amazonaws.com",
         AWS_SECRET: `${namePrefixBackend}-LambdaSecret`,
         TYPEORM_HOST: coreDatabase.attrEndpointAddress,
       },
@@ -223,7 +221,7 @@ export class NucleusStack extends Stack {
       functionName: `${namePrefixBackend}-GraphqlLambda`,
       handler: "dist/graphql/index.graphqlHandler",
       securityGroups: [graphqlSecurityGroup],
-      timeout: Duration.seconds(15),
+      timeout: Duration.seconds(25),
     });
 
     // Create graphql gateway
@@ -264,7 +262,7 @@ export class NucleusStack extends Stack {
       functionName: `${namePrefixBackend}-QueueLambda`,
       handler: "dist/queue/index.queueHandler",
       securityGroups: [queueSecurityGroup],
-      timeout: Duration.seconds(60),
+      timeout: Duration.seconds(115),
     });
 
     // Grant lambdas access to lambda secret
