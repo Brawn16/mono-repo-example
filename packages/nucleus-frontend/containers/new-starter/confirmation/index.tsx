@@ -7,7 +7,7 @@ export function Confirmation() {
     <>
       <Head title="Confirmation - New Starter Form" />
       <NewStarterLayout showSteps={false} title="New Starter Confirmation">
-        Congratulations. You have now completed the Online Onboarding We are
+        Congratulations, you have now completed the online onboarding. We are
         dealing with your application and will notify you of the outcome via
         contact details provided within X working days.
         <div className="mt-4">
