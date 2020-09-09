@@ -38,7 +38,7 @@ export function Form() {
   });
   const hasError = errors.addressLine1 || errors.addressPostcode;
 
-  register({ name: "addressLine1" }, { required: "This field is required" });
+  register({ name: "addressLine1" }, { required: "Address is required" });
   register({ name: "addressLine2" });
   register({ name: "addressTownCity" });
   register({ name: "addressCounty" });
