@@ -7,7 +7,7 @@ import {
   Vpc,
 } from "@aws-cdk/aws-ec2";
 import { Queue, QueueEncryption } from "@aws-cdk/aws-sqs";
-import { Code, Function, Runtime, Version } from "@aws-cdk/aws-lambda";
+import { Code, Function, Runtime, Tracing } from "@aws-cdk/aws-lambda";
 import { SqsEventSource } from "@aws-cdk/aws-lambda-event-sources";
 import { LambdaRestApi } from "@aws-cdk/aws-apigateway";
 import { resolve } from "path";
@@ -21,6 +21,7 @@ import {
 import { Bucket, BlockPublicAccess, HttpMethods } from "@aws-cdk/aws-s3";
 import { BucketDeployment, Source } from "@aws-cdk/aws-s3-deployment";
 import { RemovalPolicy } from "@aws-cdk/core";
+import { v4 as uuidv4 } from "uuid";
 
 export class NucleusStack extends Stack {
   constructor(
@@ -222,14 +223,29 @@ export class NucleusStack extends Stack {
       handler: "dist/graphql/index.graphqlHandler",
       securityGroups: [graphqlSecurityGroup],
       timeout: Duration.seconds(25),
+      tracing: Tracing.ACTIVE,
     });
 
     // Create graphql lambda version
-    new Version(this, "NucleusBackendGraphqlLambdaVersion", {
-      description: `Graphql lambda version for Nucleus backend (${branch})`,
-      lambda: graphqlLambda,
-      provisionedConcurrentExecutions: 10,
+    const graphqlLambdaVersion = graphqlLambda.addVersion(
+      uuidv4(),
+      undefined,
+      `Graphql lambda version for Nucleus backend (${branch})`
+    );
+
+    // Create graphql lambda version alias
+    const graphqlLambdaVersionAlias = graphqlLambdaVersion.addAlias(uuidv4(), {
+      description: `Graphql lambda version alias for Nucleus backend (${branch})`,
+      provisionedConcurrentExecutions: 20,
     });
+
+    // Configure graphql lambda version alias autoscaling
+    graphqlLambdaVersionAlias
+      .addAutoScaling({
+        maxCapacity: 100,
+        minCapacity: 20,
+      })
+      .scaleOnUtilization({ utilizationTarget: 0.5 });
 
     // Create graphql gateway
     const graphqlGateway = new LambdaRestApi(
@@ -270,6 +286,7 @@ export class NucleusStack extends Stack {
       handler: "dist/queue/index.queueHandler",
       securityGroups: [queueSecurityGroup],
       timeout: Duration.seconds(115),
+      tracing: Tracing.ACTIVE,
     });
 
     // Grant lambdas access to lambda secret
