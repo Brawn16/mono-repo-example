@@ -22,7 +22,7 @@ export function PageNotFound() {
         </button>
         <Anchor
           className="pl-2 mt-8 ml-2 text-blue-600 border-l hover:text-blue-500"
-          href="/dashboard"
+          href="/dashboard/"
         >
           Dashboard &rarr;
         </Anchor>

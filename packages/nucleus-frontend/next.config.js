@@ -1,4 +1,11 @@
 const withImages = require("next-images");
 const transpile = require("next-transpile-modules");
 
-module.exports = transpile(["@sdh-project-services/nucleus-ui"])(withImages());
+const withModules = transpile(["@sdh-project-services/nucleus-ui"]);
+
+module.exports = withModules(
+  withImages({
+    crossOrigin: "anonymous",
+    trailingSlash: true,
+  })
+);

@@ -22,7 +22,7 @@ function findValue(data: any = [], id: string) {
 
 function renderField(label: string, value?: string) {
   return (
-    <div className="py-1 grid grid-cols-2 gap-4">
+    <div key={label} className="py-1 grid grid-cols-2 gap-4">
       <strong className="truncate">{label}</strong>
       <div className="text-gray-600 truncate">{value}</div>
     </div>
@@ -116,7 +116,7 @@ export function Form() {
     });
 
     if (errors === undefined) {
-      Router.push("/new-starter/confirmation");
+      Router.push("/new-starter/confirmation/");
       localStorage.removeItem("new-starter");
     }
   };
@@ -126,7 +126,7 @@ export function Form() {
       {error && (
         <Alert className="mb-8 text-white bg-red-600">{error.message}</Alert>
       )}
-      <Panel href="/new-starter/personal-details" title="Personal Details">
+      <Panel href="/new-starter/personal-details/" title="Personal Details">
         {renderField("First Name", values.firstName)}
         {renderField("Last Name", values.lastName)}
         {renderField("Email", values.email)}
@@ -137,7 +137,7 @@ export function Form() {
           values.emegencyContactPhoneNumber
         )}
       </Panel>
-      <Panel className="mt-8" href="/new-starter/address" title="Address">
+      <Panel className="mt-8" href="/new-starter/address/" title="Address">
         {renderAddress(values)}
       </Panel>
       <Panel
@@ -166,7 +166,7 @@ export function Form() {
       </Panel>
       <Panel
         className="mt-8"
-        href="/new-starter/work-details"
+        href="/new-starter/work-details/"
         title="Work Details"
       >
         {renderField(
@@ -180,7 +180,7 @@ export function Form() {
       </Panel>
       <Panel
         className="mt-8"
-        href="/new-starter/qualifications"
+        href="/new-starter/qualifications/"
         title="Qualifications"
       >
         <div className="grid grid-cols-2">
@@ -190,13 +190,13 @@ export function Form() {
           </div>
         </div>
       </Panel>
-      <Panel className="mt-8" href="/new-starter/my-photo" title="My Photo">
+      <Panel className="mt-8" href="/new-starter/my-photo/" title="My Photo">
         <div className="grid grid-cols-2 gap-4">
           <strong className="truncate">Worker profile</strong>
           <div className="w-32">{renderUploads([values.photoUpload])}</div>
         </div>
       </Panel>
-      <Panel className="mt-8" href="/new-starter/medical" title="Medical">
+      <Panel className="mt-8" href="/new-starter/medical/" title="Medical">
         {renderField(
           "Medical issues or ailments",
           values.medicalIssues ? "Yes" : "No"

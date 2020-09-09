@@ -1,5 +1,5 @@
 import { env } from "process";
-import { S3, Credentials } from "aws-sdk";
+import { getS3Object } from "../../shared/aws/s3";
 import { OperativeEntity } from "../../shared/entity/operative.entity";
 import { UploadEntity } from "../../shared/entity/upload.entity";
 import { getMSGraphClient } from "../../shared/ms-graph/client";
@@ -11,10 +11,6 @@ function getUploadExtension(upload: UploadEntity) {
 
 export async function createOperativeSyncPhotos(operativeId: string) {
   const api = env.SERVICE_NEW_STARTER_MS_GRAPH_SYNC_FILES_API;
-  const accessKey = env.AWS_UPLOAD_ACCESS_KEY;
-  const accessSecret = env.AWS_UPLOAD_ACCESS_SECRET;
-  const bucket = env.AWS_UPLOAD_BUCKET;
-  const endpoint = env.AWS_UPLOAD_ENDPOINT;
   const promises: Array<Promise<void>> = [];
   const newFileApi = `${api}:/children`;
   const client = getMSGraphClient();
@@ -22,23 +18,6 @@ export async function createOperativeSyncPhotos(operativeId: string) {
   if (api === undefined) {
     throw new Error("MS Graph file creation is not configured.");
   }
-
-  if (
-    accessKey === undefined ||
-    accessSecret === undefined ||
-    bucket === undefined ||
-    endpoint === undefined
-  ) {
-    throw new Error("Upload bucket is not configured.");
-  }
-
-  const s3 = new S3({
-    credentials: new Credentials({
-      accessKeyId: accessKey,
-      secretAccessKey: accessSecret,
-    }),
-    endpoint,
-  });
 
   const operative = await OperativeEntity.findOneOrFail(operativeId, {
     relations: [
@@ -56,22 +35,8 @@ export async function createOperativeSyncPhotos(operativeId: string) {
   });
 
   // Upload file to folder
-  const upload = async (Key: string, name: string) => {
-    const stream = await new Promise((resolve, reject) => {
-      s3.getObject(
-        {
-          Bucket: bucket,
-          Key,
-        },
-        (error, { Body }) => {
-          if (error) {
-            reject(error);
-          }
-          resolve(Body);
-        }
-      );
-    });
-
+  const upload = async (id: string, name: string) => {
+    const stream = await getS3Object(id);
     return client
       .api(
         `groups/a456dd18-d1c9-41a6-8286-9086a270e4dc/drive/items/${response.id}:/${name}:/content`

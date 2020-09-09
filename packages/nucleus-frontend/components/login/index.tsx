@@ -87,9 +87,9 @@ export function Login({
           label="Remember Me"
           name="remember"
         />
-        <Anchor href="/reset-password">Forgot Password?</Anchor>
+        <Anchor href="/reset-password/">Forgot Password?</Anchor>
       </div>
-      <PrimaryButton className="w-full" iconType={FaLock}>
+      <PrimaryButton className="w-full" iconType={FaLock} type="submit">
         Login
       </PrimaryButton>
     </form>

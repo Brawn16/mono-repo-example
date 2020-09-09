@@ -6,7 +6,7 @@ export function Index(): null {
   const [{ token }] = useCookies();
 
   useEffect(() => {
-    Router.push(token ? "/dashboard" : "/login");
+    Router.push(token ? "/dashboard/" : "/login/");
   }, []);
 
   return null;

@@ -22,7 +22,7 @@ export function Nav() {
   const [, , removeCookie] = useCookies();
 
   const handleLogout = async () => {
-    await Router.push("/login");
+    await Router.push("/login/");
     removeCookie("token");
   };
 
@@ -37,8 +37,8 @@ export function Nav() {
             <FaBars className="w-5 h-5" />
           </button>
           <div className="items-center hidden -ml-2 md:flex">
-            <NavLink href="/dashboard" label="Dashboard" />
-            <NavLink href="/work-packs" label="Work Packs" />
+            <NavLink href="/dashboard/" label="Dashboard" />
+            <NavLink href="/work-packs/" label="Work Packs" />
           </div>
           <div className="flex items-center">
             <button
