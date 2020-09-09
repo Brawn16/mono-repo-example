@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, InputHTMLAttributes, Ref } from "react";
 import { FieldError } from "react-hook-form";
-import { IconType } from "react-icons/lib/cjs";
+import { IconType } from "react-icons";
 
 export interface InputProps
   extends DetailedHTMLProps<

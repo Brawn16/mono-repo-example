@@ -12,7 +12,7 @@ import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
 import { format, parse } from "date-fns";
 import React, { useRef } from "react";
 import { BrowserView, MobileView } from "react-device-detect";
-import { FaRegCalendar } from "react-icons/fa";
+import { AiOutlineCalendar } from "react-icons/ai";
 import { Input } from "../input";
 import { DatePickerProps } from "./types";
 
@@ -61,7 +61,7 @@ export function DatePicker(props: DatePickerProps) {
   return (
     <>
       <MobileView>
-        <Input iconType={FaRegCalendar} type="date" {...inputProperties} />
+        <Input iconType={AiOutlineCalendar} type="date" {...inputProperties} />
       </MobileView>
       <BrowserView>
         <MuiThemeProvider theme={theme}>
@@ -76,7 +76,7 @@ export function DatePicker(props: DatePickerProps) {
                 <Input
                   componentRef={ref}
                   data-testid="date-picker-input"
-                  iconType={FaRegCalendar}
+                  iconType={AiOutlineCalendar}
                   onMouseDown={onClick}
                   {...inputProperties}
                 />

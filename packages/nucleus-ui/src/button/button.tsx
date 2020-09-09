@@ -23,11 +23,11 @@ export function Button(props: PropsWithChildren<ButtonProps>) {
     <button type="button" {...buttonProperties} className={className}>
       <span className="relative flex items-center justify-center truncate">
         {Icon && !postionIconRight && (
-          <Icon className="w-3 h-3 mr-1 text-white opacity-50 duration-150 ease-in-out transition" />
+          <Icon className="w-4 h-4 mr-1 text-white opacity-50 duration-150 ease-in-out transition" />
         )}
         {children}
         {Icon && postionIconRight && (
-          <Icon className="w-3 h-3 ml-1 text-white opacity-50 duration-150 ease-in-out transition" />
+          <Icon className="w-4 h-4 ml-1 text-white opacity-50 duration-150 ease-in-out transition" />
         )}
       </span>
     </button>

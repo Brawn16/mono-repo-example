@@ -1,6 +1,6 @@
 import { Panel as BasePanel } from "@sdh-project-services/nucleus-ui/dist/panel";
 import React, { PropsWithChildren } from "react";
-import { FaEdit } from "react-icons/fa";
+import { AiOutlineEdit } from "react-icons/ai";
 import { Anchor } from "../../../components/anchor";
 import { PanelProps } from "./types";
 
@@ -18,7 +18,7 @@ export function Panel({
           className="flex items-center hover:text-gray-800 focus:outline-none duration-150 ease-in-out transition"
           href={href}
         >
-          <FaEdit />
+          <AiOutlineEdit />
           <span className="pl-1 underline">Edit</span>
         </Anchor>
       </div>

@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { FaCloudUploadAlt } from "react-icons/fa";
+import { AiOutlineCloudUpload } from "react-icons/ai";
 import { PrimaryButton } from "../button";
 import { InputError } from "../input-error";
 import { Label } from "../label";
@@ -11,7 +11,7 @@ export function UploadDropzone(props: PropsWithChildren<UploadDropzoneProps>) {
   const {
     children,
     error,
-    iconType: Icon = FaCloudUploadAlt,
+    iconType: Icon = AiOutlineCloudUpload,
     label,
     multiple,
     onChange,

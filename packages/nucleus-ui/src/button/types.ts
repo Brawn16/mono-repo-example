@@ -1,5 +1,5 @@
 import { DetailedHTMLProps, ButtonHTMLAttributes } from "react";
-import { IconType } from "react-icons/lib/cjs";
+import { IconType } from "react-icons";
 
 export interface ButtonProps
   extends DetailedHTMLProps<

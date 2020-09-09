@@ -1,7 +1,7 @@
 import Router from "next/router";
 import React from "react";
 import { useCookies } from "react-cookie";
-import { FaBars, FaSignOutAlt } from "react-icons/fa";
+import { AiOutlineMenu, AiOutlineLogout } from "react-icons/ai";
 import { NavLink } from "./nav-link";
 import { notificationCount } from "./nav.module.css";
 
@@ -34,7 +34,7 @@ export function Nav() {
             className="p-2 ml-2 text-blue-300 rounded-full md:hidden duration-150 ease-in-out transition hover:text-white focus:outline-none focus:text-white focus:bg-blue-600"
             type="button"
           >
-            <FaBars className="w-5 h-5" />
+            <AiOutlineMenu className="w-5 h-5" />
           </button>
           <div className="items-center hidden -ml-2 md:flex">
             <NavLink href="/dashboard/" label="Dashboard" />
@@ -60,7 +60,7 @@ export function Nav() {
               onClick={handleLogout}
               type="button"
             >
-              <FaSignOutAlt className="w-5 h-5" />
+              <AiOutlineLogout className="w-5 h-5" />
             </button>
           </div>
         </div>

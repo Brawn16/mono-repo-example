@@ -1,11 +1,11 @@
 import React from "react";
-import { FaInfoCircle } from "react-icons/fa";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { InputHelpProps } from "./types";
 
 export function InputHelp({ help }: InputHelpProps) {
   return (
     <div className="flex items-center mt-1 text-gray-500">
-      <FaInfoCircle className="w-3 h-3" />
+      <AiOutlineQuestionCircle className="w-4 h-4" />
       <p className="ml-1 text-sm">{help}</p>
     </div>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import { FaQuestionCircle } from "react-icons/fa";
+import { AiOutlineQuestion } from "react-icons/ai";
 import { Alert } from ".";
 
 export default {
@@ -15,7 +15,7 @@ export const alert = () => (
 );
 
 export const customIcon = () => (
-  <Alert iconType={FaQuestionCircle}>
+  <Alert iconType={AiOutlineQuestion}>
     <strong>Alert with custom icon</strong>
     <p>And a little bit of text...</p>
   </Alert>

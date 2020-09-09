@@ -1,11 +1,11 @@
 import React, { PropsWithChildren } from "react";
-import { FaExclamationCircle } from "react-icons/fa";
+import { AiOutlineWarning } from "react-icons/ai";
 import { AlertProps } from "./types";
 
 export function Alert({
   children,
   className = "text-white bg-red-600",
-  iconType: Icon = FaExclamationCircle,
+  iconType: Icon = AiOutlineWarning,
 }: PropsWithChildren<AlertProps>) {
   return (
     <div className={`p-4  ${className}`}>

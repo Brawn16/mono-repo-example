@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { FaTrash } from "react-icons/fa";
+import { AiOutlineDelete } from "react-icons/ai";
 import { Context } from "../upload-dropzone/context";
 import { UploadProgress } from "../upload-progress";
 import { UploadViewer } from "../upload-viewer";
@@ -33,7 +33,7 @@ export function File({ file: { file, id }, index }: UploadGalleryFileProps) {
         onClick={() => onDelete(index)}
         type="button"
       >
-        <FaTrash />
+        <AiOutlineDelete />
         <span className="pl-1 underline">Remove file</span>
       </button>
     </div>

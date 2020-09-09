@@ -48,7 +48,7 @@ export function Form() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(handleFormSubmit)}>
+      <form className="mt-8" onSubmit={handleSubmit(handleFormSubmit)}>
         <Checkbox
           checked={acceptedRequiredDocs === true}
           className="my-2"

@@ -1,6 +1,6 @@
 import { action } from "@storybook/addon-actions";
 import React from "react";
-import { FaLock, FaCheck } from "react-icons/fa";
+import { AiOutlineLock, AiOutlineCheck } from "react-icons/ai";
 import {
   Button,
   PrimaryButton,
@@ -29,13 +29,13 @@ export const buttonWithIcon = () => {
   return (
     <div className="flex space-x-2">
       <PrimaryButton
-        iconType={FaLock}
+        iconType={AiOutlineLock}
         onClick={action("onClick")}
         postionIconRight
       >
         Button
       </PrimaryButton>
-      <PrimaryButton iconType={FaLock} onClick={action("onClick")}>
+      <PrimaryButton iconType={AiOutlineLock} onClick={action("onClick")}>
         Button
       </PrimaryButton>
     </div>
@@ -65,7 +65,7 @@ export const secondaryButton = () => {
 
 export const successButton = () => {
   return (
-    <SuccessButton iconType={FaCheck} onClick={action("onClick")}>
+    <SuccessButton iconType={AiOutlineCheck} onClick={action("onClick")}>
       Success
     </SuccessButton>
   );
