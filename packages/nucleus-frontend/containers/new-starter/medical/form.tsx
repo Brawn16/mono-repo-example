@@ -29,7 +29,6 @@ export function Form() {
   } = useForm<NewStarterMedicalFormData>({ defaultValues: values });
 
   register({ name: "medicalIssues" }, { validate });
-  register({ name: "medicationRequired" });
   register({ name: "medicationRequired" }, { validate });
 
   watch(["medicalIssues", "medicationRequired"]);
