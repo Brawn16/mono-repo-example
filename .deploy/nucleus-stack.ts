@@ -150,10 +150,9 @@ export class NucleusStack extends Stack {
         ":SecretString:TYPEORM_PASSWORD}}",
       ]),
       scalingConfiguration: {
-        autoPause: true,
-        maxCapacity: 2,
+        autoPause: false,
+        maxCapacity: 16,
         minCapacity: 2,
-        secondsUntilAutoPause: 300,
       },
       storageEncrypted: true,
       vpcSecurityGroupIds: [coreDatabaseSecurityGroup.securityGroupId],
