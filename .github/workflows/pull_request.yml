@@ -30,8 +30,8 @@ jobs:
       - name: Build UI
         run: yarn workspace @sdh-project-services/nucleus-ui build
   
-        - name: Build frontend
-          run: yarn workspace @sdh-project-services/nucleus-frontend build
+      - name: Build frontend
+        run: yarn workspace @sdh-project-services/nucleus-frontend build
 
   storybook:
     name: Publish Storybook
