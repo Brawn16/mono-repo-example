@@ -5,7 +5,7 @@ import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 export function TermsAndConditions() {
   return (
     <>
-      <Head title="Terms and conditions - New Starter Form" />
+      <Head title="Terms and Conditions - New Starter Form" />
       <NewStarterLayout showSteps={false} title="Terms and conditions">
         terms and coditions go here
       </NewStarterLayout>
