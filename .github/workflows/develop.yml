@@ -4,21 +4,8 @@ on:
     branches:
       - develop
 jobs:
-  test:
-    name: Run Unit Tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Retrieve code
-        uses: actions/checkout@v2
-
-      - name: Install modules
-        uses: bahmutov/npm-install@v1
-
-      - name: Run tests
-        run: yarn test
-
-  build:
-    name: Build Bundles
+  build-backend:
+    name: Build Backend
     needs: [test]
     runs-on: ubuntu-latest
     steps:
@@ -31,17 +18,22 @@ jobs:
       - name: Build backend
         run: yarn workspace @sdh-project-services/nucleus-backend build
 
-      - name: Build UI
-        run: yarn workspace @sdh-project-services/nucleus-ui build
-
-      - name: Retrieve frontend cache
-        uses: actions/cache@v1
-        with:
-          key: nucleus-frontend-${{ hashFiles('yarn.lock') }}
-          path: packages/nucleus-frontend/.next/cache
-
-      - name: Build frontend
-        run: yarn workspace @sdh-project-services/nucleus-frontend build
+    build-frontend:
+      name: Build Frontend
+      needs: [test]
+      runs-on: ubuntu-latest
+      steps:
+        - name: Retrieve code
+          uses: actions/checkout@v2
+  
+        - name: Install modules
+          uses: bahmutov/npm-install@v1
+  
+        - name: Build UI
+          run: yarn workspace @sdh-project-services/nucleus-ui build
+  
+        - name: Build frontend
+          run: yarn workspace @sdh-project-services/nucleus-frontend build
 
   storybook:
     name: Publish Storybook
@@ -58,3 +50,16 @@ jobs:
         run: cd packages/nucleus-ui && yarn chromatic
           --exit-once-uploaded
           --project-token=${{ secrets.CHROMATIC }}
+
+    test:
+      name: Run Unit Tests
+      runs-on: ubuntu-latest
+      steps:
+        - name: Retrieve code
+          uses: actions/checkout@v2
+  
+        - name: Install modules
+          uses: bahmutov/npm-install@v1
+  
+        - name: Run tests
+          run: yarn test
