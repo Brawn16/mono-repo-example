@@ -16,19 +16,19 @@ jobs:
       - name: Build backend
         run: yarn workspace @sdh-project-services/nucleus-backend build
 
-    build-frontend:
-      name: Build Frontend
-      needs: [test]
-      runs-on: ubuntu-latest
-      steps:
-        - name: Retrieve code
-          uses: actions/checkout@v2
-  
-        - name: Install modules
-          uses: bahmutov/npm-install@v1
-  
-        - name: Build UI
-          run: yarn workspace @sdh-project-services/nucleus-ui build
+  build-frontend:
+    name: Build Frontend
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retrieve code
+        uses: actions/checkout@v2
+
+      - name: Install modules
+        uses: bahmutov/npm-install@v1
+
+      - name: Build UI
+        run: yarn workspace @sdh-project-services/nucleus-ui build
   
         - name: Build frontend
           run: yarn workspace @sdh-project-services/nucleus-frontend build
@@ -49,15 +49,15 @@ jobs:
           --exit-once-uploaded
           --project-token=${{ secrets.CHROMATIC }}
 
-    test:
-      name: Run Unit Tests
-      runs-on: ubuntu-latest
-      steps:
-        - name: Retrieve code
-          uses: actions/checkout@v2
-  
-        - name: Install modules
-          uses: bahmutov/npm-install@v1
-  
-        - name: Run tests
-          run: yarn test
+  test:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retrieve code
+        uses: actions/checkout@v2
+
+      - name: Install modules
+        uses: bahmutov/npm-install@v1
+
+      - name: Run tests
+        run: yarn test
