@@ -1,3 +1,5 @@
+import "source-map-support/register";
+
 import { resolve as resolvePath } from "path";
 import { env } from "process";
 import { config } from "dotenv";

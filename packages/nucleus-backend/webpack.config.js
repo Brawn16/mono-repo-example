@@ -4,6 +4,7 @@ const TerserPlugin = require("terser-webpack-plugin");
 const { IgnorePlugin } = require("webpack");
 
 module.exports = {
+  devtool: "source-map",
   entry: lib.entries,
   externals: {
     argon2: "argon2",
@@ -28,10 +29,8 @@ module.exports = {
     minimizer: [
       new TerserPlugin({
         extractComments: false,
-        sourceMap: true,
         terserOptions: {
           keep_classnames: true,
-          sourceMap: true,
         },
       }),
     ],
@@ -45,8 +44,6 @@ module.exports = {
   resolve: {
     extensions: [".js", ".mjs", ".ts"],
   },
-  stats: {
-    warnings: false,
-  },
+  stats: "errors-only",
   target: "node",
 };

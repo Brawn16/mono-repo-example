@@ -3,13 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "run-s build:rimraf build:tsc",
-    "build:rimraf": "rimraf dist",
-    "build:tsc": "tsc",
+    "build": "serverless webpack",
     "dev": "run-p dev:elasticmq dev:s3rver dev:sls",
     "dev:elasticmq": "java -jar elasticmq.jar",
     "dev:s3rver": "s3rver --configure-bucket uploads.localhost cors.xml --directory .s3rver",
-    "dev:sls": "export NODE_ENV=test && sls offline --httpPort 5000",
+    "dev:sls": "export NODE_ENV=test && serverless offline --httpPort 5000",
     "test": "jest",
     "typeorm": "typeorm"
   },
@@ -57,6 +55,7 @@
     "reflect-metadata": "^0.1.13",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
+    "source-map-support": "^0.5.19",
     "type-graphql": "^0.17.6",
     "typeorm": "^0.2.24",
     "uuid": "^8.3.0"
