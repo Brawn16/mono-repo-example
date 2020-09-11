@@ -43,9 +43,22 @@ it("returns addresses", async () => {
   ]);
 });
 
+it("throws an error when postcode is invalid", async () => {
+  stub(request, "get").rejects({
+    response: {
+      statusCode: 400
+    },
+  });
+
+  const result = new AddressLookupResolver().addressLookup("postcode");
+  expect(result).rejects.toThrow(new Error("Invalid postcode."));
+});
+
 it("throws an error when postcode is unknown", async () => {
-  stub(request, "get").resolves({
-    statusCode: 404,
+  stub(request, "get").rejects({
+    response: {
+      statusCode: 404
+    },
   });
 
   const result = new AddressLookupResolver().addressLookup("postcode");
@@ -53,8 +66,10 @@ it("throws an error when postcode is unknown", async () => {
 });
 
 it("throws an error when postcode service errors", async () => {
-  stub(request, "get").resolves({
-    statusCode: 500,
+  stub(request, "get").rejects({
+    response: {
+      statusCode: 500
+    },
   });
 
   const result = new AddressLookupResolver().addressLookup("postcode");

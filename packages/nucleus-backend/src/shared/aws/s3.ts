@@ -12,7 +12,7 @@ export function getS3Client() {
 
   // If we are using a local bucket, set endpoint and credentials
   if (bucket.includes("localhost")) {
-    endpoint = "http://localhost:4568";
+    endpoint = "http://localhost:4569";
     credentials = new Credentials({
       accessKeyId: "S3RVER",
       secretAccessKey: "S3RVER",

@@ -1,24 +1,28 @@
 service: nucleus-backend
 plugins:
+  - serverless-webpack
+  - serverless-s3-local
   - serverless-offline-sqs
+  - serverless-offline-elasticmq
   - serverless-offline
 
-provider:
-  name: aws
-
 custom:
+  s3:
+    cors: cors.xml
+    directory: .s3rver
+  elasticmq:
+    stages:
+      - dev
+    start:
+      noStart: false
   serverless-offline-sqs:
     autoCreate: true
     endpoint: http://0.0.0.0:9324
-
-resources:
-  Resources:
-    Queue:
-      Type: AWS::SQS::Queue
-      Properties:
-        ContentBasedDeduplication: true
-        FifoQueue: true
-        QueueName: Queue.fifo
+  serverless-offline:
+    useChildProcesses: true
+  webpack:
+    keepOutputDirectory: true
+    packager: yarn
 
 functions:
   graphql:
@@ -31,7 +35,7 @@ functions:
           cors: true
           method: post
           path: graphql
-    handler: dist/graphql/index.graphqlHandler
+    handler: src/graphql/index.graphqlHandler
   queue:
     events:
       - sqs:
@@ -39,4 +43,21 @@ functions:
             Fn::GetAtt:
               - Queue
               - Arn
-    handler: dist/queue/index.queueHandler
+    handler: src/queue/index.queueHandler
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+resources:
+  Resources:
+    Queue:
+      Type: AWS::SQS::Queue
+      Properties:
+        ContentBasedDeduplication: true
+        FifoQueue: true
+        QueueName: Queue.fifo
+    Uploads:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: uploads.localhost

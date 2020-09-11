@@ -185,16 +185,6 @@ export class NucleusStack extends Stack {
 
     // Create base lambda props
     const baseLambdaProps = {
-      code: Code.fromAsset(resolve(__dirname, "../packages/nucleus-backend"), {
-        exclude: [
-          "*.*",
-          ".*",
-          "!dist/**",
-          "!node_modules/**",
-          "!.env",
-          "!jwt.key",
-        ],
-      }),
       environment: {
         AWS_QUEUE_URL: coreQueue.queueUrl,
         AWS_UPLOADS_BUCKET: uploadsBucket.bucketName,
@@ -219,6 +209,12 @@ export class NucleusStack extends Stack {
     // Create graphql lambda
     const graphqlLambda = new Function(this, "NucleusBackendGraphqlLambda", {
       ...baseLambdaProps,
+      code: Code.fromAsset(
+        resolve(__dirname, "../packages/nucleus-backend/.webpack/service"),
+        {
+          exclude: ["src/queue/"],
+        }
+      ),
       description: `Graphql lambda for Nucleus backend (${branch})`,
       environment: {
         ...baseLambdaProps.environment,
@@ -297,6 +293,12 @@ export class NucleusStack extends Stack {
     // Create queue lambda
     const queueLambda = new Function(this, "NucleusBackendQueueLambda", {
       ...baseLambdaProps,
+      code: Code.fromAsset(
+        resolve(__dirname, "../packages/nucleus-backend/.webpack/service"),
+        {
+          exclude: ["src/graphql/"],
+        }
+      ),
       description: `Queue lambda for Nucleus backend (${branch})`,
       events: [new SqsEventSource(coreQueue)],
       functionName: `${namePrefixBackend}-QueueLambda`,
