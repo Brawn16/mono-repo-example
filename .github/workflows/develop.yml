@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - develop
+
 jobs:
   build-backend:
     name: Build Backend
