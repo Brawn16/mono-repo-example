@@ -1,12 +1,14 @@
-import { hash } from "argon2";
+import { generateScryptHash } from "../../crypto/scrypt";
 import { UserEntity } from "../../entity/user.entity";
 
 export async function getMockUserEntity(): Promise<UserEntity> {
+  const { hash, salt } = await generateScryptHash("password");
   const user = new UserEntity();
 
   user.id = "id";
   user.email = "email";
-  user.password = await hash("password");
+  user.password = hash;
+  user.passwordSalt = salt;
   user.isActive = true;
   user.isVerified = true;
 

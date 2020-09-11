@@ -1,7 +1,7 @@
-import { hash } from "argon2";
 import { MinLength } from "class-validator";
 import { Field, ObjectType } from "type-graphql";
 import { AfterLoad, BeforeInsert, BeforeUpdate, Column, Entity } from "typeorm";
+import { generateScryptHash } from "../crypto/scrypt";
 import { BaseEntity } from "./base.entity";
 
 @Entity("user")
@@ -14,6 +14,10 @@ export class UserEntity extends BaseEntity {
   @Column()
   @MinLength(8)
   public password?: string;
+
+  @Column()
+  @Field()
+  public passwordSalt?: string;
 
   @Column()
   @Field()
@@ -38,7 +42,10 @@ export class UserEntity extends BaseEntity {
   @BeforeUpdate()
   public async encryptPassword(): Promise<void> {
     if (this.password !== undefined && this.currentPassword !== this.password) {
-      this.password = await hash(this.password);
+      const { hash, salt } = await generateScryptHash(this.password);
+
+      this.password = hash;
+      this.passwordSalt = salt;
       this.loadCurrentPassword();
     }
   }

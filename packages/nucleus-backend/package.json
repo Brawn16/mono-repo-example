@@ -12,6 +12,28 @@
     "node": ">= 12.0.0",
     "npm": "please-use-yarn"
   },
+  "dependencies": {
+    "@microsoft/microsoft-graph-client": "^2.0.0",
+    "@slack/webhook": "^5.0.3",
+    "apollo-server-lambda": "^2.15.1",
+    "aws-sdk": "^2.725.0",
+    "change-case": "^4.1.1",
+    "class-transformer": "^0.3.1",
+    "class-validator": "^0.12.2",
+    "dotenv": "^8.2.0",
+    "graphql": "^14.5.8",
+    "graphql-tools": "^5.0.0",
+    "isomorphic-fetch": "^2.2.1",
+    "jose": "^1.27.0",
+    "pg": "^8.0.3",
+    "reflect-metadata": "^0.1.13",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6",
+    "source-map-support": "^0.5.19",
+    "type-graphql": "^0.17.6",
+    "typeorm": "^0.2.24",
+    "uuid": "^8.3.0"
+  },
   "devDependencies": {
     "@types/faker": "^4.1.11",
     "@types/jest": "^25.2.1",
@@ -31,28 +53,5 @@
     "ts-jest": "^25.5.0",
     "ts-loader": "^8.0.3",
     "typescript": "^3.8.3"
-  },
-  "dependencies": {
-    "@microsoft/microsoft-graph-client": "^2.0.0",
-    "@slack/webhook": "^5.0.3",
-    "apollo-server-lambda": "^2.15.1",
-    "argon2": "^0.26.2",
-    "aws-sdk": "^2.725.0",
-    "change-case": "^4.1.1",
-    "class-transformer": "^0.3.1",
-    "class-validator": "^0.12.2",
-    "dotenv": "^8.2.0",
-    "graphql": "^14.5.8",
-    "graphql-tools": "^5.0.0",
-    "isomorphic-fetch": "^2.2.1",
-    "jose": "^1.27.0",
-    "pg": "^8.0.3",
-    "reflect-metadata": "^0.1.13",
-    "request": "^2.88.2",
-    "request-promise": "^4.2.6",
-    "source-map-support": "^0.5.19",
-    "type-graphql": "^0.17.6",
-    "typeorm": "^0.2.24",
-    "uuid": "^8.3.0"
   }
 }

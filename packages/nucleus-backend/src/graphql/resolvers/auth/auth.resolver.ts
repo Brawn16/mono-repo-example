@@ -1,6 +1,6 @@
 import { ForbiddenError } from "apollo-server-core";
-import { verify } from "argon2";
 import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
+import { verifyScryptHash } from "../../../shared/crypto/scrypt";
 import { UserEntity } from "../../../shared/entity/user.entity";
 import { createAuthToken } from "../../core/auth";
 import { AuthenticatedAppContext } from "../../core/context";
@@ -21,11 +21,16 @@ export class AuthResolver {
     @Arg("password") password: string
   ): Promise<LoginDto> {
     const user = await UserEntity.findOne({ email });
-    if (!user || !user.password) {
+    if (!user || !user.password || !user.passwordSalt) {
       throw new ForbiddenError("The login details supplied are invalid.");
     }
 
-    const valid = await verify(user.password, password);
+    const valid = await verifyScryptHash(
+      password,
+      user.password,
+      user.passwordSalt
+    );
+
     if (!valid) {
       throw new ForbiddenError("The login details supplied are invalid.");
     }

@@ -3,16 +3,15 @@ const { lib } = require("serverless-webpack");
 const TerserPlugin = require("terser-webpack-plugin");
 const { IgnorePlugin } = require("webpack");
 
-const {isLocal} = lib.webpack;
+const { isLocal } = lib.webpack;
 
 module.exports = {
-  devtool: "source-map",
+  devtool: "nosources-source-map",
   entry: lib.entries,
   externals: {
-    argon2: "argon2",
     "aws-sdk": "aws-sdk",
   },
-  mode: isLocal ? "development": "production",
+  mode: isLocal ? "development" : "production",
   module: {
     rules: [
       {
@@ -27,25 +26,27 @@ module.exports = {
       },
     ],
   },
-  optimization: isLocal ? undefined : {
-    minimizer: [
-      new TerserPlugin({
-        extractComments: false,
-        terserOptions: {
-          keep_classnames: true,
-        },
-      }),
-    ],
-  },
+  optimization: isLocal
+    ? undefined
+    : {
+        minimizer: [
+          new TerserPlugin({
+            extractComments: false,
+            terserOptions: {
+              keep_classnames: true,
+            },
+          }),
+        ],
+      },
   plugins: [
     new CopyPlugin({
       patterns: [
-        ".env",
         {
           from: ".env.local",
-          noErrorOnMissing: true
+          noErrorOnMissing: true,
         },
-        "jwt.key"
+        ".env",
+        "jwt.key",
       ],
     }),
     new IgnorePlugin(/pg-native/),
