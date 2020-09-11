@@ -3,6 +3,8 @@ const { lib } = require("serverless-webpack");
 const TerserPlugin = require("terser-webpack-plugin");
 const { IgnorePlugin } = require("webpack");
 
+const {isLocal} = lib.webpack;
+
 module.exports = {
   devtool: "source-map",
   entry: lib.entries,
@@ -10,7 +12,7 @@ module.exports = {
     argon2: "argon2",
     "aws-sdk": "aws-sdk",
   },
-  mode: "production",
+  mode: isLocal ? "development": "production",
   module: {
     rules: [
       {
@@ -25,7 +27,7 @@ module.exports = {
       },
     ],
   },
-  optimization: {
+  optimization: isLocal ? undefined : {
     minimizer: [
       new TerserPlugin({
         extractComments: false,
@@ -45,5 +47,4 @@ module.exports = {
     extensions: [".js", ".mjs", ".ts"],
   },
   stats: "errors-only",
-  target: "node",
 };

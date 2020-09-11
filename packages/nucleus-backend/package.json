@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "build": "serverless webpack",
-    "dev": "yarn dev:serverless",
-    "dev:serverless": "export NODE_ENV=test && serverless offline --httpPort 5000 --webpack-no-watch",
+    "dev": "export NODE_ENV=test && serverless offline --httpPort 5000",
     "test": "jest",
     "typeorm": "typeorm"
   },
