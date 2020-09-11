@@ -66,8 +66,14 @@ export function Form() {
           label={
             <>
               To proceed please confirm that you have read, consent and agree to
-              our <Anchor href="/new-starter/terms">full terms</Anchor> and{" "}
-              <Anchor href="/new-starter/privacy-policy">privacy policy</Anchor>
+              our{" "}
+              <Anchor href="/new-starter/terms" target="_blank">
+                full terms
+              </Anchor>{" "}
+              and{" "}
+              <Anchor href="/new-starter/privacy-policy" target="_blank">
+                privacy policy
+              </Anchor>
               , and understand that you can change communication and privacy
               preferences at request.
             </>
