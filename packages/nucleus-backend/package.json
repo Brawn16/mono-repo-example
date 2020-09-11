@@ -4,10 +4,8 @@
   "private": true,
   "scripts": {
     "build": "serverless webpack",
-    "dev": "run-p dev:elasticmq dev:s3rver dev:sls",
-    "dev:elasticmq": "java -jar elasticmq.jar",
-    "dev:s3rver": "s3rver --configure-bucket uploads.localhost cors.xml --directory .s3rver",
-    "dev:sls": "export NODE_ENV=test && serverless offline --httpPort 5000",
+    "dev": "yarn dev:serverless",
+    "dev:serverless": "export NODE_ENV=test && serverless offline --httpPort 5000 --webpack-no-watch",
     "test": "jest",
     "typeorm": "typeorm"
   },
@@ -23,18 +21,16 @@
     "@types/uuid": "^8.3.0",
     "copy-webpack-plugin": "^6.1.0",
     "jest": "^25.5.4",
-    "npm-run-all": "^4.1.5",
-    "rimraf": "^3.0.2",
-    "s3rver": "^3.6.1",
     "serverless": "^1.74.1",
     "serverless-offline": "6.6.0",
+    "serverless-offline-elasticmq": "^0.0.11",
     "serverless-offline-sqs": "^4.1.0",
+    "serverless-s3-local": "^0.6.5",
     "serverless-webpack": "^5.3.4",
     "sinon": "^9.0.2",
     "terser-webpack-plugin": "^4.1.0",
     "ts-jest": "^25.5.0",
     "ts-loader": "^8.0.3",
-    "tsc-watch": "^4.2.5",
     "typescript": "^3.8.3"
   },
   "dependencies": {
