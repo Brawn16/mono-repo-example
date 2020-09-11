@@ -39,7 +39,14 @@ module.exports = {
   },
   plugins: [
     new CopyPlugin({
-      patterns: [".env", ".env.local", "jwt.key"],
+      patterns: [
+        ".env",
+        {
+          from: ".env.local",
+          noErrorOnMissing: true
+        },
+        "jwt.key"
+      ],
     }),
     new IgnorePlugin(/pg-native/),
   ],
