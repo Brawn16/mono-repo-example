@@ -1,4 +1,4 @@
-name: Deploy
+name: Develop
 on:
   push:
     branches:
@@ -53,7 +53,7 @@ jobs:
           --project-token=${{ secrets.CHROMATIC }}
 
   test:
-    name: Run Unit Tests
+    name: Run Tests
     runs-on: ubuntu-latest
     steps:
       - name: Retrieve code
