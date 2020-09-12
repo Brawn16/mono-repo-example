@@ -251,6 +251,7 @@ export class NucleusStack extends Stack {
       {
         aliasName: uuidv4(),
         description: `Graphql lambda alias for Nucleus backend (${branch})`,
+        provisionedConcurrentExecutions: 16,
         version: graphqlLambdaVersion,
       }
     );
