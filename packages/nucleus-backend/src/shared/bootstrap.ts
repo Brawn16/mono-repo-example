@@ -1,10 +1,8 @@
-import "source-map-support/register";
-
 import { resolve as resolvePath } from "path";
 import { env } from "process";
 import { config } from "dotenv";
+import { createConnection } from "typeorm";
 import { getSecret } from "./aws/secret";
-import { createConnection } from "./database/connection";
 
 // Load .env files
 const path = resolvePath(__dirname, "../../.env.local");

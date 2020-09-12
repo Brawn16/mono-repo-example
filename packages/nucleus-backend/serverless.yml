@@ -1,6 +1,5 @@
 service: nucleus-backend
 plugins:
-  - serverless-webpack
   - serverless-s3-local
   - serverless-offline-sqs
   - serverless-offline-elasticmq
@@ -20,9 +19,6 @@ custom:
     endpoint: http://0.0.0.0:9324
   serverless-offline:
     useChildProcesses: true
-  webpack:
-    keepOutputDirectory: true
-    packager: yarn
 
 functions:
   graphql:
@@ -35,7 +31,7 @@ functions:
           cors: true
           method: post
           path: graphql
-    handler: src/graphql/index.graphqlHandler
+    handler: dist/graphql/index.graphqlHandler
   queue:
     events:
       - sqs:
@@ -43,7 +39,7 @@ functions:
             Fn::GetAtt:
               - Queue
               - Arn
-    handler: src/queue/index.queueHandler
+    handler: dist/queue/index.queueHandler
 
 provider:
   name: aws

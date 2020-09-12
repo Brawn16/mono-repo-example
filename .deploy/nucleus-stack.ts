@@ -192,6 +192,7 @@ export class NucleusStack extends Stack {
         TYPEORM_HOST: coreDatabase.attrEndpointAddress,
       },
       runtime: Runtime.NODEJS_12_X,
+      tracing: Tracing.ACTIVE,
       vpc: vpc,
     };
 
@@ -210,9 +211,17 @@ export class NucleusStack extends Stack {
     const graphqlLambda = new Function(this, "NucleusBackendGraphqlLambda", {
       ...baseLambdaProps,
       code: Code.fromAsset(
-        resolve(__dirname, "../packages/nucleus-backend/.webpack/service"),
+        resolve(__dirname, "../packages/nucleus-backend"),
         {
-          exclude: ["src/queue/"],
+          exclude: [
+            "*.*",
+            ".*",
+            "!dist/graphql/**",
+            "!dist/shared/**",
+            "!node_modules/**",
+            "!.env",
+            "!jwt.key",
+          ],
         }
       ),
       description: `Graphql lambda for Nucleus backend (${branch})`,
@@ -222,10 +231,10 @@ export class NucleusStack extends Stack {
         APOLLO_PLAYGROUND_ENDPOINT: "/prod/graphql",
       },
       functionName: `${namePrefixBackend}-GraphqlLambda`,
-      handler: "src/graphql/index.graphqlHandler",
+      handler: "dist/graphql/index.graphqlHandler",
+      memorySize: 256,
       securityGroups: [graphqlSecurityGroup],
       timeout: Duration.seconds(25),
-      tracing: Tracing.ACTIVE,
     });
 
     // Create graphql lambda version
@@ -294,18 +303,25 @@ export class NucleusStack extends Stack {
     const queueLambda = new Function(this, "NucleusBackendQueueLambda", {
       ...baseLambdaProps,
       code: Code.fromAsset(
-        resolve(__dirname, "../packages/nucleus-backend/.webpack/service"),
+        resolve(__dirname, "../packages/nucleus-backend"),
         {
-          exclude: ["src/graphql/"],
+          exclude: [
+            "*.*",
+            ".*",
+            "!dist/queue/**",
+            "!dist/shared/**",
+            "!node_modules/**",
+            "!.env",
+            "!jwt.key",
+          ],
         }
       ),
       description: `Queue lambda for Nucleus backend (${branch})`,
       events: [new SqsEventSource(coreQueue)],
       functionName: `${namePrefixBackend}-QueueLambda`,
-      handler: "src/queue/index.queueHandler",
+      handler: "dist/queue/index.queueHandler",
       securityGroups: [queueSecurityGroup],
       timeout: Duration.seconds(115),
-      tracing: Tracing.ACTIVE,
     });
 
     // Grant lambdas access to lambda secret
