@@ -4,6 +4,7 @@ import { getMockUserEntity } from "../tests/helpers/user";
 it("encrypts new password", async () => {
   const user = await getMockUserEntity();
   user.password = "password";
+  user.passwordSalt = "salt";
 
   await user.encryptPassword();
   const valid = await verifyScryptHash(
@@ -18,6 +19,7 @@ it("encrypts new password", async () => {
 it("does not re-encrypt new password", async () => {
   const user = await getMockUserEntity();
   user.password = "password";
+  user.passwordSalt = "salt";
 
   await user.encryptPassword();
   await user.encryptPassword();
