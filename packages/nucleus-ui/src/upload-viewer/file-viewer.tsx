@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { UploadViewerFileProps, UploadViewerChildrenProps } from "./types";
 
-export function FileViewer({ children, file }: UploadViewerFileProps) {
+export function FileViewer({
+  children,
+  file,
+  loadingChildren = null,
+}: UploadViewerFileProps) {
   const [childrenProperties, setChildrenProperties] = useState<
     UploadViewerChildrenProps
   >();
@@ -43,7 +47,7 @@ export function FileViewer({ children, file }: UploadViewerFileProps) {
   }, []);
 
   if (childrenProperties === undefined) {
-    return null;
+    return loadingChildren;
   }
 
   return <>{children(childrenProperties)}</>;

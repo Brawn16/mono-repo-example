@@ -1,9 +1,13 @@
 import { useQuery } from "@apollo/client";
-import * as React from "react";
+import React from "react";
 import { createPresignedUploadUrl as createPresignedUploadUrlQuery } from "./queries";
 import { UploadViewerS3ViewerProps, UploadViewerData } from "./types";
 
-export function S3Viewer({ children, id }: UploadViewerS3ViewerProps) {
+export function S3Viewer({
+  children,
+  id,
+  loadingChildren = null,
+}: UploadViewerS3ViewerProps) {
   const { data, error, loading } = useQuery<{
     createPresignedUploadUrl?: UploadViewerData;
   }>(createPresignedUploadUrlQuery, {
@@ -15,7 +19,7 @@ export function S3Viewer({ children, id }: UploadViewerS3ViewerProps) {
   // If we have not resolved the image URL,
   // do not render
   if (loading === true) {
-    return null;
+    return loadingChildren;
   }
 
   const { createPresignedUploadUrl } = data || {};

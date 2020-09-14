@@ -1,5 +1,4 @@
 import { useQuery } from "@apollo/client";
-import { Image } from "@sdh-project-services/nucleus-ui/dist/image";
 import { InputError } from "@sdh-project-services/nucleus-ui/dist/input-error";
 import { Label } from "@sdh-project-services/nucleus-ui/dist/label";
 import { RadioButton } from "@sdh-project-services/nucleus-ui/dist/radio-button";
@@ -72,7 +71,7 @@ function renderWorkstreams(
           onClick={() => handleChange("workstream", value)}
           type="button"
         >
-          <Image alt={label} src={logos[label]} />
+          <img alt={label} src={logos[label]} />
         </button>
       );
     }
