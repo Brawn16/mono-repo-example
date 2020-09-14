@@ -36,13 +36,9 @@ export function Form() {
     defaultValues: values,
   });
 
-  const [showAddressFields, setShowAddressFields] = useState(false);
-
-  useEffect(() => {
-    if (values.addressLine1) {
-      setShowAddressFields(true);
-    }
-  }, []);
+  const [showAddressFields, setShowAddressFields] = useState(
+    values.addressLine1 !== undefined
+  );
 
   const hasError = errors.addressLine1 || errors.addressPostcode;
 
