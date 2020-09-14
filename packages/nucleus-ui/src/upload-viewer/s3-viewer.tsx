@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React, { ReactElement } from "react";
+import React from "react";
 import { createPresignedUploadUrl as createPresignedUploadUrlQuery } from "./queries";
 import { UploadViewerS3ViewerProps, UploadViewerData } from "./types";
 
@@ -7,7 +7,7 @@ export function S3Viewer({
   children,
   id,
   loadingChildren = null,
-}: UploadViewerS3ViewerProps): ReactElement | null {
+}: UploadViewerS3ViewerProps) {
   const { data, error, loading } = useQuery<{
     createPresignedUploadUrl?: UploadViewerData;
   }>(createPresignedUploadUrlQuery, {

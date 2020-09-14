@@ -1,11 +1,11 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { UploadViewerFileProps, UploadViewerChildrenProps } from "./types";
 
 export function FileViewer({
   children,
   file,
   loadingChildren = null,
-}: UploadViewerFileProps): ReactElement | null {
+}: UploadViewerFileProps) {
   const [childrenProperties, setChildrenProperties] = useState<
     UploadViewerChildrenProps
   >();
