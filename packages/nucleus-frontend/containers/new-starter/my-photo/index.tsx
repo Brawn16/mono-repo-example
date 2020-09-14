@@ -1,4 +1,3 @@
-import { Image } from "@sdh-project-services/nucleus-ui/dist/image";
 import { Panel } from "@sdh-project-services/nucleus-ui/dist/panel";
 import React from "react";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
@@ -52,25 +51,25 @@ export function MyPhoto() {
             <strong>Examples:</strong>
             <div className="mt-1 text-white grid grid-cols-4 gap-4">
               <div className="relative p-1 border rounded">
-                <Image alt="Correct" src={examplePhotoCorrect} />
+                <img alt="Correct" src={examplePhotoCorrect} />
                 <div className="absolute p-2 bg-green-500 rounded-full top-3 right-3">
                   <AiOutlineCheck />
                 </div>
               </div>
               <div className="relative p-1 border rounded">
-                <Image alt="Incorrect" src={examplePhotoIncorrect} />
+                <img alt="Incorrect" src={examplePhotoIncorrect} />
                 <div className="absolute p-2 bg-red-600 rounded-full top-3 right-3">
                   <AiOutlineClose />
                 </div>
               </div>
               <div className="relative p-1 border rounded">
-                <Image alt="Incorrect" src={examplePhotoIncorrect2} />
+                <img alt="Incorrect" src={examplePhotoIncorrect2} />
                 <div className="absolute p-2 bg-red-600 rounded-full top-3 right-3">
                   <AiOutlineClose />
                 </div>
               </div>
               <div className="relative p-1 border rounded">
-                <Image alt="Incorrect" src={examplePhotoIncorrect3} />
+                <img alt="Incorrect" src={examplePhotoIncorrect3} />
                 <div className="absolute p-2 bg-red-600 rounded-full top-3 right-3">
                   <AiOutlineClose />
                 </div>
