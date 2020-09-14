@@ -16,7 +16,7 @@ export function Login() {
 
   return (
     <div className={loginClassName}>
-      <div className="w-full max-w-sm p-8 mx-auto bg-white">
+      <div className="w-full max-w-sm p-8 mx-auto bg-white rounded">
         <LoginForm>
           <div className="text-center">
             <h2 className="text-2xl font-extrabold">

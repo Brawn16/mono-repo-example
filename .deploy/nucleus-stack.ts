@@ -192,6 +192,7 @@ export class NucleusStack extends Stack {
         TYPEORM_HOST: coreDatabase.attrEndpointAddress,
       },
       runtime: Runtime.NODEJS_12_X,
+      tracing: Tracing.ACTIVE,
       vpc: vpc,
     };
 
@@ -209,12 +210,17 @@ export class NucleusStack extends Stack {
     // Create graphql lambda
     const graphqlLambda = new Function(this, "NucleusBackendGraphqlLambda", {
       ...baseLambdaProps,
-      code: Code.fromAsset(
-        resolve(__dirname, "../packages/nucleus-backend/.webpack/service"),
-        {
-          exclude: ["src/queue/"],
-        }
-      ),
+      code: Code.fromAsset(resolve(__dirname, "../packages/nucleus-backend"), {
+        exclude: [
+          "*.*",
+          ".*",
+          "!dist/graphql/**",
+          "!dist/shared/**",
+          "!node_modules/**",
+          "!.env",
+          "!jwt.key",
+        ],
+      }),
       description: `Graphql lambda for Nucleus backend (${branch})`,
       environment: {
         ...baseLambdaProps.environment,
@@ -223,9 +229,9 @@ export class NucleusStack extends Stack {
       },
       functionName: `${namePrefixBackend}-GraphqlLambda`,
       handler: "dist/graphql/index.graphqlHandler",
+      memorySize: 256,
       securityGroups: [graphqlSecurityGroup],
       timeout: Duration.seconds(25),
-      tracing: Tracing.ACTIVE,
     });
 
     // Create graphql lambda version
@@ -245,7 +251,7 @@ export class NucleusStack extends Stack {
       {
         aliasName: uuidv4(),
         description: `Graphql lambda alias for Nucleus backend (${branch})`,
-        provisionedConcurrentExecutions: 20,
+        provisionedConcurrentExecutions: 16,
         version: graphqlLambdaVersion,
       }
     );
@@ -253,8 +259,8 @@ export class NucleusStack extends Stack {
     // Configure graphql lambda alias autoscaling
     graphqlLambdaAlias
       .addAutoScaling({
-        maxCapacity: 100,
-        minCapacity: 20,
+        maxCapacity: 128,
+        minCapacity: 16,
       })
       .scaleOnUtilization({
         utilizationTarget: 0.5,
@@ -293,19 +299,23 @@ export class NucleusStack extends Stack {
     // Create queue lambda
     const queueLambda = new Function(this, "NucleusBackendQueueLambda", {
       ...baseLambdaProps,
-      code: Code.fromAsset(
-        resolve(__dirname, "../packages/nucleus-backend/.webpack/service"),
-        {
-          exclude: ["src/graphql/"],
-        }
-      ),
+      code: Code.fromAsset(resolve(__dirname, "../packages/nucleus-backend"), {
+        exclude: [
+          "*.*",
+          ".*",
+          "!dist/queue/**",
+          "!dist/shared/**",
+          "!node_modules/**",
+          "!.env",
+          "!jwt.key",
+        ],
+      }),
       description: `Queue lambda for Nucleus backend (${branch})`,
       events: [new SqsEventSource(coreQueue)],
       functionName: `${namePrefixBackend}-QueueLambda`,
       handler: "dist/queue/index.queueHandler",
       securityGroups: [queueSecurityGroup],
       timeout: Duration.seconds(115),
-      tracing: Tracing.ACTIVE,
     });
 
     // Grant lambdas access to lambda secret

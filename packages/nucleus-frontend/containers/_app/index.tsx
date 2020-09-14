@@ -3,8 +3,8 @@ import {
   ApolloClient,
   ApolloLink,
   InMemoryCache,
-  HttpLink,
 } from "@apollo/client";
+import { BatchHttpLink } from "@apollo/client/link/batch-http";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import React from "react";
@@ -29,14 +29,15 @@ export const authLink = new ApolloLink((operation, forward) => {
   return forward(operation);
 });
 
-export const httpLink = new HttpLink({
+export const batcnhHttpLink = new BatchHttpLink({
+  batchMax: 5,
   uri: process.env.NEXT_PUBLIC_APOLLO_URI,
 });
 
 const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
-  link: ApolloLink.from([authLink, httpLink]),
-  ssrMode: true,
+  link: ApolloLink.from([authLink, batcnhHttpLink]),
+  queryDeduplication: true,
 });
 
 export function App({ Component, pageProps }: AppProps) {
