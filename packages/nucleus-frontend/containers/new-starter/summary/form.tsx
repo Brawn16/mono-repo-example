@@ -1,6 +1,6 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { Alert } from "@sdh-project-services/nucleus-ui/dist/alert";
-import { Image } from "@sdh-project-services/nucleus-ui/dist/image";
+import { Spinner } from "@sdh-project-services/nucleus-ui/dist/spinner";
 import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewer";
 import Router from "next/router";
 import React, { FormEvent, useContext } from "react";
@@ -54,13 +54,19 @@ function renderAddress(values: { [key: string]: string }) {
 }
 
 function renderUploads(uploads: string[]) {
+  const loadingChildren = (
+    <div className="absolute inset-0 flex items-center justify-center">
+      <Spinner />
+    </div>
+  );
+
   return uploads.map((uploadId: string) => {
     return (
       <div key={uploadId} className={square}>
-        <UploadViewer id={uploadId}>
+        <UploadViewer id={uploadId} loadingChildren={loadingChildren}>
           {({ data = {} }) => (
             <div className="absolute inset-0 flex items-center justify-center">
-              <Image alt="Upload" className="max-h-full" src={data.url} />
+              <img alt="Upload" className="max-h-full" src={data.url} />
             </div>
           )}
         </UploadViewer>

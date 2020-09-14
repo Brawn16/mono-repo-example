@@ -1,5 +1,5 @@
 import { ApolloError } from "@apollo/client";
-import { ReactNode } from "react";
+import { ReactElement, ReactNode } from "react";
 
 export interface UploadViewerData {
   upload: {
@@ -23,6 +23,7 @@ export interface UploadViewerProps {
   children: (props: UploadViewerChildrenProps) => ReactNode;
   file?: File;
   id?: string;
+  loadingChildren?: ReactElement | null;
 }
 
 export interface UploadViewerS3ViewerProps extends UploadViewerProps {

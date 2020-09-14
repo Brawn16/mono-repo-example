@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
-import { Image } from "../image";
+import { Spinner } from "../spinner";
 import { Context } from "../upload-dropzone/context";
 import { UploadProgress } from "../upload-progress";
 import { UploadViewer } from "../upload-viewer";
@@ -15,20 +15,25 @@ function renderUpload({ error, data }: UploadViewerChildrenProps) {
 
   return (
     <div className="absolute inset-0 flex items-center justify-center">
-      <Image alt="Upload" className="max-h-full" src={data.url} />
+      <img alt="Upload" className="max-h-full" src={data.url} />
     </div>
   );
 }
 
 export function File({ file: { file, id }, index }: UploadGalleryFileProps) {
   const { onDelete } = useContext(Context);
+  const loadingChildren = (
+    <div className="absolute inset-0 flex items-center justify-center">
+      <Spinner />
+    </div>
+  );
 
   return (
     <div>
       <div className={square}>
         {file && <UploadProgress file={file} />}
         {id && (
-          <UploadViewer file={file} id={id}>
+          <UploadViewer file={file} id={id} loadingChildren={loadingChildren}>
             {renderUpload}
           </UploadViewer>
         )}
