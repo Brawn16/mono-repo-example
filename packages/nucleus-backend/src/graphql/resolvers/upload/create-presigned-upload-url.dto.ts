@@ -4,8 +4,8 @@ import { UploadEntity } from "../../../shared/entity/upload.entity";
 @ObjectType()
 export class CreatePresignedUploadUrlDto {
   @Field()
-  public presignedUrl?: string;
+  public upload?: UploadEntity;
 
   @Field()
-  public upload?: UploadEntity;
+  public url?: string;
 }

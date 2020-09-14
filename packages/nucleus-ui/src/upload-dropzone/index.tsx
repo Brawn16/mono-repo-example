@@ -65,7 +65,7 @@ export function UploadDropzone(props: PropsWithChildren<UploadDropzoneProps>) {
     const index = files.findIndex(({ file }) => file === uploadedFile);
     const newFiles = [...files];
 
-    newFiles[index] = { id };
+    newFiles[index] = { file: uploadedFile, id };
     setFiles(newFiles);
     handleChange(newFiles);
   };
