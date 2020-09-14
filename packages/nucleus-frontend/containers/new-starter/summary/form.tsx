@@ -1,5 +1,6 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { Alert } from "@sdh-project-services/nucleus-ui/dist/alert";
+import { Image } from "@sdh-project-services/nucleus-ui/dist/image";
 import { UploadViewer } from "@sdh-project-services/nucleus-ui/dist/upload-viewer";
 import Router from "next/router";
 import React, { FormEvent, useContext } from "react";
@@ -59,11 +60,7 @@ function renderUploads(uploads: string[]) {
         <UploadViewer id={uploadId}>
           {({ data = {} }) => (
             <div className="absolute inset-0 flex items-center justify-center">
-              <img
-                alt="Upload"
-                className="max-h-full"
-                src={data.presignedUrl}
-              />
+              <Image alt="Upload" className="max-h-full" src={data.url} />
             </div>
           )}
         </UploadViewer>

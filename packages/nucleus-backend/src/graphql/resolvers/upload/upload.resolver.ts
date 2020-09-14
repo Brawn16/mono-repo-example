@@ -68,12 +68,12 @@ export class UploadResolver {
       throw new ForbiddenError("Upload is not flagged as public.");
     }
 
-    const presignedUrl = await s3.getSignedUrlPromise("getObject", {
+    const url = await s3.getSignedUrlPromise("getObject", {
       Bucket: env.AWS_UPLOADS_BUCKET,
       Expires: 60,
       Key: id,
     });
 
-    return { presignedUrl, upload };
+    return { upload, url };
   }
 }
