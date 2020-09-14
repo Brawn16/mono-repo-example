@@ -12,8 +12,6 @@ export function S3Viewer({ children, id }: UploadViewerS3ViewerProps) {
     variables: { id },
   });
 
-  console.log("here");
-
   // If we have not resolved the image URL,
   // do not render
   if (loading === true) {
