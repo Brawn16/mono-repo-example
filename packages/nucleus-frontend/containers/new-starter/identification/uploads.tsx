@@ -34,7 +34,9 @@ export function Uploads(props: UploadProps) {
 
   return (
     <>
-      <div className="mt-4 grid grid-cols-2 gap-4">{dropzones}</div>
+      <div className="mt-4 grid-cols-1 grid md:grid-cols-2 gap-4">
+        {dropzones}
+      </div>
       {error && <InputError error={error} />}
     </>
   );

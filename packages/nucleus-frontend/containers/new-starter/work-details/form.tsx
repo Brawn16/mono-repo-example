@@ -122,7 +122,7 @@ export function Form() {
       <Label label="Who will you be working for?" />
       {workstreamsData === undefined && <Spinner />}
       {workstreamsData && (
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {renderWorkstreams(
             workstreamsData.workstreams,
             workstream,
