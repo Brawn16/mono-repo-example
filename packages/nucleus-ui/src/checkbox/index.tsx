@@ -8,14 +8,14 @@ export function Checkbox(props: CheckboxProps) {
   // Build props to pass to input
   const inputProperties = { ...props };
   delete inputProperties.componentRef;
-
+  const borderErrorColor = error ? "border-red-500" : "";
   return (
     <div className={className}>
       <div className="flex">
         <input
           {...inputProperties}
           ref={componentRef}
-          className="w-8 h-8 mr-3 text-blue-600 rounded outline-none form-checkbox focus:border-blue-500 focus:shadow-none"
+          className={`w-8 h-8 mr-3 text-blue-600 rounded outline-none form-checkbox focus:border-blue-500 focus:shadow-none ${borderErrorColor}`}
           id={name}
           type="checkbox"
         />

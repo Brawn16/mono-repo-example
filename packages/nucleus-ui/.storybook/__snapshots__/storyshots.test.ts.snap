@@ -323,7 +323,7 @@ exports[`Storyshots Checkbox Checkbox 1`] = `
     className="flex"
   >
     <input
-      className="w-8 h-8 mr-3 text-blue-600 rounded outline-none form-checkbox focus:border-blue-500 focus:shadow-none"
+      className="w-8 h-8 mr-3 text-blue-600 rounded outline-none form-checkbox focus:border-blue-500 focus:shadow-none "
       id="checkbox"
       label="Label"
       name="checkbox"

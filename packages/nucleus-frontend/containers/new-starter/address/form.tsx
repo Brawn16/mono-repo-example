@@ -4,7 +4,7 @@ import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
 import { InputError } from "@sdh-project-services/nucleus-ui/dist/input-error";
 import { pascalCase } from "change-case";
 import { postcodeValidator } from "postcode-validator";
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Context } from "../../../layouts/new-starter/context";
 import { Navigation } from "../../../layouts/new-starter/navigation";
@@ -31,11 +31,15 @@ export function Form() {
     getValues,
     register,
     setValue,
-    watch,
     reset,
   } = useForm<NewStarterAddressFormData>({
     defaultValues: values,
   });
+
+  const [showAddressFields, setShowAddressFields] = useState(
+    values.addressLine1 !== undefined
+  );
+
   const hasError = errors.addressLine1 || errors.addressPostcode;
 
   register({ name: "addressLine1" }, { required: "Address is required" });
@@ -43,7 +47,6 @@ export function Form() {
   register({ name: "addressTownCity" });
   register({ name: "addressCounty" });
   register({ name: "addressPostcode" }, { validate: validatePostcode });
-  watch("addressLine1");
 
   const {
     addressLine1,
@@ -58,6 +61,7 @@ export function Form() {
     keys.forEach((key: keyof AddressLookupAddress) => {
       setValue(`address${pascalCase(key)}`, address[key]);
     });
+    setShowAddressFields(true);
   };
 
   const handleFormSubmit = (data: NewStarterAddressFormData) => {
@@ -66,7 +70,7 @@ export function Form() {
 
   return (
     <>
-      {addressLine1 === undefined && (
+      {showAddressFields === false && (
         <div onFocus={() => clearErrors()}>
           <AddressLookup onAddressSelect={handleAddressSelection} />
           {hasError && (
@@ -79,22 +83,28 @@ export function Form() {
           )}
           <button
             className="mt-4 font-medium underline focus:outline-none duration-150 ease-in-out transition hover:text-gray-900 focus:text-gray-900"
-            onClick={() => setValue("addressLine1", "")}
+            onClick={() => {
+              setShowAddressFields(true);
+            }}
             type="button"
           >
-            Manually enter address
+            Or manually enter address
           </button>
         </div>
       )}
       <form onSubmit={handleSubmit(handleFormSubmit)}>
-        {addressLine1 !== undefined && (
+        {showAddressFields !== false && (
           <>
             <Input
               error={errors.addressLine1}
               label="Address"
               name="addressLine1"
               onChange={(event) => setValue("addressLine1", event.target.value)}
-              onKeyDown={() => clearErrors("addressLine1")}
+              onKeyDown={() => {
+                if (errors.addressLine1) {
+                  clearErrors("addressLine1");
+                }
+              }}
               required
               value={addressLine1}
             />
@@ -130,13 +140,19 @@ export function Form() {
               onChange={(event) =>
                 setValue("addressPostcode", event.target.value)
               }
-              onKeyDown={() => clearErrors("addressPostcode")}
+              onKeyDown={() => {
+                if (errors.addressPostcode !== undefined)
+                  clearErrors("addressPostcode");
+              }}
               required
               value={addressPostcode}
             />
             <button
               className="mt-4 font-medium underline focus:outline-none duration-150 ease-in-out transition hover:text-gray-900 focus:text-gray-900"
-              onClick={() => reset({})}
+              onClick={() => {
+                reset({});
+                setShowAddressFields(false);
+              }}
               type="button"
             >
               Search for another address
