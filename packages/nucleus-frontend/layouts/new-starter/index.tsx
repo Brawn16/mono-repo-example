@@ -141,7 +141,7 @@ export function NewStarter({
               </Anchor>
             )}
             {header || (
-              <h2 className="text-2xl font-extrabold md:text-3xl font-montserrat">
+              <h2 className="text-2xl font-extrabold md:text-4xl font-montserrat">
                 {headerTitle || title}
               </h2>
             )}

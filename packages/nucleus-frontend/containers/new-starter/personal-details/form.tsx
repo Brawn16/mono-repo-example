@@ -42,7 +42,11 @@ export function Form() {
           help="Please enter your legal first name"
           label="First name"
           name="firstName"
-          onKeyDown={() => clearErrors("firstName")}
+          onKeyDown={() => {
+            if (errors.firstName !== undefined) {
+              clearErrors("firstName");
+            }
+          }}
           required
         />
         <Input
@@ -53,7 +57,11 @@ export function Form() {
           error={errors.lastName}
           label="Last name"
           name="lastName"
-          onFocus={() => clearErrors("lastName")}
+          onKeyDown={() => {
+            if (errors.lastName !== undefined) {
+              clearErrors("lastName");
+            }
+          }}
           required
         />
       </div>
@@ -66,7 +74,11 @@ export function Form() {
         inputMode="tel"
         label="Phone number"
         name="phoneNumber"
-        onFocus={() => clearErrors("phoneNumber")}
+        onKeyDown={() => {
+          if (errors.phoneNumber !== undefined) {
+            clearErrors("phoneNumber");
+          }
+        }}
         required
         type="tel"
       />
@@ -83,7 +95,11 @@ export function Form() {
         inputMode="email"
         label="Email"
         name="email"
-        onFocus={() => clearErrors("email")}
+        onKeyDown={() => {
+          if (errors.email !== undefined) {
+            clearErrors("email");
+          }
+        }}
         required
         type="email"
       />
@@ -96,7 +112,11 @@ export function Form() {
         help="We will only use these details in case of an emergency"
         label="Emergency contact name"
         name="emergencyContactName"
-        onFocus={() => clearErrors("emergencyContactName")}
+        onKeyDown={() => {
+          if (errors.emergencyContactName !== undefined) {
+            clearErrors("emergencyContactName");
+          }
+        }}
         required
       />
       <Input
@@ -108,7 +128,11 @@ export function Form() {
         inputMode="tel"
         label="Emergency contact number"
         name="emergencyContactPhoneNumber"
-        onFocus={() => clearErrors("emergencyContactPhoneNumber")}
+        onKeyDown={() => {
+          if (errors.emergencyContactPhoneNumber !== undefined) {
+            clearErrors("emergencyContactPhoneNumber");
+          }
+        }}
         required
         type="tel"
       />

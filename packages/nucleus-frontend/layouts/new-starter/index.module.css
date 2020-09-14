@@ -10,6 +10,9 @@
 
   @apply absolute bg-sdh-blue bg-opacity-75 inset-0;
 }
+.background:after {
+  background: linear-gradient(45deg, #0f132d, rgba(28, 36, 83, 0.8));
+}
 
 .logo {
   background: url(./logo.png);
