@@ -62,12 +62,14 @@ export function UploadDropzone(props: PropsWithChildren<UploadDropzoneProps>) {
   };
 
   const handleUploadComplete = (uploadedFile: File, id: string) => {
-    const index = files.findIndex(({ file }) => file === uploadedFile);
-    const newFiles = [...files];
+    setFiles((oldFiles) => {
+      const index = files.findIndex(({ file }) => file === uploadedFile);
+      const newFiles = [...oldFiles];
 
-    newFiles[index] = { file: uploadedFile, id };
-    setFiles(newFiles);
-    handleChange(newFiles);
+      newFiles[index] = { file: uploadedFile, id };
+      handleChange(newFiles);
+      return newFiles;
+    });
   };
 
   const { getRootProps, getInputProps } = useDropzone({

@@ -4,7 +4,7 @@ import { Input } from "@sdh-project-services/nucleus-ui/dist/input";
 import { InputError } from "@sdh-project-services/nucleus-ui/dist/input-error";
 import { pascalCase } from "change-case";
 import { postcodeValidator } from "postcode-validator";
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Context } from "../../../layouts/new-starter/context";
 import { Navigation } from "../../../layouts/new-starter/navigation";

@@ -20,7 +20,10 @@ function renderUpload({ error, data }: UploadViewerChildrenProps) {
   );
 }
 
-export function File({ file: { file, id }, index }: UploadGalleryFileProps) {
+export function File({
+  dropzoneFile: { file, id },
+  index,
+}: UploadGalleryFileProps) {
   const { onDelete } = useContext(Context);
   const loadingChildren = (
     <div className="absolute inset-0 flex items-center justify-center">

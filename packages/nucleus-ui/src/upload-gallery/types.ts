@@ -1,8 +1,8 @@
 import { UploadDropzoneFile } from "../upload-dropzone/types";
 
 export interface UploadGalleryFileProps {
+  dropzoneFile: UploadDropzoneFile;
   gridClassName?: string;
-  file: UploadDropzoneFile;
   index: number;
 }
 
