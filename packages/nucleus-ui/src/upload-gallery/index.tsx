@@ -6,13 +6,13 @@ import { UploadDropzoneFile } from "../upload-dropzone/types";
 import { File } from "./file";
 import { UploadGalleryProps } from "./types";
 
-function renderFile(file: UploadDropzoneFile, index: number) {
-  let { id: key } = file;
-  if (file.file) {
-    key = file.file.name;
+function renderFile(dropzoneFile: UploadDropzoneFile, index: number) {
+  let key = dropzoneFile.id;
+  if (dropzoneFile.file !== undefined) {
+    key = dropzoneFile.file.name;
   }
 
-  return <File key={key} file={file} index={index} />;
+  return <File key={key} dropzoneFile={dropzoneFile} index={index} />;
 }
 
 function renderFiles(files: UploadDropzoneFile[]) {
