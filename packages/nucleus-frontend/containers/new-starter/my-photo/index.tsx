@@ -29,7 +29,7 @@ export function MyPhoto() {
           <div className="md:grid grid-cols-2 gap-4">
             <div>
               <strong>The photo must:</strong>
-              <ul className="pl-4 text-gray-500 list-none ">
+              <ul className="pl-4 text-gray-500 list-none">
                 <li className="flex">
                   <AiOutlineCheck className="flex-shrink-0 mt-1 mr-1 text-green-500" />
                   contain no other objects or people
