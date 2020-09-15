@@ -38,8 +38,11 @@ export function Form() {
         tags={["operativeQualification", "public"]}
         uploads={qualificationUploadIds}
       >
-        <InputHelp help="All uploads must be from a UK recognised competent authority/professional body/licensed body." />
-        <InputHelp help="Make sure to upload the front and back of any qualification cards." />
+        <div className="mt-4">
+          <InputHelp help="All uploads must be from a UK recognised competent authority/professional body/licensed body." />
+          <InputHelp help="Make sure to upload the front and back of any qualification cards." />
+        </div>
+
         <UploadGallery />
       </UploadDropzone>
       <Navigation />
