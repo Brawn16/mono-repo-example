@@ -29,7 +29,7 @@ export function MyPhoto() {
           <div className="md:grid grid-cols-2 gap-4">
             <div>
               <strong>The photo must:</strong>
-              <ul className="pl-4 text-gray-500 list-none">
+              <ul className="text-gray-500 list-none space-y-1">
                 <li className="flex">
                   <AiOutlineCheck className="flex-shrink-0 mt-1 mr-1 text-green-500" />
                   contain no other objects or people
@@ -39,16 +39,16 @@ export function MyPhoto() {
                   be taken against a plain light-coloured background
                 </li>
                 <li className="flex">
-                  <AiOutlineCheck className="flex-shrink-0 mt-1 mr-1 text-green-500" />
+                  <AiOutlineCheck className="flex-shrink-0 mt-1 mr-1  text-green-500" />
                   be in clear contrast to the background
                 </li>
               </ul>
             </div>
             <div className="mt-4 md:mt-0">
               <strong>And you must:</strong>
-              <ul className="pl-4 text-gray-500 list-none">
+              <ul className="text-gray-500 list-none space-y-1">
                 <li className="flex">
-                  <AiOutlineCheck className="flex-shrink-0 mt-1 mr-1 text-green-500" />
+                  <AiOutlineCheck className="flex-shrink-0 mt-1 mr-1  text-green-500" />
                   be facing forwards and looking straight at the camera
                 </li>
                 <li className="flex">
