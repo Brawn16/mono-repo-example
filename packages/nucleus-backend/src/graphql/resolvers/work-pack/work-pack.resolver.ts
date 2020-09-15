@@ -9,21 +9,23 @@ import { WorkPackDto } from "./work-pack.dto";
 export class WorkPackResolver {
   @Query(() => [WorkPackDto])
   public async workPacks(): Promise<WorkPackDto[]> {
-    // Send login request
-    const { headers } = await this.sendRequest("Signin", {
-      formData: {
-        password: env.SERVICE_DEPOTNET_PASSWORD,
-        username: env.SERVICE_DEPOTNET_USERNAME,
-      },
-      timeout: 15000,
-    });
+    let cookie: string | undefined;
 
-    // Attempt to retrieve cookies from headers
-    let cookie: string;
+    // Send login request
     try {
-      [cookie] = headers["set-cookie"] || [];
-    } catch (error) {
-      throw new Error("Unable to parse DepotNet auth token");
+      await this.sendRequest("Signin", {
+        formData: {
+          password: env.SERVICE_DEPOTNET_PASSWORD,
+          username: env.SERVICE_DEPOTNET_USERNAME,
+        },
+        timeout: 15000,
+      });
+    } catch ({ response: { headers } }) {
+      try {
+        [cookie] = headers["set-cookie"] || [];
+      } catch (error) {
+        throw new Error("Unable to parse DepotNet auth token");
+      }
     }
 
     // Retrieve work packs
@@ -38,7 +40,7 @@ export class WorkPackResolver {
           skip: 0,
           take: 50,
         },
-        timeout: 15000,
+        timeout: 120000,
       }
     );
 
