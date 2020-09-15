@@ -85,7 +85,7 @@ function renderIdentification(
       <strong className="truncate">{label}</strong>
       <div className="text-gray-600">
         <p className="truncate">{identification}</p>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 mt-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 mt-4">
           {renderUploads(uploads)}
         </div>
       </div>

@@ -1,7 +1,6 @@
 import { Panel } from "@sdh-project-services/nucleus-ui/dist/panel";
 import React from "react";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
-import { FcCheckmark } from "react-icons/fc";
 import { Head } from "../../../components/head";
 import { NewStarter as NewStarterLayout } from "../../../layouts/new-starter";
 import examplePhotoCorrect from "./example-photo-correct.jpg";
@@ -32,15 +31,15 @@ export function MyPhoto() {
               <strong>The photo must:</strong>
               <ul className="pl-4 text-gray-500 list-none ">
                 <li className="flex">
-                  <FcCheckmark className="mt-1 mr-1" />
+                  <AiOutlineCheck className="flex-shrink-0 mt-1 mr-1 text-green-500" />
                   contain no other objects or people
                 </li>
                 <li className="flex">
-                  <FcCheckmark className="mt-1 mr-1" />
+                  <AiOutlineCheck className="flex-shrink-0 mt-1 mr-1 text-green-500" />
                   be taken against a plain light-coloured background
                 </li>
                 <li className="flex">
-                  <FcCheckmark className="mt-1 mr-1" />
+                  <AiOutlineCheck className="flex-shrink-0 mt-1 mr-1 text-green-500" />
                   be in clear contrast to the background
                 </li>
               </ul>
@@ -49,27 +48,27 @@ export function MyPhoto() {
               <strong>And you must:</strong>
               <ul className="pl-4 text-gray-500 list-none">
                 <li className="flex">
-                  <FcCheckmark className="mt-1 mr-1" />
+                  <AiOutlineCheck className="flex-shrink-0 mt-1 mr-1 text-green-500" />
                   be facing forwards and looking straight at the camera
                 </li>
                 <li className="flex">
-                  <FcCheckmark className="mt-1 mr-1" />
+                  <AiOutlineCheck className="flex-shrink-0 mt-1 mr-1 text-green-500" />
                   have a plain expression and your mouth closed
                 </li>
                 <li className="flex">
-                  <FcCheckmark className="mt-1 mr-1" />
+                  <AiOutlineCheck className="flex-shrink-0 mt-1 mr-1 text-green-500" />
                   have your eyes open and visible
                 </li>
                 <li className="flex">
-                  <AiOutlineClose className="mt-1 mr-1 text-red-600" />
+                  <AiOutlineClose className="flex-shrink-0 mt-1 mr-1 text-red-600" />
                   not have hair in front of your eyes
                 </li>
                 <li className="flex">
-                  <AiOutlineClose className="mt-1 mr-1 text-red-600" />
+                  <AiOutlineClose className="flex-shrink-0 mt-1 mr-1 text-red-600" />
                   not have a head covering
                 </li>
                 <li className="flex">
-                  <AiOutlineClose className="mt-1 mr-1 text-red-600" />
+                  <AiOutlineClose className="flex-shrink-0 mt-1 mr-1 text-red-600" />
                   not wear sunglasses or tinted glasses
                 </li>
               </ul>
