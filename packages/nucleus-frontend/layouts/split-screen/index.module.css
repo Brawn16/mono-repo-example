@@ -1,24 +1,12 @@
 .background {
   background: url(./background.jpg);
 
-  @apply bg-fixed flex-1 relative;
+  @apply bg-cover flex-1 relative;
 }
 
 .background:before {
-  backdrop-filter: blur(0.1rem);
+  background: linear-gradient(45deg, #0f132d, rgba(28, 36, 83, 0.8));
   content: "";
 
-  @apply absolute bg-sdh-blue bg-opacity-75 inset-0;
-}
-
-.logo {
-  background: url(./logo.png);
-
-  @apply absolute bg-cover bottom-0 right-0 hidden h-20 m-16 w-64;
-}
-
-@screen xl {
-  .logo {
-    @apply block;
-  }
+  @apply absolute inset-0;
 }

@@ -27,11 +27,11 @@ export function Nav() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-blue-700 shadow-sm">
+    <nav className="sticky top-0 z-50 bg-blue-800 shadow-sm">
       <div className="pr-2 md:pr-6 md:pl-8">
         <div className="flex items-center justify-between h-16">
           <button
-            className="p-2 ml-2 text-blue-300 rounded-full md:hidden duration-150 ease-in-out transition hover:text-white focus:outline-none focus:text-white focus:bg-blue-600"
+            className="p-2 ml-2 text-blue-400 rounded-full md:hidden duration-150 ease-in-out transition hover:text-white focus:outline-none focus:text-white focus:bg-blue-700"
             type="button"
           >
             <AiOutlineMenu className="w-5 h-5" />
@@ -52,11 +52,11 @@ export function Nav() {
               />
               <span className={notificationCount}>7</span>
             </button>
-            <span className="hidden ml-4 font-medium text-blue-300 lg:block">
+            <span className="hidden ml-4 font-medium text-blue-400 lg:block">
               Good {getTimeOfDay()}, James!
             </span>
             <button
-              className="p-2 ml-4 text-blue-300 rounded-full duration-150 ease-in-out transition hover:text-white focus:outline-none focus:text-white hover:bg-blue-600 focus:bg-blue-600"
+              className="p-2 ml-4 text-blue-400 rounded-full duration-150 ease-in-out transition hover:text-white focus:outline-none focus:text-white hover:bg-blue-700 focus:bg-blue-700"
               onClick={handleLogout}
               type="button"
             >
