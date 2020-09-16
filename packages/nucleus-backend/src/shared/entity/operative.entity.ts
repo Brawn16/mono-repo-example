@@ -99,7 +99,7 @@ export class OperativeEntity extends BaseEntity {
   @OneToOne(() => UploadEntity)
   public photoUpload?: UploadEntity;
 
-  @Column("varchar", { array: true })
+  @Column("varchar", { array: true, nullable: true })
   @Field(() => [String])
   public qualificationUploadIds?: string[];
 }

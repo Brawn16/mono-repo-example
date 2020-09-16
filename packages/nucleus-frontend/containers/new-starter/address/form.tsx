@@ -76,7 +76,7 @@ export function Form() {
           {hasError && (
             <InputError
               error={{
-                message: "Please select your address",
+                message: "Please find your address",
                 type: "manual",
               }}
             />

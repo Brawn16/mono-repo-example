@@ -69,14 +69,16 @@ export async function createOperativeSyncPhotos(operativeId: string) {
     );
   });
 
-  const { qualificationUploadIds = [] } = operative;
-  promises.concat(
-    qualificationUploadIds.map(async (id: string, index: number) => {
-      const uploadEntity = await UploadEntity.findOneOrFail(id);
-      const extension = getUploadExtension(uploadEntity);
-      return upload(id, `Qualification ${index + 1}${extension}`);
-    })
-  );
+  const { qualificationUploadIds } = operative;
+  if (qualificationUploadIds) {
+    promises.concat(
+      qualificationUploadIds.map(async (id: string, index: number) => {
+        const uploadEntity = await UploadEntity.findOneOrFail(id);
+        const extension = getUploadExtension(uploadEntity);
+        return upload(id, `Qualification ${index + 1}${extension}`);
+      })
+    );
+  }
 
   return Promise.all(promises);
 }
