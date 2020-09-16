@@ -56,7 +56,7 @@ export class CreateOperativeInput {
   @Field()
   public photoUpload?: string;
 
-  @Field(() => [String])
+  @Field(() => [String], { nullable: true })
   public qualificationUploadIds?: string[];
 
   @Field({ nullable: true })
