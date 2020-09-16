@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from "react";
-import { background, logo } from "./index.module.css";
+import { background } from "./index.module.css";
 
 export function SplitScreen({ children }: PropsWithChildren<{}>) {
   const year = new Date().getFullYear();
@@ -14,9 +14,7 @@ export function SplitScreen({ children }: PropsWithChildren<{}>) {
           </footer>
         </div>
       </div>
-      <div className={background}>
-        <div className={logo} />
-      </div>
+      <div className={background} />
     </div>
   );
 }

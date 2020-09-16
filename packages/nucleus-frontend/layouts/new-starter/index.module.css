@@ -1,17 +1,14 @@
 .background {
   background: url(./background.jpg);
 
-  @apply bg-fixed flex flex-col relative p-8 w-full;
+  @apply bg-cover flex flex-col relative p-8 w-full;
 }
 
 .background:before {
-  backdrop-filter: blur(0.1rem);
+  background: linear-gradient(45deg, #0f132d, rgba(28, 36, 83, 0.8));
   content: "";
 
-  @apply absolute bg-sdh-blue bg-opacity-75 inset-0;
-}
-.background:after {
-  background: linear-gradient(45deg, #0f132d, rgba(28, 36, 83, 0.8));
+  @apply absolute bg-opacity-75 inset-0;
 }
 
 .logo {
