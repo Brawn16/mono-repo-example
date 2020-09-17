@@ -75,7 +75,7 @@ export const AddressLookup = ({
         <Label label={label} name="addressLookupPostcode" />
         <div className="flex">
           <Input
-            className="w-full mr-4"
+            className="max-w-xs mr-4"
             componentRef={register({
               required: "Postcode is required",
             })}
