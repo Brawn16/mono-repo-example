@@ -111,7 +111,7 @@ export function UploadDropzone(props: PropsWithChildren<UploadDropzoneProps>) {
         className={`flex flex-col items-center p-6 bg-gray-100 border-2 border-dashed rounded cursor-pointer focus:outline-none focus:border-gray-400 focus:bg-gray-200 ${errorClassName}`}
       >
         <Icon className="text-6xl text-gray-400" />
-        <div className="pb-4">
+        <div className="hidden pb-4 lg:block">
           Drag {multiple ? "files" : "file"} to upload, or
         </div>
         <PrimaryButton>Choose {fileLabel}</PrimaryButton>
