@@ -32,7 +32,6 @@
     "reflect-metadata": "^0.1.13",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
-    "stream-length": "^1.0.2",
     "type-graphql": "^0.17.6",
     "typeorm": "^0.2.24",
     "uuid": "^8.3.0"
