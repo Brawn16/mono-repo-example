@@ -36,10 +36,10 @@ export async function createOperativeSyncPhotos(operativeId: string) {
   });
 
   // Upload file to folder
-  const upload = async (id: string, name: string, size: number | undefined) => {
+  const upload = async (id: string, name: string, size: number | 0) => {
     const stream = await getS3Object(id);
 
-    if (size && size < 4194304) {
+    if (size < 4194304) {
       return client
         .api(
           `groups/a456dd18-d1c9-41a6-8286-9086a270e4dc/drive/items/${response.id}:/${name}:/content`
@@ -54,12 +54,12 @@ export async function createOperativeSyncPhotos(operativeId: string) {
       .post({ "@microsoft.graph.conflictBehavior": "rename" });
 
     return axios.put(sessionResponse.uploadUrl, stream, {
-      maxContentLength: 100000000,
       maxBodyLength: 1000000000,
+      maxContentLength: 100000000,
       headers: {
-        "Content-Type": "application/octet-stream",
         "Content-Length": size,
-        "Content-Range": `bytes 0-${size && size - 1}/${size}`,
+        "Content-Range": `bytes 0-${size - 1}/${size}`,
+        "Content-Type": "application/octet-stream",
       },
     });
   };
@@ -69,7 +69,7 @@ export async function createOperativeSyncPhotos(operativeId: string) {
   if (photoUpload) {
     const extension = getUploadExtension(photoUpload);
     promises.push(
-      upload(photoUpload.id || "", `Photo${extension}`, photoUpload.size)
+      upload(photoUpload.id || "", `Photo${extension}`, photoUpload.size || 0)
     );
   }
 
@@ -89,7 +89,7 @@ export async function createOperativeSyncPhotos(operativeId: string) {
         return upload(
           id,
           `${idName} ${index + 1}${extension}`,
-          uploadEntity.size
+          uploadEntity.size || 0
         );
       })
     );
@@ -104,7 +104,7 @@ export async function createOperativeSyncPhotos(operativeId: string) {
         return upload(
           id,
           `Qualification ${index + 1}${extension}`,
-          uploadEntity.size
+          uploadEntity.size || 0
         );
       })
     );
